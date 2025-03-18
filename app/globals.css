@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@plugin  "tailwindcss-animate";
+
+@theme {
+
+  --breakpoint-sm: 320px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 976px;
+  --color-primary800: #00265F;
+  --color-primary600: #809CC7;
+  --color-primary300:#809CC7;
+  --color-primaryBubbly:#F5FAFF;
+  --color-tertiary600: #EEEFF1;
+  --color-tertiary300: #FAFAFA;
+  --color-tertiary700:#CCD0D4;
+  --color-tertiary900:#737578;
+  --color-tertiary1000: #525355;
+  --color-tertiary1100:#313233;
+  --color-tertiary100:#FFFFFF;
+  --color-primary1000: #001330;
+  --color-primary100:#CCD7E9;
+  --color-primary1100:#000B1D;
+  --color-border: hsl(var(--border));
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from: { height: "0" };
+    to: { height: "var(--radix-accordion-content-height)" };
+    }
+
+    @keyframes accordion-up {
+      from: { height: "var(--radix-accordion-content-height)" };
+      to: { height: "0" };
+      }
+}
+
+.bg_linear-gradient {
+  background: linear-gradient(128deg, #00398F 0%, #001029 71.93%);
+}
+.faq-ans,
+.service-accord {
+  overflow: hidden;
+  transition: max-height 0.75s ease;
+  max-height: 0px;
+}
+.faq-ans.active,
+.service-accord.active {
+  margin-top: 0.5rem;
+  max-height: 2000px;
+}
