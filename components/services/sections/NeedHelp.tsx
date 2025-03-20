@@ -19,7 +19,7 @@ const HelpCard: React.FC<IHelpCard> = ({ icon, title }) => (
 
 export const NeedHelp: React.FC = () => {
   return (
-    <div className="lg:px-[2.5rem] px-4  py-[54px]">
+    <div className="sm:px-[2.5rem] px-4  py-[54px]">
       <MaxScreenWrapper style="relative flex flex-col md:gap-[80px] gap-[40px]">
         <CustomImage
           src={bubble}

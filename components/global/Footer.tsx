@@ -7,11 +7,11 @@ import bubbleImg from "../../public/bubbles_footerlogo.png";
 
 export const Footer: React.FC = () => {
   return (
-    <div className="bg-primary800 flex flex-col justify-center items-center lg:px-[2.5rem] px-4  pt-[104px]">
+    <div className="bg-primary800 flex flex-col justify-center items-center lg:px-[2.5rem] px-4  sm:pt-[104px] pt-[54px]">
       <MaxScreenWrapper style="w-full relative flex justify-center items-center flex-col">
         <CustomImage
           src={bubbleImg}
-          style="w-full h-[600px] absolute bottom-[0px] left-[0px] right-[0px]"
+          style="w-full md:h-[600px] h-[150px] absolute bottom-[0px] left-[0px] right-[0px]"
           imgStyle="object-cover"
         />
         <div className="w-full relative flex flex-wrap justify-between gap-[80px]">
@@ -69,7 +69,7 @@ export const Footer: React.FC = () => {
             </Text>
           </div>
         </div>
-        <Text style="items-center mt-[204px] mb-[243px] text-[16px] text-center font-[500] leading-[160%] flex gap-[4px] text-tertiary700">
+        <Text style="items-center md:mt-[204px] mt-[73px] mb-[73px] md:mb-[243px] text-[16px] text-center font-[500] leading-[160%] flex gap-[4px] text-tertiary700">
           <CopyrightSvg />
           2025 Bubbles. All rights reserved
         </Text>

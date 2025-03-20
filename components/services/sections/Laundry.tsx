@@ -18,7 +18,7 @@ interface ILaundrySection {
 
 export const LaundrySection: React.FC<ILaundrySection> = ({ activeTab }) => {
   return (
-    <div className="lg:px-[2.5rem] px-4  py-[54px] sm:py-[104px]">
+    <div className="sm:px-[2.5rem] px-4  py-[54px] sm:py-[104px]">
       <MaxScreenWrapper style="flex flex-col gap-[40px]">
         <RevealAnimation style="w-fit">
           <Text

@@ -14,7 +14,7 @@ interface IServicesSection {
 
 export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
   return (
-    <div className=" lg:px-[2.5rem] px-4 md:pb-[104px] pb-[54px]">
+    <div className=" sm:px-[2.5rem] px-4 md:pb-[104px] pb-[54px]">
       <MaxScreenWrapper style="flex flex-col gap-[40px]">
         <RevealAnimation style="w-fit">
           <Text

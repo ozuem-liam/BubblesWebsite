@@ -18,7 +18,7 @@ import { RevealAnimation } from "@/components/global/Reveal";
 
 export const BackByTech: React.FC = () => {
   return (
-    <div className="bg-tertiary300 lg:px-[2.5rem] px-4 py-[54px] sm:py-[104px]">
+    <div className="bg-tertiary300 sm:px-[2.5rem] px-4 py-[54px] sm:py-[104px]">
       <MaxScreenWrapper style="flex flex-col gap-[18px]">
         <div className="flex flex-wrap gap-[12px] justify-center">
           <RevealAnimation style="w-fit">

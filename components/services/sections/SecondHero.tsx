@@ -16,7 +16,7 @@ interface ISecondHero {
 
 export const SecondHero: React.FC<ISecondHero> = ({ activeTab }) => {
   return (
-    <div className="lg:px-[2.5rem] px-4 bg-primaryBubbly md:pt-[64px] pt-[20px]">
+    <div className="sm:px-[2.5rem] px-4 bg-primaryBubbly md:pt-[64px] pt-[20px]">
       <MaxScreenWrapper style="relative pt-[4rem] flex lg:flex-row flex-col items-center md:gap-[60px] gap-[40px] justify-center">
         <CustomImage
           src={bubble2}
