@@ -27,7 +27,7 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
               : "More Loads. More Money. Less Stress"}
           </Text>
         </RevealAnimation>
-        <div className="flex lg:flex-row flex-col items-center lg:gap-[80px] gap-[25px] sm:gap-[50px] justify-between">
+        <div className="flex md:flex-row flex-col items-center lg:gap-[80px] gap-[25px] sm:gap-[50px] justify-between">
           <RevealAnimation style="lg:w-[50%] w-full">
             <CustomImage
               src={activeTab === customerTab ? heroImg : heroImg2}
@@ -42,7 +42,7 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
               </Text>
             </RevealAnimation>
             <RevealAnimation style="w-fit">
-              <Text style="lg:text-start text-center text-[24px] font-[400] leading-[140%] text-tertiary1000">
+              <Text style="sm:text-start text-center text-[24px] font-[400] leading-[140%] text-tertiary1000">
                 {activeTab === customerTab
                   ? `Deep-cleaned, fresh, and neatly folded, so you can enjoy that
                 just-laundered feel without the hassle.`

@@ -23,7 +23,7 @@ export const SecondHero: React.FC<ISecondHero> = ({ activeTab }) => {
           style="md:w-[370px] w-[300px] h-[330px] absolute bottom-[10px] right-[10px]"
           imgStyle="object-cover"
         />
-        <div className="flex flex-col gap-[24px] lg:w-[30%] w-full lg:items-start items-center">
+        <div className="py-0 md:py-[2rem] lg:py-0 flex flex-col gap-[24px] lg:w-[30%] w-full lg:items-start items-center">
           <RevealAnimation style="w-fit">
             <Text style="lg:text-start text-center border-l-2 border-primary300 w-fit px-[16px] py-[8px] bg-primary100 rounded-r-[8px] text-black text-[14px] font-[400]">
               Free Laundry Basket
