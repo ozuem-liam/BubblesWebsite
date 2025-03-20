@@ -2,8 +2,8 @@
 
 import { CustomImage } from "@/components/global/Image";
 import { Text } from "@/components/global/Text";
-import heroImg from "../../../public/service_img.png";
-import heroImg2 from "../../../public/service_img2.png";
+import heroImg from "../../../public/service_img2.svg";
+import heroImg2 from "../../../public/service_img.svg";
 import { MaxScreenWrapper } from "@/components/global/MaxScreen";
 import { RevealAnimation } from "@/components/global/Reveal";
 import { customerTab } from "../index";
@@ -14,30 +14,30 @@ interface IServicesSection {
 
 export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
   return (
-    <div className=" lg:px-[2.5rem] px-4 pb-[104px]">
+    <div className=" lg:px-[2.5rem] px-4 md:pb-[104px] pb-[54px]">
       <MaxScreenWrapper style="flex flex-col gap-[40px]">
         <RevealAnimation style="w-fit">
           <Text
             id="service"
             as="h1"
-            style="font-[700] text-[40px] leading-[160%]"
+            style="font-[700] md:text-[40px] text-[30px] leading-[160%]"
           >
             {activeTab === customerTab
               ? "Several Services To Meet Your Laundry Needs"
               : "More Loads. More Money. Less Stress"}
           </Text>
         </RevealAnimation>
-        <div className="flex lg:flex-row flex-col items-center lg:gap-[80px]  gap-[50px] justify-between">
+        <div className="flex lg:flex-row flex-col items-center lg:gap-[80px] gap-[25px] sm:gap-[50px] justify-between">
           <RevealAnimation style="lg:w-[50%] w-full">
             <CustomImage
               src={activeTab === customerTab ? heroImg : heroImg2}
-              style="w-full lg:h-[576px] lg:g-[504px] h-[400px]"
+              style="w-full lg:h-[576px] lg:g-[504px] h-[300px] sm:h-[400px]"
               imgStyle="object-contain"
             />
           </RevealAnimation>
           <div className="flex flex-col gap-[24px] lg:w-[50%] w-full lg:items-start items-center">
             <RevealAnimation style="w-fit">
-              <Text style="text-start text-tertiary1100 text-[32px] font-[700] leading-[160%]">
+              <Text style="sm:text-start text-center text-tertiary1100 text-[32px] font-[700] sm:leading-[160%] laeding-[120%]">
                 {activeTab === customerTab ? "Wash" : "Grow Your Customer Base"}
               </Text>
             </RevealAnimation>

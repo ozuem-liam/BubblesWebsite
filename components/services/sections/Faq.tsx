@@ -80,7 +80,7 @@ export const FAQ: React.FC<IFAQ> = ({ activeTab }) => {
     });
   }, [activeTab]);
   return (
-    <div className="lg:px-[2.5rem] px-4  py-[104px]">
+    <div className="lg:px-[2.5rem] px-4  py-[54px] sm:py-[104px]">
       <MaxScreenWrapper style="relative flex md:flex-row flex-col md:gap-[80px] gap-[40px]">
         <CustomImage
           src={bubble}

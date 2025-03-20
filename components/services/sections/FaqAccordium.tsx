@@ -10,6 +10,7 @@ interface IAccordium {
   title: string;
   info: string;
 }
+
 export const Accordium: React.FC<IAccordium> = ({
   title,
   info,

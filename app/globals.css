@@ -3,7 +3,7 @@
 
 @theme {
 
-  --breakpoint-sm: 320px;
+  --breakpoint-sm: 425px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 976px;
   --color-primary800: #00265F;

@@ -13,7 +13,7 @@ export const LaunderyCard: React.FC<ILaunderyCard> = ({
     <div className="">
       <CustomImage
         src={img}
-        style="w-full md:h-[610px] h-[496px]"
+        style="w-full h-[410px] md:h-[610px] sm:h-[496px]"
         imgStyle="object-contain "
       />
     </div>

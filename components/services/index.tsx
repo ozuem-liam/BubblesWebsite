@@ -18,8 +18,8 @@ export const Services: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>(customerTab);
 
   return (
-    <div className="pb-[104px] flex flex-col gap-[40px]">
-      <div className="bg-tertiary300 pt-[104px] flex flex-col gap-[40px]">
+    <div className="sm:pb-[104px] pb-[54px] flex flex-col gap-[40px]">
+      <div className="bg-tertiary300 sm:pt-[104px] pt-[54px] flex flex-col gap-[40px]">
         <MaxScreenWrapper style="flex items-start w-full lg:px-0 px-4 ">
           <Text
             clickFunc={() =>
@@ -28,7 +28,7 @@ export const Services: React.FC = () => {
               )
             }
             style={cn(
-              "flex items-center justify-center w-[152px] h-[64px] text-center px-[16px] py-[8px] bg-tertiary600 rounded-l-[8px] text-tertiary900 text-[20px] font-[400]",
+              "flex items-center justify-center w-[152px] h-[54px] md:h-[64px] text-center px-[16px] py-[8px] bg-tertiary600 rounded-l-[8px] text-tertiary900 text-[20px] font-[400]",
               activeTab === customerTab &&
                 "text-tertiary700 bg-primary800 border-l-4 border-primary300 cursor-pointer"
             )}
@@ -42,7 +42,7 @@ export const Services: React.FC = () => {
               )
             }
             style={cn(
-              "flex items-center justify-center w-[152px] h-[64px] text-center px-[16px] py-[8px] bg-tertiary600 rounded-r-[8px] text-tertiary900 text-[20px] font-[400]",
+              "flex items-center justify-center w-[152px] h-[54px] md:h-[64px] text-center px-[16px] py-[8px] bg-tertiary600 rounded-r-[8px] text-tertiary900 text-[20px] font-[400]",
               activeTab === vendorTab &&
                 "text-tertiary700 bg-primary800 border-r-4 border-primary300 cursor-pointer"
             )}

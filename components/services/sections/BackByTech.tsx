@@ -1,13 +1,13 @@
 "use client";
 
 import { CustomImage } from "@/components/global/Image";
-import heroImg1 from "../../../public/place_img1.png";
+import heroImg1 from "../../../public/place_img1.svg";
 import { MaxScreenWrapper } from "@/components/global/MaxScreen";
-import heroImg2 from "../../../public/place_img2.png";
-import heroImg3 from "../../../public/place_img3.png";
-import heroImg4 from "../../../public/place_img4.png";
-import heroImg5 from "../../../public/place_img5.png";
-import heroImg6 from "../../../public/place_img6.png";
+import heroImg2 from "../../../public/place_img2.svg";
+import heroImg3 from "../../../public/place_img3.svg";
+import heroImg4 from "../../../public/place_img4.svg";
+import heroImg5 from "../../../public/place_img5.svg";
+import heroImg6 from "../../../public/place_img6.svg";
 import { Text } from "@/components/global/Text";
 import {
   EcoFriendlySvg,
@@ -18,7 +18,7 @@ import { RevealAnimation } from "@/components/global/Reveal";
 
 export const BackByTech: React.FC = () => {
   return (
-    <div className="bg-tertiary300 lg:px-[2.5rem] px-4 py-[104px]">
+    <div className="bg-tertiary300 lg:px-[2.5rem] px-4 py-[54px] sm:py-[104px]">
       <MaxScreenWrapper style="flex flex-col gap-[18px]">
         <div className="flex flex-wrap gap-[12px] justify-center">
           <RevealAnimation style="w-fit">

@@ -2,11 +2,11 @@
 import { Text } from "@/components/global/Text";
 import { MaxScreenWrapper } from "@/components/global/MaxScreen";
 import { LaunderyCard } from "./LaundryCard";
-import step1 from "../../../public/step 1.png";
-import step2 from "../../../public/step 2.png";
-import step3 from "../../../public/step 3.png";
-import step4 from "../../../public/step 4.png";
-import step5 from "../../../public/step5.png";
+import step1 from "../../../public/step 1.svg";
+import step2 from "../../../public/step 2.svg";
+import step3 from "../../../public/step 3.svg";
+import step4 from "../../../public/step 4.svg";
+import step5 from "../../../public/step 5.svg";
 import step6 from "../../../public/step 6.png";
 import { Button } from "@/components/ui/button";
 import { RevealAnimation } from "@/components/global/Reveal";
@@ -18,7 +18,7 @@ interface ILaundrySection {
 
 export const LaundrySection: React.FC<ILaundrySection> = ({ activeTab }) => {
   return (
-    <div className="lg:px-[2.5rem] px-4  py-[104px]">
+    <div className="lg:px-[2.5rem] px-4  py-[54px] sm:py-[104px]">
       <MaxScreenWrapper style="flex flex-col gap-[40px]">
         <RevealAnimation style="w-fit">
           <Text

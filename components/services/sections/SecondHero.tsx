@@ -3,8 +3,8 @@
 import { CustomImage } from "../../global/Image";
 import { Text } from "../../global/Text";
 import { BlackAppleStoreSvg, BlackPlayStoreSvg } from "../../svgs";
-import heroImg from "../../../public/iPhone 11 Pro.png";
-import heroImg2 from "../../../public/iPhone 11 Pro2.png";
+import heroImg from "../../../public/iPhone 11 Pro2.svg";
+import heroImg2 from "../../../public/iPhone 11 Pro.svg";
 import { MaxScreenWrapper } from "../../global/MaxScreen";
 import bubble2 from "../../../public/bubble2.png";
 import { RevealAnimation } from "@/components/global/Reveal";
@@ -30,7 +30,7 @@ export const SecondHero: React.FC<ISecondHero> = ({ activeTab }) => {
             </Text>
           </RevealAnimation>
           <RevealAnimation style="md:w-[90%] w-full">
-            <Text style="w-full lg:text-start text-center text-[56px] font-[500] leading-[140%] text-black">
+            <Text style="w-full lg:text-start text-center text-[46px] md:text-[56px] font-[500] leading-[140%] text-black">
               {activeTab === customerTab
                 ? `Don’t Get Left in the Basket. Join Us Today!`
                 : "Start growing your business with every spin."}
