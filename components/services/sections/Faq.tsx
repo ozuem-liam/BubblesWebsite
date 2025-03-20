@@ -13,11 +13,6 @@ interface IFAQ {
 const customerFaq = [
   {
     title: "Is Bubbles available in my area?",
-    answer:
-      "Our consulting services focus on delivering tailor-made solutions that address your unique business challenges and opportunities thus providing strategic guidance to help you navigate your digital transformation journey.",
-  },
-  {
-    title: "Is Bubbles available in my area?",
     answer: "Can I wash other things asides from clothes?",
   },
   {
