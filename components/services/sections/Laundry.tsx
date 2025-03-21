@@ -2,12 +2,12 @@
 import { Text } from "@/components/global/Text";
 import { MaxScreenWrapper } from "@/components/global/MaxScreen";
 import { LaunderyCard } from "./LaundryCard";
-import step1 from "../../../public/step 1.svg";
-import step2 from "../../../public/step 2.svg";
-import step3 from "../../../public/step 3.svg";
-import step4 from "../../../public/step 4.svg";
-import step5 from "../../../public/step 5.svg";
-import step6 from "../../../public/step 6.png";
+import step1 from "../../../public/step 1 (1).svg";
+import step2 from "../../../public/step 2 (1).svg";
+import step3 from "../../../public/step 3 (1).svg";
+import step4 from "../../../public/step 4 (1).svg";
+import step5 from "../../../public/step 5 (1).svg";
+import step6 from "../../../public/step 5 (1).svg";
 import { Button } from "@/components/ui/button";
 import { RevealAnimation } from "@/components/global/Reveal";
 import { customerTab } from "../index";
@@ -30,7 +30,7 @@ export const LaundrySection: React.FC<ILaundrySection> = ({ activeTab }) => {
               : "Getting Started is Easy"}
           </Text>
         </RevealAnimation>
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 grid-cols-1 bg_linear-gradient rounded-[12px] md:p-[40px] p-[20px] gap-[24px] justify-between">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 grid-cols-1 bg_linear-gradient rounded-[12px] md:p-[40px] p-[20px] lg:gap-0 gap-[20px] justify-between">
           <RevealAnimation style="w-full">
             <LaunderyCard
               img={activeTab === customerTab ? step1 : step4}
