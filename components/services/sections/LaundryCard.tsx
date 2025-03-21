@@ -11,7 +11,7 @@ export const LaunderyCard: React.FC<ILaunderyCard> = ({
 }) => (
   <CustomImage
     src={img}
-    style="w-full h-[360px] md:h-[610px] sm:h-[496px]"
+    style="w-full h-[450px] lg:h-[610px]"
     imgStyle="object-contain"
   />
 );
