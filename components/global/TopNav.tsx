@@ -16,7 +16,7 @@ const NavLinks: React.FC = () => (
         key={index}
         className="text-[16px] font-[400] text-tertiary600 py-1 px-1 hover:text-primary600 transition-colors duration-500"
       >
-        <Link href={`#${links.route}`} className="text-none">
+        <Link href={`#${links.route}`} className="text-none text-tertiary600">
           {links.title}
         </Link>
       </li>

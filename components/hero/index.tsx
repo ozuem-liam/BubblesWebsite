@@ -7,6 +7,7 @@ import { AppleStoreSvg, PlayStoreSvg } from "../svgs";
 import heroImg from "../../public/hero_img.svg";
 import { MaxScreenWrapper } from "../global/MaxScreen";
 import { RevealAnimation } from "../global/Reveal";
+import Link from "next/link";
 
 export const Hero: React.FC = () => {
   return (
@@ -33,11 +34,15 @@ export const Hero: React.FC = () => {
             </Text>
           </RevealAnimation>
           <RevealAnimation style="w-fit">
-            <div
-              id="store"
-              className="flex gap-[24px] flex-wrap md:justify-start justify-center"
-            >
-              <PlayStoreSvg />
+            <div className="flex gap-[24px] flex-wrap md:justify-start justify-center">
+              <Link
+                id="store"
+                href={`https://play.google.com/store/apps/details?id=com.bubbles.customer.app&hl=en`}
+                target="_blank"
+                className="text-none"
+              >
+                <PlayStoreSvg />
+              </Link>
               <AppleStoreSvg />
             </div>
           </RevealAnimation>

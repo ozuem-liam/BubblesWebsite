@@ -4,6 +4,7 @@ import bubble from "../../../public/bubbles.png";
 import { CustomImage } from "@/components/global/Image";
 import { CallSvg, SendSvg, SocialSvg, WhatsappSvg } from "@/components/svgs";
 import { RevealAnimation } from "@/components/global/Reveal";
+import Link from "next/link";
 
 interface IHelpCard {
   icon: React.ReactNode;
@@ -37,7 +38,7 @@ export const NeedHelp: React.FC = () => {
           </RevealAnimation>
           <RevealAnimation style="w-fit">
             <Text
-                id="contact"
+              id="contact"
               as="h2"
               style="font-[400] text-[22px] leading-[140%] text-tertiary1000 md:text-start text-center"
             >
@@ -47,16 +48,36 @@ export const NeedHelp: React.FC = () => {
         </div>
         <div className="w-full gap-[20px] flex flex-wrap md:justify-between justify-center items-center">
           <RevealAnimation style="w-fit">
-            <HelpCard icon={<WhatsappSvg />} title={"Whatsapp"} />
+            <Link
+              href="https://api.whatsapp.com/send?phone=08105951215"
+              className="text-none"
+              target="_blank"
+            >
+              <HelpCard icon={<WhatsappSvg />} title={"Whatsapp"} />
+            </Link>
           </RevealAnimation>
           <RevealAnimation style="w-fit">
-            <HelpCard icon={<CallSvg />} title={"Phone support"} />
+            <Link href="tel:08105951215" className="text-none" target="_blank">
+              <HelpCard icon={<CallSvg />} title={"Phone support"} />
+            </Link>
           </RevealAnimation>
           <RevealAnimation style="w-fit">
-            <HelpCard icon={<SendSvg />} title={"Email"} />
+            <Link
+              href="mailto:support@bubblesng.com"
+              className="text-none"
+              target="_blank"
+            >
+              <HelpCard icon={<SendSvg />} title={"Email"} />
+            </Link>
           </RevealAnimation>
           <RevealAnimation style="w-fit">
-            <HelpCard icon={<SocialSvg />} title={"Social"} />
+            <Link
+              href="https://www.instagram.com/getbubblesng/"
+              className="text-none"
+              target="_blank"
+            >
+              <HelpCard icon={<SocialSvg />} title={"Social"} />
+            </Link>
           </RevealAnimation>
         </div>
       </MaxScreenWrapper>

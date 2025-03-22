@@ -9,6 +9,7 @@ import { MaxScreenWrapper } from "../../global/MaxScreen";
 import bubble2 from "../../../public/bubble2.png";
 import { RevealAnimation } from "@/components/global/Reveal";
 import { customerTab } from "../index";
+import Link from "next/link";
 
 interface ISecondHero {
   activeTab: string;
@@ -38,7 +39,17 @@ export const SecondHero: React.FC<ISecondHero> = ({ activeTab }) => {
           </RevealAnimation>
           <RevealAnimation style="w-fit">
             <div className="flex gap-[24px] flex-wrap md:justify-start justify-center">
-              <BlackPlayStoreSvg />
+              <Link
+                href={
+                  activeTab === customerTab
+                    ? `https://play.google.com/store/apps/details?id=com.bubbles.customer.app&hl=en`
+                    : "Shttps://play.google.com/store/apps/details?id=com.bubbles.bubbles_vendor&hl=en"
+                }
+                target="_blank"
+                className="text-none"
+              >
+                <BlackPlayStoreSvg />
+              </Link>
               <BlackAppleStoreSvg />
             </div>
           </RevealAnimation>

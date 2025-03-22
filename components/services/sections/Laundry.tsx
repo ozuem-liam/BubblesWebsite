@@ -11,12 +11,14 @@ import step6 from "../../../public/step 5 (1).svg";
 import { Button } from "@/components/ui/button";
 import { RevealAnimation } from "@/components/global/Reveal";
 import { customerTab } from "../index";
+import { useRouter } from "next/navigation";
 
 interface ILaundrySection {
   activeTab: string;
 }
 
 export const LaundrySection: React.FC<ILaundrySection> = ({ activeTab }) => {
+  const router = useRouter();
   return (
     <div className="sm:px-[2.5rem] px-4  py-[54px] sm:py-[104px]">
       <MaxScreenWrapper style="flex flex-col gap-[40px]">
@@ -64,7 +66,10 @@ export const LaundrySection: React.FC<ILaundrySection> = ({ activeTab }) => {
                 : "Start getting requests from nearby customers"}
             </Text>
           </RevealAnimation>
-          <Button className="text-black bg-primary100 text-tertiary1100 rounded-[12px] h-[50px] w-[162px] flex flex-col items-center lg:text-[16px] text-[14px] font-[500]">
+          <Button
+            onClick={() => router.push("#store")}
+            className="text-black bg-primary100 text-tertiary1100 rounded-[12px] h-[50px] w-[162px] flex flex-col items-center lg:text-[16px] text-[14px] font-[500]"
+          >
             Get Started
           </Button>
         </div>
