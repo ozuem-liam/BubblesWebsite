@@ -7,7 +7,7 @@ import step2 from "../../../public/step 2 (1).svg";
 import step3 from "../../../public/step 3 (1).svg";
 import step4 from "../../../public/step 4 (1).svg";
 import step5 from "../../../public/step 5 (1).svg";
-import step6 from "../../../public/step 5 (1).svg";
+import step6 from "../../../public/step 6 (1).svg";
 import { Button } from "@/components/ui/button";
 import { RevealAnimation } from "@/components/global/Reveal";
 import { customerTab } from "../index";

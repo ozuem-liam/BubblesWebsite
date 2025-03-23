@@ -52,6 +52,7 @@ export const Hero: React.FC = () => {
             src={heroImg}
             style="w-full lg:h-[776px] h-[400px]"
             imgStyle="object-contain"
+            priority={true}
           />
         </RevealAnimation>
       </MaxScreenWrapper>

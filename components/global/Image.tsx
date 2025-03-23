@@ -27,7 +27,7 @@ export const CustomImage: React.FC<ICustomImagePropType> = ({
     <div className={cn("relative", style)} onClick={clickFunc && clickFunc}>
       {isLoading && (
         <div
-          className={cn("w-full animate-pulse bg-tertiary300", style, imgStyle)}
+          className={cn("w-full animate-pulse bg-transparent", style, imgStyle)}
         ></div>
       )}
       <Image
