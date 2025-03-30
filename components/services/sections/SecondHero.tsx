@@ -38,7 +38,7 @@ export const SecondHero: React.FC<ISecondHero> = ({ activeTab }) => {
             </Text>
           </RevealAnimation>
           <RevealAnimation style="w-fit">
-            <div className="flex gap-[24px] flex-wrap md:justify-start justify-center">
+            <div className="flex md:gap-[20px] gap-[12px] md:justify-start justify-center">
               <Link
                 href={
                   activeTab === customerTab

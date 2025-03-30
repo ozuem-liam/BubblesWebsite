@@ -1,6 +1,6 @@
 export const PlayStoreSvg = () => (
   <svg
-    width="190"
+    width="170"
     height="58"
     viewBox="0 0 190 58"
     fill="none"
@@ -48,7 +48,7 @@ export const PlayStoreSvg = () => (
 
 export const AppleStoreSvg = () => (
   <svg
-    width="186"
+    width="170"
     height="58"
     viewBox="0 0 186 58"
     fill="none"
@@ -215,7 +215,7 @@ export const EcoFriendlySvg = () => (
 
 export const BlackPlayStoreSvg = () => (
   <svg
-    width="190"
+    width="170"
     height="59"
     viewBox="0 0 190 59"
     fill="none"
@@ -263,7 +263,7 @@ export const BlackPlayStoreSvg = () => (
 
 export const BlackAppleStoreSvg = () => (
   <svg
-    width="186"
+    width="170"
     height="59"
     viewBox="0 0 186 59"
     fill="none"
