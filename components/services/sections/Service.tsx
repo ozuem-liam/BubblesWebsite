@@ -190,12 +190,12 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
                 style={{ opacity: contentOpacity[index] || 0 }}
               >
                 <RevealAnimation style='w-fit'>
-                  <Text style='sm:text-start text-center text-tertiary1100 text-[32px] font-[700] sm:leading-[160%] leading-[120%]'>
+                  <Text style='text-start text-tertiary1100 text-[32px] font-[700] sm:leading-[160%] leading-[120%]'>
                     {content.title}
                   </Text>
                 </RevealAnimation>
                 <RevealAnimation style='w-fit'>
-                  <Text style='sm:text-start text-center text-[24px] font-[400] leading-[140%] text-tertiary1000 whitespace-normal'>
+                  <Text style='text-start text-[24px] font-[400] leading-[140%] text-tertiary1000 whitespace-normal'>
                     {content.desc}
                   </Text>
                 </RevealAnimation>
