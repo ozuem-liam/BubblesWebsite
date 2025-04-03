@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
-import { StaticImageData } from 'next/legacy/image'
+import { StaticImageData } from 'next/image'
 
 interface ICustomImagePropType {
   src: StaticImageData
