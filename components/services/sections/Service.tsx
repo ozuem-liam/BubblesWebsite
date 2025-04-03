@@ -186,7 +186,7 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
             {activeData.map((content, index) => (
               <div
                 key={index}
-                className='snap-start flex flex-col items-start md:justify-center justify-start md:h-[400px] h-[250px] w-full px-4 transition-opacity duration-300'
+                className='snap-start flex flex-col items-start md:justify-center justify-start md:h-[400px] h-[250px] w-full md:px-4 px-0 transition-opacity duration-300'
                 style={{ opacity: contentOpacity[index] || 0 }}
               >
                 <RevealAnimation style='w-fit'>

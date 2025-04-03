@@ -85,7 +85,7 @@ export const Footer: React.FC = () => {
             </Link>
 
             <Link
-              href="https://api.whatsapp.com/send?phone=08105951215"
+              href="https://api.whatsapp.com/send?phone=2348105951215"
               target='_blank'
               className="text-none"
             >

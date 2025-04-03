@@ -13,7 +13,7 @@ export const Hero: React.FC = () => {
   return (
     <div className="lg:px-[2.5rem] px-4 bg_linear-gradient lg:pt-[6rem] pt-[12rem]">
       <TopNav />
-      <MaxScreenWrapper style="md:pt-[4rem] pt-[2rem] pb-[6rem] flex lg:flex-row flex-col items-center md:gap-[40px] gap-[20px] justify-between">
+      <MaxScreenWrapper style="md:pt-[4rem] pt-[1rem] pb-[6rem] flex lg:flex-row flex-col items-center md:gap-[40px] gap-[20px] justify-between">
         <div className="flex flex-col gap-[24px] lg:w-[40%] w-full lg:items-start items-center">
           <RevealAnimation style="w-fit">
             <Text style="lg:text-start text-center border-l-2 border-primary300 w-fit px-[16px] py-[8px] bg-primary800 rounded-r-[8px] text-tertiary700 text-[14px] font-[400]">
@@ -34,7 +34,7 @@ export const Hero: React.FC = () => {
             </Text>
           </RevealAnimation>
           <RevealAnimation style="w-fit">
-            <div className="flex md:gap-[20px] gap-[6px] md:justify-start justify-center">
+            <div className="flex md:gap-[15px] gap-[6px] md:justify-start justify-center">
               <Link
                 id="store"
                 href={`https://play.google.com/store/apps/details?id=com.bubbles.customer.app&hl=en`}

@@ -42,7 +42,7 @@ export const Accordium: React.FC<IAccordium> = ({
           />
         </div>
         <div ref={serviceAccordium} className="service-accord">
-          <Text style="md:text-[20px] leading-[160%] text-[14px] font-[340] text-tertiary1000">
+          <Text style="md:text-[20px] leading-[160%] text-[14px] font-[400] text-tertiary1000">
             {info}
           </Text>
         </div>
