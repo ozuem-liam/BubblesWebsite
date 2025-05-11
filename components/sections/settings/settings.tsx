@@ -20,13 +20,13 @@ export const Settings = () => {
           <div className="md:col-span-1">
             <div className="bg-[#001a3f] rounded-lg p-4 border border-[#1a3b6d] sticky top-20">
               <nav className="space-y-1">
-                <a href="#vendor" className="flex items-center px-3 py-2 text-white rounded-md bg-[#0e2d5e] font-medium">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdhe7oJaxHU4KKbJwneB77E6v8XWWNYwTGv2Od2ULLG76EHxg/viewform?usp=header" className="flex items-center px-3 py-2 text-white rounded-md bg-[#0e2d5e] font-medium">
                   <ShoppingBag size={18} className="mr-2" /> Request Vendor
                 </a>
                 <a href="#security" className="flex items-center px-3 py-2 text-gray-300 hover:bg-[#0e2d5e] rounded-md">
                   <Shield size={18} className="mr-2" /> Security
                 </a>
-                <a href="#help" className="flex items-center px-3 py-2 text-gray-300 hover:bg-[#0e2d5e] rounded-md">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdhe7oJaxHU4KKbJwneB77E6v8XWWNYwTGv2Od2ULLG76EHxg/viewform?usp=header" className="flex items-center px-3 py-2 text-gray-300 hover:bg-[#0e2d5e] rounded-md">
                   <HelpCircle size={18} className="mr-2" /> Help & Support
                 </a>
               </nav>
