@@ -50,14 +50,21 @@ export const TopNav: React.FC = () => {
         <nav>
           <NavLinks />
         </nav>
-        <div className="flex justify-between items-center lg:w-auto w-full  h-[85%]">
+        <div className="flex justify-between items-center lg:w-auto w-full h-[85%]">
           <MobileNav />
-          <Button
-            onClick={() => router.push("#store")}
-            className="bg-primary100 text-tertiary1100 rounded-[12px] lg:h-[48px] h-[50px] lg:w-[185px] w-[162px] flex flex-col items-center lg:text-[16px] text-[14px] font-[500]"
-          >
-            Get Started
-          </Button>
+          {/* Hide on mobile, show on desktop */}
+          <div className="hidden lg:flex items-center gap-4">
+            <Link href="/auth/login">
+              <Button className="p-4 bg-[#bfdbfe] rounded-md text-[rgba(0, 57, 143, 1)] hover:bg-[#a3c4fd] transition-colors">
+                Login
+              </Button>
+            </Link>
+            <Link href="/auth/signup">
+              <Button className="p-4 bg-[#bfdbfe] rounded-md text-[rgba(0, 57, 143, 1)] hover:bg-[#a3c4fd] transition-colors">
+                Sign Up
+              </Button>
+            </Link>
+          </div>
         </div>
       </MaxScreenWrapper>
     </header>
