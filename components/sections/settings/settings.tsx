@@ -20,8 +20,8 @@ export const Settings = () => {
           <div className="md:col-span-1">
             <div className="bg-[#001a3f] rounded-lg p-4 border border-[#1a3b6d] sticky top-20">
               <nav className="space-y-1">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdhe7oJaxHU4KKbJwneB77E6v8XWWNYwTGv2Od2ULLG76EHxg/viewform?usp=header" className="flex items-center px-3 py-2 text-white rounded-md bg-[#0e2d5e] font-medium">
-                  <ShoppingBag size={18} className="mr-2" /> Request Vendor
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSf8ar0Decnr26f16zz7ck1MjcYbwQwrnva7JOQGYyZ6JA0oAQ/viewform?usp=header" className="flex items-center px-3 py-2 text-white rounded-md bg-[#0e2d5e] font-medium">
+                  <ShoppingBag size={18} className="mr-2" /> Request a Vendor
                 </a>
                 <a href="#security" className="flex items-center px-3 py-2 text-gray-300 hover:bg-[#0e2d5e] rounded-md">
                   <Shield size={18} className="mr-2" /> Security
@@ -36,7 +36,7 @@ export const Settings = () => {
           {/* Main Content */}
           <div className="md:col-span-3 space-y-6">
             {/* Vendor Section */}
-            <div id="vendor" className="bg-[#00112b] rounded-lg p-6 border border-[#1a3b6d]">
+            {/* <div id="vendor" className="bg-[#00112b] rounded-lg p-6 border border-[#1a3b6d]">
               <h2 className="text-white text-xl font-semibold mb-2">Request Vendor</h2>
               <p className="text-[#CCD0D4] mb-4">
                 Submit a request to become a vendor or find vendors near your location.
@@ -61,7 +61,7 @@ export const Settings = () => {
                   <p className="text-gray-300">Not a vendor yet. Submit a request to get started.</p>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Security Section */}
             <div id="security" className="bg-[#00112b] rounded-lg p-6 border border-[#1a3b6d]">
