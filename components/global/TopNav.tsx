@@ -52,12 +52,12 @@ export const TopNav: React.FC = () => {
           <MobileNav />
           {/* Hide on mobile, show on desktop */}
           <div className="hidden lg:flex items-center gap-4">
-            <Link href="/auth/login">
+            <Link href="/login">
               <Button className="p-4 bg-[#bfdbfe] rounded-md text-[rgba(0, 57, 143, 1)] hover:bg-[#a3c4fd] transition-colors">
                 Login
               </Button>
             </Link>
-            <Link href="/auth/signup">
+            <Link href="/signup">
               <Button className="p-4 bg-[#bfdbfe] rounded-md text-[rgba(0, 57, 143, 1)] hover:bg-[#a3c4fd] transition-colors">
                 Sign Up
               </Button>
