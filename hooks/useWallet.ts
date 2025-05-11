@@ -2,8 +2,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useAuth } from '@/contexts/auth-context';
-import { Wallet, Transaction, walletService, FundWalletPayload } from '@/lib/wallet';
+import { useAuth } from '../contexts/auth-context';
+import { Wallet, Transaction, walletService, FundWalletPayload } from '../lib/wallet';
 
 export const useWallet = () => {
   const { token } = useAuth();

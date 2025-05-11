@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useAuth } from "@/contexts/auth-context";
+import { useAuth } from "../contexts/auth-context";
 import {
   ShopServiceCategory,
   DeliveryOption,
@@ -10,11 +10,11 @@ import {
   ShopService,
   CartItemDetail,
   CartData,
-} from "@/lib/order-flow";
+} from "../lib/order-flow";
 import { useRouter } from "next/navigation";
-import { CreateOrderPayload, orderService } from "@/lib/order";
+import { CreateOrderPayload, orderService } from "../lib/order";
 import { toast } from "sonner";
-import { Account, UserData } from "@/lib/auth";
+import { Account, UserData } from "../lib/auth";
 
 export const useOrderFlow = (shopId?: string) => {
   const { token } = useAuth();

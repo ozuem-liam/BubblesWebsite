@@ -6,14 +6,14 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from "../../components/ui/sheet";
 import { useState } from "react";
 import { HambergerMenu } from "iconsax-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { useRouter } from "nextjs-toploader/app";
-import { NavRoutes } from "@/lib/constants/NavRoutes";
+import { NavRoutes } from "../../lib/constants/NavRoutes";
 import { Button } from "../ui/button";
 
 export const MobileNav: React.FC = () => {

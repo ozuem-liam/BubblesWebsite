@@ -3,13 +3,13 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { useAuth } from "@/contexts/auth-context";
-import { Text } from "@/components/global/Text";
-import { Button } from "@/components/ui/button";
-import { formatNaira } from "@/lib/utils";
+import { useAuth } from "../../../contexts/auth-context";
+import { Text } from "../../../components/global/Text";
+import { Button } from "../../../components/ui/button";
+import { formatNaira } from "../../../lib/utils";
 import { format } from "date-fns";
 import Link from "next/link";
-import { OrderDetailsData, orderService } from "@/lib/order";
+import { OrderDetailsData, orderService } from "../../../lib/order";
 
 export const OrderDetails = () => {
   const { id } = useParams();

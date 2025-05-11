@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { ProfileView } from "@/components/sections/profile/profile-view";
+import { ProfileView } from "../../../components/sections/profile/profile-view";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 

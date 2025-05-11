@@ -1,10 +1,10 @@
 // components/wallet/TransactionHistory.tsx
 'use client';
 
-import { useWallet } from '@/hooks/useWallet';
-import { Text } from '@/components/global/Text';
+import { useWallet } from '../../../hooks/useWallet';
+import { Text } from '../../../components/global/Text';
 import { format } from 'date-fns';
-import { formatNaira, koboToNaira } from '@/lib/utils';
+import { formatNaira, koboToNaira } from '../../../lib/utils';
 
 export const TransactionHistory = () => {
   const { transactions, loading } = useWallet();

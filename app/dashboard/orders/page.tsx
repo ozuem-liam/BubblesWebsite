@@ -1,4 +1,4 @@
-import { OrdersList } from '@/components/sections/orders/order-list';
+import { OrdersList } from '../../../components/sections/orders/order-list';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

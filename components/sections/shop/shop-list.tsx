@@ -1,8 +1,8 @@
 'use client';
 
-import { useShops } from '@/hooks/useShops';
-import { Button } from '@/components/ui/button';
-import { Text } from '@/components/global/Text';
+import { useShops } from '../../../hooks/useShops';
+import { Button } from '../../../components/ui/button';
+import { Text } from '../../../components/global/Text';
 import Link from 'next/link';
 
 export const ShopList = () => {

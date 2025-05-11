@@ -3,10 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Text } from "@/components/global/Text";
-import { toast } from "sonner";
-import { authService } from "@/lib/auth";
+import { Button } from "../../../components/ui/button";
+import { Text } from "../../../components/global/Text";
+import { authService } from "../../../lib/auth";
 
 // Lagos local governments
 const LAGOS_LOCAL_GOVERNMENTS = [

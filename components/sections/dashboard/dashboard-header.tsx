@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Logo } from '@/components/global/Logo';
-import { useAuth } from '@/contexts/auth-context';
+import { Button } from '../../../components/ui/button';
+import { Logo } from '../../../components/global/Logo';
+import { useAuth } from '../../../contexts/auth-context';
 
 export const DashboardHeader = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

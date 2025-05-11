@@ -1,4 +1,4 @@
-import { Settings } from "@/components/sections/settings/settings";
+import { Settings } from "../../../components/sections/settings/settings";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";

@@ -1,9 +1,9 @@
 'use client';
 
-import { Text } from '@/components/global/Text';
-import { formatNaira } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { CartData, DeliveryOption } from '@/lib/order-flow';
+import { Text } from '../../../components/global/Text';
+import { formatNaira } from '../../../lib/utils';
+import { Button } from '../../../components/ui/button';
+import { CartData, DeliveryOption } from '../../../lib/order-flow';
 
 export const OrderSummary = ({
   cart,

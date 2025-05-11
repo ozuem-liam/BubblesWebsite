@@ -1,7 +1,7 @@
 'use client';
 
-import { Text } from '@/components/global/Text';
-import { ShopService, ShopServiceCategory } from '@/lib/order-flow';
+import { Text } from '../../../components/global/Text';
+import { ShopService, ShopServiceCategory } from '../../../lib/order-flow';
 import Image from 'next/image';
 
 export const ShopServices = ({

@@ -1,9 +1,9 @@
-import { MaxScreenWrapper } from '@/components/global/MaxScreen'
-import { Text } from '@/components/global/Text'
+import { MaxScreenWrapper } from '../../../components/global/MaxScreen'
+import { Text } from '../../../components/global/Text'
 import bubble from '../../../public/bubbles.png'
-import { CustomImage } from '@/components/global/Image'
-import { CallSvg, SendSvg, SocialSvg, WhatsappSvg } from '@/components/svgs'
-import { RevealAnimation } from '@/components/global/Reveal'
+import { CustomImage } from '../../../components/global/Image'
+import { CallSvg, SendSvg, SocialSvg, WhatsappSvg } from '../../../components/svgs'
+import { RevealAnimation } from '../../../components/global/Reveal'
 import Link from 'next/link'
 
 interface IHelpCard {

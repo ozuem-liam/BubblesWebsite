@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import { LoginForm } from "@/components/sections/auth/login-form";
-import { Footer } from "@/components/global/Footer";
-import { TopNav } from "@/components/global/TopNav";
+import { LoginForm } from "../../components/sections/auth/login-form";
+import { Footer } from "../../components/global/Footer";
+import { TopNav } from "../../components/global/TopNav";
 
 export const metadata: Metadata = {
   title: "Login | Bubbles",

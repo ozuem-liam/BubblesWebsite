@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from '@/contexts/auth-context';
-import { Order, orderService } from '@/lib/order';
+import { useAuth } from '../contexts/auth-context';
+import { Order, orderService } from '../lib/order';
 
 export const useOrders = (page = 1, limit = 10) => {
   const { token } = useAuth();

@@ -3,7 +3,7 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
-import { Account, authService, UserData } from '@/lib/auth';
+import { Account, authService, UserData } from '../lib/auth';
 
 interface AuthContextType {
   user: Account | null;

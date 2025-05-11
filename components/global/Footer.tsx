@@ -1,4 +1,4 @@
-import { MaxScreenWrapper } from "@/components/global/MaxScreen";
+import { MaxScreenWrapper } from "../../components/global/MaxScreen";
 import { Logo } from "./Logo";
 import { Text } from "./Text";
 import { CopyrightSvg, EnvelopeSvg, LocationSvg } from "../svgs";

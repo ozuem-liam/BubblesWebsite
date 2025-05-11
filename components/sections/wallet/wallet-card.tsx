@@ -1,13 +1,13 @@
 // components/wallet/WalletCard.tsx
 'use client';
 
-import { useWallet } from '@/hooks/useWallet';
-import { Button } from '@/components/ui/button';
-import { Text } from '@/components/global/Text';
-import { Input } from '@/components/ui/input';
+import { useWallet } from '../../../hooks/useWallet';
+import { Button } from '../../../components/ui/button';
+import { Text } from '../../../components/global/Text';
+import { Input } from '../../../components/ui/input';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { formatNaira, koboToNaira } from '@/lib/utils';
+import { formatNaira, koboToNaira } from '../../../lib/utils';
 
 export const WalletCard = () => {
   const { wallet, loading, fundWallet } = useWallet();

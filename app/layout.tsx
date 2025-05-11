@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
-import { Hero } from "@/components/hero";
-import { Footer } from "@/components/global/Footer";
-import { AuthProvider } from "@/contexts/auth-context";
+import { Footer } from "../components/global/Footer";
+import { AuthProvider } from "../contexts/auth-context";
 
 const grotesk = Hanken_Grotesk({
   subsets: ["latin"],

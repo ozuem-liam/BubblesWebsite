@@ -1,16 +1,16 @@
 'use client';
 
-import { Text } from '@/components/global/Text';
-import { formatNaira } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { Text } from '../../../components/global/Text';
+import { formatNaira } from '../../../lib/utils';
+import { Button } from '../../../components/ui/button';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
-import { CartData, DeliveryOption } from '@/lib/order-flow';
-import { Select } from '@/components/ui/select';
+import { CartData, DeliveryOption } from '../../../lib/order-flow';
+import { Select } from '../../../components/ui/select';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Account } from '@/lib/auth';
-import { useAuth } from '@/contexts/auth-context';
+import { Account } from '../../../lib/auth';
+import { useAuth } from '../../../contexts/auth-context';
 
 export const CheckoutScreen = ({
   cart,

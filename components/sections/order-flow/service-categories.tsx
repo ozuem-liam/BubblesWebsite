@@ -1,7 +1,7 @@
 'use client';
 
-import { Text } from '@/components/global/Text';
-import { ShopServiceCategory } from '@/lib/order-flow';
+import { Text } from '../../../components/global/Text';
+import { ShopServiceCategory } from '../../../lib/order-flow';
 import { useEffect } from 'react';
 
 export const ServiceCategories = ({

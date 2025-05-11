@@ -3,16 +3,16 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Text } from "@/components/global/Text";
+import { Button } from "../../../components/ui/button";
+import { Text } from "../../../components/global/Text";
 import { toast } from "sonner";
-import { useAuth } from "@/contexts/auth-context";
-import { authService } from "@/lib/auth";
+import { useAuth } from "../../../contexts/auth-context";
+import { authService } from "../../../lib/auth";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  // const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { login } = useAuth();
@@ -20,8 +20,6 @@ export const LoginForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
-  
     try {
       const response = await authService.login({ email, password });
       if (response.code === 200 && response.data?.token) {
@@ -38,10 +36,10 @@ export const LoginForm = () => {
         const from = searchParams.get('from') || '/dashboard';
         router.push(from);
       } else {
-        setError(response.message || 'Login failed');
+        // setError(response.message || 'Login failed');
       }
     } catch (err) {
-      setError('An error occurred during login');
+      // setError('An error occurred during login');
     } finally {
       setLoading(false);
     }

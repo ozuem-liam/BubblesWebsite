@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { authService } from "@/lib/auth";
+import { authService } from "../../../lib/auth";
 
 // Step type to track the current stage of password reset flow
 type ResetStep = "email" | "verify-otp" | "reset-password" | "success";

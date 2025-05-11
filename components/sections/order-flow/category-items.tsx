@@ -1,9 +1,9 @@
 'use client';
 
-import { Text } from '@/components/global/Text';
-import { Button } from '@/components/ui/button';
-import { CartData, Item } from '@/lib/order-flow';
-import { formatNaira } from '@/lib/utils';
+import { Text } from '../../../components/global/Text';
+import { Button } from '../../../components/ui/button';
+import { CartData, Item } from '../../../lib/order-flow';
+import { formatNaira } from '../../../lib/utils';
 
 export const CategoryItems = ({
   items,

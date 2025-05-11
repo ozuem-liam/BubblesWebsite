@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { ShopList } from "@/components/sections/shop/shop-list";
+import { ShopList } from "../../../components/sections/shop/shop-list";
 
 export const metadata: Metadata = {
   title: "Shops | Bubbles",

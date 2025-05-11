@@ -1,17 +1,17 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { CustomImage } from '@/components/global/Image'
-import { Text } from '@/components/global/Text'
-import { MaxScreenWrapper } from '@/components/global/MaxScreen'
-import { RevealAnimation } from '@/components/global/Reveal'
+import { CustomImage } from '../../../components/global/Image'
+import { Text } from '../../../components/global/Text'
+import { MaxScreenWrapper } from '../../../components/global/MaxScreen'
+import { RevealAnimation } from '../../../components/global/Reveal'
 import { customerTab } from '../index'
 import {
   CUSTOMERDATA,
   CUSTOMERDATAIMAGES,
   VENDORDATA,
   VENDORDATAIMAGES,
-} from '@/lib/constants/Service'
+} from '../../../lib/constants/Service'
 import { StaticImageData } from 'next/legacy/image'
 
 interface IServicesSection {

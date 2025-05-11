@@ -2,8 +2,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Shop, ShopListResponse, shopService } from '@/lib/shop';
-import { useAuth } from '@/contexts/auth-context';
+import { Shop, ShopListResponse, shopService } from '../lib/shop';
+import { useAuth } from '../contexts/auth-context';
 
 export const useShops = (page = 1, limit = 10) => {
   const { token } = useAuth();

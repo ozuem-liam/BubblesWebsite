@@ -2,7 +2,7 @@
 
 import Brand from "../../public/bubbles-logo.svg";
 import { CustomImage } from "./Image";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { useRouter } from "nextjs-toploader/app";
 
 interface ILogoPropType {

@@ -1,19 +1,17 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useOrderFlow } from "@/hooks/useOrderFlow";
-import { Text } from "@/components/global/Text";
+import { useOrderFlow } from "../../../../../hooks/useOrderFlow";
+import { Text } from "../../../../../components/global/Text";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { CategoryItems } from "@/components/sections/order-flow/category-items";
-import { OrderSummary } from "@/components/sections/order-flow/order-summary";
-import { CheckoutScreen } from "@/components/sections/order-flow/checkout-screen";
-import { ServiceCategories } from "@/components/sections/order-flow/service-categories";
-import { ShopServices } from "@/components/sections/order-flow/shop-services";
-import { DeliveryOption } from "@/lib/order-flow";
-import { useAuth } from "@/contexts/auth-context";
-import { Account } from "@/lib/auth";
+import { CategoryItems } from "../../../../../components/sections/order-flow/category-items";
+import { OrderSummary } from "../../../../../components/sections/order-flow/order-summary";
+import { CheckoutScreen } from "../../../../../components/sections/order-flow/checkout-screen";
+import { ServiceCategories } from "../../../../../components/sections/order-flow/service-categories";
+import { ShopServices } from "../../../../../components/sections/order-flow/shop-services";
+import { DeliveryOption } from "../../../../../lib/order-flow";
+import { Account } from "../../../../../lib/auth";
 
 export default function OrderFlowPage() {
   const { shopId } = useParams();
@@ -46,8 +44,6 @@ export default function OrderFlowPage() {
   const [selectedDelivery, setSelectedDelivery] = useState<DeliveryOption | null>(null);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [showCheckoutScreen, setShowCheckoutScreen] = useState(false);
-  const router = useRouter();
-  const { user } = useAuth();
 
   const handleSelectDelivery = (option: DeliveryOption) => {
     setSelectedDelivery(option);

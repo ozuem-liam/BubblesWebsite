@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useOrders } from "@/hooks/useOrders";
-import { formatNaira } from "@/lib/utils";
+import { useOrders } from "../../../hooks/useOrders";
+import { formatNaira } from "../../../lib/utils";
 import { format } from "date-fns";
 
 export const OrdersList = () => {

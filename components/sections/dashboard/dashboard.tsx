@@ -2,14 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Text } from "@/components/global/Text";
-import { Button } from "@/components/ui/button";
-import { useAuth } from "@/contexts/auth-context";
+import { Text } from "../../../components/global/Text";
+import { useAuth } from "../../../contexts/auth-context";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { capitalize, formatNaira, koboToNaira } from "@/lib/utils";
+import { capitalize, formatNaira, koboToNaira } from "../../../lib/utils";
 import { ShopList } from "../shop/shop-list";
-import { useWallet } from "@/hooks/useWallet";
+import { useWallet } from "../../../hooks/useWallet";
 
 export const Dashboard = () => {
   const { user, isAuthenticated, loading, logout } = useAuth();

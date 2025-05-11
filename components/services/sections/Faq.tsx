@@ -1,8 +1,8 @@
-import { MaxScreenWrapper } from "@/components/global/MaxScreen";
-import { Text } from "@/components/global/Text";
+import { MaxScreenWrapper } from "../../../components/global/MaxScreen";
+import { Text } from "../../../components/global/Text";
 import { Accordium } from "./FaqAccordium";
 import bubble from "../../../public/bubbles.png";
-import { CustomImage } from "@/components/global/Image";
+import { CustomImage } from "../../../components/global/Image";
 import { useEffect, useState } from "react";
 import { customerTab } from "..";
 

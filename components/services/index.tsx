@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { MaxScreenWrapper } from "../global/MaxScreen";
 import { Text } from "../global/Text";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { ServicesSection } from "./sections/Service";
 import { LaundrySection } from "./sections/Laundry";
 import { BackByTech } from "./sections/BackByTech";

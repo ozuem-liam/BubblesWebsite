@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { Dashboard } from "@/components/sections/dashboard/dashboard";
+import { Dashboard } from "../../components/sections/dashboard/dashboard";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 

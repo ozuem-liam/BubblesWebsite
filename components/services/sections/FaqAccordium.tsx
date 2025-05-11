@@ -1,8 +1,8 @@
 "use client";
 
-import { RevealAnimation } from "@/components/global/Reveal";
-import { Text } from "@/components/global/Text";
-import { cn } from "@/lib/utils";
+import { RevealAnimation } from "../../../components/global/Reveal";
+import { Text } from "../../../components/global/Text";
+import { cn } from "../../../lib/utils";
 import { ArrowDown2 } from "iconsax-react";
 import { useCallback, useRef, useState } from "react";
 

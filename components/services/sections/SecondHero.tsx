@@ -7,7 +7,7 @@ import heroImg from "../../../public/iPhone 11 Pro2.svg";
 import heroImg2 from "../../../public/iPhone 11 Pro.svg";
 import { MaxScreenWrapper } from "../../global/MaxScreen";
 import bubble2 from "../../../public/bubble2.png";
-import { RevealAnimation } from "@/components/global/Reveal";
+import { RevealAnimation } from "../../../components/global/Reveal";
 import { customerTab } from "../index";
 import Link from "next/link";
 

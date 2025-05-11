@@ -1,11 +1,10 @@
 // components/profile/ProfileView.tsx
 'use client';
 
-import { Text } from '@/components/global/Text';
-import { Button } from '@/components/ui/button';
+import { Text } from '../../../components/global/Text';
 import Image from 'next/image';
-import { capitalize } from '@/lib/utils';
-import { useAuth } from '@/contexts/auth-context';
+import { capitalize } from '../../../lib/utils';
+import { useAuth } from '../../../contexts/auth-context';
 
 export const ProfileView = () => {
   const { user, loading } = useAuth();

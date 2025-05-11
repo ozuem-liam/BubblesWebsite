@@ -1,6 +1,6 @@
-import { Footer } from "@/components/global/Footer";
-import { TopNav } from "@/components/global/TopNav";
-import { SignupForm } from "@/components/sections/auth/signup-form";
+import { Footer } from "../../components/global/Footer";
+import { TopNav } from "../../components/global/TopNav";
+import { SignupForm } from "../../components/sections/auth/signup-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

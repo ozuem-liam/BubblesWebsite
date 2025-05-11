@@ -1,12 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "../../components/ui/button";
 import Link from "next/link";
-import { NavRoutes } from "@/lib/constants/NavRoutes";
+import { NavRoutes } from "../../lib/constants/NavRoutes";
 import { Logo } from "./Logo";
 import { MobileNav } from "./mobileNav";
 import { MaxScreenWrapper } from "./MaxScreen";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const NavLinks: React.FC = () => (
@@ -25,7 +24,6 @@ const NavLinks: React.FC = () => (
 );
 
 export const TopNav: React.FC = () => {
-  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
