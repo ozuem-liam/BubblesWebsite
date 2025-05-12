@@ -44,7 +44,7 @@ export const MobileNav: React.FC = () => {
         ))}
       </ul>
 
-      <div className="flex flex-col gap-4 mb-10 w-full">
+      <div className="flex flex-col gap-4 mb-30 w-full">
         <SheetClose asChild>
           <Link href="/login" className="w-full">
             <Button
