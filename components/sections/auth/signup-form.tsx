@@ -72,7 +72,7 @@ export const SignupForm = () => {
         if (otpResponse.code === 200) {
           setSuccess('Registration successful! Please check your email for OTP.');
           // Redirect to OTP verification with email and token
-          router.push(`/auth/verify-otp?email=${encodeURIComponent(formData.email)}`);
+          router.push(`/verify-otp?email=${encodeURIComponent(formData.email)}`);
         } else {
           setError('Failed to send OTP. Please try again.');
         }
