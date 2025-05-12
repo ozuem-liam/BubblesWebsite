@@ -47,7 +47,7 @@ export const MobileNav: React.FC = () => {
       <div className="flex flex-col gap-4 mb-10 w-full">
         <SheetClose asChild>
           <Link href="/login" className="w-full">
-            <Button 
+            <Button
               className="w-full p-4 bg-[#bfdbfe] rounded-md text-[rgba(0, 57, 143, 1)] hover:bg-[#a3c4fd] transition-colors"
               onClick={() => setOpen(false)}
             >
@@ -57,7 +57,7 @@ export const MobileNav: React.FC = () => {
         </SheetClose>
         <SheetClose asChild>
           <Link href="/signup" className="w-full">
-            <Button 
+            <Button
               className="w-full p-4 bg-[#bfdbfe] rounded-md text-[rgba(0, 57, 143, 1)] hover:bg-[#a3c4fd] transition-colors"
               onClick={() => setOpen(false)}
             >
@@ -66,15 +66,17 @@ export const MobileNav: React.FC = () => {
           </Link>
         </SheetClose>
         <SheetClose asChild>
-          <Button
-            onClick={() => {
-              router.push("#store");
-              setOpen(false);
-            }}
-            className="w-full p-4 bg-[#001D48] text-white rounded-md hover:bg-[#00338D] transition-colors"
-          >
-            Send a Message
-          </Button>
+          <Link href="https://docs.google.com/forms/d/e/1FAIpQLSf8ar0Decnr26f16zz7ck1MjcYbwQwrnva7JOQGYyZ6JA0oAQ/viewform?usp=header">
+            <Button
+              onClick={() => {
+                router.push("#store");
+                setOpen(false);
+              }}
+              className="w-full p-4 bg-[#001D48] text-white rounded-md hover:bg-[#00338D] transition-colors"
+            >
+              Request a Vendor
+            </Button>
+          </Link>
         </SheetClose>
       </div>
     </div>
