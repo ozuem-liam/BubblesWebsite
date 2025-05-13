@@ -12,7 +12,6 @@ export default function LoginPage() {
     <main>
       <TopNav />
       <LoginForm />
-      <Footer />
     </main>
   );
 }

@@ -12,7 +12,6 @@ export default function SignupPage() {
     <main>
       <TopNav />
       <SignupForm />
-      <Footer />
     </main>
   );
 }

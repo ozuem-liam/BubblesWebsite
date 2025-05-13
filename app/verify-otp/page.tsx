@@ -10,7 +10,6 @@ export default function SignupPage() {
   return (
     <main>
       <OtpForm />
-      <Footer />
     </main>
   );
 }
