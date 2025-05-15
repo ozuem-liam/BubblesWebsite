@@ -25,12 +25,12 @@ export const Hero: React.FC = () => {
               id="home"
               style="lg:text-start text-center md:text-[72px] text-[42px] font-[800] leading-[120%] text-tertiary100"
             >
-              Laundry Made Simple For You
+              Laundry, Spaces & More
             </Text>
           </RevealAnimation>
           <RevealAnimation style="w-fit">
             <Text style="lg:text-start text-center text-tertiary700 text-[15px] md:text-[20px] font-[400] leading-[140%]">
-              {`No more laundry stress; just fresh, professionally cleaned clothes. Whether you're a busy professional or a laundry business looking to grow, we’re here to help.`}
+              {`No more stress—just spotless clothes, clean spaces, and pest-free environments. Whether you're a busy professional or a business looking to grow, Bubbles makes laundry, cleaning, and fumigation effortless, we’re here to help.`}
             </Text>
           </RevealAnimation>
           <RevealAnimation style="w-fit">

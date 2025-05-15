@@ -72,7 +72,7 @@ export const BackByTech: React.FC = () => {
                 as="h3"
                 style="font-[700] text-[34px] leading-[160%] text-center"
               >
-                Laundry Backed by Tech That Delivers
+                Cleaning Service Backed by Tech That Delivers
               </Text>
             </RevealAnimation>
             <RevealAnimation style="w-fit">
@@ -80,7 +80,7 @@ export const BackByTech: React.FC = () => {
                 as="h4"
                 style="font-[400] text-[22px] leading-[140%] text-tertiary1000 text-center"
               >
-                We started with one goal: To make laundry feel less like a chore
+                We started with one goal: To make cleaning feel less like a chore
                 and more like a breeze.
               </Text>
             </RevealAnimation>

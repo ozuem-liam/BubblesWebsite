@@ -62,7 +62,7 @@ export const LaundrySection: React.FC<ILaundrySection> = ({ activeTab }) => {
               style="font-[400] text-[24px] leading-[160%] md:text-start text-center"
             >
               {activeTab === customerTab
-                ? "Place a laundry order now and let us serve you."
+                ? "Place a order now and let us serve you."
                 : "Start getting requests from nearby customers"}
             </Text>
           </RevealAnimation>
