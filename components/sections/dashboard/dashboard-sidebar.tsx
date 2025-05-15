@@ -93,7 +93,9 @@ export const DashboardSidebar = () => {
       <div className="md:hidden fixed bottom-4 right-4 z-40">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="p-3 rounded-full bg-[#bfdbfe] text-[#001D48] shadow-lg"
+          className="p-3 rounded-full bg-[#bfdbfe] text-[#001D48] shadow-lg hover:scale-105 transition-transform focus:outline-none focus:ring-2 focus:ring-[#bfdbfe] focus:ring-opacity-50"
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMobileMenuOpen}
         >
           {isMobileMenuOpen ? (
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -107,21 +109,24 @@ export const DashboardSidebar = () => {
         </button>
       </div>
 
-      {/* Sidebar for desktop */}
-      <aside className="hidden md:block w-64 min-h-screen bg-[#00112b] shadow-lg border-r border-[#1a3b6d]">
+      {/* Desktop Sidebar */}
+      <aside className="hidden md:block w-64 min-h-screen bg-[#00112b] shadow-lg border-r border-[#1a3b6d] sticky top-0">
         <nav className="pt-6 px-4">
           <ul className="space-y-2">
             {menuItems.map((item) => (
               <li key={item.name}>
                 <Link
                   href={item.path}
-                  className={`flex items-center space-x-3 px-4 py-3 rounded-md transition-colors ${
+                  className={`flex items-center space-x-3 px-4 py-3 rounded-md transition-all duration-200 ${
                     isActive(item.path)
-                      ? 'bg-[#bfdbfe] text-[#001D48] font-medium'
-                      : 'text-white hover:bg-[#002A6B]'
+                      ? 'bg-[#bfdbfe] text-[#001D48] font-medium shadow-md'
+                      : 'text-white hover:bg-[#002A6B] hover:shadow-sm'
                   }`}
+                  aria-current={isActive(item.path) ? "page" : undefined}
                 >
-                  {item.icon}
+                  <span className={`${isActive(item.path) ? 'text-[#001D48]' : 'text-[#bfdbfe]'}`}>
+                    {item.icon}
+                  </span>
                   <span>{item.name}</span>
                 </Link>
               </li>
@@ -132,12 +137,20 @@ export const DashboardSidebar = () => {
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed inset-0 z-30 transform ${
-          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-300 ease-in-out md:hidden`}
+        className={`fixed inset-0 z-30 transition-all duration-300 ease-in-out md:hidden ${
+          isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+        }`}
       >
-        <div className="absolute inset-0 bg-black opacity-50" onClick={() => setIsMobileMenuOpen(false)}></div>
-        <div className="absolute inset-y-0 left-0 w-64 max-w-sm bg-[#00112b] shadow-lg border-r border-[#1a3b6d] transform translate-x-0">
+        <div 
+          className="absolute inset-0 bg-black/50 transition-opacity duration-300"
+          onClick={() => setIsMobileMenuOpen(false)}
+          aria-hidden="true"
+        ></div>
+        <div 
+          className={`absolute inset-y-0 left-0 w-64 max-w-sm bg-[#00112b] shadow-lg border-r border-[#1a3b6d] transform transition-transform duration-300 ${
+            isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        >
           <nav className="pt-16 px-4">
             <ul className="space-y-2">
               {menuItems.map((item) => (
@@ -150,6 +163,7 @@ export const DashboardSidebar = () => {
                         : 'text-white hover:bg-[#002A6B]'
                     }`}
                     onClick={() => setIsMobileMenuOpen(false)}
+                    aria-current={isActive(item.path) ? "page" : undefined}
                   >
                     {item.icon}
                     <span>{item.name}</span>
