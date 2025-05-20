@@ -37,13 +37,13 @@ export const SecondHero: React.FC<ISecondHero> = ({ activeTab }) => {
                 : "Start growing your business with every spin."}
             </Text>
           </RevealAnimation>
-          <RevealAnimation style="w-fit">
-            <div className="flex md:gap-[15px] gap-[6px] md:justify-start justify-center">
+          <RevealAnimation style="md:w-fit w-full">
+            <div className="flex md:gap-[15px] gap-[6px] md:justify-start justify-between">
               <Link
                 href={
                   activeTab === customerTab
                     ? `https://play.google.com/store/apps/details?id=com.bubbles.customer.app&hl=en`
-                    : "Shttps://play.google.com/store/apps/details?id=com.bubbles.bubbles_vendor&hl=en"
+                    : "https://play.google.com/store/apps/details?id=com.bubbles.bubbles_vendor&hl=en"
                 }
                 target="_blank"
                 className="text-none"

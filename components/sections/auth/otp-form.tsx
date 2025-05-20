@@ -57,7 +57,7 @@ const OtpFormContent = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#001D48] to-[#000c1d] pt-24 pb-10 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-[#001D48] to-[#000c1d] pt-[10rem] pb-10 px-4">
       <div className="max-w-md mx-auto">
         <div className="max-w-md mx-auto p-6 bg-[#222] rounded-lg shadow-lg">
           {/* ... rest of your JSX remains the same ... */}

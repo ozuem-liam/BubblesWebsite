@@ -18,9 +18,9 @@ export const Services: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>(customerTab);
 
   return (
-    <div className="sm:pb-[104px] pb-[54px] flex flex-col md:gap-[40px] ga-[20px]">
+    <div className="sm:pb-[104px] pb-[54px] flex flex-col md:gap-[40px] gap-[20px]">
       <div className="bg-tertiary300 sm:pt-[104px] pt-[54px] flex flex-col gap-[40px]">
-        <MaxScreenWrapper style="flex items-start w-full md:px-[2.5rem] xl:px-0 px-4 ">
+        <MaxScreenWrapper style="flex items-start w-full px-[2.5rem] px-4 ">
           <Text
             clickFunc={() =>
               setActiveTab((prevState) =>

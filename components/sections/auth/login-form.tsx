@@ -47,7 +47,7 @@ export const LoginForm = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-b from-[#001D48] to-[#000c1d] pt-24 pb-10 px-4">
+      <div className="min-h-screen bg-gradient-to-b from-[#001D48] to-[#000c1d] pt-[10rem] pb-10 px-4">
         <div className="max-w-md mx-auto">
           <div className="bg-[#00112b] rounded-lg shadow-xl p-8 border border-[#1a3b6d]">
             <Text
