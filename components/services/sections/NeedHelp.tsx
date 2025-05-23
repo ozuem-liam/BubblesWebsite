@@ -20,8 +20,8 @@ const HelpCard: React.FC<IHelpCard> = ({ icon, title }) => (
 
 export const NeedHelp: React.FC = () => {
   return (
-    <div className='relative flex flex-col md:gap-[80px] gap-[40px]'>
-      <MaxScreenWrapper style='relative flex flex-col md:gap-[80px] gap-[40px] w-full sm:px-[2.5rem] px-4  py-[54px]'>
+    <div className='relative flex flex-col md:gap-[50px] gap-[30px]'>
+      <MaxScreenWrapper style='relative flex flex-col md:gap-[80px] gap-[40px] w-full lg:px-[2.5rem] xl:px-[5.5rem] px-4  py-[54px]'>
         <CustomImage
           src={bubble}
           style='md:w-[370px] w-[300px] h-[330px] absolute top-[10px] left-[10px]'
@@ -48,7 +48,7 @@ export const NeedHelp: React.FC = () => {
         </div>
       </MaxScreenWrapper>
       <div className='border border-[gainsboro]'>
-        <MaxScreenWrapper style='w-full gap-[20px] flex flex-wrap md:justify-between justify-center items-center sm:px-[2.5rem] px-4'>
+        <MaxScreenWrapper style='w-full gap-[20px] flex flex-wrap md:justify-between justify-center items-center lg:px-[2.5rem] xl:px-[5.5rem] px-4'>
           <RevealAnimation style='w-fit'>
             <Link
               href='https://api.whatsapp.com/send?phone=2348105951215'

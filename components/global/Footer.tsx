@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export const Footer: React.FC = () => {
   return (
-    <div className="bg-primary800 flex flex-col justify-center items-center lg:px-[2.5rem] px-4  sm:pt-[104px] pt-[54px]">
+    <div className="bg-primary800 flex flex-col justify-center items-center lg:px-[2.5rem] xl:px-[5.5rem] px-4  sm:pt-[104px] pt-[54px]">
       <MaxScreenWrapper style="w-full relative flex justify-center items-center flex-col">
         <CustomImage
           src={bubbleImg}
@@ -16,7 +16,7 @@ export const Footer: React.FC = () => {
           imgStyle="object-cover"
         />
         <div className="w-full relative flex flex-wrap justify-between gap-[80px]">
-          <div className="flex flex-col sm:gap-[20px] gap-[15px]">
+          <div className="flex flex-col md:gap-[20px] gap-[15px]">
             <Logo style="h-[30px]" />
             <Text style="text-[16px] font-[500] leading-[160%] text-tertiary700">
               No spin, just results!
@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
               yusuf Oyero, Ketu, Lagos
             </Text>
           </div>
-          <div className="flex flex-col sm:gap-[20px] gap-[15px]">
+          <div className="flex flex-col md:gap-[20px] gap-[15px]">
             <Text style="text-[16px] font-[700] leading-[150%] text-tertiary100">
               About Us
             </Text>
@@ -52,7 +52,7 @@ export const Footer: React.FC = () => {
               </Text>
             </Link>
           </div>
-          <div className="flex flex-col sm:gap-[20px] gap-[15px]">
+          <div className="flex flex-col md:gap-[20px] gap-[15px]">
             <Text style="text-[16px] font-[700] leading-[150%] text-tertiary100">
               Support
             </Text>
@@ -95,7 +95,7 @@ export const Footer: React.FC = () => {
             </Link>
           </div>
         </div>
-        <Text style="items-center md:mt-[204px] mt-[73px] mb-[73px] md:mb-[243px] text-[16px] text-center font-[500] leading-[160%] flex gap-[4px] text-tertiary800">
+        <Text style="items-center md:mt-[104px] mt-[43px] mb-[73px] md:mb-[243px] text-[16px] text-center font-[500] leading-[160%] flex gap-[4px] text-tertiary800">
           <CopyrightSvg />
           2025 Bubbles. All rights reserved
         </Text>

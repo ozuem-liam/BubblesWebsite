@@ -1,5 +1,6 @@
 export const PlayStoreSvg = () => (
   <svg
+  className="play-store-svg"
     width="165"
     height="58"
     viewBox="0 0 190 58"
@@ -48,6 +49,7 @@ export const PlayStoreSvg = () => (
 
 export const AppleStoreSvg = () => (
   <svg
+  className="apple-store-svg"
     width="165"
     height="58"
     viewBox="0 0 186 58"

@@ -6,10 +6,11 @@ export const metadata: Metadata = {
   title: "Verify OTP | Bubbles",
 };
 
-export default function SignupPage() {
+export default function VerifyOtpPage() {
   return (
     <main>
       <OtpForm />
+      {"hellow rold"}
     </main>
   );
 }
