@@ -24,7 +24,7 @@ export const BackByTech: React.FC = () => {
           <RevealAnimation style="w-fit">
             <CustomImage
               src={heroImg1}
-              style="md:w-[330px] w-[300px] h-[250px] md:h-[260px]"
+              style="md:w-[330px] w-[300px] h-[240px] md:h-[260px]"
               imgStyle="object-cover"
             />
           </RevealAnimation>
