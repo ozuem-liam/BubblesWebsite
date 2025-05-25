@@ -12,7 +12,7 @@ export const Settings = () => {
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center mb-8">
           <SettingsIcon className="text-white mr-3" size={24} />
-          <h1 className="text-white text-2xl font-bold">Account Settings</h1>
+          <h1 className="text-white text-xl font-bold">Account Settings</h1>
         </div>
 
         <div className="grid md:grid-cols-4 gap-6">
@@ -20,7 +20,7 @@ export const Settings = () => {
           <div className="md:col-span-1">
             <div className="bg-[#001a3f] rounded-lg p-4 border border-[#1a3b6d] sticky top-20">
               <nav className="space-y-1">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSf8ar0Decnr26f16zz7ck1MjcYbwQwrnva7JOQGYyZ6JA0oAQ/viewform?usp=header" className="flex items-center px-3 py-2 text-white rounded-md bg-[#0e2d5e] font-medium">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSf8ar0Decnr26f16zz7ck1MjcYbwQwrnva7JOQGYyZ6JA0oAQ/viewform?usp=header" className="flex items-center px-3 py-2 text-white rounded-md bg-[#0e2d5e] text-sm font-medium">
                   <ShoppingBag size={18} className="mr-2" /> Request a Vendor
                 </a>
                 <a href="#security" className="flex items-center px-3 py-2 text-gray-300 hover:bg-[#0e2d5e] rounded-md">
@@ -57,7 +57,7 @@ export const Settings = () => {
                 </div>
                 
                 <div className="mt-4 p-4 bg-[#001a3f] rounded-md border border-[#1a3b6d]">
-                  <h3 className="text-white text-md font-medium mb-2">Current Vendor Status</h3>
+                  <h3 className="text-white text-md text-sm font-medium mb-2">Current Vendor Status</h3>
                   <p className="text-gray-300">Not a vendor yet. Submit a request to get started.</p>
                 </div>
               </div>
@@ -90,7 +90,7 @@ export const Settings = () => {
                     
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-1">Current Password</label>
+                        <label className="block text-xs text-sm font-medium text-gray-300 mb-1">Current Password</label>
                         <input 
                           type="password" 
                           className="w-full bg-[#001a3f] border border-[#1a3b6d] rounded px-3 py-2 text-white"
@@ -98,7 +98,7 @@ export const Settings = () => {
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-1">New Password</label>
+                        <label className="block text-xs text-sm font-medium text-gray-300 mb-1">New Password</label>
                         <input 
                           type="password" 
                           className="w-full bg-[#001a3f] border border-[#1a3b6d] rounded px-3 py-2 text-white"
@@ -106,7 +106,7 @@ export const Settings = () => {
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-1">Confirm New Password</label>
+                        <label className="block text-xs text-sm font-medium text-gray-300 mb-1">Confirm New Password</label>
                         <input 
                           type="password" 
                           className="w-full bg-[#001a3f] border border-[#1a3b6d] rounded px-3 py-2 text-white"

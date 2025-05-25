@@ -38,16 +38,17 @@ export default function OrderFlowPage() {
     selectedDeliveryDate,
     setSelectedDeliveryDate,
     selectedTimeSlot,
-    setSelectedTimeSlot
+    setSelectedTimeSlot,
   } = useOrderFlow(shopId as string);
 
-  const [selectedDelivery, setSelectedDelivery] = useState<DeliveryOption | null>(null);
+  const [selectedDelivery, setSelectedDelivery] =
+    useState<DeliveryOption | null>(null);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [showCheckoutScreen, setShowCheckoutScreen] = useState(false);
 
   const handleSelectDelivery = (option: DeliveryOption) => {
     setSelectedDelivery(option);
-    toggleExpressDelivery(option.type === 'express');
+    toggleExpressDelivery(option.type === "express");
   };
 
   const handleProceedToCheckout = () => {
@@ -55,7 +56,7 @@ export default function OrderFlowPage() {
       toast.error("Please select delivery option and add items to cart");
       return;
     }
-    
+
     setShowCheckoutScreen(true);
   };
 
@@ -64,9 +65,10 @@ export default function OrderFlowPage() {
   };
 
   const handleCheckout = async (
-    selectedDelivery: DeliveryOption, 
+    cart: any,
+    selectedDelivery: DeliveryOption | null,
     user: Account,
-    pickupDate: string | null, 
+    pickupDate: string | null,
     timeSlot?: string | null
   ) => {
     if (!selectedDelivery || !cart?.items.length) {
@@ -80,8 +82,14 @@ export default function OrderFlowPage() {
         toast.error("User is not authenticated");
         return false;
       }
-      const success = await checkout(selectedDelivery, user, pickupDate, timeSlot);
-      
+      const success = await checkout(
+        cart,
+        selectedDelivery,
+        user,
+        pickupDate,
+        timeSlot
+      );
+
       if (success) {
         toast.success("Order created successfully!");
         return true;
@@ -100,7 +108,7 @@ export default function OrderFlowPage() {
 
   if (error) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
         <Text as="p" style="text-red-500">
           {error}
         </Text>
@@ -109,17 +117,17 @@ export default function OrderFlowPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-4xl mx-auto">
-        <Text as="h1" style="text-white text-2xl font-bold mb-8">
-          {showCheckoutScreen ? "Complete Your Order" : "Create Your Order"}
-        </Text>
+    <div className="max-w-7xl mx-auto">
+      <Text as="h1" style="text-gray-800 text-xl font-bold mb-6">
+        {showCheckoutScreen ? "Complete Your Order" : "Create Your Order"}
+      </Text>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {!showCheckoutScreen ? (
-            <>
-              <div className="lg:col-span-2 space-y-6">
-                {categories.length === 0 && (
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {!showCheckoutScreen ? (
+          <>
+            <div className="lg:col-span-2 space-y-6">
+              {categories.length === 0 && (
+                <>
                   <ShopServices
                     services={services}
                     setCategories={setCategories}
@@ -127,29 +135,28 @@ export default function OrderFlowPage() {
                     selectedService={selectedService}
                     loading={loading.services}
                   />
-                )}
+                </>
+              )}
 
-                {selectedService && (
+              {selectedService && (
+                <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
                   <ServiceCategories
                     categories={categories}
                     onSelectCategory={selectCategory}
                     selectedCategory={selectedCategory}
-                    loading={loading.categories}
-                  />
-                )}
-
-                {selectedCategory && (
-                  <CategoryItems
+                    cloading={loading.categories}
                     items={items}
                     cart={cart}
-                    onAddToCart={addToCart}
-                    onRemoveFromCart={removeFromCart}
-                    onUpdateQuantity={updateQuantity}
+                    addToCart={addToCart}
+                    removeFromCart={removeFromCart}
+                    updateQuantity={updateQuantity}
                     loading={loading.items}
                   />
-                )}
-              </div>
-              <div className="lg:col-span-1">
+                </div>
+              )}
+            </div>
+            <div className="lg:col-span-1">
+              <>
                 <OrderSummary
                   cart={cart}
                   deliveryOptions={deliveryOptions}
@@ -159,28 +166,28 @@ export default function OrderFlowPage() {
                   loading={isCheckingOut || loading.checkout}
                   isExpressSelected={isExpressSelected}
                 />
-              </div>
-            </>
-          ) : (
-            <div className="lg:col-span-3">
-              {selectedDelivery && (
-                <CheckoutScreen
-                  cart={cart}
-                  selectedDelivery={selectedDelivery}
-                  isExpressSelected={isExpressSelected}
-                  onBack={handleBackToSummary}
-                  checkout={handleCheckout}
-                  loading={isCheckingOut || loading.checkout}
-                  availableTimeSlots={availableTimeSlots}
-                  selectedDeliveryDate={selectedDeliveryDate}
-                  setSelectedDeliveryDate={setSelectedDeliveryDate}
-                  selectedTimeSlot={selectedTimeSlot}
-                  setSelectedTimeSlot={setSelectedTimeSlot}
-                />
-              )}
+              </>
             </div>
-          )}
-        </div>
+          </>
+        ) : (
+          <div className="lg:col-span-3">
+            <div className="bg-white shadow-sm">
+              <CheckoutScreen
+                cart={cart}
+                selectedDelivery={selectedDelivery}
+                isExpressSelected={isExpressSelected}
+                onBack={handleBackToSummary}
+                checkout={handleCheckout}
+                loading={isCheckingOut || loading.checkout}
+                availableTimeSlots={availableTimeSlots}
+                selectedDeliveryDate={selectedDeliveryDate}
+                setSelectedDeliveryDate={setSelectedDeliveryDate}
+                selectedTimeSlot={selectedTimeSlot}
+                setSelectedTimeSlot={setSelectedTimeSlot}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

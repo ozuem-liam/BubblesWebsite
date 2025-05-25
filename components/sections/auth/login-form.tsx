@@ -12,7 +12,6 @@ import { authService } from "../../../lib/auth";
 export const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { login } = useAuth();
@@ -68,7 +67,7 @@ export const LoginForm = () => {
               <div className="mb-6">
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-[#CCD0D4] mb-2"
+                  className="block text-xs text-sm font-medium text-[#CCD0D4] mb-2"
                 >
                   Email Address
                 </label>
@@ -87,13 +86,13 @@ export const LoginForm = () => {
                 <div className="flex justify-between mb-2">
                   <label
                     htmlFor="password"
-                    className="block text-sm font-medium text-[#CCD0D4]"
+                    className="block text-xs text-sm font-medium text-[#CCD0D4]"
                   >
                     Password
                   </label>
                   <Link
                     href="/forgot-password"
-                    className="text-sm text-[#bfdbfe] hover:underline"
+                    className="text-xs text-[#bfdbfe] hover:underline"
                   >
                     Forgot password?
                   </Link>
@@ -112,7 +111,7 @@ export const LoginForm = () => {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#bfdbfe] text-[#001D48] font-medium py-3 rounded-md hover:bg-[#9cc2fe] transition-colors"
+                className="w-full bg-[#bfdbfe] text-[#001D48] text-sm font-medium py-3 rounded-md hover:bg-[#9cc2fe] transition-colors"
               >
                 {loading ? "Signing in..." : "Sign In"}
               </Button>

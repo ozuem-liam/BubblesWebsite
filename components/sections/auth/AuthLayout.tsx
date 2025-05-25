@@ -11,7 +11,7 @@ import Brand from '../../../public/blue-bubbles-logo.png'
 const OrSeparator = (): JSX.Element => (
   <div className='flex items-center w-full '>
     <div className='flex-grow h-px bg-gradient-to-r from-gray-300 to-transparent'></div>
-    <span className='mx-4 text-sm font-medium text-gray-500'>OR</span>
+    <span className='mx-4 text-xs text-sm font-medium text-gray-500'>OR</span>
     <div className='flex-grow h-px bg-gradient-to-l from-gray-300 to-transparent'></div>
   </div>
 )
@@ -31,7 +31,7 @@ const FooterText = ({
     {footerText}
     <Link
       href={footerLink}
-      className=' ms-2 font-medium text-primary hover:text-primary-500 hover:underline transition-colors'
+      className=' ms-2 text-sm font-medium text-primary hover:text-primary-500 hover:underline transition-colors'
     >
       {footerLinkTitle}
     </Link>
@@ -41,7 +41,7 @@ const FooterText = ({
 // const GoogleSignIn = (): JSX.Element => (
 //   <Button className='h-[50px] rounded-sm w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-grey-400 shadow-none bg-white text-gray-700 hover:bg-none'>
 //     <GoogleSvg />
-//     <span className='font-medium text-[19px] text-[#8f8f8f]'>
+//     <span className='text-sm font-medium text-[19px] text-[#8f8f8f]'>
 //       Sign in with Google
 //     </span>
 //   </Button>

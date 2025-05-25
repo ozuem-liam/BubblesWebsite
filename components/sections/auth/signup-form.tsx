@@ -113,7 +113,7 @@ export const SignupForm = () => {
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-[#CCD0D4] mb-2">
+                <label htmlFor="firstName" className="block text-xs text-sm font-medium text-[#CCD0D4] mb-2">
                   First Name
                 </label>
                 <input
@@ -128,7 +128,7 @@ export const SignupForm = () => {
                 />
               </div>
               <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-[#CCD0D4] mb-2">
+                <label htmlFor="lastName" className="block text-xs text-sm font-medium text-[#CCD0D4] mb-2">
                   Last Name
                 </label>
                 <input
@@ -145,7 +145,7 @@ export const SignupForm = () => {
             </div>
 
             <div className="mb-6">
-              <label htmlFor="email" className="block text-sm font-medium text-[#CCD0D4] mb-2">
+              <label htmlFor="email" className="block text-xs text-sm font-medium text-[#CCD0D4] mb-2">
                 Email Address
               </label>
               <input
@@ -161,7 +161,7 @@ export const SignupForm = () => {
             </div>
 
             <div className="mb-6">
-              <label htmlFor="phone" className="block text-sm font-medium text-[#CCD0D4] mb-2">
+              <label htmlFor="phone" className="block text-xs text-sm font-medium text-[#CCD0D4] mb-2">
                 Phone Number
               </label>
               <input
@@ -179,7 +179,7 @@ export const SignupForm = () => {
             </div>
 
             <div className="mb-6">
-              <label htmlFor="address" className="block text-sm font-medium text-[#CCD0D4] mb-2">
+              <label htmlFor="address" className="block text-xs text-sm font-medium text-[#CCD0D4] mb-2">
                 Address
               </label>
               <input
@@ -195,7 +195,7 @@ export const SignupForm = () => {
             </div>
 
             <div className="mb-6">
-              <label htmlFor="country" className="block text-sm font-medium text-[#CCD0D4] mb-2">
+              <label htmlFor="country" className="block text-xs text-sm font-medium text-[#CCD0D4] mb-2">
                 Country
               </label>
               <input
@@ -209,7 +209,7 @@ export const SignupForm = () => {
             </div>
 
             <div className="mb-6">
-              <label htmlFor="state" className="block text-sm font-medium text-[#CCD0D4] mb-2">
+              <label htmlFor="state" className="block text-xs text-sm font-medium text-[#CCD0D4] mb-2">
                 State
               </label>
               <select
@@ -228,7 +228,7 @@ export const SignupForm = () => {
 
             {formData.state === "Lagos" && (
               <div className="mb-6">
-                <label htmlFor="localGovernment" className="block text-sm font-medium text-[#CCD0D4] mb-2">
+                <label htmlFor="localGovernment" className="block text-xs text-sm font-medium text-[#CCD0D4] mb-2">
                   Local Government
                 </label>
                 <select
@@ -248,7 +248,7 @@ export const SignupForm = () => {
             )}
 
             <div className="mb-6">
-              <label htmlFor="city" className="block text-sm font-medium text-[#CCD0D4] mb-2">
+              <label htmlFor="city" className="block text-xs text-sm font-medium text-[#CCD0D4] mb-2">
                 City
               </label>
               <input
@@ -264,7 +264,7 @@ export const SignupForm = () => {
             </div>
 
             <div className="mb-6">
-              <label htmlFor="password" className="block text-sm font-medium text-[#CCD0D4] mb-2">
+              <label htmlFor="password" className="block text-xs text-sm font-medium text-[#CCD0D4] mb-2">
                 Password
               </label>
               <input
@@ -288,7 +288,7 @@ export const SignupForm = () => {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#bfdbfe] text-[#001D48] font-medium py-3 rounded-md hover:bg-[#9cc2fe] transition-colors"
+              className="w-full bg-[#bfdbfe] text-[#001D48] text-sm font-medium py-3 rounded-md hover:bg-[#9cc2fe] transition-colors"
             >
               {loading ? "Creating Account..." : "Create Account"}
             </Button>

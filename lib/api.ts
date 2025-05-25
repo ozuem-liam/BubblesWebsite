@@ -2,25 +2,25 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const api = {
   async post<T>(endpoint: string, body: any, token?: string): Promise<T> {
-    const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
-    };
-
-    if (token) {
-      headers['Authorization'] = `Bearer ${token}`;
+    try {
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      };
+  
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+      
+      const response = await fetch(`${BASE_URL}${endpoint}`, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(body),
+      });
+      
+      return response.json();
+    } catch (error: any) {
+      throw new Error(`API request failed with status ${error.message}`);
     }
-    
-    const response = await fetch(`${BASE_URL}${endpoint}`, {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify(body),
-    });
-
-    if (!response.ok) {
-      throw new Error(`API request failed with status ${response.status}`);
-    }
-
-    return response.json();
   },
 
   async get<T>(endpoint: string, token?: string): Promise<T> {

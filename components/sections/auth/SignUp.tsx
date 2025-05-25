@@ -200,7 +200,7 @@ export const SignUpForm = () => {
           <div className='flex flex-col gap-5'>
             <Button
               disabled={isPending}
-              className='mb-4 h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white font-medium text-lg w-full'
+              className='mb-4 h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white text-sm font-medium text-lg w-full'
             >
               {isPending ? (
                 <Loader className='w-5 h-5 text-white animate-spin' />

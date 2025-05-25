@@ -240,12 +240,13 @@ export const useOrderFlow = (shopId?: string) => {
   };
 
   const checkout = async (
+    currCart: any,
     selectedDeliveryOption: DeliveryOption,
     user: Account,
     pickupDate: string | null,
     timeSlotId?: string | null
   ) => {
-    if (!token || !cart || !selectedDeliveryOption) {
+    if (!token || !currCart || !selectedDeliveryOption) {
       setError("Missing required information for checkout");
       return false;
     }
@@ -261,12 +262,13 @@ export const useOrderFlow = (shopId?: string) => {
           price: isExpressSelected ? item.express_amount : item.fixed_amount,
         })
       );
-
+      
       let updatedCart = null;
       // Update cart items and pricing
-      if (cart._id && itemsToUpdate.length > 0) {
+      if (itemsToUpdate.length > 0) {
+        console.log({ init: currCart, localCart, itemsToUpdate })
         updatedCart = await orderFlowService.updateMultipleCartItems(
-          cart._id,
+          currCart._id,
           {
             items: itemsToUpdate,
             is_express: isExpressSelected,
@@ -296,10 +298,11 @@ export const useOrderFlow = (shopId?: string) => {
         (sum, { quantity }) => sum + quantity,
         0
       );
-      const cartId = updatedCart ? updatedCart.data._id : cart._id;
+      console.log({currCart, updatedCart})
+      const cartId = updatedCart ? updatedCart.data._id : currCart._id;
       const serviceId = selectedService ? selectedService.service._id : "";
       const shippingAddress = user?.address || "";
-      const shippingAddressId = cart.items[0].vendor?._id || "";
+      const shippingAddressId = currCart.items[0].vendor?._id || "";
       const selectedDate = isExpressSelected ? pickupDate : null;
 
       // For express delivery, use the selected date
@@ -341,8 +344,6 @@ export const useOrderFlow = (shopId?: string) => {
 
       if (paymentResponse?.code === 200 && paymentResponse?.data) {
         toast.success(paymentResponse.message);
-        setLocalCart({}); // Clear local cart after successful checkout
-        setCart(null); // Clear cart state
         // Redirect to payment gateway
         window.location.href =
           paymentResponse.data.initializedTrasaction.data.authorization_url;
@@ -351,15 +352,15 @@ export const useOrderFlow = (shopId?: string) => {
       } else {
         toast.error("Payment initiation failed");
       }
-      // const response = await orderFlowService.createOrder(orderPayload, token);
-      // router.push(`/payment/${response.orderId}`);
-
+  
       return true;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to checkout");
       return false;
     } finally {
       setLoading((prev) => ({ ...prev, checkout: false }));
+      setLocalCart({}); // Clear local cart after successful checkout
+      setCart(null); // Clear cart state
     }
   };
 
