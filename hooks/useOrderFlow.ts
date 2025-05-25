@@ -361,6 +361,8 @@ export const useOrderFlow = (shopId?: string) => {
 
       if (paymentResponse?.code === 200 && paymentResponse?.data) {
         toast.success(paymentResponse.message);
+        setLocalCart({}); // Clear local cart after successful checkout
+        setCart(null); // Clear cart state
         // Redirect to payment gateway
         window.location.href =
           paymentResponse.data.initializedTrasaction.data.authorization_url;
@@ -376,8 +378,6 @@ export const useOrderFlow = (shopId?: string) => {
       return false;
     } finally {
       setLoading((prev) => ({ ...prev, checkout: false }));
-      setLocalCart({}); // Clear local cart after successful checkout
-      setCart(null); // Clear cart state
     }
   };
 
