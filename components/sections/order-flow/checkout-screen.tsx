@@ -35,7 +35,7 @@ export const CheckoutScreen = ({
   setSelectedDeliveryDate: (date: string | null) => void;
   selectedTimeSlot: string | null;
   setSelectedTimeSlot: (slot: string | null) => void;
-  checkout: (cart: any, selectedDelivery: DeliveryOption | null, user: Account, pickupDate: string | null, timeSlot?: string | null) => Promise<boolean>;
+  checkout: (selectedDelivery: DeliveryOption | null, user: Account, pickupDate: string | null, timeSlot?: string | null) => Promise<boolean>;
 }) => {
   const subtotal = cart?.items.reduce((sum, item) => sum + (item.price * item.quantity), 0) || 0;
   const deliveryFee = selectedDelivery?.fee || 0;
@@ -63,7 +63,6 @@ export const CheckoutScreen = ({
       return;
     }
     const success = await checkout(
-      cart,
       selectedDelivery, 
       user,
       isExpressSelected ? selectedDeliveryDate : null,

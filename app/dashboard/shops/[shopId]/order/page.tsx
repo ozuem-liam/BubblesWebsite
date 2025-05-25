@@ -65,7 +65,6 @@ export default function OrderFlowPage() {
   };
 
   const handleCheckout = async (
-    cart: any,
     selectedDelivery: DeliveryOption | null,
     user: Account,
     pickupDate: string | null,
@@ -83,7 +82,6 @@ export default function OrderFlowPage() {
         return false;
       }
       const success = await checkout(
-        cart,
         selectedDelivery,
         user,
         pickupDate,

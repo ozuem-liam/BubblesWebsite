@@ -175,7 +175,25 @@ export const useOrderFlow = (shopId?: string) => {
   }, [token, isExpressSelected]);
 
   // Local cart operations
-  const addToLocalCart = (item: Item) => {
+  const addToLocalCart = async (item: Item) => {
+    // 1. Ensure we have a cart
+    let currentCart = cart;
+    if (currentCart?.items?.length == 0) {
+      // 2. Update server cart
+      const resp = await orderFlowService.addToCart(
+        {
+          item,
+          quantity: 1,
+          vendor: shopId || "",
+        },
+        token as string
+      );
+      currentCart = resp.data;
+      setCart(currentCart);
+    }
+    console.log({currentCartn: currentCart})
+
+
     setLocalCart((prev) => ({
       ...prev,
       [item._id]: {
@@ -240,13 +258,12 @@ export const useOrderFlow = (shopId?: string) => {
   };
 
   const checkout = async (
-    currCart: any,
     selectedDeliveryOption: DeliveryOption,
     user: Account,
     pickupDate: string | null,
     timeSlotId?: string | null
   ) => {
-    if (!token || !currCart || !selectedDeliveryOption) {
+    if (!token || !cart || !selectedDeliveryOption) {
       setError("Missing required information for checkout");
       return false;
     }
@@ -262,13 +279,13 @@ export const useOrderFlow = (shopId?: string) => {
           price: isExpressSelected ? item.express_amount : item.fixed_amount,
         })
       );
-      
+
       let updatedCart = null;
       // Update cart items and pricing
       if (itemsToUpdate.length > 0) {
-        console.log({ init: currCart, localCart, itemsToUpdate })
+        console.log({ init: cart, localCart, itemsToUpdate });
         updatedCart = await orderFlowService.updateMultipleCartItems(
-          currCart._id,
+          cart._id,
           {
             items: itemsToUpdate,
             is_express: isExpressSelected,
@@ -298,11 +315,11 @@ export const useOrderFlow = (shopId?: string) => {
         (sum, { quantity }) => sum + quantity,
         0
       );
-      console.log({currCart, updatedCart})
-      const cartId = updatedCart ? updatedCart.data._id : currCart._id;
+      console.log({ cart, updatedCart });
+      const cartId = updatedCart ? updatedCart.data._id : cart._id;
       const serviceId = selectedService ? selectedService.service._id : "";
       const shippingAddress = user?.address || "";
-      const shippingAddressId = currCart.items[0].vendor?._id || "";
+      const shippingAddressId = cart.items[0].vendor?._id || "";
       const selectedDate = isExpressSelected ? pickupDate : null;
 
       // For express delivery, use the selected date
@@ -310,7 +327,7 @@ export const useOrderFlow = (shopId?: string) => {
         // Format the date as needed for the API
         pickupDate = new Date(pickupDate).toISOString();
       }
-      const scheduledDate = new Date().toISOString().split('T')[0];
+      const scheduledDate = new Date().toISOString().split("T")[0];
 
       // Here you would call your order creation API
       const orderPayload: CreateOrderPayload = {
@@ -352,7 +369,7 @@ export const useOrderFlow = (shopId?: string) => {
       } else {
         toast.error("Payment initiation failed");
       }
-  
+
       return true;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to checkout");
