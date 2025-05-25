@@ -6,7 +6,7 @@ import { Button } from '../../../components/ui/button';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
 import { CartData, DeliveryOption } from '../../../lib/order-flow';
-import { Select } from '../../../components/ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../components/ui/select';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Account } from '../../../lib/auth';
@@ -137,16 +137,19 @@ export const CheckoutScreen = ({
           ) : (
             <Select
               value={selectedTimeSlot || ""}
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedTimeSlot(e.target.value || null)}
-              options={[
-                { value: "", label: "Select a time slot", disabled: true },
-                ...availableTimeSlots.map(slot => ({
-                  value: slot.startTime,
-                  label: `${slot.startTime} - ${slot.endTime}`
-                }))
-              ]}
-              className="bg-[#00112b] text-white border-[#1a3b6d]"
-            />
+              onValueChange={(value: string) => setSelectedTimeSlot(value || null)}
+            >
+              <SelectTrigger className="bg-[#00112b] text-white border-[#1a3b6d]">
+                <SelectValue placeholder="Select a time slot" />
+              </SelectTrigger>
+              <SelectContent>
+                {availableTimeSlots.map(slot => (
+                  <SelectItem key={slot._id} value={slot.startTime}>
+                    {slot.startTime} - {slot.endTime}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           )}
         </div>
       </div>

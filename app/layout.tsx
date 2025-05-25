@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
-import { Footer } from "../components/global/Footer";
 import { AuthProvider } from "../contexts/auth-context";
+import { Toaster } from "@/components/ui/sonner";
 
 const grotesk = Hanken_Grotesk({
   subsets: ["latin"],
@@ -29,7 +29,7 @@ export default function RootLayout({
         >
           <NextTopLoader color="#001029" showSpinner={false} />
           <main>{children}</main>
-          <Footer />
+          <Toaster richColors />
         </body>
       </AuthProvider>
     </html>

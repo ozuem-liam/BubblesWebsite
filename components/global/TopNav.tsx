@@ -41,7 +41,7 @@ export const TopNav: React.FC = () => {
         isScrolled ? "bg-primary800 shadow-md" : "bg-transparent"
       }`}
     >
-      <MaxScreenWrapper style="px-[1rem] lg:pb-0 pb-[1rem] flex lg:flex-row flex-col justify-between lg:items-center items-start lg:gap-[12px] gap-0">
+      <MaxScreenWrapper style="lg:px-[2.5rem] xl:px-[5.5rem] px-4 lg:pb-0 pb-[1rem] flex lg:flex-row flex-col justify-between lg:items-center items-start lg:gap-[12px] gap-0">
         <div>
           <Logo />
         </div>
@@ -52,12 +52,12 @@ export const TopNav: React.FC = () => {
           <MobileNav />
           {/* Hide on mobile, show on desktop */}
           <div className="hidden lg:flex items-center gap-4">
-            <Link href="/login">
+            <Link href="/auth/sign-in">
               <Button className="p-4 bg-[#bfdbfe] rounded-md text-[rgba(0, 57, 143, 1)] hover:bg-[#a3c4fd] transition-colors">
                 Login
               </Button>
             </Link>
-            <Link href="/signup">
+            <Link href="/auth/sign-up">
               <Button className="p-4 bg-[#bfdbfe] rounded-md text-[rgba(0, 57, 143, 1)] hover:bg-[#a3c4fd] transition-colors">
                 Sign Up
               </Button>

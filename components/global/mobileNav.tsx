@@ -36,7 +36,7 @@ export const MobileNav: React.FC = () => {
                   : "hover:text-white"
               )}
             >
-              <Link href={`#${links.route}`} className="text-none">
+              <Link href={`/#${links.route}`} className="text-none">
                 {links.title}
               </Link>
             </li>
@@ -46,7 +46,7 @@ export const MobileNav: React.FC = () => {
 
       <div className="flex flex-col gap-4 mb-30 w-full">
         <SheetClose asChild>
-          <Link href="/login" className="w-full">
+          <Link href="/auth/sign-in" className="w-full">
             <Button
               className="w-full p-4 bg-[#bfdbfe] rounded-md text-[rgba(0, 57, 143, 1)] hover:bg-[#a3c4fd] transition-colors"
               onClick={() => setOpen(false)}
@@ -56,7 +56,7 @@ export const MobileNav: React.FC = () => {
           </Link>
         </SheetClose>
         <SheetClose asChild>
-          <Link href="/signup" className="w-full">
+          <Link href="/auth/sign-up" className="w-full">
             <Button
               className="w-full p-4 bg-[#bfdbfe] rounded-md text-[rgba(0, 57, 143, 1)] hover:bg-[#a3c4fd] transition-colors"
               onClick={() => setOpen(false)}

@@ -18,34 +18,34 @@ import { RevealAnimation } from "../../../components/global/Reveal";
 
 export const BackByTech: React.FC = () => {
   return (
-    <div className="bg-tertiary300 sm:px-[2.5rem] px-4 py-[54px] sm:py-[104px]">
+    <div className="bg-tertiary300 lg:px-[2.5rem] xl:px-[5.5rem] px-4 py-[54px] sm:py-[104px]">
       <MaxScreenWrapper style="flex flex-col gap-[18px]">
         <div className="flex flex-wrap gap-[12px] justify-center">
           <RevealAnimation style="w-fit">
             <CustomImage
               src={heroImg1}
-              style="md:w-[420px] w-[300px] h-[250px] md:h-[340px]"
-              imgStyle="object-conver"
+              style="md:w-[330px] w-[300px] h-[250px] md:h-[260px]"
+              imgStyle="object-cover"
             />
           </RevealAnimation>
           <RevealAnimation style="w-fit">
             <CustomImage
               src={heroImg2}
-              style="w-[240px] h-[280px]"
+              style="w-[200px] h-[230px]"
               imgStyle="object-cover"
             />
           </RevealAnimation>
           <RevealAnimation style="w-fit">
             <CustomImage
               src={heroImg3}
-              style="md:w-[348px] md:h-[295px] w-[300px] h-[250px]"
+              style="md:w-[290px] md:h-[245px] w-[300px] h-[250px]"
               imgStyle="object-cover"
             />
           </RevealAnimation>
           <RevealAnimation style="w-fit">
             <CustomImage
               src={heroImg4}
-              style="md:w-[340px] md:h-[350px] w-[300px] h-[310px]"
+              style="md:w-[300px] md:h-[310px] w-[300px] h-[310px]"
               imgStyle="object-cover"
             />
           </RevealAnimation>
@@ -54,14 +54,14 @@ export const BackByTech: React.FC = () => {
           <RevealAnimation style="w-fit">
             <CustomImage
               src={heroImg5}
-              style="lg:w-[310px] lg:h-[310px] w-[300px] h-[300px]"
+              style="lg:w-[270px] lg:h-[270px] w-[300px] h-[300px]"
               imgStyle="object-cover"
             />
           </RevealAnimation>
           <RevealAnimation style="w-fit">
             <CustomImage
               src={heroImg6}
-              style="lg:w-[290px] lg:h-[330px] w-[300px] h-[340px] lg:hidden block"
+              style="lg:w-[250px] lg:h-[290px] w-[300px] h-[340px] lg:hidden block"
               imgStyle="object-cover"
             />
           </RevealAnimation>

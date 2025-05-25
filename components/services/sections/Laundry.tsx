@@ -20,7 +20,7 @@ interface ILaundrySection {
 export const LaundrySection: React.FC<ILaundrySection> = ({ activeTab }) => {
   const router = useRouter();
   return (
-    <div className="sm:px-[2.5rem] px-4  py-[54px] sm:py-[104px]">
+    <div className="lg:px-[2.5rem] xl:px-[5.5rem] px-4  py-[24px] sm:py-[54px]">
       <MaxScreenWrapper style="flex flex-col gap-[40px]">
         <RevealAnimation style="w-fit">
           <Text
@@ -32,7 +32,7 @@ export const LaundrySection: React.FC<ILaundrySection> = ({ activeTab }) => {
               : "Getting Started is Easy"}
           </Text>
         </RevealAnimation>
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 grid-cols-1 bg_linear-gradient rounded-[12px] md:p-[40px] p-[20px] lg:gap-[24px] gap-[10px] justify-between">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 grid-cols-1 bg_linear-gradient rounded-[12px] md:p-[40px] px-[20px] lg:py-0 py-[20px] lg:gap-[24px] gap-[10px] justify-between">
           <RevealAnimation style="w-full">
             <LaunderyCard
               img={activeTab === customerTab ? step1 : step4}
@@ -67,7 +67,7 @@ export const LaundrySection: React.FC<ILaundrySection> = ({ activeTab }) => {
             </Text>
           </RevealAnimation>
           <Button
-            onClick={() => router.push("#store")}
+            onClick={() => router.push("/auth/sign-in")}
             className="text-black bg-primary100 text-tertiary1100 rounded-[12px] h-[50px] w-[162px] flex flex-col items-center lg:text-[16px] text-[14px] font-[500]"
           >
             Get Started
