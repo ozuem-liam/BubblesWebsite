@@ -125,11 +125,3 @@
     height: auto; /* Maintain aspect ratio */
   }
 }
-
-/* For very small screens */
-@media (max-width: 480px) {
-  .play-store-svg,
-  .apple-store-svg {
-    width: 130px; /* Adjust this value as needed */
-  }
-}
