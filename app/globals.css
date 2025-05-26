@@ -110,18 +110,3 @@
 
   --color-sidebar-ring: var(--sidebar-ring);
 }
-
-.play-store-svg,
-.apple-store-svg {
-  width: 165px;
-  height: 58px;
-}
-
-/* Mobile styles */
-@media (max-width: 768px) {
-  .play-store-svg,
-  .apple-store-svg {
-    width: 150px; /* Adjust this value as needed */
-    height: auto; /* Maintain aspect ratio */
-  }
-}
