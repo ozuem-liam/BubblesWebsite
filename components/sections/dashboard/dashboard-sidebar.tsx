@@ -83,7 +83,7 @@ const DesktopSidebar = ({ menuItems, isActive }: {
 }) => (
   <aside className="hidden md:flex flex-col w-64 h-screen bg-white shadow-lg border-r border-gray-200 sticky top-0">
     <div className="px-6 py-4 border-b border-gray-200">
-      <h2 className="text-xl font-semibold text-gray-800">Navigation</h2>
+      {/* <h2 className="text-xl font-semibold text-gray-800">Navigation</h2> */}
     </div>
     <nav className="flex-1 pt-4 px-4 overflow-y-auto">
       <ul className="space-y-1">
