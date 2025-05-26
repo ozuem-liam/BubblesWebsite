@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { X } from 'lucide-react';
+import { SettingsIcon, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { DashboardIcon, ShopIcon, ServicesIcon, OrdersIcon, WalletIcon, CartIcon, ProfileIcon } from './Icons';
 import { useRouter } from 'next/navigation';
@@ -52,6 +52,11 @@ const menuItems: NavLink[] = [
     name: 'Profile',
     path: '/dashboard/profile',
     icon: <ProfileIcon />,
+  },
+  {
+    name: 'Settings',
+    path: '/dashboard/settings',
+    icon: <SettingsIcon />,
   },
 ];
 

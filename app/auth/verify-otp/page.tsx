@@ -1,5 +1,5 @@
-import { SignUpForm } from '@/components/sections/auth/SignUp'
+import { VerifyOtpForm } from '../../../components/sections/auth/VerifyOtp'
 
 export default function VerifyOtp() {
-  return <SignUpForm />
+  return <VerifyOtpForm />
 }
