@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader } from 'lucide-react'
@@ -14,8 +14,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { VerifyOtpFormSchema } from '@/lib/schema/VerifyOtp'
 import { authService } from '@/lib/auth'
 
-
-export const VerifyOtpForm = () => {
+// Separate component that uses useSearchParams
+const VerifyOtpFormContent = () => {
   const [isPending, setIsPending] = useState(false)
   const [otpSent, setOtpSent] = useState(false)
   const [token, setToken] = useState('')
@@ -79,8 +79,14 @@ export const VerifyOtpForm = () => {
     }
   }
 
-   // Automatically send OTP when email is present but not sent yet
-   useEffect(() => {
+  const handleResendOtp = () => {
+    setOtpSent(false)
+    setToken('')
+    handleSendOtp()
+  }
+
+  // Automatically send OTP when email is present but not sent yet
+  useEffect(() => {
     if (email && !otpSent && !token) {
       handleSendOtp()
     }
@@ -138,5 +144,29 @@ export const VerifyOtpForm = () => {
         </Form>
       )}
     </AuthLayout>
+  )
+}
+
+// Loading fallback component
+const VerifyOtpFormFallback = () => (
+  <AuthLayout
+    title="OTP Verification"
+    subTitle="Loading..."
+    footerText=""
+    footerLink="#"
+    footerLinkTitle=""
+  >
+    <div className="w-full flex items-center justify-center py-8">
+      <Loader className="w-6 h-6 animate-spin" />
+    </div>
+  </AuthLayout>
+)
+
+// Main component with Suspense wrapper
+export const VerifyOtpForm = () => {
+  return (
+    <Suspense fallback={<VerifyOtpFormFallback />}>
+      <VerifyOtpFormContent />
+    </Suspense>
   )
 }
