@@ -18,45 +18,39 @@ export const ShopServices = ({
   selectedService: ShopService | null;
   loading: boolean;
 }) => {
-
   const handleServiceSelect = (service: ShopService) => {
     onSelectService(service);
     setCategories(service.categories);
   };
 
   return (
-    <div className="space-y-6">
-      <Text as="h2" style="text-white text-2xl font-bold mb-6">
-        Available Services
-      </Text>
-      
+    <div className="space-y-6">      
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[...Array(6)].map((_, index) => (
-            <div key={index} className="p-4 rounded-xl bg-[#001D48]">
-              <Skeleton className="w-full h-40 rounded-lg mb-3 bg-[#002A6B]" />
-              <Skeleton className="w-3/4 h-5 mb-2 bg-[#002A6B]" />
-              <Skeleton className="w-full h-4 bg-[#002A6B]" />
+            <div key={index} className="p-4 rounded-lg bg-gray-50 border border-gray-200">
+              <Skeleton className="w-full h-40 rounded-md mb-3 bg-gray-200" />
+              <Skeleton className="w-3/4 h-5 mb-2 bg-gray-200" />
+              <Skeleton className="w-full h-4 bg-gray-200" />
             </div>
           ))}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* <div className=""> */}
           {services.map(service => (
             <div
               key={service._id}
               onClick={() => handleServiceSelect(service)}
-              className={`group p-5 rounded-xl border-2 cursor-pointer transition-all duration-300 hover:shadow-lg ${
+              className={`group p-5 rounded-lg border-2 cursor-pointer transition-all duration-300 hover:shadow-md ${
                 selectedService?._id === service._id 
-                  ? 'border-[#bfdbfe] bg-[#bfdbfe]/10 shadow-md' 
-                  : 'border-[#1a3b6d] bg-[#001D48] hover:border-[#bfdbfe]/50'
+                  ? 'border-blue-500 bg-blue-50 shadow-sm' 
+                  : 'border-gray-200 bg-white hover:border-blue-300'
               }`}
-              aria-selected={selectedService?._id === service._id}
             >
               <div className="flex flex-col items-center">
-                {/* Image Container */}
-                <div className={`relative w-full h-40 mb-4 rounded-lg overflow-hidden transition-transform duration-300 group-hover:scale-[1.02] ${
-                  selectedService?._id === service._id ? 'ring-2 ring-[#bfdbfe]' : ''
+                <div className={`relative w-full h-40 mb-4 rounded-md overflow-hidden transition-transform duration-300 group-hover:scale-[1.02] ${
+                  selectedService?._id === service._id ? 'ring-2 ring-blue-200' : ''
                 }`}>
                   {service.service.image ? (
                     <Image 
@@ -67,41 +61,39 @@ export const ShopServices = ({
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-[#002A6B] to-[#00112b] flex items-center justify-center">
-                      <span className="text-gray-400 text-sm">No image available</span>
+                    <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+                      <span className="text-gray-400 text-xs">No image available</span>
                     </div>
                   )}
                 </div>
 
-                {/* Content */}
                 <div className="text-center w-full space-y-2">
                   <Text 
                     as="h3" 
-                    style={`text-lg font-semibold ${
+                    style={`font-semibold ${
                       selectedService?._id === service._id 
-                        ? 'text-[#bfdbfe]' 
-                        : 'text-white group-hover:text-[#bfdbfe]'
+                        ? 'text-blue-600' 
+                        : 'text-gray-800 group-hover:text-blue-600'
                     }`}
                   >
                     {service.service.name}
                   </Text>
                   <Text 
                     as="p" 
-                    style={`text-sm ${
+                    style={`text-xs ${
                       selectedService?._id === service._id 
-                        ? 'text-[#bfdbfe]/80' 
-                        : 'text-[#CCD0D4] group-hover:text-[#bfdbfe]/80'
+                        ? 'text-blue-500' 
+                        : 'text-gray-600 group-hover:text-blue-500'
                     }`}
                   >
                     {service.service.meta}
                   </Text>
                 </div>
 
-                {/* Selection Indicator */}
                 <div className={`mt-3 w-4 h-4 rounded-full border-2 transition-colors ${
                   selectedService?._id === service._id 
-                    ? 'bg-[#bfdbfe] border-[#bfdbfe]' 
-                    : 'border-[#1a3b6d] group-hover:border-[#bfdbfe]'
+                    ? 'bg-blue-500 border-blue-500' 
+                    : 'border-gray-300 group-hover:border-blue-300'
                 }`} />
               </div>
             </div>

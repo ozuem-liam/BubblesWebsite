@@ -216,7 +216,7 @@ export const PasswordReset = () => {
           <button
             type='submit'
             disabled={loading}
-            className={`h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white font-medium text-lg w-full ${
+            className={`h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white text-sm font-medium text-lg w-full ${
               loading ? 'opacity-70 cursor-not-allowed' : ''
             }`}
           >
@@ -225,7 +225,7 @@ export const PasswordReset = () => {
           <div className='text-center mt-4'>
             <a
               href='/auth/sign-in'
-              className='text-blue-400 hover:text-blue-300 text-sm'
+              className='text-blue-400 hover:text-blue-300 text-xs'
             >
               Back to Login
             </a>
@@ -256,7 +256,7 @@ export const PasswordReset = () => {
           <button
             type='submit'
             disabled={loading}
-            className={`h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white font-medium text-lg w-full ${
+            className={`h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white text-sm font-medium text-lg w-full ${
               loading ? 'opacity-70 cursor-not-allowed' : ''
             }`}
           >
@@ -267,7 +267,7 @@ export const PasswordReset = () => {
               type='button'
               onClick={handleResendOtp}
               disabled={countdown > 0 || loading}
-              className={`h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white font-medium text-lg w-full ${
+              className={`h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white text-sm font-medium text-lg w-full ${
                 countdown > 0 || loading ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >
@@ -278,7 +278,7 @@ export const PasswordReset = () => {
             <button
               type='button'
               onClick={() => setCurrentStep('email')}
-              className='h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white font-medium text-lg w-full'
+              className='h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white text-sm font-medium text-lg w-full'
             >
               Change email
             </button>
@@ -327,7 +327,7 @@ export const PasswordReset = () => {
           <button
             type='submit'
             disabled={loading}
-            className={`h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white font-medium text-lg w-full${
+            className={`h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white text-sm font-medium text-lg w-full${
               loading ? 'opacity-70 cursor-not-allowed' : ''
             }`}
           >
@@ -362,7 +362,7 @@ export const PasswordReset = () => {
           </p>
           <button
             onClick={() => router.push('/auth/sign-in')}
-            className='h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white font-medium text-lg w-full'
+            className='h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white text-sm font-medium text-lg w-full'
           >
             Return to Login
           </button>

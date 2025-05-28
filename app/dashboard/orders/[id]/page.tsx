@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: any }): Promise<Met
 
 export default function OrderDetailsPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto py-8">
       <div className="max-w-4xl mx-auto">
         <OrderDetails />
       </div>

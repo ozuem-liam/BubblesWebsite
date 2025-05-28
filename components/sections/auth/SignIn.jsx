@@ -35,6 +35,7 @@ export const SignInForm = () => {
     setIsPending(true)
     try {
       const response = await authService.login({ email: email, password: pwd })
+  
       if (response.code === 200 && response.data?.token) {
         toast.success(response.message || 'Login successful')
 
@@ -85,14 +86,14 @@ export const SignInForm = () => {
           />
           <Link
             href={'/auth/reset-password'}
-            className='font-medium text-primary hover:text-primary-500 hover:underline transition-colors'
+            className='text-sm font-medium text-primary hover:text-primary-500 hover:underline transition-colors'
           >
             Forgot Password ?
           </Link>
           <div className='flex flex-col gap-5'>
             <Button
               disabled={isPending}
-              className='mb-4 h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white font-medium text-lg w-full'
+              className='mb-4 h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white text-sm font-medium text-lg w-full'
             >
               {isPending ? (
                 <Loader className='w-5 h-5 text-white animate-spin' />

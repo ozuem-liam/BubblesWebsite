@@ -175,7 +175,25 @@ export const useOrderFlow = (shopId?: string) => {
   }, [token, isExpressSelected]);
 
   // Local cart operations
-  const addToLocalCart = (item: Item) => {
+  const addToLocalCart = async (item: Item) => {
+    // 1. Ensure we have a cart
+    let currentCart = cart;
+    if (currentCart?.items?.length == 0) {
+      // 2. Update server cart
+      const resp = await orderFlowService.addToCart(
+        {
+          item,
+          quantity: 1,
+          vendor: shopId || "",
+        },
+        token as string
+      );
+      currentCart = resp.data;
+      setCart(currentCart);
+    }
+    console.log({currentCartn: currentCart})
+
+
     setLocalCart((prev) => ({
       ...prev,
       [item._id]: {
@@ -264,7 +282,8 @@ export const useOrderFlow = (shopId?: string) => {
 
       let updatedCart = null;
       // Update cart items and pricing
-      if (cart._id && itemsToUpdate.length > 0) {
+      if (itemsToUpdate.length > 0) {
+        console.log({ init: cart, localCart, itemsToUpdate });
         updatedCart = await orderFlowService.updateMultipleCartItems(
           cart._id,
           {
@@ -296,6 +315,7 @@ export const useOrderFlow = (shopId?: string) => {
         (sum, { quantity }) => sum + quantity,
         0
       );
+      console.log({ cart, updatedCart });
       const cartId = updatedCart ? updatedCart.data._id : cart._id;
       const serviceId = selectedService ? selectedService.service._id : "";
       const shippingAddress = user?.address || "";
@@ -307,7 +327,7 @@ export const useOrderFlow = (shopId?: string) => {
         // Format the date as needed for the API
         pickupDate = new Date(pickupDate).toISOString();
       }
-      const scheduledDate = new Date().toISOString().split('T')[0];
+      const scheduledDate = new Date().toISOString().split("T")[0];
 
       // Here you would call your order creation API
       const orderPayload: CreateOrderPayload = {
@@ -351,8 +371,6 @@ export const useOrderFlow = (shopId?: string) => {
       } else {
         toast.error("Payment initiation failed");
       }
-      // const response = await orderFlowService.createOrder(orderPayload, token);
-      // router.push(`/payment/${response.orderId}`);
 
       return true;
     } catch (err) {

@@ -8,25 +8,34 @@ export const Settings = () => {
   const [showPasswordModal, setShowPasswordModal] = useState(false);
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 bg-white">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center mb-8">
-          <SettingsIcon className="text-white mr-3" size={24} />
-          <h1 className="text-white text-2xl font-bold">Account Settings</h1>
+          <SettingsIcon className="text-gray-800 mr-3" size={24} />
+          <h1 className="text-gray-800 text-xl font-bold">Account Settings</h1>
         </div>
 
         <div className="grid md:grid-cols-4 gap-6">
           {/* Sidebar Navigation */}
           <div className="md:col-span-1">
-            <div className="bg-[#001a3f] rounded-lg p-4 border border-[#1a3b6d] sticky top-20">
+            <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 sticky top-20">
               <nav className="space-y-1">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSf8ar0Decnr26f16zz7ck1MjcYbwQwrnva7JOQGYyZ6JA0oAQ/viewform?usp=header" className="flex items-center px-3 py-2 text-white rounded-md bg-[#0e2d5e] font-medium">
+                <a 
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSf8ar0Decnr26f16zz7ck1MjcYbwQwrnva7JOQGYyZ6JA0oAQ/viewform?usp=header" 
+                  className="flex items-center px-3 py-2 text-gray-800 rounded-md bg-gray-100 text-sm font-medium hover:bg-gray-200"
+                >
                   <ShoppingBag size={18} className="mr-2" /> Request a Vendor
                 </a>
-                <a href="#security" className="flex items-center px-3 py-2 text-gray-300 hover:bg-[#0e2d5e] rounded-md">
+                <a 
+                  href="#security" 
+                  className="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md"
+                >
                   <Shield size={18} className="mr-2" /> Security
                 </a>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdhe7oJaxHU4KKbJwneB77E6v8XWWNYwTGv2Od2ULLG76EHxg/viewform?usp=header" className="flex items-center px-3 py-2 text-gray-300 hover:bg-[#0e2d5e] rounded-md">
+                <a 
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdhe7oJaxHU4KKbJwneB77E6v8XWWNYwTGv2Od2ULLG76EHxg/viewform?usp=header" 
+                  className="flex items-center px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md"
+                >
                   <HelpCircle size={18} className="mr-2" /> Help & Support
                 </a>
               </nav>
@@ -35,40 +44,12 @@ export const Settings = () => {
 
           {/* Main Content */}
           <div className="md:col-span-3 space-y-6">
-            {/* Vendor Section */}
-            {/* <div id="vendor" className="bg-[#00112b] rounded-lg p-6 border border-[#1a3b6d]">
-              <h2 className="text-white text-xl font-semibold mb-2">Request Vendor</h2>
-              <p className="text-[#CCD0D4] mb-4">
-                Submit a request to become a vendor or find vendors near your location.
-              </p>
-              <div className="space-y-4">
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Link 
-                    href="https://docs.google.com/forms/d/e/1FAIpQLSfY7JqYhReoFENnEZCfRZ9_JXed1Nq-x6JVZgmhjgyUKVPCdw/viewform" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-[#bfdbfe] text-[#001D48] hover:bg-[#a3c4fd] px-4 py-2 rounded flex-1 text-center"
-                  >
-                    Request Vendor Status
-                  </Link>
-                  <button className="bg-[#1a3b6d] text-white hover:bg-[#254b82] px-4 py-2 rounded flex-1">
-                    Find Nearby Vendors
-                  </button>
-                </div>
-                
-                <div className="mt-4 p-4 bg-[#001a3f] rounded-md border border-[#1a3b6d]">
-                  <h3 className="text-white text-md font-medium mb-2">Current Vendor Status</h3>
-                  <p className="text-gray-300">Not a vendor yet. Submit a request to get started.</p>
-                </div>
-              </div>
-            </div> */}
-
             {/* Security Section */}
-            <div id="security" className="bg-[#00112b] rounded-lg p-6 border border-[#1a3b6d]">
-              <h2 className="text-white text-xl font-semibold mb-4">Security Settings</h2>
+            <div id="security" className="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+              <h2 className="text-gray-800 text-xl font-semibold mb-4">Security Settings</h2>
               
               <button 
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+                className="bg_linear-gradient hover:bg-blue-700 text-white px-4 py-2 rounded transition-colors"
                 onClick={() => setShowPasswordModal(true)}
               >
                 Change Password
@@ -77,12 +58,12 @@ export const Settings = () => {
               {/* Password Change Modal */}
               {showPasswordModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                  <div className="bg-[#00112b] rounded-lg p-6 border border-[#1a3b6d] max-w-md w-full">
+                  <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-lg max-w-md w-full">
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-white text-lg font-semibold">Change Password</h3>
+                      <h3 className="text-gray-800 text-lg font-semibold">Change Password</h3>
                       <button 
                         onClick={() => setShowPasswordModal(false)}
-                        className="text-gray-400 hover:text-white"
+                        className="text-gray-500 hover:text-gray-700"
                       >
                         <X size={20} />
                       </button>
@@ -90,26 +71,26 @@ export const Settings = () => {
                     
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-1">Current Password</label>
+                        <label className="block text-sm font-medium bg_linear-gradient mb-1">Current Password</label>
                         <input 
                           type="password" 
-                          className="w-full bg-[#001a3f] border border-[#1a3b6d] rounded px-3 py-2 text-white"
+                          className="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 text-gray-800 focus:outline-none focus:ring-1 focus:ring-blue-500"
                           placeholder="Enter current password"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-1">New Password</label>
+                        <label className="block text-sm font-medium bg_linear-gradient mb-1">New Password</label>
                         <input 
                           type="password" 
-                          className="w-full bg-[#001a3f] border border-[#1a3b6d] rounded px-3 py-2 text-white"
+                          className="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 text-gray-800 focus:outline-none focus:ring-1 focus:ring-blue-500"
                           placeholder="Enter new password"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-1">Confirm New Password</label>
+                        <label className="block text-sm font-medium bg_linear-gradient mb-1">Confirm New Password</label>
                         <input 
                           type="password" 
-                          className="w-full bg-[#001a3f] border border-[#1a3b6d] rounded px-3 py-2 text-white"
+                          className="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 text-gray-800 focus:outline-none focus:ring-1 focus:ring-blue-500"
                           placeholder="Confirm new password"
                         />
                       </div>
@@ -117,11 +98,11 @@ export const Settings = () => {
                       <div className="flex justify-end space-x-3 pt-2">
                         <button 
                           onClick={() => setShowPasswordModal(false)}
-                          className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded"
+                          className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded transition-colors"
                         >
                           Cancel
                         </button>
-                        <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                        <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition-colors">
                           Update Password
                         </button>
                       </div>
@@ -132,16 +113,16 @@ export const Settings = () => {
             </div>
 
             {/* Help & Support Section */}
-            <div id="help" className="bg-[#00112b] rounded-lg p-6 border border-[#1a3b6d]">
-              <h2 className="text-white text-xl font-semibold mb-4">Help & Support</h2>
-              <p className="text-[#CCD0D4] mb-4">
+            <div id="help" className="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+              <h2 className="text-gray-800 text-xl font-semibold mb-4">Help & Support</h2>
+              <p className="text-gray-600 mb-4">
                 Need assistance? Submit a support request and our team will get back to you.
               </p>
               <Link 
                 href="https://docs.google.com/forms/d/e/1FAIpQLSdcmj7CQwbj0YPB8VuGa9FhYrYF8-Yx3HRIzUQQAJjJM3J1pQ/viewform" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#1a3b6d] text-white hover:bg-[#254b82] px-4 py-2 rounded inline-block"
+                className="bg_linear-gradient text-white hover:bg-blue-700 px-4 py-2 rounded inline-block transition-colors"
               >
                 Contact Support
               </Link>

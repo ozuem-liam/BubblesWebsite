@@ -87,11 +87,15 @@ export const SignUpForm = () => {
             'Registration successful! Please check your email for OTP.'
           )
           // Redirect to OTP verification with email and token
-          router.push(
-            `/auth/verify-otp?email=${encodeURIComponent(emailEntered)}`
-          )
+          const queryParams = new URLSearchParams({
+            email: encodeURIComponent(emailEntered),
+            // Optionally add a short-lived token for additional security
+            // token: registerResponse.data?.tempToken
+          }).toString();
+          
+          router.push(`/auth/verify-otp?${queryParams}`);
         } else {
-          toast.error('Failed to send OTP. Please try again.')
+          toast.error(otpResponse?.message || 'Failed to send OTP. Please try again.')
         }
       } else {
         toast.error(registerResponse.message || 'Registration failed')
@@ -200,7 +204,7 @@ export const SignUpForm = () => {
           <div className='flex flex-col gap-5'>
             <Button
               disabled={isPending}
-              className='mb-4 h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white font-medium text-lg w-full'
+              className='mb-4 h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white text-sm font-medium text-lg w-full'
             >
               {isPending ? (
                 <Loader className='w-5 h-5 text-white animate-spin' />

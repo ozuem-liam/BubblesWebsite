@@ -1,4 +1,3 @@
-// components/wallet/WalletCard.tsx
 'use client';
 
 import { useWallet } from '../../../hooks/useWallet';
@@ -8,6 +7,7 @@ import { Input } from '../../../components/ui/input';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { formatNaira, koboToNaira } from '../../../lib/utils';
+import { Skeleton } from '../../../components/ui/skeleton';
 
 export const WalletCard = () => {
   const { wallet, loading, fundWallet } = useWallet();
@@ -36,38 +36,49 @@ export const WalletCard = () => {
   };
 
   return (
-    <div className="bg-[#00112b] rounded-lg p-6 border border-[#1a3b6d]">
-      <Text as="h3" style="text-white text-xl font-bold mb-4">
+    <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+      <Text as="h3" style="text-gray-800 text-xl font-bold mb-4">
         Your Wallet
       </Text>
       
       <div className="flex items-center justify-between mb-6">
-        <Text as="p" style="text-[#CCD0D4]">Current Balance:</Text>
-        <Text as="p" style="text-white text-2xl font-bold">
-          {loading.wallet ? 'Loading...' : `${formatNaira(koboToNaira(wallet?.balance))}`}
-        </Text>
+        <Text as="p" style="text-gray-600">Current Balance:</Text>
+        {loading.wallet ? (
+          <Skeleton className="h-7 w-32 bg-gray-200" />
+        ) : (
+          <Text as="p" style="text-gray-800 text-xl font-bold">
+            {formatNaira(koboToNaira(wallet?.balance))}
+          </Text>
+        )}
       </div>
 
       <div className="space-y-4">
         <div>
-          <label className="block text-[#CCD0D4] mb-2">
+          <label className="block text-gray-600 text-sm mb-2">
             Amount to Fund
           </label>
           <Input
             type="number"
             value={amount}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAmount(e.target.value)}
+            onChange={(e) => setAmount(e.target.value)}
             placeholder="Enter amount"
-            className="bg-[#001D48] text-white border-[#1a3b6d]"
+            className="bg-white text-gray-800 border-gray-300 focus:border-blue-500"
           />
         </div>
 
         <Button
           onClick={handleFundWallet}
           disabled={loading.funding || isFunding}
-          className="w-full bg-[#bfdbfe] text-[#001D48] hover:bg-[#9cc2fe]"
+          className="w-full bg_linear-gradient hover:bg-blue-700 text-white"
         >
-          {loading.funding || isFunding ? 'Processing...' : 'Fund Wallet'}
+          {loading.funding || isFunding ? (
+            <span className="flex items-center gap-2">
+              <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+              Processing...
+            </span>
+          ) : (
+            'Fund Wallet'
+          )}
         </Button>
       </div>
     </div>

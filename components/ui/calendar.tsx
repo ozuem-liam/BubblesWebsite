@@ -22,7 +22,7 @@ const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
           months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
           month: "space-y-4",
           caption: "flex justify-center pt-1 relative items-center",
-          caption_label: "text-sm font-medium text-white",
+          caption_label: "text-xs text-sm font-medium text-white",
           nav: "space-x-1 flex items-center",
           nav_button: cn(
             "h-7 w-7 bg-transparent p-0 opacity-80 hover:opacity-100"
@@ -35,7 +35,7 @@ const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
             "text-white rounded-md w-8 font-normal text-[0.8rem] opacity-70",
           row: "flex w-full mt-2",
           cell: cn(
-            "relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent",
+            "relative p-0 text-center text-xs focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent",
             props.mode === "range"
               ? "[&:has(>.day-range-end)]:rounded-r-md [&:has(>.day-range-start)]:rounded-l-md first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md"
               : "[&:has([aria-selected])]:rounded-md"
