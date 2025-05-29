@@ -5,6 +5,7 @@ import { Button } from '../../../components/ui/button';
 import { CartData, Item } from '../../../lib/order-flow';
 import { formatNaira } from '../../../lib/utils';
 import { Skeleton } from '../../../components/ui/skeleton';
+import Image from 'next/image';
 
 export const CategoryItems = ({
   items,
@@ -23,38 +24,45 @@ export const CategoryItems = ({
 }) => {
   if (loading) {
     return (
-      <div className="space-y-3">
-        {[...Array(5)].map((_, index) => (
-          <Skeleton key={index} className="w-full h-16 bg-gray-200 p-3 rounded-lg" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {[...Array(4)].map((_, index) => (
+          <Skeleton key={index} className="w-full h-24 bg-gray-200 rounded-lg" />
         ))}
       </div>
     );
   }
 
   return (
-    <div className="space-y-4">
-      {/* <Text as="h2" style="text-gray-800 text-xl font-semibold">
-        Available Items
-      </Text> */}
-      <div className="space-y-3">
-        {items.map(item => {
-          const cartItem = cart?.items.find(ci => ci.item._id === item._id);
-          const quantity = cartItem?.quantity || 0;
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {items.map(item => {
+        const cartItem = cart?.items.find(ci => ci.item._id === item._id);
+        const quantity = cartItem?.quantity || 0;
+        const price = cartItem ? cartItem.price : item.fixed_amount;
 
-          return (
-            <div 
-              key={item._id} 
-              className="flex justify-between items-center p-3 bg-white rounded-lg transition-colors"
-            >
-              <div>
-                <Text as="h3" style="text-gray-800 text-sm font-medium">{item?.name}</Text>
-                <Text as="p" style="text-gray-600 text-xs">
-                  {cartItem ? formatNaira(cartItem.price) : formatNaira(item.fixed_amount)}
-                </Text>
+        return (
+          <div 
+            key={item._id} 
+            className="flex items-start p-4 bg-white rounded-lg border border-gray-200 hover:shadow-sm transition-shadow"
+          >
+            {item.image && (
+              <div className="relative w-16 h-16 rounded-md overflow-hidden mr-4 flex-shrink-0">
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  fill
+                  className="object-cover"
+                />
               </div>
-              <div className="flex items-center gap-2">
+            )}
+            <div className="flex-grow">
+              <Text as="h3" style="text-gray-800 font-medium">{item.name}</Text>
+              <Text as="p" style="text-blue-600 font-semibold mt-1">
+                {formatNaira(price)}
+              </Text>
+              
+              <div className="mt-3 flex items-center justify-between">
                 {quantity > 0 ? (
-                  <>
+                  <div className="flex items-center gap-2">
                     <Button 
                       variant="outline"
                       size="sm" 
@@ -74,21 +82,21 @@ export const CategoryItems = ({
                     >
                       +
                     </Button>
-                  </>
+                  </div>
                 ) : (
                   <Button 
                     size="sm" 
                     onClick={() => onAddToCart(item)}
-                    className="bg_linear-gradient hover:bg-blue-700 text-white"
+                    className="bg-blue-600 hover:bg-blue-700 text-white"
                   >
-                    Add
+                    Add to Cart
                   </Button>
                 )}
               </div>
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </div>
   );
 };

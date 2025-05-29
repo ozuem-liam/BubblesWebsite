@@ -26,58 +26,40 @@ type DataType = {
 export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [activeData, setActiveData] = useState<DataType>(CUSTOMERDATA)
-  const [activeImage, setActiveImage] =
-    useState<StaticImageData[]>(CUSTOMERDATAIMAGES)
+  const [activeImage, setActiveImage] = useState<StaticImageData[]>(CUSTOMERDATAIMAGES)
+  const [currentIndex, setCurrentIndex] = useState(0)
   const [isDragging, setIsDragging] = useState<boolean>(false)
   const [startPosition, setStartPosition] = useState<number>(0)
   const [scrollTop, setScrollTop] = useState<number>(0)
-  const [contentOpacity, setContentOpacity] = useState<number[]>(
-    Array(activeData.length).fill(0)
-  )
 
   useEffect(() => {
-    // Initialize the first content item with full opacity
-    const initialOpacity = [...contentOpacity]
-    initialOpacity[0] = 1
-    setContentOpacity(initialOpacity)
-  }, [])
-
-  useEffect(() => {
-    //Change data based on teh active tab
     setActiveData(() => (activeTab === customerTab ? CUSTOMERDATA : VENDORDATA))
     setActiveImage(() =>
       activeTab === customerTab ? CUSTOMERDATAIMAGES : VENDORDATAIMAGES
     )
+    setCurrentIndex(0) // Reset to first item when tab changes
   }, [activeTab])
 
   useEffect(() => {
     const handleScroll = () => {
       if (scrollRef.current) {
-        const { scrollTop, clientHeight } = scrollRef.current
-        const sectionHeight = clientHeight // Height of one content section
-
-        // Calculate index based on scroll position
-        const index = Math.min(
-          Math.floor(scrollTop / sectionHeight),
-          activeData.length - 1
-        )
-
-        // Calculate the progress within the current section (0 to 1)
-        const progress = (scrollTop % sectionHeight) / sectionHeight
-        setScrollTop(scrollTop)
-
-        // Update opacity for each content item
-        const newOpacity = Array(activeData.length).fill(0)
-
-        // Current section gets opacity based on how far into it we've scrolled
-        newOpacity[index] = 1 - progress
-
-        // Next section (if exists) gets opacity based on progress
-        if (index < activeData.length - 1) {
-          newOpacity[index + 1] = progress
+        const { scrollTop, scrollHeight, clientHeight } = scrollRef.current
+        const itemHeight = clientHeight * 0.8 // Each item takes 80% of container height
+        const maxScroll = scrollHeight - clientHeight
+        
+        if (maxScroll <= 0) {
+          setCurrentIndex(0)
+          return
         }
 
-        setContentOpacity(newOpacity)
+        // Simple index calculation based on scroll position
+        const index = Math.min(
+          Math.floor(scrollTop / itemHeight),
+          activeData.length - 1
+        )
+        
+        setCurrentIndex(index)
+        setScrollTop(scrollTop)
       }
     }
 
@@ -102,7 +84,6 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging || !scrollRef.current) return
-
     const deltaY = e.clientY - startPosition
     scrollRef.current.scrollTop = scrollTop - deltaY
     setStartPosition(e.clientY)
@@ -111,7 +92,6 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isDragging || !scrollRef.current) return
-
     const deltaY = e.touches[0].clientY - startPosition
     scrollRef.current.scrollTop = scrollTop - deltaY
     setStartPosition(e.touches[0].clientY)
@@ -124,11 +104,11 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
   return (
     <div className='lg:px-[2.5rem] xl:px-[5.5rem] px-4 md:pb-[104px] pb-[54px]'>
       <MaxScreenWrapper style='flex flex-col'>
-        <RevealAnimation style='w-fit'>
+        <RevealAnimation style='w-fit md:mb-0 mb-6'>
           <Text
             id='service'
             as='h1'
-            style='font-[700] md:text-[40px] text-[30px] leading-[160%]'
+            style='font-[700] md:text-[40px] text-[30px] md:leading-[160%] leading-[120%]'
           >
             {activeTab === customerTab
               ? 'Several Services To Meet Your Laundry Needs'
@@ -137,70 +117,65 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
         </RevealAnimation>
 
         <div className='flex md:flex-row flex-col items-center lg:gap-[80px] gap-[25px] sm:gap-[50px] justify-between'>
-          {/* Image with opacity animation */}
-          <RevealAnimation style='lg:w-[50%] w-full'>
-            {activeImage.map((img, index) => (
-              <div
-                key={index}
-                className='absolute w-full transition-opacity duration-300'
-                style={{
-                  opacity: contentOpacity[index] || 0,
-                  display: contentOpacity[index] > 0 ? 'block' : 'none',
-                }}
-              >
-                <CustomImage
-                  src={img}
-                  style='w-full lg:h-[576px] lg:g-[504px] h-[300px] sm:h-[400px]'
-                  imgStyle='object-contain'
-                />
-              </div>
-            ))}
-            {/* Fallback image (always displayed if none of the above are visible) */}
-            <div
-              className='transition-opacity duration-300'
-              style={{
-                opacity: contentOpacity.every((op) => op === 0) ? 1 : 0,
-              }}
-            >
-              <CustomImage
-                src={activeImage[0]}
-                style='w-full lg:h-[576px] lg:g-[504px] h-[300px] sm:h-[400px]'
-                imgStyle='object-contain'
-              />
+          {/* Image section */}
+          <RevealAnimation style='lg:w-[50%] w-full relative'>
+            <div className='relative w-full lg:h-[576px] h-[310px] sm:h-[380px]'>
+              {activeImage.map((img, index) => (
+                <div
+                  key={index}
+                  className='absolute inset-0 transition-opacity duration-300'
+                  style={{
+                    opacity: currentIndex === index ? 1 : 0,
+                  }}
+                >
+                  <CustomImage
+                    src={img}
+                    style='w-full h-full'
+                    imgStyle='object-contain'
+                  />
+                </div>
+              ))}
             </div>
           </RevealAnimation>
 
-          {/* Scrollable Content with draggable functionality */}
-          <div
-            ref={scrollRef}
-            className='block lg:w-[50%] w-full lg:items-start items-center md:h-[400px] h-[250px] overflow-y-auto snap-y snap-mandatory scroll-smooth'
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleDragEnd}
-            onMouseLeave={handleDragEnd}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleDragEnd}
-            style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
-          >
-            {activeData.map((content, index) => (
-              <div
-                key={index}
-                className='snap-start flex flex-col items-start md:justify-center justify-start md:h-[400px] h-[250px] w-full md:px-4 px-0 transition-opacity duration-300'
-                style={{ opacity: contentOpacity[index] || 0 }}
-              >
-                <RevealAnimation style='w-fit'>
-                  <Text style='text-start text-tertiary1100 text-[32px] font-[700] sm:leading-[160%] leading-[120%]'>
-                    {content.title}
-                  </Text>
-                </RevealAnimation>
-                <RevealAnimation style='w-fit'>
-                  <Text style='text-start text-[24px] font-[400] leading-[140%] text-tertiary1000 whitespace-normal'>
-                    {content.desc}
-                  </Text>
-                </RevealAnimation>
+          {/* Content section */}
+          <div className='lg:w-[50%] w-full'>
+            <div
+              ref={scrollRef}
+              className='overflow-y-auto scroll-smooth h-[200px] md:h-[400px] lg:h-[450px]'
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleDragEnd}
+              onMouseLeave={handleDragEnd}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleDragEnd}
+              style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+            >
+              <div className='space-y-8 py-4'>
+                {activeData.map((content, index) => (
+                  <div
+                    key={index}
+                    className={`min-h-[250px] md:min-h-[320px] lg:min-h-[400px] flex flex-col justify-center gap-4 px-2 md:px-4 transition-all duration-300 ${
+                      currentIndex === index 
+                        ? 'opacity-100 scale-100' 
+                        : 'opacity-40 scale-95'
+                    }`}
+                  >
+                    <RevealAnimation style='w-fit'>
+                      <Text style='text-start text-tertiary1100 text-[22px] md:text-[28px] lg:text-[32px] font-[700] leading-[120%] md:leading-[160%]'>
+                        {content.title}
+                      </Text>
+                    </RevealAnimation>
+                    <RevealAnimation style='w-fit'>
+                      <Text style='text-start text-[14px] md:text-[18px] lg:text-[20px] font-[400] leading-[140%] text-tertiary1000'>
+                        {content.desc}
+                      </Text>
+                    </RevealAnimation>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </MaxScreenWrapper>

@@ -1,9 +1,10 @@
+import { StaticImageData } from "next/image";
 import { api } from "./api";
 
 export interface Category {
   _id: string;
   name: string;
-  image: string;
+  image: StaticImageData;
   meta: string;
   createdAt: string;
   updatedAt: string;
@@ -14,7 +15,7 @@ export interface Item {
   _id: string;
   name: string;
   slug: string;
-  image: string;
+  image: StaticImageData;
   category: string; // category ID
   service: string; // service ID
   vendor: string; // vendor ID
@@ -70,7 +71,7 @@ export interface OrderPayload {
 export interface ShopServiceCategory {
   _id: string;
   name: string;
-  image: string;
+  image: StaticImageData;
   meta: string;
   createdAt: string;
   updatedAt: string;
@@ -82,7 +83,7 @@ export interface ShopService {
   service: {
     _id: string;
     name: string;
-    image: string;
+    image: StaticImageData;
     meta: string;
     __v: number;
   };

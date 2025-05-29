@@ -28,7 +28,7 @@ export const useOrderFlow = (shopId?: string) => {
   const [selectedService, setSelectedService] = useState<ShopService | null>(
     null
   );
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>();
   const [deliveryOptions, setDeliveryOptions] = useState<DeliveryOption[]>([]);
   const [loading, setLoading] = useState({
     services: false,
@@ -78,6 +78,7 @@ export const useOrderFlow = (shopId?: string) => {
       try {
         setLoading((prev) => ({ ...prev, categories: true }));
         setCategories(selectedService.categories);
+        setSelectedCategory(selectedService.categories[0]?._id)
       } catch (err) {
         setError(
           err instanceof Error ? err.message : "Failed to load categories"

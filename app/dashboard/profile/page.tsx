@@ -1,22 +1,10 @@
-import { Metadata } from "next";
-import { ProfileView } from "../../../components/sections/profile/profile-view";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { Metadata } from 'next'
+import { ProfileComponent } from '../../../components/sections/profile/profile-view'
 
 export const metadata: Metadata = {
-  title: "Profile | Bubbles",
-};
+  title: 'Profile | Bubbles',
+}
 
 export default async function ProfilePage() {
-  // Server-side protection
-  const cookiesData = await cookies();
-  const token = cookiesData.get("token")?.value;
-  if (!token) {
-    redirect("/login?from=/dashboard");
-  }
-  return (
-    <div className="container mx-auto py-8">
-      <ProfileView />
-    </div>
-  );
+  return <ProfileComponent />
 }
