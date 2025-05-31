@@ -76,6 +76,7 @@ export const useCartStore = create<CartState>()(
                 quantity: (state.localCart[item._id]?.quantity || 0) + 1,
               },
             },
+            shopId:item.vendor
           }
         }),
       removeFromLocalCart: (itemId) =>
