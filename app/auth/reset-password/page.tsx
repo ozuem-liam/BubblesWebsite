@@ -1,4 +1,4 @@
-import { PasswordReset } from '@/components/sections/auth/password-reset'
+import { PasswordReset } from '@/components/sections/auth/PasswordReset'
 
 export default function ResetPasswordPage() {
   return <PasswordReset />

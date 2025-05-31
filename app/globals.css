@@ -23,6 +23,17 @@
   --color-primary1000: #001330;
   --color-primary100:#CCD7E9;
   --color-primary1100:#000B1D;
+  --color-light-purple-200:#EDDCFA;
+  --color-neutral-grey:#666666;
+  --color-white-80:#FFFFFFCC;
+  --color-captcha:rgba(119, 119, 119, 0.31);
+  --color-input-border:rgba(0, 0, 0, 0.35);
+  --color-light-purple:rgba(157, 113, 198, 1);
+  --color-thick-purple:#5D14AD;
+  --color-thick-grey-200:#F7F5F8;
+  --color-thick-purple-30:#5D14AD4D;
+  --color-thick-purple-5:#5D14AD0D;
+  --color-medium-purple:#9747FF;
   --color-destructive :red;
   --color-border: hsl(var(--border));
   --animate-accordion-down: accordion-down 0.2s ease-out;
@@ -56,7 +67,7 @@
 
 :root {
 
-  --sidebar: hsl(0 0% 98%);
+  --sidebar:#001029;
 
   --sidebar-foreground: hsl(240 5.3% 26.1%);
 
@@ -109,19 +120,4 @@
   --color-sidebar-border: var(--sidebar-border);
 
   --color-sidebar-ring: var(--sidebar-ring);
-}
-
-.play-store-svg,
-.apple-store-svg {
-  width: 165px;
-  height: 58px;
-}
-
-/* Mobile styles */
-@media (max-width: 768px) {
-  .play-store-svg,
-  .apple-store-svg {
-    width: 150px; /* Adjust this value as needed */
-    height: auto; /* Maintain aspect ratio */
-  }
 }

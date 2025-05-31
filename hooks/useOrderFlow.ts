@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import { useState, useEffect } from "react";
-import { useAuth } from "../contexts/auth-context";
+import { useState, useEffect } from 'react'
+import { useAuth } from '../contexts/auth-context'
 import {
   ShopServiceCategory,
   DeliveryOption,
@@ -10,26 +10,25 @@ import {
   ShopService,
   CartItemDetail,
   CartData,
-} from "../lib/order-flow";
-import { useRouter } from "next/navigation";
-import { CreateOrderPayload, orderService } from "../lib/order";
-import { toast } from "sonner";
-import { Account, UserData } from "../lib/auth";
+  ICartItem,
+} from '../lib/order-flow'
+import { useRouter } from 'next/navigation'
+import { CreateOrderPayload, PaymentMethod, orderService } from '../lib/order'
+import { toast } from 'sonner'
+import { Account } from '../lib/auth'
+import { useCartStore } from '../stores/CartStore'
+import { LocalCartItem } from '@/stores/CartStore'
 
 export const useOrderFlow = (shopId?: string) => {
-  const { token } = useAuth();
-  const [services, setServices] = useState<ShopService[]>([]);
-  const [categories, setCategories] = useState<ShopServiceCategory[]>([]);
-  const [items, setItems] = useState<Item[]>([]);
-  const [cart, setCart] = useState<CartData | null>(null);
-  const [localCart, setLocalCart] = useState<{
-    [itemId: string]: { item: Item; quantity: number };
-  }>({});
+  const { token } = useAuth()
+  const [services, setServices] = useState<ShopService[]>([])
+  const [categories, setCategories] = useState<ShopServiceCategory[]>([])
+  const [items, setItems] = useState<Item[]>([])
   const [selectedService, setSelectedService] = useState<ShopService | null>(
     null
-  );
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [deliveryOptions, setDeliveryOptions] = useState<DeliveryOption[]>([]);
+  )
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const [deliveryOptions, setDeliveryOptions] = useState<DeliveryOption[]>([])
   const [loading, setLoading] = useState({
     services: false,
     categories: false,
@@ -37,239 +36,292 @@ export const useOrderFlow = (shopId?: string) => {
     cart: false,
     checkout: false,
     scheduler: false,
-  });
-  const [error, setError] = useState<string | null>(null);
+  })
+  const [error, setError] = useState<string | null>(null)
   const [availableTimeSlots, setAvailableTimeSlots] = useState<
     { _id: string; startTime: string; endTime: string }[]
-  >([]);
+  >([])
   const [selectedDeliveryDate, setSelectedDeliveryDate] = useState<
     string | null
-  >(null);
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null);
-  const [isExpressSelected, setIsExpressSelected] = useState(false);
-  const router = useRouter();
+  >(null)
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null)
+  const [isExpressSelected, setIsExpressSelected] = useState(false)
+  const [cartInitialized, setCartInitialized] = useState(false)
+  const router = useRouter()
+
+  const {
+    cart,
+    localCart,
+    setCart,
+    setLocalCart,
+    initializeCart,
+    addToLocalCart: zustandAddToLocalCart,
+    removeFromLocalCart: zustandRemoveFromLocalCart,
+    updateLocalCartQuantity: zustandUpdateLocalCartQuantity,
+    clearCart,
+  } = useCartStore()
 
   // Load shop services
   useEffect(() => {
-    if (!shopId || !token) return;
+    if (!shopId || !token) return
 
     const loadServices = async () => {
       try {
-        setLoading((prev) => ({ ...prev, services: true }));
-        const data = await orderFlowService.getShopServices(shopId, token);
-        setServices(data);
+        setLoading((prev) => ({ ...prev, services: true }))
+        const data = await orderFlowService.getShopServices(shopId, token)
+        setServices(data)
+        // if (data.length > 0) {
+        //   setSelectedService(data[0])
+        // }
       } catch (err) {
-        setError(
-          err instanceof Error ? err.message : "Failed to load services"
-        );
+        setError(err instanceof Error ? err.message : 'Failed to load services')
       } finally {
-        setLoading((prev) => ({ ...prev, services: false }));
+        setLoading((prev) => ({ ...prev, services: false }))
       }
-    };
+    }
 
-    loadServices();
-  }, [shopId, token]);
+    loadServices()
+  }, [shopId, token])
 
   // Load categories when service is selected
   useEffect(() => {
-    if (!selectedService) return;
+    if (!selectedService) return
 
     const loadCategories = async () => {
       try {
-        setLoading((prev) => ({ ...prev, categories: true }));
-        setCategories(selectedService.categories);
+        setLoading((prev) => ({ ...prev, categories: true }))
+        setCategories(selectedService.categories)
+        // if (selectedService.categories.length > 0) {
+        //   setSelectedCategory(selectedService.categories[0]._id)
+        // }
       } catch (err) {
         setError(
-          err instanceof Error ? err.message : "Failed to load categories"
-        );
+          err instanceof Error ? err.message : 'Failed to load categories'
+        )
       } finally {
-        setLoading((prev) => ({ ...prev, categories: false }));
+        setLoading((prev) => ({ ...prev, categories: false }))
       }
-    };
+    }
 
-    loadCategories();
-  }, [selectedService]);
+    loadCategories()
+  }, [selectedService])
 
-  // Load items when category is selected
   useEffect(() => {
-    if (!selectedCategory || !selectedService || !shopId || !token) return;
+    if (!selectedService || !shopId || !token) return
 
-    const loadItems = async () => {
+    const loadAllItems = async () => {
       try {
-        setLoading((prev) => ({ ...prev, items: true }));
-        const data = await orderFlowService.getItemsByCategory(
-          shopId,
-          selectedService.service._id,
-          selectedCategory
-        );
-        setItems(data);
+        setLoading((prev) => ({ ...prev, items: true }))
+
+        // Load items for all categories
+        const allItems: Item[] = []
+        for (const category of selectedService.categories) {
+          const response = await orderFlowService.getPaginatedItemsByCategory(
+            shopId,
+            selectedService.service._id,
+            category._id
+          )
+          if (response?.data?.results) {
+            // Add category ID to each item for easier filtering
+            const itemsWithCategory = response.data.results.map((item) => ({
+              ...item,
+              filteringCategoryId: category._id,
+            }))
+            allItems.push(...itemsWithCategory)
+          }
+        }
+
+        setItems(allItems)
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to load items");
+        setError(err instanceof Error ? err.message : 'Failed to load items')
       } finally {
-        setLoading((prev) => ({ ...prev, items: false }));
+        setLoading((prev) => ({ ...prev, items: false }))
       }
-    };
+    }
 
-    loadItems();
-  }, [selectedCategory, token, shopId, selectedService]);
+    loadAllItems()
+  }, [selectedService, token, shopId])
 
-  // Load cart
+  // Initialize cart only once when token is available
   useEffect(() => {
-    if (!token) return;
+    if (!token || cartInitialized) return
 
     const loadCart = async () => {
       try {
-        setLoading((prev) => ({ ...prev, cart: true }));
-        const resp = await orderFlowService.getCart(token);
-        setCart(resp.data);
+        setLoading((prev) => ({ ...prev, cart: true }))
 
-        const initialLocalCart: {
-          [itemId: string]: { item: Item; quantity: number };
-        } = {};
-        resp.data.items.forEach((cartItem: CartItemDetail) => {
-          initialLocalCart[cartItem.item._id] = {
-            item: cartItem.item,
-            quantity: cartItem.quantity,
-          };
-        });
-        setLocalCart(initialLocalCart);
+        // Check if we already have items in localCart (from persistence)
+        if (Object.keys(localCart).length > 0) {
+          // We have persisted cart data, just sync the server cart if needed
+          try {
+            const resp = await orderFlowService.getCart(token)
+            if (resp.data && !cart) {
+              setCart(resp.data)
+            }
+          } catch (err) {
+            // If server cart fails, continue with local cart
+            console.warn('Failed to sync server cart:', err)
+          }
+        } else {
+          // No local cart data, initialize from server
+          await initializeCart(token)
+        }
+
+        setCartInitialized(true)
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to load cart");
+        setError(err instanceof Error ? err.message : 'Failed to load cart')
+        setCartInitialized(true)
       } finally {
-        setLoading((prev) => ({ ...prev, cart: false }));
+        setLoading((prev) => ({ ...prev, cart: false }))
       }
-    };
+    }
 
-    loadCart();
-  }, [token]);
+    loadCart()
+  }, [token, cartInitialized, localCart, cart, initializeCart, setCart])
 
   // Load delivery options
   useEffect(() => {
-    const options = orderFlowService.getDeliveryOptions();
-    setDeliveryOptions(options);
-  }, []);
+    const options = orderFlowService.getDeliveryOptions()
+    setDeliveryOptions(options)
+  }, [])
 
   // Load time slots for standard delivery
   useEffect(() => {
-    if (isExpressSelected || !token) return;
+    if (isExpressSelected || !token) return
 
     const loadTimeSlots = async () => {
       try {
-        setLoading((prev) => ({ ...prev, scheduler: true }));
-        const response = await orderFlowService.getStandardDeliveryDates(token);
-        setAvailableTimeSlots(response.data);
+        setLoading((prev) => ({ ...prev, scheduler: true }))
+        const response = await orderFlowService.getStandardDeliveryDates(token)
+        setAvailableTimeSlots(response.data)
 
         if (response.data.length > 0 && !selectedTimeSlot) {
-          setSelectedTimeSlot(response.data[0].startTime);
+          setSelectedTimeSlot(response.data[0].startTime)
         }
       } catch (err) {
         setError(
-          err instanceof Error ? err.message : "Failed to load time slots"
-        );
+          err instanceof Error ? err.message : 'Failed to load time slots'
+        )
       } finally {
-        setLoading((prev) => ({ ...prev, scheduler: false }));
+        setLoading((prev) => ({ ...prev, scheduler: false }))
       }
-    };
-
-    loadTimeSlots();
-  }, [token, isExpressSelected]);
-
-  // Local cart operations
-  const addToLocalCart = async (item: Item) => {
-    // 1. Ensure we have a cart
-    let currentCart = cart;
-    if (currentCart?.items?.length == 0) {
-      // 2. Update server cart
-      const resp = await orderFlowService.addToCart(
-        {
-          item,
-          quantity: 1,
-          vendor: shopId || "",
-        },
-        token as string
-      );
-      currentCart = resp.data;
-      setCart(currentCart);
     }
-    console.log({currentCartn: currentCart})
 
+    loadTimeSlots()
+  }, [token, isExpressSelected, selectedTimeSlot])
 
-    setLocalCart((prev) => ({
-      ...prev,
-      [item._id]: {
-        item,
-        quantity: (prev[item._id]?.quantity || 0) + 1,
-      },
-    }));
-  };
+  const addToLocalCart = async (item: Item) => {
+    try {
+      // 1. Ensure we have a cart on the server
+      let currentCart = cart
+      if (!currentCart || currentCart.items?.length === 0) {
+        // 2. Update server cart
+        const resp = await orderFlowService.addToCart(
+          {
+            item,
+            quantity: 1,
+            vendor: shopId || '',
+          },
+          token as string
+        )
+        currentCart = resp.data
+        setCart(currentCart)
+      }
+
+      // 3. Update local cart (this will persist automatically)
+      zustandAddToLocalCart(item)
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : 'Failed to add item to cart'
+      )
+      console.error('Error adding to cart:', err)
+    }
+  }
 
   const removeFromLocalCart = (itemId: string) => {
-    setLocalCart((prev) => {
-      const newCart = { ...prev };
-      delete newCart[itemId];
-      return newCart;
-    });
-  };
+    zustandRemoveFromLocalCart(itemId)
+  }
 
   const updateLocalCartQuantity = (itemId: string, newQuantity: number) => {
-    if (newQuantity < 1) {
-      removeFromLocalCart(itemId);
-      return;
-    }
-
-    setLocalCart((prev) => {
-      if (!prev[itemId]) return prev;
-      return {
-        ...prev,
-        [itemId]: {
-          ...prev[itemId],
-          quantity: newQuantity,
-        },
-      };
-    });
-  };
+    zustandUpdateLocalCartQuantity(itemId, newQuantity)
+  }
 
   const getDisplayCart = (isExpress: boolean = false): CartData | null => {
-    if (!cart) return null;
+    if (!cart && Object.keys(localCart).length === 0) return null
 
-    const displayItems: CartItemDetail[] = Object.values(localCart).map(
-      ({ item, quantity }) => {
+    const cartItems: LocalCartItem[] = Object.values(localCart)
+
+    const displayItems: CartItemDetail[] = cartItems.map(
+      ({ item, quantity }): CartItemDetail => {
+        // Convert Item to ICartItem format for CartItemDetail
+        const cartItem: ICartItem = {
+          _id: item._id,
+          vendor: item.vendor,
+          service: item.service,
+          category: item.category,
+          name: item.name,
+          slug: item.slug,
+          fixed_amount: item.fixed_amount,
+          express_amount: item.express_amount,
+          image: item.image,
+          is_active: item.is_active,
+          createdAt: item.createdAt,
+          updatedAt: item.updatedAt,
+          __v: item.__v,
+        }
+
         return {
           _id: item._id,
-          item: item,
+          item: cartItem,
           quantity: quantity,
           price: isExpress ? item.express_amount : item.fixed_amount,
-          vendor: { _id: shopId || "", business_name: "" },
-        };
+          vendor: { _id: shopId || '', business_name: '' },
+        }
       }
-    );
+    )
+
+    // Create a display cart even if server cart is not available
+    const baseCart: CartData = cart || {
+      _id: 'local-cart',
+      user: 'local-user',
+      items: [],
+      checkoutStatus: false,
+      is_express: false,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }
 
     return {
-      ...cart,
+      ...baseCart,
       items: displayItems,
       is_express: isExpress,
-    };
-  };
+    }
+  }
 
   const toggleExpressDelivery = (isExpress: boolean) => {
-    setIsExpressSelected(isExpress);
-    setSelectedTimeSlot(null);
-    setSelectedDeliveryDate(null);
-  };
+    setIsExpressSelected(isExpress)
+    setSelectedTimeSlot(null)
+    setSelectedDeliveryDate(null)
+  }
 
   const checkout = async (
     selectedDeliveryOption: DeliveryOption,
     user: Account,
     pickupDate: string | null,
+    payment_method: PaymentMethod = 'paystack',
     timeSlotId?: string | null
   ) => {
-    if (!token || !cart || !selectedDeliveryOption) {
-      setError("Missing required information for checkout");
-      return false;
+    if (
+      !token ||
+      Object.keys(localCart).length === 0 ||
+      !selectedDeliveryOption
+    ) {
+      setError('Missing required information for checkout')
+      return false
     }
 
     try {
-      setLoading((prev) => ({ ...prev, checkout: true }));
+      setLoading((prev) => ({ ...prev, checkout: true }))
 
       // Prepare items for the updateMultipleCartItem endpoint
       const itemsToUpdate = Object.values(localCart).map(
@@ -278,125 +330,148 @@ export const useOrderFlow = (shopId?: string) => {
           quantity,
           price: isExpressSelected ? item.express_amount : item.fixed_amount,
         })
-      );
+      )
 
-      let updatedCart = null;
+      let updatedCart = null
+      let cartId = cart?._id
+
+      // Ensure we have a server cart
+      if (!cart) {
+        // Create a cart with the first item
+        const firstItem = Object.values(localCart)[0]
+        if (firstItem) {
+          const resp = await orderFlowService.addToCart(
+            {
+              item: firstItem.item,
+              quantity: firstItem.quantity,
+              vendor: shopId || '',
+            },
+            token
+          )
+          cartId = resp.data._id
+          setCart(resp.data)
+        }
+      }
+
       // Update cart items and pricing
-      if (itemsToUpdate.length > 0) {
-        console.log({ init: cart, localCart, itemsToUpdate });
+      if (itemsToUpdate.length > 0 && cartId) {
         updatedCart = await orderFlowService.updateMultipleCartItems(
-          cart._id,
+          cartId,
           {
             items: itemsToUpdate,
             is_express: isExpressSelected,
           },
           token
-        );
+        )
       }
 
       // For standard delivery, use the time slot info
       if (!isExpressSelected && timeSlotId) {
         const selectedSlot = availableTimeSlots.find(
           (slot) => slot._id === timeSlotId
-        );
+        )
         if (selectedSlot) {
           // Format as "startTime - endTime" for the order
-          pickupDate = `${selectedSlot.startTime} - ${selectedSlot.endTime}`;
+          pickupDate = `${selectedSlot.startTime} - ${selectedSlot.endTime}`
         }
       }
 
       const totalAmount = calculateTotal(
         isExpressSelected,
         selectedDeliveryOption
-      );
-      const subtotal = calculateSubtotal(isExpressSelected);
-      const deliveryFee = selectedDeliveryOption.fee || 0;
+      )
+      const subtotal = calculateSubtotal(isExpressSelected)
+      const deliveryFee = selectedDeliveryOption.fee || 0
       const totalItems = Object.values(localCart).reduce(
         (sum, { quantity }) => sum + quantity,
         0
-      );
-      console.log({ cart, updatedCart });
-      const cartId = updatedCart ? updatedCart.data._id : cart._id;
-      const serviceId = selectedService ? selectedService.service._id : "";
-      const shippingAddress = user?.address || "";
-      const shippingAddressId = cart.items[0].vendor?._id || "";
-      const selectedDate = isExpressSelected ? pickupDate : null;
+      )
+      const finalCartId = updatedCart ? updatedCart.data._id : cartId
+      const serviceId = selectedService ? selectedService.service._id : ''
+      const shippingAddress = user?.address || ''
+      const shippingAddressId =
+        Object.values(localCart)[0]?.item?.vendor || shopId || ''
+      const selectedDate = isExpressSelected ? pickupDate : null
 
       // For express delivery, use the selected date
       if (isExpressSelected && pickupDate) {
         // Format the date as needed for the API
-        pickupDate = new Date(pickupDate).toISOString();
+        pickupDate = new Date(pickupDate).toISOString()
       }
-      const scheduledDate = new Date().toISOString().split("T")[0];
+      const scheduledDate = new Date().toISOString().split('T')[0]
 
       // Here you would call your order creation API
       const orderPayload: CreateOrderPayload = {
-        customer: user?.id || "",
-        customer_first_name: user?.first_name || "",
-        customer_last_name: user?.last_name || "",
-        customer_phone_number: user?.phone || "",
+        customer: user?.id || '',
+        customer_first_name: user?.first_name || '',
+        customer_last_name: user?.last_name || '',
+        customer_phone_number: user?.phone || '',
         amount: totalAmount || 0,
         address:
-          shippingAddress?.street_address + " " + shippingAddress?.city + " " ||
-          shippingAddress?.state ||
-          "",
+          (typeof shippingAddress === 'object'
+            ? `${shippingAddress?.street_address || ''} ${
+                shippingAddress?.city || ''
+              } ${shippingAddress?.state || ''}`
+            : shippingAddress) || '',
         total_quantity: totalItems,
-        cart: cartId,
+        cart: finalCartId || '',
         service: serviceId,
-        delivery_option: "delivery",
+        delivery_option: 'delivery',
         scheduled_date: scheduledDate,
-        scheduled_time: `${timeSlotId}:00` || "",
+        scheduled_time: `${timeSlotId || ''}:00`,
         shipping_address: shippingAddressId,
-        payment_method: "paystack", // or whatever method selected
+        payment_method: payment_method, // or whatever method selected
         sub_total: subtotal,
         delivery_fee: deliveryFee,
         is_express: isExpressSelected,
-      };
+      }
 
       const paymentResponse = await orderService.createOrderAndPay(
         orderPayload,
-        "paystack",
+        payment_method,
         token
-      );
+      )
 
       if (paymentResponse?.code === 200 && paymentResponse?.data) {
-        toast.success(paymentResponse.message);
-        setLocalCart({}); // Clear local cart after successful checkout
-        setCart(null); // Clear cart state
+        toast.success(paymentResponse.message)
+        clearCart() // Clear cart state using Zustand
+        setCartInitialized(false) // Reset initialization flag
         // Redirect to payment gateway
         window.location.href =
-          paymentResponse.data.initializedTrasaction.data.authorization_url;
+          paymentResponse.data.initializedTrasaction.data.authorization_url
       } else if (paymentResponse?.code === 200 && !paymentResponse?.data) {
-        toast.success(paymentResponse.message);
+        toast.success(paymentResponse.message)
+        clearCart()
+        setCartInitialized(false)
       } else {
-        toast.error("Payment initiation failed");
+        toast.error('Payment initiation failed')
       }
 
-      return true;
+      return true
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to checkout");
-      return false;
+      setError(err instanceof Error ? err.message : 'Failed to checkout')
+      return false
     } finally {
-      setLoading((prev) => ({ ...prev, checkout: false }));
+      setLoading((prev) => ({ ...prev, checkout: false }))
     }
-  };
+  }
 
-  const calculateSubtotal = (isExpress: boolean) => {
-    return Object.values(localCart).reduce((sum, { item, quantity }) => {
-      return (
-        sum + (isExpress ? item.express_amount : item.fixed_amount) * quantity
-      );
-    }, 0);
-  };
+  const calculateSubtotal = (isExpress: boolean): number => {
+    const cartItems = Object.values(localCart) as LocalCartItem[]
+    return cartItems.reduce((sum: number, { item, quantity }) => {
+      const price = isExpress ? item.express_amount : item.fixed_amount
+      return sum + (price || 0) * quantity
+    }, 0)
+  }
 
   const calculateTotal = (
     isExpress: boolean,
     selectedDeliveryOption?: DeliveryOption
-  ) => {
-    const subtotal = calculateSubtotal(isExpress);
-    const deliveryFee = selectedDeliveryOption?.fee || 0;
-    return subtotal + deliveryFee;
-  };
+  ): number => {
+    const subtotal = calculateSubtotal(isExpress)
+    const deliveryFee = selectedDeliveryOption?.fee || 0
+    return subtotal + deliveryFee
+  }
 
   return {
     services,
@@ -422,5 +497,57 @@ export const useOrderFlow = (shopId?: string) => {
     setSelectedDeliveryDate,
     selectedTimeSlot,
     setSelectedTimeSlot,
-  };
-};
+    clearCart
+  }
+}
+
+export const useFetchCategoryItems = (
+  vendorId: string,
+  serviceId: string,
+  categoryId: string,
+  limit?: number
+) => {
+  const { token } = useAuth()
+  const [items, setItems] = useState<Item[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [paginationPage, setPaginationPage] = useState<number>(1)
+  const [paginationTotal, setPaginationTotal] = useState<number | null>(null)
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        if (paginationPage === 1) setLoading(true)
+        const response = await orderFlowService.getPaginatedItemsByCategory(
+          vendorId,
+          serviceId,
+          categoryId,
+          paginationPage,
+          limit
+        )
+        console.log('this is rbowese', response)
+
+        setItems(response?.data?.results)
+        setPaginationTotal(response?.data?.pagination?.total)
+        // setMeta(response.data?.pagination || null)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch shops')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (token) {
+      fetchItems()
+    }
+  }, [token, paginationPage])
+
+  return {
+    items,
+    loading,
+    error,
+    paginationTotal,
+    setPaginationPage,
+    paginationPage,
+  }
+}

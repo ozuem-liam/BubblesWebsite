@@ -1,23 +1,30 @@
-import { Metadata } from "next";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { ShopList } from "../../../components/sections/shop/shop-list";
+import { Metadata } from 'next'
+import { Text } from '@/components/global/Text'
+import { FeaturedShop } from '@/components/sections/shop/ShopList'
 
 export const metadata: Metadata = {
-  title: "Shops | Bubbles",
-};
+  title: 'Shops | Bubbles',
+}
 
 export default async function ShopPage() {
-  // Server-side protection
-  const cookiesData = await cookies();
-  const token = cookiesData.get("token")?.value;
-  if (!token) {
-    redirect("/login?from=/dashboard");
-  }
+
   return (
-    <main>
-      <h2 className="text-white text-xl font-bold">Featured Shops</h2>
-      <ShopList />
-    </main>
-  );
+    <section className="h-screen py-4">
+      <header className='flex flex-wrap justify-between items-center mb-8 gap-4'>
+        <div>
+          <Text
+            as='h2'
+            style='text-gray-900 text-2xl font-bold mb-2'
+            children='Featured Shops'
+          />
+          <Text
+            as='p'
+            style='text-gray-600'
+            children='Discover top-rated shops in your area'
+          />
+        </div>
+      </header>
+      <FeaturedShop/>
+    </section>
+  )
 }

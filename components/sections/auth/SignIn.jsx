@@ -15,6 +15,7 @@ import { toast } from 'sonner'
 import { useAuth } from '../../../contexts/auth-context'
 import { useRouter } from 'nextjs-toploader/app'
 import { authService } from '../../../lib/auth'
+import Cookies from 'js-cookie'
 
 export const SignInForm = () => {
   const [isPending, setIsPending] = useState(false)
@@ -30,25 +31,28 @@ export const SignInForm = () => {
   })
 
   const onSubmit = async (values) => {
-    console.log(values)
     const { email, pwd } = values
     setIsPending(true)
     try {
       const response = await authService.login({ email: email, password: pwd })
-  
+
       if (response.code === 200 && response.data?.token) {
         toast.success(response.message || 'Login successful')
 
-        // Set token in cookies
-        document.cookie = `token=${response.data.token}; path=/; secure; samesite=strict`
+        Cookies.set('token', response.data.token, {
+          expires: 4 / 24, // 3 hours
+          path: '/',
+          sameSite: 'strict',
+          secure: window.location.protocol === 'https:',
+        })
 
-        // Call auth context login
         login(response.data)
 
-        // Handle redirect
-        const searchParams = new URLSearchParams(window.location.search)
-        const from = searchParams.get('from') || '/dashboard'
-        router.push(from)
+        setTimeout(() => {
+          const searchParams = new URLSearchParams(window.location.search)
+          const from = searchParams.get('from') || '/dashboard'
+          router.push(from)
+        }, 200)
       } else {
         toast.error(response.message || 'Login failed')
       }

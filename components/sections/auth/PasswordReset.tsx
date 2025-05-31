@@ -4,9 +4,23 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { authService } from '../../../lib/auth'
 import { AuthLayout } from './AuthLayout'
+import { AlertCircle } from 'lucide-react'
 
 // Step type to track the current stage of password reset flow
 type ResetStep = 'email' | 'verify-otp' | 'reset-password' | 'success'
+const variantStyles = {
+  danger: {
+    container: 'bg-red-50 border-red-200 text-red-800',
+    icon: 'text-red-500',
+    button: 'text-red-400 hover:text-red-600'
+  },
+  warning: {
+    container: 'bg-amber-50 border-amber-200 text-amber-800',
+    icon: 'text-amber-500',
+    button: 'text-amber-400 hover:text-amber-600'
+  }
+}
+const styles = variantStyles['danger']
 
 export const PasswordReset = () => {
   const router = useRouter()
@@ -188,8 +202,15 @@ export const PasswordReset = () => {
     >
       {/* Error display */}
       {error && (
-        <div className='mb-4 p-3 bg-red-900/30 border border-red-800 rounded-md text-red-200'>
-          {error}
+        <div
+          className={`mb-4 px-4 py-3 border rounded flex items-start gap-3 ${styles.container}`}
+        >
+          <AlertCircle
+            className={`w-5 h-5 mt-0.5 flex-shrink-0 ${styles.icon}`}
+          />
+          <div className='flex-1 text-sm font-medium leading-relaxed'>
+            {error}
+          </div>
         </div>
       )}
 
@@ -248,7 +269,7 @@ export const PasswordReset = () => {
               type='text'
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
-              className='px-2 md:text-md text-md font-[400] border border-grey-400 shadow-none h-[50px] rounded-sm flex items-center'
+              className='w-full md:text-md text-md font-[400] border border-grey-400 shadow-none h-[50px] rounded-sm flex items-center px-2'
               placeholder='Enter verification code'
               required
             />
@@ -301,7 +322,7 @@ export const PasswordReset = () => {
               type='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className='px-2 md:text-md text-md font-[400] border border-grey-400 shadow-none h-[50px] rounded-sm flex items-center'
+              className='w-full md:text-md text-md font-[400] border border-grey-400 shadow-none h-[50px] rounded-sm flex items-center px-2'
               placeholder='Enter new password'
               minLength={8}
               required
@@ -319,7 +340,7 @@ export const PasswordReset = () => {
               type='password'
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className='px-2 w-full bg-[#001a3f] border border-[#1a3b6d] rounded px-3 py-2 text-white'
+              className='w-full md:text-md text-md font-[400] border border-grey-400 shadow-none h-[50px] rounded-sm flex items-center px-2'
               placeholder='Confirm new password'
               required
             />

@@ -143,4 +143,8 @@ export const authService = {
   async getProfileData(token: string) {
     return await api.get<CustomerProfileApiResponse>('/customer/profile', token);
   },
+
+  async updateAddress(data: Address,customerId:string) {
+    return await api.post<{ message: string }>(`/customer/update/${customerId}verify-otp`, data);
+  },
 };
