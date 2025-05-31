@@ -12,7 +12,7 @@ import {
   CartData,
   ICartItem,
 } from '../lib/order-flow'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { CreateOrderPayload, PaymentMethod, orderService } from '../lib/order'
 import { toast } from 'sonner'
 import { Account } from '../lib/auth'
@@ -20,6 +20,8 @@ import { useCartStore } from '../stores/CartStore'
 import { LocalCartItem } from '@/stores/CartStore'
 
 export const useOrderFlow = (shopId?: string) => {
+  const query = useSearchParams()
+  const bubbleShop = query.get('name')
   const { token } = useAuth()
   const [services, setServices] = useState<ShopService[]>([])
   const [categories, setCategories] = useState<ShopServiceCategory[]>([])
@@ -69,10 +71,11 @@ export const useOrderFlow = (shopId?: string) => {
       try {
         setLoading((prev) => ({ ...prev, services: true }))
         const data = await orderFlowService.getShopServices(shopId, token)
+        const isBubbleStore = data.length > 0 && bubbleShop
         setServices(data)
-        // if (data.length > 0) {
-        //   setSelectedService(data[0])
-        // }
+        if (isBubbleStore) {
+          setSelectedService(data[0])
+        }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load services')
       } finally {
@@ -238,12 +241,65 @@ export const useOrderFlow = (shopId?: string) => {
     }
   }
 
-  const removeFromLocalCart = (itemId: string) => {
-    zustandRemoveFromLocalCart(itemId)
+  const removeFromLocalCart = async (itemId: string) => {
+    try {
+      // 1. Update server cart first if we have a cart
+      if (cart && cart._id && token) {
+        const updatedCart = await orderFlowService.removeFromCart(itemId, token)
+        setCart(updatedCart.data)
+      }
+
+      // 2. Update local cart (this will persist automatically)
+      zustandRemoveFromLocalCart(itemId)
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : 'Failed to remove item from cart'
+      )
+      console.error('Error removing from cart:', err)
+    }
   }
 
-  const updateLocalCartQuantity = (itemId: string, newQuantity: number) => {
-    zustandUpdateLocalCartQuantity(itemId, newQuantity)
+  // Updated clearCart function - you might want to rename this to avoid confusion with Zustand's clearCart
+  const clearCartCompletely = async () => {
+    try {
+      // 1. Clear server cart first if we have a cart
+      if (cart && cart._id && token) {
+        await orderFlowService.clearCart(cart._id, token)
+        setCart(null) // Clear the cart state
+      }
+
+      // 2. Clear local cart (this will persist automatically)
+      clearCart() // This is the Zustand clearCart function
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to clear cart')
+      console.error('Error clearing cart:', err)
+    }
+  }
+
+  // Updated updateLocalCartQuantity function
+  const updateLocalCartQuantity = async (
+    itemId: string,
+    newQuantity: number
+  ) => {
+    try {
+      // 1. Update server cart first if we have a cart
+      if (cart && cart._id && token) {
+        const updatedCart = await orderFlowService.updateCartItem(
+          itemId,
+          newQuantity,
+          token
+        )
+        setCart(updatedCart.data)
+      }
+
+      // 2. Update local cart (this will persist automatically)
+      zustandUpdateLocalCartQuantity(itemId, newQuantity)
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : 'Failed to update cart quantity'
+      )
+      console.error('Error updating cart quantity:', err)
+    }
   }
 
   const getDisplayCart = (isExpress: boolean = false): CartData | null => {
@@ -485,8 +541,9 @@ export const useOrderFlow = (shopId?: string) => {
     selectService: setSelectedService,
     selectCategory: setSelectedCategory,
     addToCart: addToLocalCart,
-    removeFromCart: removeFromLocalCart,
-    updateQuantity: updateLocalCartQuantity,
+    removeFromCart: removeFromLocalCart, // Updated function
+    updateQuantity: updateLocalCartQuantity, // Updated function
+    clearCartCompletely, // New function name to avoid confusion
     checkout,
     selectedService,
     selectedCategory,
@@ -497,7 +554,7 @@ export const useOrderFlow = (shopId?: string) => {
     setSelectedDeliveryDate,
     selectedTimeSlot,
     setSelectedTimeSlot,
-    clearCart
+    clearCart, // Keep the Zustand clearCart for internal use
   }
 }
 

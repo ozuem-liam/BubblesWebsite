@@ -1,6 +1,6 @@
 'use client'
 
-import { useBubbleShop, useShops } from '../../../hooks/useShops'
+import { useBubbleShop } from '../../../hooks/useShops'
 import { ErrorComponent } from '@/components/global/Error'
 import { LoadingComponent } from '@/components/global/Loading'
 import { ShopList } from '../shop/ShopList'

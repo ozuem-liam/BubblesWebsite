@@ -15,7 +15,7 @@ export const OrderSummary = ({
   onCheckout,
   loading,
   isExpressSelected,
-  clearCart
+  clearCartCompletely
 }: {
   cart: CartData | null
   deliveryOptions: DeliveryOption[]
@@ -24,7 +24,7 @@ export const OrderSummary = ({
   onCheckout: () => void
   loading: boolean
   isExpressSelected: boolean
-  clearCart: () => void
+  clearCartCompletely: () => void
 }) => {
   const subtotal =
     cart?.items.reduce((sum, item) => sum + item.price * item.quantity, 0) || 0
@@ -33,7 +33,7 @@ export const OrderSummary = ({
 
   const handleClearCart = () => {
     if (window.confirm('Are you sure you want to clear your cart? This action cannot be undone.')) {
-      clearCart()
+      clearCartCompletely()
     }
   }
 
@@ -251,7 +251,7 @@ export const OrderSummary = ({
             <Button
               onClick={handleClearCart}
               variant='outline'
-              className='w-full sm:flex-1 h-14 text-red-600 border-red-200 hover:bg-red-50 hover:border-red-300 flex items-center justify-center gap-2'
+              className='w-full flex-1 h-14 text-red-600 border-red-200 hover:bg-red-50 hover:border-red-300 flex items-center justify-center gap-2'
             >
               <Trash2 className='w-4 h-4' />
               Clear All Items
@@ -260,7 +260,7 @@ export const OrderSummary = ({
             <Button
               onClick={onCheckout}
               disabled={!selectedDelivery || loading}
-              className='w-full sm:flex-[2] h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-sm text-base font-medium'
+              className='w-full md:min-h-auto min-h-[40px] md:w-[50px] flex-1 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-sm text-center font-medium'
               size='lg'
             >
               {loading ? (

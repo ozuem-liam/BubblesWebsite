@@ -1,6 +1,6 @@
 'use client'
 
-import { useParams } from 'next/navigation'
+import { useParams, useSearchParams } from 'next/navigation'
 import { useOrderFlow } from '../../../../../hooks/useOrderFlow'
 import { ServiceCategories } from '../../../../../components/sections/order-flow/ServiceCategories'
 import { ShopServices } from '../../../../../components/sections/order-flow/ShopServices'
@@ -15,6 +15,8 @@ interface BreadcrumbItem {
 
 export default function OrderFlowPage() {
   const { shopId } = useParams()
+  const query = useSearchParams()
+  const bubbleShop = query.get('name')
   const {
     services,
     categories,
@@ -45,9 +47,9 @@ export default function OrderFlowPage() {
     },
   ]
 
-  if (selectedService) {
+  if (selectedService || bubbleShop) {
     breadcrumbItems.push({
-      label: selectedService.service.name,
+      label: selectedService?.service.name||'',
       onClick: selectedCategory
         ? () => {
             selectCategory(null)
@@ -108,7 +110,7 @@ export default function OrderFlowPage() {
           />
         )}
 
-        {selectedService && (
+        {(selectedService || bubbleShop)&& (
           <ServiceCategories
             selectedService={selectedService}
             categories={categories}

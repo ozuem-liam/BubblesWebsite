@@ -56,37 +56,42 @@ const WelcomeSection = ({ user }: { user: any }) => (
   </section>
 )
 
-const PromoBannerSection = ({ router }: { router: any }) => (
-  <section className='relative'>
-    {/* Desktop Banner */}
-    <div
-      className='md:block hidden relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer'
-      onClick={() => router.push('/dashboard/store')}
-    >
-      <CustomImage
-        src={bubblesDesktopStorebanner}
-        style='w-full h-[22rem]'
-        imgStyle='object-cover'
-        priority={true}
-      />
-      <div className='absolute inset-0 bg-black/70 opacity-30 flex items-center justify-center'></div>
-    </div>
+const PromoBannerSection = ({ router }: { router: any }) => {
+  const bubblesStore =
+    '/dashboard/shops/6837466d37f650f4defa3839/order?name=bubbles'
 
-    {/* Mobile Banner */}
-    <div
-      className='md:hidden block relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer'
-      onClick={() => router.push('/dashboard/store')}
-    >
-      <CustomImage
-        src={bubblesMobileStorebanner}
-        style='w-full h-[15rem]'
-        imgStyle='object-cover '
-        priority={true}
-      />
-      <div className='absolute inset-0 bg-black/70 opacity-30 flex items-center justify-center'></div>
-    </div>
-  </section>
-)
+  return (
+    <section className='relative'>
+      {/* Desktop Banner */}
+      <div
+        className='md:block hidden relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer'
+        onClick={() => router.push(bubblesStore)}
+      >
+        <CustomImage
+          src={bubblesDesktopStorebanner}
+          style='w-full h-[22rem]'
+          imgStyle='object-cover'
+          priority={true}
+        />
+        <div className='absolute inset-0 bg-black/70 opacity-30 flex items-center justify-center'></div>
+      </div>
+
+      {/* Mobile Banner */}
+      <div
+        className='md:hidden block relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer'
+        onClick={() => router.push(bubblesStore)}
+      >
+        <CustomImage
+          src={bubblesMobileStorebanner}
+          style='w-full h-[15rem]'
+          imgStyle='object-cover '
+          priority={true}
+        />
+        <div className='absolute inset-0 bg-black/70 opacity-30 flex items-center justify-center'></div>
+      </div>
+    </section>
+  )
+}
 
 const ShopsSection = () => {
   const { shops, loading, error } = useShops()
