@@ -25,7 +25,7 @@ export const Pagination: React.FC<IPagination> = ({
   setPageNumber,
 }) => {
   const handlePageClick = (event: any) => {
-    let page_number = event.selected + 1
+    const page_number = event.selected + 1
     setPageNumber(page_number)
   }
 

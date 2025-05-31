@@ -8,13 +8,14 @@ import { MapPin, Star, Store } from 'lucide-react'
 import { ErrorComponent } from '@/components/global/Error'
 import { LoadingComponent } from '@/components/global/Loading'
 import { Shop } from '@/lib/shop'
+import { CustomImage } from '@/components/global/Image'
 
 interface IShopList {
   shops: Shop[]
   loading: boolean
   error: string | null
 }
-export const ShopList:React.FC<IShopList> = ({ shops, loading, error }) => {
+export const ShopList: React.FC<IShopList> = ({ shops, loading, error }) => {
   if (loading) {
     return <LoadingComponent fallbackText={'Loading amazing shops...'} />
   }
@@ -56,10 +57,11 @@ const ShopCard = ({ shop }: { shop: any }) => (
     {/* Shop Banner/Image */}
     <div className='bg-white m-1 border border-gray-200 rounded-md p-3 relative h-48 from-gray-100 to-gray-200 overflow-hidden'>
       {shop.business_banner ? (
-        <img
+        <CustomImage
           src={shop.business_banner}
           alt={shop.business_name}
-          className='h-full w-full object-cover group-hover:scale-110 transition-transform duration-300'
+          style='w-full h-full p-1 group-hover:scale-110 transition-transform duration-300'
+          imgStyle='object-cover'
         />
       ) : (
         <div className='flex flex-col items-center justify-center h-full text-gray-400 bg-gradient-to-br from-blue-50 to-indigo-100'>

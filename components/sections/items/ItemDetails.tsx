@@ -13,19 +13,13 @@ import 'swiper/css/free-mode'
 import { useOrderFlow } from '@/hooks/useOrderFlow'
 import { formatNaira } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import { CartData, Item } from '@/lib/order-flow'
+import { Item } from '@/lib/order-flow'
 import type { Swiper as SwiperType } from 'swiper'
 import { StaticImageData } from 'next/image'
-import {
-  ChevronLeft,
-  ShoppingCart,
-  Star,
-  Truck,
-  Clock,
-  Shield,
-} from 'lucide-react'
+import { ShoppingCart, Star, Truck, Clock, Shield } from 'lucide-react'
 import { BreadCrumb } from '@/components/global/BreadCrumb'
 import { useRouter } from 'nextjs-toploader/app'
+import { CustomImage } from '@/components/global/Image'
 
 interface ProductDetailsProps {
   product: Item
@@ -81,10 +75,6 @@ const ProductDetailsPage: React.FC<ProductDetailsProps> = ({
       ? product.images
       : [product.image]
 
-  const getImageSrc = (img: string | StaticImageData): string => {
-    return typeof img === 'string' ? img : img.src
-  }
-
   return (
     <div className='min-h-screen bg-gray-50'>
       {/* Header */}
@@ -117,10 +107,11 @@ const ProductDetailsPage: React.FC<ProductDetailsProps> = ({
                 {productImages.map((img, index) => (
                   <SwiperSlide key={index}>
                     <div className='w-full h-full flex items-center justify-center bg-white p-3 sm:p-6'>
-                      <img
-                        src={getImageSrc(img)}
+                      <CustomImage
+                        src={img}
                         alt={`${product.name} ${index + 1}`}
-                        className='max-w-full max-h-full object-contain'
+                        style='max-w-full max-h-full'
+                        imgStyle='object-contain'
                       />
                     </div>
                   </SwiperSlide>
@@ -156,10 +147,11 @@ const ProductDetailsPage: React.FC<ProductDetailsProps> = ({
                         }
                       `}
                       >
-                        <img
-                          src={getImageSrc(img)}
+                        <CustomImage
+                          src={img}
                           alt={`${product.name} thumbnail ${index + 1}`}
-                          className='w-full h-full object-cover bg-white p-1 sm:p-2'
+                          style='w-full h-full bg-white p-1 sm:p-2'
+                          imgStyle='object-cover'
                         />
                       </div>
                     </SwiperSlide>

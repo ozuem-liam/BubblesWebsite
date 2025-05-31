@@ -5,6 +5,7 @@ import NextTopLoader from 'nextjs-toploader'
 import { AuthProvider } from '../contexts/auth-context'
 import { Toaster } from '@/components/ui/sonner'
 import CartHydration from '@/stores/CartHydration'
+import { Suspense } from 'react'
 
 const grotesk = Hanken_Grotesk({
   subsets: ['latin'],
@@ -31,7 +32,8 @@ export default function RootLayout({
           <NextTopLoader color='#001029' showSpinner={false} />
           <main>
             <CartHydration />
-            {children}
+
+            <Suspense fallback={<div></div>}>{children}</Suspense>
           </main>
           <Toaster richColors />
         </body>

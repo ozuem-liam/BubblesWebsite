@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { OrderDetailsData, orderService } from '../../../lib/order'
 import { Skeleton } from '../../ui/skeleton'
 import { ErrorComponent } from '@/components/global/Error'
+import { CustomImage } from '@/components/global/Image'
 
 export const OrderDetails = () => {
   const { id } = useParams()
@@ -209,10 +210,11 @@ export const OrderDetails = () => {
                 >
                   {item.itemrequest.image && (
                     <div className='flex-shrink-0 w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center'>
-                      <img
+                      <CustomImage
                         src={item.itemrequest.image}
                         alt={item.itemrequest.name}
-                        className='w-full h-full object-contain p-1'
+                        style='w-full h-full p-1'
+                        imgStyle='object-contain'
                       />
                     </div>
                   )}
