@@ -18,17 +18,17 @@ import {
   MapPin,
   ChevronDown,
   Star,
-  AlertCircle,
   Filter,
   DollarSign,
   FileText,
   Zap,
   Grid3X3,
-  Receipt
+  Receipt,
 } from 'lucide-react'
-import { Skeleton } from '../../../components/ui/skeleton'
+import { Skeleton } from '../../ui/skeleton'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'nextjs-toploader/app'
+import { ErrorComponent } from '@/components/global/Error'
 
 // Define types for the order data
 type OrderStatus =
@@ -97,7 +97,7 @@ const OrderCard = ({
   expanded,
   onToggleExpand,
   formatDate,
-  formatKoboToNaira,
+  koboToNaira,
   getStatusIcon,
   getStatusColor,
   getPaymentStatusColor,
@@ -108,7 +108,7 @@ const OrderCard = ({
   expanded: boolean
   onToggleExpand: () => void
   formatDate: (dateString: string) => string
-  formatKoboToNaira: (kobo: number) => string
+  koboToNaira: (kobo: number) => string
   getStatusIcon: (status: OrderStatus) => React.ReactNode
   getStatusColor: (status: OrderStatus) => string
   getPaymentStatusColor: (status: PaymentStatus) => string
@@ -182,7 +182,7 @@ const OrderCard = ({
           <div className='flex flex-col lg:items-end gap-2 md:gap-3'>
             <div className='text-right'>
               <p className='text-xl md:text-2xl font-bold text-gray-800 mb-1'>
-                {formatKoboToNaira(order.amount)}
+                {formatNaira(order.amount)}
               </p>
               <div className='flex items-center gap-1 text-xs md:text-sm text-gray-600 justify-end'>
                 {getPaymentMethodIcon(order.payment_method)}
@@ -225,7 +225,7 @@ export const OrdersList = () => {
     return date.toLocaleDateString('en-US', options)
   }
 
-  const formatKoboToNaira = (kobo: number): string => {
+  const koboToNaira = (kobo: number): string => {
     return formatNaira(kobo / 100)
   }
 
@@ -356,7 +356,7 @@ export const OrdersList = () => {
         {[...Array(3)].map((_, index) => (
           <div
             key={index}
-            className='bg-white rounded-xl p-4 md:p-6 border border-gray-200 shadow-sm'
+            className='rounded-xl p-4 md:p-6 border border-gray-200'
           >
             <div className='flex justify-between items-start mb-3 md:mb-4'>
               <div className='space-y-2 md:space-y-3 flex-1'>
@@ -379,34 +379,7 @@ export const OrdersList = () => {
   }
 
   if (error) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.98 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className='flex flex-col items-center justify-center p-6 md:p-12 border-2 border-red-200 bg-red-50 rounded-xl'
-      >
-        <div className='p-3 md:p-4 bg-red-100 rounded-full mb-3 md:mb-4'>
-          <AlertCircle className='w-6 h-6 md:w-8 md:h-8 text-red-600' />
-        </div>
-        <h3 className='text-base md:text-lg font-semibold text-red-800 mb-1 md:mb-2'>
-          Unable to Load Orders
-        </h3>
-        <p className='text-red-600 mb-4 md:mb-6 text-center max-w-md text-sm md:text-base'>
-          We encountered an issue while fetching your orders. This could be due
-          to a temporary network issue or server maintenance.
-        </p>
-        <p className='text-xs md:text-sm text-red-500 mb-4 md:mb-6 font-mono bg-red-100 px-2 py-1 md:px-3 md:py-1 rounded'>
-          Error: {error}
-        </p>
-        <button
-          onClick={() => window.location.reload()}
-          className='flex items-center gap-1 md:gap-2 bg-red-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg hover:bg-red-700 transition-colors font-medium text-sm md:text-base'
-        >
-          <RefreshCw className='w-3 h-3 md:w-4 md:h-4' />
-          Retry Loading Orders
-        </button>
-      </motion.div>
-    )
+    return <ErrorComponent error={error} />
   }
 
   if (orders.length === 0) {
@@ -428,14 +401,14 @@ export const OrdersList = () => {
         </p>
         <div className='flex flex-col sm:flex-row gap-2 md:gap-3'>
           <Link
-            href='/shops'
+            href='/dashboard/store'
             className='flex items-center gap-1 md:gap-2 bg-blue-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-lg hover:shadow-xl text-sm md:text-base'
           >
             <ShoppingBag className='w-4 h-4 md:w-5 md:h-5' />
             Browse Shops
           </Link>
           <Link
-            href='/shops'
+            href='/dashboard/store'
             className='flex items-center gap-1 md:gap-2 bg-white text-blue-600 px-6 py-3 md:px-8 md:py-4 rounded-lg hover:bg-blue-50 transition-colors font-medium border border-blue-200 text-sm md:text-base'
           >
             <Star className='w-4 h-4 md:w-5 md:h-5' />
@@ -447,7 +420,7 @@ export const OrdersList = () => {
   }
 
   return (
-    <div className='h-screen space-y-4 md:space-y-6 py-6 px-4'>
+    <div className='h-screen space-y-4 md:space-y-6 py-4'>
       {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
@@ -525,7 +498,7 @@ export const OrdersList = () => {
                 setExpandedOrder(expandedOrder === order._id ? null : order._id)
               }
               formatDate={formatDate}
-              formatKoboToNaira={formatKoboToNaira}
+              koboToNaira={koboToNaira}
               getStatusIcon={getStatusIcon}
               getStatusColor={getStatusColor}
               getPaymentStatusColor={getPaymentStatusColor}

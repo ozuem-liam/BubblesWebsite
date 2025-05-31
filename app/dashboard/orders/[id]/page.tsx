@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { OrderDetails } from '../../../../components/sections/orders/order-details'
+import { OrderDetails } from '../../../../components/sections/orders/OrderDetails'
 
 export const dynamic = 'force-dynamic' // Add this line
 

@@ -3,7 +3,7 @@
 import { useWallet } from '../../../hooks/useWallet'
 import { format } from 'date-fns'
 import { formatNaira, koboToNaira } from '../../../lib/utils'
-import { Skeleton } from '../../../components/ui/skeleton'
+import { Skeleton } from '../../ui/skeleton'
 import { useState } from 'react'
 
 export const TransactionHistory = () => {

@@ -1,12 +1,26 @@
 'use client'
 
-import { TransactionHistory } from './transaction-history'
-import { WalletCard } from './wallet-card'
+import { useRouter } from 'nextjs-toploader/app'
+import { TransactionHistory } from './TransactionHistory'
+import { WalletCard } from './WalletCard'
+import { BreadCrumb } from '@/components/global/BreadCrumb'
 
 export const Wallet = () => {
+  const router = useRouter()
+  const breadcrumbItems = [
+    {
+      isHome: true,
+      label: 'Home',
+      onClick: () => router.push('/dashboard'),
+    },
+    {
+      label: `Wallet`,
+    },
+  ]
   return (
-    <main className='min-h-screen relative overflow-hidden'>
-      <div className='relative z-10 container mx-auto px-4 py-6'>
+    <main className='min-h-screen relative overflow-hidden py-4'>
+      <BreadCrumb breadcrumbItems={breadcrumbItems} />
+      <div className='relative z-10 container mx-auto'>
         <div>
           {/* Header Section */}
           <div className='text-start mb-8 animate-fade-in'>

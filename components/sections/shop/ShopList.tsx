@@ -4,38 +4,23 @@ import { useShops } from '../../../hooks/useShops'
 import { Button } from '../../../components/ui/button'
 import { Text } from '../../../components/global/Text'
 import Link from 'next/link'
-import { Loader, MapPin, Star, Store } from 'lucide-react'
+import { MapPin, Star, Store } from 'lucide-react'
+import { ErrorComponent } from '@/components/global/Error'
+import { LoadingComponent } from '@/components/global/Loading'
+import { Shop } from '@/lib/shop'
 
-export const ShopList = () => {
-  const { shops, loading, error } = useShops()
-
+interface IShopList {
+  shops: Shop[]
+  loading: boolean
+  error: string | null
+}
+export const ShopList:React.FC<IShopList> = ({ shops, loading, error }) => {
   if (loading) {
-    return (
-      <div className='flex justify-center items-center h-64'>
-        <div className='flex flex-col items-center gap-4 text-gray-600'>
-          <Loader className='w-8 h-8 animate-spin text-blue-500' />
-          <Text as='p' style='text-gray-600 font-medium'>
-            Loading amazing shops...
-          </Text>
-        </div>
-      </div>
-    )
+    return <LoadingComponent fallbackText={'Loading amazing shops...'} />
   }
 
   if (error) {
-    return (
-      <div className='flex flex-col justify-center items-center h-64 text-center'>
-        <div className='bg-red-50 p-4 rounded-full mb-4'>
-          <Store className='w-8 h-8 text-red-500' />
-        </div>
-        <Text as='p' style='text-red-600 font-medium mb-2'>
-          Oops! Something went wrong
-        </Text>
-        <Text as='p' style='text-gray-600 text-sm'>
-          {error}
-        </Text>
-      </div>
-    )
+    return <ErrorComponent error={error} />
   }
 
   if (!shops || shops.length === 0) {
@@ -132,4 +117,7 @@ const ShopCard = ({ shop }: { shop: any }) => (
   </div>
 )
 
-export default ShopList
+export const FeaturedShop = () => {
+  const { shops, loading, error } = useShops()
+  return <ShopList shops={shops} loading={loading} error={error} />
+}

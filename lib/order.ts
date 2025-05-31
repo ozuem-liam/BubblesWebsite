@@ -15,7 +15,7 @@ type PaymentStatus =
   | "refunded"
   | "partially_refunded";
 
-type PaymentMethod =
+export type PaymentMethod =
   | "paystack"
   | "bank_transfer"
   | "wallet"

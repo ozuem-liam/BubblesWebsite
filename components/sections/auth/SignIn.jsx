@@ -40,7 +40,7 @@ export const SignInForm = () => {
         toast.success(response.message || 'Login successful')
 
         Cookies.set('token', response.data.token, {
-          expires: 3 / 24, // 3 hours
+          expires: 4 / 24, // 3 hours
           path: '/',
           sameSite: 'strict',
           secure: window.location.protocol === 'https:',

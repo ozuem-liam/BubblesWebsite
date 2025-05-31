@@ -4,6 +4,7 @@ import { useAuth } from '../../../contexts/auth-context'
 import { useEffect, useState } from 'react'
 import { Settings, Edit, Save, X } from 'lucide-react'
 import { UserAvatar } from '@/components/global/UserAvatar'
+import { LoadingComponent } from '@/components/global/Loading'
 
 export const ProfileComponent = () => {
   // Edit state and form data
@@ -58,6 +59,10 @@ export const ProfileComponent = () => {
       )
     }
   }, [user, loading])
+
+  if (loading) {
+    return <LoadingComponent fallbackText={'Fetching profile details...'} />
+  }
 
   return (
     <div className='min-h-screen bg-gray-50 p-4 md:p-6 '>
@@ -130,22 +135,6 @@ export const ProfileComponent = () => {
                 className='h-24 w-24 text-xl'
                 src={user?.profile_image || undefined}
               />
-              <div className='space-y-2'>
-                <button
-                  disabled={!isEditing}
-                  className={`px-3 py-2 text-sm border rounded-md transition-colors
-                    ${
-                      isEditing
-                        ? 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-                        : 'bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed'
-                    }`}
-                >
-                  Change avatar
-                </button>
-                <p className='text-sm text-gray-500'>
-                  JPG, GIF or PNG. Max size 2MB
-                </p>
-              </div>
             </div>
 
             {/* Form Fields */}

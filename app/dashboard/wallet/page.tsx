@@ -1,4 +1,4 @@
-import { Wallet } from '../../../components/sections/wallet/wallet';
+import { Wallet } from '../../../components/sections/wallet';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

@@ -1,8 +1,8 @@
 'use client'
 
 import { useWallet } from '../../../hooks/useWallet'
-import { Button } from '../../../components/ui/button'
-import { Input } from '../../../components/ui/input'
+import { Button } from '../../ui/button'
+import { Input } from '../../ui/input'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { formatNaira, koboToNaira } from '../../../lib/utils'

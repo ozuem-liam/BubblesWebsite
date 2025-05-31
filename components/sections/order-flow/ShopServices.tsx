@@ -2,10 +2,10 @@
 
 import { Text } from '../../../components/global/Text'
 import { ShopService, ShopServiceCategory } from '../../../lib/order-flow'
-import Image from 'next/image'
 import { Skeleton } from '../../../components/ui/skeleton'
 import { truncateEnd } from '../../../lib/helpers/TruncateText'
 import { CustomImage } from '@/components/global/Image'
+import { Button } from '@/components/ui/button'
 
 export const ShopServices = ({
   services,
@@ -26,9 +26,9 @@ export const ShopServices = ({
   }
 
   return (
-    <div className='space-y-6'>
+    <div>
       {loading ? (
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
           {[...Array(6)].map((_, index) => (
             <div
               key={index}
@@ -41,15 +41,13 @@ export const ShopServices = ({
           ))}
         </div>
       ) : (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
           {services.map((service) => (
             <div
               key={service._id}
               onClick={() => handleServiceSelect(service)}
-              className={`border group relative rounded-xl border-gray-300 cursor-pointer transition-all duration-300 hover:shadow-md overflow-hidden ${
-                selectedService?._id === service._id
-                  ? 'bg-blue-50 shadow-sm'
-                  : 'bg-white'
+              className={`border group relative rounded-xl border-gray-300 cursor-pointer transition-all duration-300 overflow-hidden ${
+                selectedService?._id === service._id ? 'bg-blue-50' : 'bg-white'
               }`}
             >
               <div className='flex flex-col h-full'>
@@ -97,6 +95,9 @@ export const ShopServices = ({
                   >
                     {truncateEnd(service.service.meta, 45)}
                   </Text>
+                  <Button className='w-full rounded-lg border border-gray-300 bg-none mt-2'>
+                    Explore
+                  </Button>
                 </div>
               </div>
             </div>

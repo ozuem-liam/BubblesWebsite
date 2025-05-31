@@ -1,15 +1,15 @@
 import { Metadata } from 'next'
 import { Text } from '@/components/global/Text'
-import { FeaturedShop } from '@/components/sections/shop/ShopList'
+import BubbleStore from '@/components/sections/store/Store'
 
 export const metadata: Metadata = {
-  title: 'Shops | Bubbles',
+  title: 'Store | Bubbles',
 }
 
-export default async function ShopPage() {
+export default async function BubbleStorePage() {
 
   return (
-    <section className="h-screen py-4">
+    <section className="h-screen py-6 px-4">
       <header className='flex flex-wrap justify-between items-center mb-8 gap-4'>
         <div>
           <Text
@@ -24,7 +24,7 @@ export default async function ShopPage() {
           />
         </div>
       </header>
-      <FeaturedShop/>
+      <BubbleStore />
     </section>
   )
 }
