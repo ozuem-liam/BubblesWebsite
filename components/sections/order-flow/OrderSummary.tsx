@@ -251,7 +251,7 @@ export const OrderSummary = ({
             <Button
               onClick={handleClearCart}
               variant='outline'
-              className='flex-1 h-12 text-red-600 border-red-200 hover:bg-red-50 hover:border-red-300 flex items-center justify-center gap-2'
+              className='w-full sm:flex-1 h-14 text-red-600 border-red-200 hover:bg-red-50 hover:border-red-300 flex items-center justify-center gap-2'
             >
               <Trash2 className='w-4 h-4' />
               Clear All Items
@@ -260,7 +260,7 @@ export const OrderSummary = ({
             <Button
               onClick={onCheckout}
               disabled={!selectedDelivery || loading}
-              className='flex-2 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-sm'
+              className='w-full sm:flex-[2] h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-sm text-base font-medium'
               size='lg'
             >
               {loading ? (
