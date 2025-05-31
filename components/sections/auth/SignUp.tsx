@@ -60,14 +60,13 @@ export const SignUpForm = () => {
   })
 
   const onSubmit = async (values: z.infer<typeof SignUpFormSchema>) => {
-    const emailEntered = values.email
     setIsPending(true)
+
     try {
-      // First register the user
       const registerResponse = await authService.signup({
         first_name: values.first_name,
         last_name: values.last_name,
-        email: emailEntered,
+        email: values.email,
         phone: values.phone,
         address: values.address,
         country: values.country,
@@ -79,28 +78,18 @@ export const SignUpForm = () => {
       })
 
       if (registerResponse?.data?.token) {
-        // Then send OTP
-        const otpResponse = await authService.sendOtp(emailEntered)
+        toast.success('Registration successful!')
 
-        if (otpResponse.code === 200) {
-          toast.success(
-            'Registration successful! Please check your email for OTP.'
-          )
-          // Redirect to OTP verification with email and token
-          const queryParams = new URLSearchParams({
-            email: encodeURIComponent(emailEntered),
-            // Optionally add a short-lived token for additional security
-            // token: registerResponse.data?.tempToken
-          }).toString();
-          
-          router.push(`/auth/verify-otp?${queryParams}`);
-        } else {
-          toast.error(otpResponse?.message || 'Failed to send OTP. Please try again.')
-        }
+        const queryParams = new URLSearchParams({
+          email: encodeURIComponent(values.email),
+        }).toString()
+
+        router.push(`/auth/verify-otp?${queryParams}`)
       } else {
-        toast.error(registerResponse.message || 'Registration failed')
+        toast.error(registerResponse?.message || 'Registration failed')
       }
     } catch (err) {
+      console.error('Registration error:', err)
       toast.error('An error occurred during registration')
     } finally {
       setIsPending(false)
@@ -136,21 +125,21 @@ export const SignUpForm = () => {
               inputType='text'
             />
           </div>
-           <div className='grid grid-cols-2 gap-6'>
-          <InputField
-            control={form.control}
-            name='email'
-            placeholder='Enter your email address'
-            inputCategory='input'
-            inputType='email'
-          />
-          <InputField
-            control={form.control}
-            name='phone'
-            placeholder='08012345678'
-            inputCategory='input'
-            inputType='text'
-          />
+          <div className='grid grid-cols-2 gap-6'>
+            <InputField
+              control={form.control}
+              name='email'
+              placeholder='Enter your email address'
+              inputCategory='input'
+              inputType='email'
+            />
+            <InputField
+              control={form.control}
+              name='phone'
+              placeholder='08012345678'
+              inputCategory='input'
+              inputType='text'
+            />
           </div>
           <InputField
             control={form.control}
