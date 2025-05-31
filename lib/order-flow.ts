@@ -313,6 +313,17 @@ export const orderFlowService = {
     throw new Error('Error occured while updating your cart')
   },
 
+  async clearCart(
+    cartId: string,
+    token: string
+  ): Promise<CartDataResponse> {
+    const resp = await api.delete(`/cart/${cartId}`, token)
+    if (resp) {
+      return await this.getCart(token)
+    }
+    throw new Error('Error occured while updating your cart')
+  },
+
   async updateCartItem(
     itemId: string,
     quantity: number,

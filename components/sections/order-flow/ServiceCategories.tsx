@@ -32,7 +32,7 @@ export const ServiceCategories = ({
   loading,
 }: {
   categories: ShopServiceCategory[]
-  selectedService: ShopService
+  selectedService: ShopService | null
   onSelectCategory: (id: string) => void
   selectedCategory: string | null
   cloading: boolean
@@ -138,7 +138,7 @@ export const ServiceCategories = ({
                         `/dashboard/items?vendor_id=${encodeURIComponent(
                           `${shopId}`
                         )}&service_id=${encodeURIComponent(
-                          selectedService?.service?._id
+                          selectedService?.service?._id || ''
                         )}&category_id=${encodeURIComponent(category._id)}`
                       )
                     }

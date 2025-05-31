@@ -2,11 +2,14 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {
-  
   const token = request.cookies.get('token')?.value
 
   if (!token && isProtectedRoute(request.nextUrl.pathname)) {
     return NextResponse.redirect(new URL('/auth/sign-in', request.url))
+  }
+
+  if (token && request.nextUrl.pathname.startsWith("/auth")) {
+    return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
   return NextResponse.next()
@@ -18,5 +21,5 @@ function isProtectedRoute(pathname: string): boolean {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*'],
+  matcher: ['/dashboard/:path*', '/auth/:path*']
 }
