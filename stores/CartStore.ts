@@ -65,7 +65,7 @@ export const useCartStore = create<CartState>()(
           const isMultipleStore =
             state.shopId !== null && item.vendor !== state.shopId
           if (isMultipleStore) {
-            toast.error("Sorry, you can't shop from multiple shops")
+            toast.error("Please complete your current order before shopping from another store")
             return state
           }
           return {
