@@ -70,9 +70,9 @@ export const useOrderFlow = (shopId?: string) => {
         setLoading((prev) => ({ ...prev, services: true }))
         const data = await orderFlowService.getShopServices(shopId, token)
         setServices(data)
-        if (data.length > 0) {
-          setSelectedService(data[0])
-        }
+        // if (data.length > 0) {
+        //   setSelectedService(data[0])
+        // }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load services')
       } finally {
@@ -497,6 +497,7 @@ export const useOrderFlow = (shopId?: string) => {
     setSelectedDeliveryDate,
     selectedTimeSlot,
     setSelectedTimeSlot,
+    clearCart
   }
 }
 

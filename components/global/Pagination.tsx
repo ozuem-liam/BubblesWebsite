@@ -29,6 +29,12 @@ export const Pagination: React.FC<IPagination> = ({
     setPageNumber(page_number)
   }
 
+  // Divide total page number by 10 and convert to whole number
+  const adjustedPageCount = Math.floor(totalPageNumber / 10)
+
+  // Ensure we have at least 1 page
+  const finalPageCount = Math.max(adjustedPageCount, 1)
+
   return (
     <div
       className={
@@ -40,7 +46,7 @@ export const Pagination: React.FC<IPagination> = ({
         nextLabel={pagination_Style.nextLabel}
         onPageChange={handlePageClick}
         pageRangeDisplayed={4}
-        pageCount={totalPageNumber}
+        pageCount={finalPageCount}
         initialPage={(activePage ? parseInt(activePage) : 1) - 1}
         disableInitialCallback={true}
         previousLabel={pagination_Style.previousLabel}

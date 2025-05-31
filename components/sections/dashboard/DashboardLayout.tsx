@@ -207,7 +207,7 @@ export default function DashboardPageLayout({
               >
                 <input
                   type='text'
-                  placeholder='Search...'
+                  placeholder='Search products...'
                   className='bg-transparent border-none outline-none text-sm w-full rounded-lg'
                   style={{ borderRadius: '8px' }}
                   value={searchValue}

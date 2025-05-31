@@ -16,6 +16,7 @@ export default function CartItemsPageComponent() {
   const { shopId } = useParams()
   const {
     cart,
+    clearCart,
     deliveryOptions,
     loading,
     error,
@@ -134,6 +135,7 @@ export default function CartItemsPageComponent() {
           <div className='lg:col-span-3'>
             <OrderSummary
               cart={cart}
+              clearCart={clearCart}
               deliveryOptions={deliveryOptions}
               onSelectDelivery={handleSelectDelivery}
               selectedDelivery={selectedDelivery}

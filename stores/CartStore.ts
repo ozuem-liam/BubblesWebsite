@@ -3,7 +3,13 @@
 
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-import { Item, CartData, orderFlowService, CartItemDetail } from '../lib/order-flow'
+import {
+  Item,
+  CartData,
+  orderFlowService,
+  CartItemDetail,
+} from '../lib/order-flow'
+import { toast } from 'sonner'
 
 export interface LocalCartItem {
   item: Item
@@ -14,6 +20,7 @@ export interface LocalCartItem {
 type LocalCart = Record<string, LocalCartItem>
 
 interface CartState {
+  shopId: string | null
   cart: CartData | null
   localCart: Record<string, LocalCartItem>
   setCart: (cart: CartData | null) => void
@@ -29,36 +36,48 @@ export const useCartStore = create<CartState>()(
   persist(
     (set) => ({
       cart: null,
+      shopId: null,
       localCart: {},
       setCart: (cart) => set({ cart }),
       setLocalCart: (localCart) => set({ localCart }),
       initializeCart: async (token: string) => {
         try {
           const resp = await orderFlowService.getCart(token)
-          set({ 
+          set({
             cart: resp.data,
-            localCart: resp.data.items.reduce((acc: LocalCart, cartItem: CartItemDetail) => {
-              acc[cartItem.item._id] = {
-                item: cartItem.item,
-                quantity: cartItem.quantity,
-              }
-              return acc
-            }, {} as LocalCart)
+            localCart: resp.data.items.reduce(
+              (acc: LocalCart, cartItem: CartItemDetail) => {
+                acc[cartItem.item._id] = {
+                  item: cartItem.item,
+                  quantity: cartItem.quantity,
+                }
+                return acc
+              },
+              {} as LocalCart
+            ),
           })
         } catch (error) {
           console.error('Failed to initialize cart:', error)
         }
       },
       addToLocalCart: (item) =>
-        set((state) => ({
-          localCart: {
-            ...state.localCart,
-            [item._id]: {
-              item,
-              quantity: (state.localCart[item._id]?.quantity || 0) + 1,
+        set((state) => {
+          const isMultipleStore =
+            state.shopId !== null && item.vendor !== state.shopId
+          if (isMultipleStore) {
+            toast.error("Sorry, you can't shop from multiple shops")
+            return state
+          }
+          return {
+            localCart: {
+              ...state.localCart,
+              [item._id]: {
+                item,
+                quantity: (state.localCart[item._id]?.quantity || 0) + 1,
+              },
             },
-          },
-        })),
+          }
+        }),
       removeFromLocalCart: (itemId) =>
         set((state) => {
           const newLocalCart = { ...state.localCart }
