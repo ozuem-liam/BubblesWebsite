@@ -1,4 +1,4 @@
-import { Settings } from "../../../components/sections/settings/Settings";
+import { Settings } from "../../../components/sections/settings/settings";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
