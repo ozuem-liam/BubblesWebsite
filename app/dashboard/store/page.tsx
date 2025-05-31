@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default async function BubbleStorePage() {
 
   return (
-    <section className="h-screen py-6 px-4">
+    <section className="h-screen py-4">
       <header className='flex flex-wrap justify-between items-center mb-8 gap-4'>
         <div>
           <Text

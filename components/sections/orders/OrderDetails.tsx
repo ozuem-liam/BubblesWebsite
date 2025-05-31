@@ -105,7 +105,7 @@ export const OrderDetails = () => {
 
   if (!order) {
     return (
-      <div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
+      <div className='py-6'>
         <div className='flex flex-col items-center justify-center p-12 text-center bg-white rounded-xl shadow-sm'>
           <div className='w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mb-6'>
             <svg
