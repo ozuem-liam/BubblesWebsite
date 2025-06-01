@@ -11,6 +11,7 @@ import { BreadCrumb } from '@/components/global/BreadCrumb'
 import { Link, Package, ShoppingBag, Star } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Pagination } from '@/components/global/Pagination'
+import { Button } from '@/components/ui/button'
 
 export const BrowsedItem = () => {
   const { cart, addToCart, removeFromCart, updateQuantity } = useOrderFlow()
@@ -22,7 +23,7 @@ export const BrowsedItem = () => {
     error,
     paginationTotal,
     setPaginationPage,
-    paginationPage
+    paginationPage,
   } = useBubbleShopItems(searchQuery)
   const router = useRouter()
   const breadcrumbItems = [
@@ -61,21 +62,21 @@ export const BrowsedItem = () => {
           Start exploring our amazing products and services to place your first
           order today.
         </p>
-        <div className='flex flex-col sm:flex-row gap-2 md:gap-3'>
-          <Link
-            href='/dashboard/store'
-            className='flex items-center gap-1 md:gap-2 bg-blue-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-lg hover:shadow-xl text-sm md:text-base'
+        <div className='flex flex-col md:flex-row gap-2 md:gap-3'>
+          <Button
+            onClick={() => router.push('/dashboard/store')}
+            className='w-[10rem] h-[2.5rem] flex items-center gap-1 md:gap-2 bg-blue-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-md hover:bg-blue-700 transition-colors font-medium hover:shadow-xl text-sm md:text-base'
           >
             <ShoppingBag className='w-4 h-4 md:w-5 md:h-5' />
             Browse Shops
-          </Link>
-          <Link
-            href='/dashboard/store'
-            className='flex items-center gap-1 md:gap-2 bg-white text-blue-600 px-6 py-3 md:px-8 md:py-4 rounded-lg hover:bg-blue-50 transition-colors font-medium border border-blue-200 text-sm md:text-base'
+          </Button>
+          <Button
+            onClick={() => router.push('/dashboard/store')}
+            className='w-[10rem] h-[2.5rem] flex items-center gap-1 md:gap-2 bg-white text-blue-600 px-6 py-3 md:px-8 md:py-4 rounded-md hover:bg-blue-50 transition-colors font-medium border border-blue-200 text-sm md:text-base'
           >
             <Star className='w-4 h-4 md:w-5 md:h-5' />
             View Services
-          </Link>
+          </Button>
         </div>
       </motion.div>
     )
@@ -96,13 +97,6 @@ export const BrowsedItem = () => {
             loading={loading}
           />
         ))}
-        {paginationTotal !== null && paginationTotal > 1 && (
-          <Pagination
-            totalPageNumber={paginationTotal || 1}
-            activePage={paginationPage?.toString()}
-            setPageNumber={setPaginationPage}
-          />
-        )}
       </div>
 
       <style jsx>{`
@@ -117,6 +111,14 @@ export const BrowsedItem = () => {
           }
         }
       `}</style>
+
+      {paginationTotal !== null && paginationTotal > 1 && (
+        <Pagination
+          totalPageNumber={paginationTotal || 1}
+          activePage={paginationPage?.toString()}
+          setPageNumber={setPaginationPage}
+        />
+      )}
     </div>
   )
 }

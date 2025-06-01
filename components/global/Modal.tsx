@@ -46,7 +46,7 @@ export const ModalWrapper = memo<ModalWrapperProps>(
         <DialogTrigger asChild>{trigger}</DialogTrigger>
         <DialogContent
           className={cn(
-            'bg-white m-auto ',
+            'bg-white m-auto border border-white',
             bigscreenwidth && bigscreenwidth,
             scrollable && 'overflow-y-scroll max-h-screen',
             bg && bg
