@@ -105,8 +105,8 @@ export const OrderDetails = () => {
 
   if (!order) {
     return (
-      <div className='py-6'>
-        <div className='flex flex-col items-center justify-center p-12 text-center bg-white rounded-xl shadow-sm'>
+      <div className='py-4 '>
+        <div className='flex flex-col items-center justify-center text-center bg-white rounded-xl shadow-sm'>
           <div className='w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mb-6'>
             <svg
               className='w-10 h-10 text-blue-500'
@@ -170,7 +170,7 @@ export const OrderDetails = () => {
   }
 
   return (
-    <div className='w-full py-6 px-4'>
+    <div className='w-full py-4'>
       <div className='overflow-hidden'>
         {/* Order Header */}
         <div>
