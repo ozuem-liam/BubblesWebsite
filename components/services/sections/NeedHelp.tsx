@@ -65,7 +65,7 @@ export const NeedHelp: React.FC = () => {
           </RevealAnimation>
           <RevealAnimation style='w-fit'>
             <Link
-              href='mailto:support@bubblesng.com'
+              href='mailto:williams@bubblesng.com'
               className='text-none'
               target='_blank'
             >

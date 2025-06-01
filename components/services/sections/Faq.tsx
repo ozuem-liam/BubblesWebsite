@@ -23,7 +23,7 @@ const customerFaq = [
   {
     title: "Who do I contact for support?",
     answer:
-      "For assistance, please reach out to our support team at support@bubblesng.com.",
+      "For assistance, please reach out to our support team at williams@bubblesng.com.",
   },
   {
     title: "How much is delivery?",

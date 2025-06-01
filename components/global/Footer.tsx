@@ -23,7 +23,7 @@ export const Footer: React.FC = () => {
             </Text>
             <Text style="text-[16px] font-[500] leading-[160%] flex gap-[6px] items-center text-tertiary700">
               <EnvelopeSvg />
-              support@bubblesng.com
+              williams@bubblesng.com
             </Text>
             <Text style="text-[16px] font-[500] leading-[160%] flex gap-[6px] items-center text-tertiary700">
               <LocationSvg />
