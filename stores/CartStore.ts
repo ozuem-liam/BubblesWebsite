@@ -102,7 +102,7 @@ export const useCartStore = create<CartState>()(
             },
           }
         }),
-      clearCart: () => set({ cart: null, localCart: {} }),
+      clearCart: () => set({ cart: null, shopId:null, localCart: {} }),
     }),
     {
       name: 'cart-storage',

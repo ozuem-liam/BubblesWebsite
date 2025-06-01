@@ -33,20 +33,17 @@ export const SignInForm = () => {
   const onSubmit = async (values) => {
     const { email, pwd } = values
     setIsPending(true)
+
     try {
-      const response = await authService.login({ email: email, password: pwd })
+      const response = await authService.login({
+        email: email,
+        password: pwd,
+      })
 
       if (response.code === 200 && response.data?.token) {
+        await login(response.data)
+
         toast.success(response.message || 'Login successful')
-
-        Cookies.set('token', response.data.token, {
-          expires: 4 / 24, // 3 hours
-          path: '/',
-          sameSite: 'strict',
-          secure: window.location.protocol === 'https:',
-        })
-
-        login(response.data)
 
         setTimeout(() => {
           const searchParams = new URLSearchParams(window.location.search)

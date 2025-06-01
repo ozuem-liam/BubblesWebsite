@@ -1,9 +1,8 @@
 'use client'
 
-import { useRouter } from 'nextjs-toploader/app'
-import Cookies from 'js-cookie'
 import { ModalWrapper } from '@/components/global/Modal'
 import { Button } from '@/components/ui/button'
+import { useAuth } from '@/contexts/auth-context'
 
 interface ILogoutConfirmation {
   showAlert: boolean
@@ -14,14 +13,7 @@ export const LogoutConfirmation: React.FC<ILogoutConfirmation> = ({
   showAlert,
   setShowAlert,
 }) => {
-  const router = useRouter()
-
-  const handleLogout = () => {
-    Cookies.remove('token', { path: '/' })
-    router.push('/')
-    setShowAlert(false)
-    router.refresh()
-  }
+const {logout} = useAuth()
 
   return (
     <ModalWrapper
@@ -39,14 +31,14 @@ export const LogoutConfirmation: React.FC<ILogoutConfirmation> = ({
           <Button
             variant='outline'
             onClick={() => setShowAlert(false)}
-            className='px-6 text-sm'
+            className='px-6 text-sm border border-gray-300 bg-gray-300'
           >
             Cancel
           </Button>
           <Button
             variant='destructive'
-            onClick={() => handleLogout()}
-            className='px-6 text-sm'
+            onClick={() => logout()}
+            className='px-6 text-sm border border-[red]'
           >
             Confirm Logout
           </Button>
