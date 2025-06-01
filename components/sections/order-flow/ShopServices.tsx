@@ -20,10 +20,13 @@ export const ShopServices = ({
   selectedService: ShopService | null
   loading: boolean
 }) => {
-  const handleServiceSelect = (service: ShopService) => {
-    onSelectService(service)
-    setCategories(service.categories)
-  }
+const handleServiceSelect = (service: ShopService) => {
+  onSelectService(service);
+  setCategories(service.categories);
+  
+  // Save service ID to localStorage
+  localStorage.setItem('selectedServiceId', service?.service?._id);
+};
 
   return (
     <div>
