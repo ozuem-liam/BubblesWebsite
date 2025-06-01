@@ -5,29 +5,20 @@ import { Text } from '@/components/global/Text'
 import { useAuth } from '@/contexts/auth-context'
 import { useRouter } from 'next/navigation'
 import { capitalize } from '@/lib/utils'
-import { Loader } from 'lucide-react'
 import bubblesDesktopStorebanner from '../../../public/bubbles_store_desktop_img.jpeg'
 import bubblesMobileStorebanner from '../../../public/bubbles_store_mobile_img.jpeg'
 import { CustomImage } from '@/components/global/Image'
 import { Button } from '@/components/ui/button'
 import { useShops } from '@/hooks/useShops'
 import { ShopList } from '../shop/ShopList'
+import { LoadingComponent } from '@/components/global/Loading'
 
 export const Dashboard = () => {
   const { user, loading } = useAuth()
   const router = useRouter()
 
   if (loading) {
-    return (
-      <div className='min-h-screen flex items-center justify-center'>
-        <div className='text-center'>
-          <Loader className='w-12 h-12 text-blue-500 animate-spin mx-auto mb-4' />
-          <Text as='p' style='text-gray-600'>
-            Loading your dashboard...
-          </Text>
-        </div>
-      </div>
-    )
+    return <LoadingComponent fallbackText={'Loading your dashboard...'} />
   }
 
   return (

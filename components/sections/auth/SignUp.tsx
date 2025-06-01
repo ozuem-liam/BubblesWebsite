@@ -80,11 +80,11 @@ export const SignUpForm = () => {
       if (registerResponse?.data?.token) {
         toast.success('Registration successful!')
 
-        const queryParams = new URLSearchParams({
-          email: encodeURIComponent(values.email),
-        }).toString()
+        // const queryParams = new URLSearchParams({
+        //   email: encodeURIComponent(values.email),
+        // }).toString()
 
-        router.push(`/auth/verify-otp?${queryParams}`)
+        router.push(`/auth/verify-otp`)
       } else {
         toast.error(registerResponse?.message || 'Registration failed')
       }

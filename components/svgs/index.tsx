@@ -665,8 +665,8 @@ export const SettingsIcon = ({ className }: { className?: string }) => (
 export const DashboardIcon = ({ className }: { className?: string }) => (
   <svg
     className={className}
-    width='16'
-    height='16'
+    width='24'
+    height='24'
     viewBox='0 0 16 16'
     fill='none'
     xmlns='http://www.w3.org/2000/svg'
@@ -684,7 +684,7 @@ export const DashboardIcon = ({ className }: { className?: string }) => (
     </g>
     <defs>
       <clipPath id='clip0_112_6997'>
-        <rect width='16' height='16' fill='white' />
+        <rect width='24' height='24' fill='white' />
       </clipPath>
     </defs>
   </svg>
@@ -715,8 +715,8 @@ export const LogoutIcon = () => (
 export const Home03Icon = ({ className }: { className?: string }) => (
   <svg
     className={className}
-    width='16'
-    height='16'
+    width='24'
+    height='24'
     viewBox='0 0 16 16'
     fill='none'
     xmlns='http://www.w3.org/2000/svg'

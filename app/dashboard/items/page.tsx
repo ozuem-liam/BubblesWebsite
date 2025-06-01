@@ -17,11 +17,6 @@ export default async function BubbleStorePage() {
             style='text-gray-900 text-2xl font-bold mb-2'
             children='Category Items'
           />
-          <Text
-            as='p'
-            style='text-gray-600'
-            children='Discover top-rated shops in your area'
-          />
         </div>
       </header>
       <CategoryItemsPageComponent/>
