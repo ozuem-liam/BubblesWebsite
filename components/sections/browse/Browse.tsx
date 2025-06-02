@@ -12,6 +12,7 @@ import { Link, Package, ShoppingBag, Star } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Pagination } from '@/components/global/Pagination'
 import { Button } from '@/components/ui/button'
+import { bubblesStoreRoute } from '@/lib/constants/BubbleStore'
 
 export const BrowsedItem = () => {
   const { cart, addToCart, removeFromCart, updateQuantity } = useOrderFlow()
@@ -64,18 +65,18 @@ export const BrowsedItem = () => {
         </p>
         <div className='flex flex-col md:flex-row gap-2 md:gap-3'>
           <Button
-            onClick={() => router.push('/dashboard/store')}
+            onClick={() => router.push(bubblesStoreRoute)}
             className='w-[10rem] h-[2.5rem] flex items-center gap-1 md:gap-2 bg-blue-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-md hover:bg-blue-700 transition-colors font-medium hover:shadow-xl text-sm md:text-base'
           >
             <ShoppingBag className='w-4 h-4 md:w-5 md:h-5' />
-            Browse Shops
+            Browse Store
           </Button>
           <Button
-            onClick={() => router.push('/dashboard/store')}
+            onClick={() => router.push('/dashboard/shops')}
             className='w-[10rem] h-[2.5rem] flex items-center gap-1 md:gap-2 bg-white text-blue-600 px-6 py-3 md:px-8 md:py-4 rounded-md hover:bg-blue-50 transition-colors font-medium border border-blue-200 text-sm md:text-base'
           >
             <Star className='w-4 h-4 md:w-5 md:h-5' />
-            View Services
+            View shops
           </Button>
         </div>
       </motion.div>

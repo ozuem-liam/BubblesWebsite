@@ -16,7 +16,18 @@ import {
   SidebarMenuButton,
   SidebarTrigger,
 } from '@/components/ui/sidebar'
-import { LogOut, User, Search, Menu } from 'lucide-react'
+import {
+  LogOut,
+  User,
+  Search,
+  Menu,
+  Store,
+  ShoppingBag,
+  Wallet,
+  UserCircle,
+  LayoutDashboard,
+  Home,
+} from 'lucide-react'
 import { Logo } from '../../global/Logo'
 import {
   DropdownMenu,
@@ -24,15 +35,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import {
-  CartIcon,
-  OrdersIcon,
-  ShopIcon,
-  WalletIcon,
-  DashboardIcon,
-  Home03Icon,
-  ProfileIcon,
-} from '@/components/svgs'
+import { CartIcon, WalletIcon } from '@/components/svgs'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { UserAvatar } from '@/components/global/UserAvatar'
@@ -45,26 +48,26 @@ const generalItems = [
   {
     title: 'Shops',
     url: 'shops',
-    svgicon: ShopIcon,
+    icon: Store,
   },
   {
     title: 'Orders',
     url: 'orders',
-    svgicon: OrdersIcon,
+    icon: ShoppingBag,
   },
   {
     title: 'Wallet',
     url: 'wallet',
-    svgicon: WalletIcon,
+    icon: Wallet,
   },
   {
     title: 'Profile',
     url: 'profile',
-    svgicon: ProfileIcon,
+    icon: UserCircle,
   },
 ]
 
-const SIDEBAR_WIDTH = '230px'
+const SIDEBAR_WIDTH = '260px' // Increased width for better spacing
 
 export default function DashboardPageLayout({
   children,
@@ -106,62 +109,72 @@ export default function DashboardPageLayout({
       style={
         {
           '--sidebar-width': SIDEBAR_WIDTH,
-          '--sidebar-width-mobile': '100%', // Full width on mobile
+          '--sidebar-width-mobile': '100%',
         } as React.CSSProperties
       }
     >
       <Sidebar className='border-r-2 border-gray-200'>
-        <SidebarHeader className='px-4'>
-          <Logo style='w-[138px] h-[45px] my-4' />
+        <SidebarHeader className='px-6 py-6'>
+          <Logo style='w-[138px] h-[45px]' />
         </SidebarHeader>
 
-        <SidebarContent>
+        <SidebarContent className='px-3'>
           <SidebarGroup>
             <SidebarGroupContent>
-              <SidebarMenu>
+              <SidebarMenu className='space-y-2'>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
                     <a
                       href={`/dashboard`}
-                      className='flex items-center gap-3 px-4 py-3'
+                      className='flex items-center gap-4 px-4 py-4 rounded-lg transition-all duration-200 hover:bg-gray-100'
                       style={{
-                        color: isActive('') ? '#002F6C' : 'white',
-                        backgroundColor: isActive('') ? '#E4F0FF' : '',
+                        color: isActive('') ? '#002F6C' : '#6B7280',
+                        backgroundColor: isActive('')
+                          ? '#E4F0FF'
+                          : 'transparent',
+                        fontWeight: isActive('') ? '600' : '500',
                       }}
                     >
-                      <DashboardIcon
+                      <LayoutDashboard
+                        size={22}
                         className={`${
-                          isActive('') ? 'text-[#002F6C]' : 'text-white'
+                          isActive('') ? 'text-[#002F6C]' : 'text-gray-500'
                         }`}
                       />
-                      <span className='text-md'>Dashboard</span>
+                      <span className='text-base'>Dashboard</span>
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
-                <SidebarGroupLabel className='text-gray_400 px-4'>
-                  MAIN MENU
-                </SidebarGroupLabel>
+
+                <div className='py-3'>
+                  <SidebarGroupLabel className='text-gray-400 px-4 text-xs font-semibold uppercase tracking-wider mb-3'>
+                    MAIN MENU
+                  </SidebarGroupLabel>
+                </div>
+
                 {generalItems.map((item) => {
                   const active = isActive(item.url)
-                  const Icon = item.svgicon
+                  const Icon = item.icon
 
                   return (
                     <SidebarMenuItem key={item.title}>
                       <SidebarMenuButton asChild>
                         <a
                           href={`/dashboard/${item.url}`}
-                          className='flex items-center gap-3 px-4 py-3 relative'
+                          className='flex items-center gap-4 px-4 py-4 rounded-lg transition-all duration-200 hover:bg-gray-100'
                           style={{
-                            color: active ? '#002F6C' : 'white',
-                            backgroundColor: active ? '#E4F0FF' : '',
+                            color: active ? '#002F6C' : '#6B7280',
+                            backgroundColor: active ? '#E4F0FF' : 'transparent',
+                            fontWeight: active ? '600' : '500',
                           }}
                         >
                           <Icon
+                            size={22}
                             className={`${
-                              active ? 'text-[#002F6C]' : 'text-white'
+                              active ? 'text-[#002F6C]' : 'text-gray-500'
                             }`}
                           />
-                          <span className='text-md'>{item.title}</span>
+                          <span className='text-base'>{item.title}</span>
                         </a>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -172,30 +185,32 @@ export default function DashboardPageLayout({
           </SidebarGroup>
         </SidebarContent>
 
-        <SidebarFooter className='px-4'>
+        <SidebarFooter className='px-7 py-6'>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <div
+              <button
                 onClick={handleOpenAlert}
-                className='flex items-center gap-3 mb-12 px-4 py-3'
+                className='flex items-center gap-4 px-4 py-4 w-full text-left rounded-lg transition-all duration-200 hover:bg-red-50'
               >
-                <LogOut className='w-6 h-6 text-white' />
-                <span className='text-lg text-white'>Sign Out</span>
-              </div>
+                <LogOut size={22} className='text-red-500' />
+                <span className='text-base font-medium text-red-600'>
+                  Sign Out
+                </span>
+              </button>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarFooter>
       </Sidebar>
 
       <main className='relative w-full'>
-        <header className='sticky top-0 z-10 w-full bg-white shadow-sm'>
+        <header className='sticky top-0 z-10 w-full bg-white shadow-sm border-b border-gray-200'>
           <div className='flex h-16 items-center justify-between px-4 w-full'>
             <div className='flex items-center gap-4'>
-              <SidebarTrigger className='md:hidden block'>
+              <SidebarTrigger className='md:hidden block p-2 hover:bg-gray-100 rounded-lg'>
                 <Menu className='w-6 h-6 text-gray-600' />
               </SidebarTrigger>
-              <div className='hidden md:flex items-center gap-2 text-sm font-medium text-gray-700'>
-                <Home03Icon className='w-5 h-5' />
+              <div className='hidden md:flex items-center gap-3 text-sm font-medium text-gray-700'>
+                <Home className='w-5 h-5 text-blue-500' />
                 <span>Dashboard</span>
               </div>
             </div>
@@ -203,19 +218,18 @@ export default function DashboardPageLayout({
             <div className='flex-1 max-w-md mx-4'>
               <form
                 onSubmit={handleSearchSubmit}
-                className='flex items-center bg-gray-100 rounded-lg px-3 py-2 w-full'
+                className='flex items-center bg-gray-100 rounded-lg px-4 py-2.5 w-full border border-gray-200 focus-within:border-blue-300 focus-within:ring-2 focus-within:ring-blue-100 transition-all'
               >
                 <input
                   type='text'
                   placeholder='Search products...'
-                  className='bg-transparent border-none outline-none text-sm w-full rounded-lg'
-                  style={{ borderRadius: '8px' }}
+                  className='bg-transparent border-none outline-none text-sm w-full'
                   value={searchValue}
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
                 <button
                   type='submit'
-                  className='text-gray-500 hover:text-blue-500 ml-2 cursor-pointer'
+                  className='text-gray-500 hover:text-blue-500 ml-2 p-1 rounded transition-colors'
                   aria-label='Search'
                 >
                   <Search className='w-4 h-4' />
@@ -223,13 +237,13 @@ export default function DashboardPageLayout({
               </form>
             </div>
 
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-3'>
               <div className='hidden sm:block'>
                 <Link href='/dashboard/wallet'>
                   <Button
                     variant='outline'
                     size='sm'
-                    className='border-gray-300 text-gray-600 hover:bg-gray-50 h-9'
+                    className='border-gray-300 text-gray-600 hover:bg-gray-50 h-10 px-4'
                   >
                     <WalletIcon className='w-5 h-5 mr-2 text-blue-500' />
                     <span className='hidden md:inline'>Wallet</span>
@@ -241,12 +255,12 @@ export default function DashboardPageLayout({
                 <Button
                   variant='outline'
                   size='sm'
-                  className='border-gray-300 text-gray-600 hover:bg-gray-50 h-9'
+                  className='border-gray-300 text-gray-600 hover:bg-gray-50 h-10 px-4'
                 >
                   <CartIcon className='w-5 h-5' />
                   <span className='hidden md:inline ml-2'>Cart</span>
                   {cartItemCount > 0 && (
-                    <span className='absolute -top-2 -right-2 bg-blue-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center'>
+                    <span className='absolute -top-2 -right-2 bg-blue-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center shadow-lg'>
                       {cartItemCount}
                     </span>
                   )}
@@ -255,27 +269,27 @@ export default function DashboardPageLayout({
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className='focus:outline-none'>
+                  <button className='focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-full'>
                     <UserAvatar
                       fallbackText={userInitials}
-                      className='h-9 w-9'
+                      className='h-10 w-10 border-2 border-gray-200 hover:border-blue-300 transition-colors'
                     />
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
                   align='end'
-                  className='w-48 border border-gray-200 shadow-md z-[1000] bg-white'
+                  className='w-48 border border-gray-200 shadow-lg z-[1000] bg-white rounded-lg'
                 >
-                  <DropdownMenuItem className='flex items-center gap-2 px-4 py-2'>
-                    <User className='w-4 h-4' />
-                    <span>Profile</span>
+                  <DropdownMenuItem className='flex items-center gap-3 px-4 py-3 hover:bg-gray-50'>
+                    <User className='w-5 h-5 text-gray-500' />
+                    <span className='font-medium'>Profile</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={handleOpenAlert}
-                    className='flex items-center gap-2 px-4 py-2 text-red-600 focus:text-red-600'
+                    className='flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 focus:text-red-600'
                   >
-                    <LogOut className='w-4 h-4' />
-                    <span>Log out</span>
+                    <LogOut className='w-5 h-5' />
+                    <span className='font-medium'>Log out</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -283,7 +297,7 @@ export default function DashboardPageLayout({
           </div>
         </header>
 
-        <div className='container py-4 px-4 sm:px-6 bg-gray-50 min-h-[calc(100vh-4rem)]'>
+        <div className='container py-6 px-4 sm:px-6 bg-gray-50 min-h-[calc(100vh-4rem)]'>
           {children}
         </div>
       </main>
