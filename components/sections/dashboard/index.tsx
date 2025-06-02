@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button'
 import { useShops } from '@/hooks/useShops'
 import { ShopList } from '../shop/ShopList'
 import { LoadingComponent } from '@/components/global/Loading'
+import { bubblesStoreRoute } from '@/lib/constants/BubbleStore'
 
 export const Dashboard = () => {
   const { user, loading } = useAuth()
@@ -48,15 +49,13 @@ const WelcomeSection = ({ user }: { user: any }) => (
 )
 
 const PromoBannerSection = ({ router }: { router: any }) => {
-  const bubblesStore =
-    '/dashboard/shops/6837466d37f650f4defa3839/order?name=bubbles'
 
   return (
     <section className='relative'>
       {/* Desktop Banner */}
       <div
         className='md:block hidden relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer'
-        onClick={() => router.push(bubblesStore)}
+        onClick={() => router.push(bubblesStoreRoute)}
       >
         <CustomImage
           src={bubblesDesktopStorebanner}
@@ -70,7 +69,7 @@ const PromoBannerSection = ({ router }: { router: any }) => {
       {/* Mobile Banner */}
       <div
         className='md:hidden block relative rounded-2xl overflow-hidden shadow-lg group cursor-pointer'
-        onClick={() => router.push(bubblesStore)}
+        onClick={() => router.push(bubblesStoreRoute)}
       >
         <CustomImage
           src={bubblesMobileStorebanner}
