@@ -442,8 +442,10 @@ export const useOrderFlow = (shopId?: string) => {
         (sum, { quantity }) => sum + quantity,
         0
       )
+      console.log('Total amount:', selectedService, updatedCart, cart)
       const finalCartId = updatedCart ? updatedCart.data._id : cartId
-      const serviceId = selectedService ? selectedService.service._id : ''
+      // const serviceId = selectedService ? selectedService.service._id : ''
+      const serviceId = localStorage.getItem('selectedServiceId') || ''
       const shippingAddress = user?.address || ''
       const shippingAddressId =
         Object.values(localCart)[0]?.item?.vendor || shopId || ''
@@ -490,6 +492,7 @@ export const useOrderFlow = (shopId?: string) => {
 
       if (paymentResponse?.code === 200 && paymentResponse?.data) {
         toast.success(paymentResponse.message)
+        localStorage.removeItem('selectedServiceId')
         clearCart() // Clear cart state using Zustand
         setCartInitialized(false) // Reset initialization flag
         // Redirect to payment gateway
