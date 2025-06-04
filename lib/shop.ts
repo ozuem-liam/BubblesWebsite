@@ -4,7 +4,7 @@ import { api } from './api'
 import { Item } from './order-flow'
 
 // types/shop.ts
-const bubbleStoreId = '68244d83a20d59505fa6be75'
+const bubbleStoreId = '683685a5d84b9ffcbab7bde3'
 export interface ShopService {
   _id: string
   name: string
