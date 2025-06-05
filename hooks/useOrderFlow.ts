@@ -49,7 +49,6 @@ export const useOrderFlow = (shopId?: string) => {
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null)
   const [isExpressSelected, setIsExpressSelected] = useState(false)
   const [cartInitialized, setCartInitialized] = useState(false)
-  const router = useRouter()
 
   const {
     cart,
@@ -310,6 +309,7 @@ export const useOrderFlow = (shopId?: string) => {
     const displayItems: CartItemDetail[] = cartItems.map(
       ({ item, quantity }): CartItemDetail => {
         // Convert Item to ICartItem format for CartItemDetail
+
         const cartItem: ICartItem = {
           _id: item._id,
           vendor: item.vendor,
