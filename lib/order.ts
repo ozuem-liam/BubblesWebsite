@@ -248,18 +248,6 @@ export const orderService = {
     try {
       // First create the order
       return await this.createOrder(orderPayload, token);
-
-      // console.log("Order created successfully:", orderResponse);
-      // if (!orderResponse.data?._id) {
-      //   throw new Error("Failed to create order");
-      // }
-
-      // Then initiate payment
-      // return await this.makePayment(
-      //   orderResponse.data._id,
-      //   paymentMethod,
-      //   token
-      // );
     } catch (error) {
       console.error("Order and payment failed:", error);
       throw error;

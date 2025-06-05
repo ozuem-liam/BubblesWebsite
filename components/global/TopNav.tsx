@@ -8,6 +8,8 @@ import { MobileNav } from './mobileNav'
 import { MaxScreenWrapper } from './MaxScreen'
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/contexts/auth-context'
+import { CartIcon } from '../svgs'
+import { useOrderFlow } from '@/hooks/useOrderFlow'
 
 const NavLinks: React.FC = () => (
   <ul className='lg:flex hidden lg:flex-row gap-[24px] flex-col w-full items-center justify-between'>
@@ -24,9 +26,29 @@ const NavLinks: React.FC = () => (
   </ul>
 )
 
+const CartButton: React.FC<{ cartItemCount: number }> = ({ cartItemCount }) => (
+  <Link href='/dashboard/cart' className='relative group'>
+    <Button
+      variant='outline'
+      size='sm'
+      className='border-gray-300 text-gray-600 hover:bg-gray-50 h-10 px-4 rounded-lg transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-0.5 group-hover:border-primary300'
+    >
+      <CartIcon className='w-5 h-5 group-hover:text-primary600 transition-colors duration-300' />
+      <span className='hidden md:inline ml-2 font-medium group-hover:text-primary600 transition-colors duration-300'>Cart</span>
+      {cartItemCount > 0 && (
+        <span className='absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center shadow-lg border-2 border-white animate-bounce'>
+          {cartItemCount > 99 ? '99+' : cartItemCount}
+        </span>
+      )}
+    </Button>
+  </Link>
+)
+
 export const TopNav: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const { isAuthenticated } = useAuth()
+  const { cart } = useOrderFlow()
+  const cartItemCount = cart?.items.length || 0
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,7 +72,7 @@ export const TopNav: React.FC = () => {
         <nav>
           <NavLinks />
         </nav>
-        <div className='flex justify-between items-center lg:w-auto w-full h-[85%]'>
+        <div className='flex justify-between items-center lg:w-auto w-full h-[85%] gap-4'>
           <MobileNav />
           {/* Hide on mobile, show on desktop */}
           {!isAuthenticated ? (
@@ -75,6 +97,7 @@ export const TopNav: React.FC = () => {
               </Link>
             </div>
           )}
+          <CartButton cartItemCount={cartItemCount} />
         </div>
       </MaxScreenWrapper>
     </header>
