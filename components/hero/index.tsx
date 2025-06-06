@@ -39,7 +39,9 @@ const heroSlides = [
     title: "Premium Car Wash Services",
     subtitle: "Sparkling Clean Cars",
     description: "Get your car spotless with our professional car wash services. We use advanced cleaning techniques and premium products for the perfect shine.",
-    image: "/bubble-car.png"
+    image: "/bubble-car.png",
+    isCarWash: true,
+    subscribeUrl: "https://paystack.shop/pay/kqz7lftfi9"
   }
 ];
 
@@ -143,12 +145,21 @@ export const Hero: React.FC = () => {
                       </div>
                     </div>
                     */}
-                    <div className="flex justify-center lg:justify-start w-full">
-                      <Link href="/auth/sign-up">
-                        <Button className="p-4 bg-[#bfdbfe] rounded-md text-[rgba(0, 57, 143, 1)] hover:bg-[#a3c4fd] transition-colors text-lg">
-                          Get Started
-                        </Button>
-                      </Link>
+                    <div className="flex justify-center lg:justify-start w-full gap-4">
+                      {!slide.isCarWash && (
+                        <Link href="/auth/sign-up">
+                          <Button className="p-4 bg-[#bfdbfe] rounded-md text-[rgba(0, 57, 143, 1)] hover:bg-[#a3c4fd] transition-colors text-lg">
+                            Get Started
+                          </Button>
+                        </Link>
+                      )}
+                      {slide.isCarWash && (
+                        <Link href={slide.subscribeUrl} target="_blank">
+                          <Button className="p-4 bg-[#10b981] rounded-md text-white hover:bg-[#059669] transition-colors text-lg">
+                            Subscribe Now
+                          </Button>
+                        </Link>
+                      )}
                     </div>
                   </RevealAnimation>
                 </div>
