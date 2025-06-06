@@ -1,4 +1,3 @@
-// stores/CartStore.ts
 'use client'
 
 import { create } from 'zustand'

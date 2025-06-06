@@ -62,3 +62,10 @@ export const formatNaira = (amount: number): string => {
     maximumFractionDigits: 2
   }).format(amount);
 };
+
+export const formatPrice = (price: number) => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(price);
+};

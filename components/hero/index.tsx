@@ -51,7 +51,7 @@ export const Hero: React.FC = () => {
     <div className="lg:px-[2.5rem] xl:px-[5.5rem] px-4 bg_linear-gradient lg:pt-[3rem] pt-[10rem] relative overflow-hidden">
       {/* Dynamic background overlay */}
       <div 
-        className={`absolute inset-0 bg-gradient-to-br transition-all duration-1000 ease-in-out`}
+        className="absolute inset-0 bg-gradient-to-br transition-all duration-1000 ease-in-out"
       />
       
       <TopNav />

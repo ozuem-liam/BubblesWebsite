@@ -1,9 +1,7 @@
-// lib/shop.ts
 import { StaticImageData } from 'next/legacy/image'
 import { api } from './api'
 import { Item } from './order-flow'
 
-// types/shop.ts
 const bubbleStoreId = '683685a5d84b9ffcbab7bde3'
 export interface ShopService {
   _id: string
