@@ -128,9 +128,9 @@
   height: 100%;
 }
 
-.hero-swiper .swiper-slide {
+/* .hero-swiper .swiper-slide {
   height: 90vh;
-}
+} */
 
 .hero-swiper .swiper-pagination {
   bottom: 30px !important;
