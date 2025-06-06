@@ -3,33 +3,42 @@
 import { CustomImage } from "../global/Image";
 import { Text } from "../global/Text";
 import { TopNav } from "../global/TopNav";
-import { AppleStoreSvg, PlayStoreSvg } from "../svgs";
+// import { AppleStoreSvg, PlayStoreSvg } from "../svgs";
 import { MaxScreenWrapper } from "../global/MaxScreen";
 import { RevealAnimation } from "../global/Reveal";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination, EffectFade } from 'swiper/modules';
+import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
 import 'swiper/css';
-import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import heroImg from "../../public/hero_img.svg";
+import { Button } from "@/components/ui/button";
 
 const heroSlides = [
   {
     title: "Laundry Made Simple For You",
     subtitle: "8hrs+ Saved Weekly",
-    description: "No more laundry stress; just fresh, professionally cleaned clothes. Whether you're a busy professional or a laundry business looking to grow, we're here to help."
+    description: "No more laundry stress; just fresh, professionally cleaned clothes. Whether you're a busy professional or a laundry business looking to grow, we're here to help.",
+    image: heroImg
   },
   {
     title: "Professional Cleaning Services",
     subtitle: "Quality Guaranteed",
-    description: "Experience premium laundry service with our expert cleaners. We ensure your clothes get the care they deserve."
+    description: "Experience premium laundry service with our expert cleaners. We ensure your clothes get the care they deserve.",
+    image: heroImg
   },
   {
     title: "Fast & Reliable Service",
     subtitle: "24/7 Service",
-    description: "Schedule pickups and deliveries at your convenience. We work around your schedule to make laundry day stress-free."
+    description: "Schedule pickups and deliveries at your convenience. We work around your schedule to make laundry day stress-free.",
+    image: heroImg
+  },
+  {
+    title: "Premium Car Wash Services",
+    subtitle: "Sparkling Clean Cars",
+    description: "Get your car spotless with our professional car wash services. We use advanced cleaning techniques and premium products for the perfect shine.",
+    image: "/bubble-car.png"
   }
 ];
 
@@ -39,10 +48,9 @@ export const Hero: React.FC = () => {
       <TopNav />
       <MaxScreenWrapper style="pt-0 pb-[3rem]">
         <Swiper
-          modules={[Autoplay, Navigation, Pagination, EffectFade]}
+          modules={[Autoplay, Pagination, EffectFade]}
           spaceBetween={0}
           slidesPerView={1}
-          navigation
           pagination={{ clickable: true }}
           autoplay={{
             delay: 5000,
@@ -75,6 +83,7 @@ export const Hero: React.FC = () => {
                     </Text>
                   </RevealAnimation>
                   <RevealAnimation style="md:w-fit w-full">
+                    {/* App store buttons commented out
                     <div className="flex md:gap-[15px] gap-[6px] md:justify-start justify-between">
                       <Link
                         id="store"
@@ -86,11 +95,19 @@ export const Hero: React.FC = () => {
                       </Link>
                       <AppleStoreSvg />
                     </div>
+                    */}
+                    <div className="flex justify-center lg:justify-start w-full">
+                      <Link href="/auth/sign-up">
+                        <Button className="p-4 bg-[#bfdbfe] rounded-md text-[rgba(0, 57, 143, 1)] hover:bg-[#a3c4fd] transition-colors text-lg">
+                          Get Started
+                        </Button>
+                      </Link>
+                    </div>
                   </RevealAnimation>
                 </div>
                 <RevealAnimation style="lg:w-[60%] xl:w-[50%] w-full">
                   <CustomImage
-                    src={heroImg}
+                    src={slide.image}
                     style="w-full lg:h-[776px] h-[400px]"
                     imgStyle="object-contain"
                     priority={index === 0}

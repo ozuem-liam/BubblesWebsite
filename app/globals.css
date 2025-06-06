@@ -132,28 +132,6 @@
   height: 90vh;
 }
 
-.hero-swiper .swiper-button-next,
-.hero-swiper .swiper-button-prev {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.2);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(4px);
-}
-
-.hero-swiper .swiper-button-next:hover,
-.hero-swiper .swiper-button-prev:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1);
-}
-
-.hero-swiper .swiper-button-next::after,
-.hero-swiper .swiper-button-prev::after {
-  font-size: 24px;
-}
-
 .hero-swiper .swiper-pagination {
   bottom: 30px !important;
 }
