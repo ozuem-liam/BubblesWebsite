@@ -32,7 +32,7 @@ export const LaundrySection: React.FC<ILaundrySection> = ({ activeTab }) => {
               : "Getting Started is Easy"}
           </Text>
         </RevealAnimation>
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 grid-cols-1 bg_linear-gradient rounded-[12px] md:p-[40px] px-[20px] lg:py-0 py-[20px] lg:gap-[24px] gap-[10px] justify-between">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 grid-cols-1 laundry_bg_linear-gradient rounded-[12px] md:px-[40px] px-0 lg:py-0 md:py-[20px] py-0 lg:gap-[24px] gap-[10px] justify-between">
           <RevealAnimation style="w-full">
             <LaunderyCard
               img={activeTab === customerTab ? step1 : step4}
