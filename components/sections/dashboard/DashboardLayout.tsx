@@ -67,7 +67,7 @@ const generalItems = [
   },
 ]
 
-const SIDEBAR_WIDTH = '260px' // Increased width for better spacing
+const SIDEBAR_WIDTH = '220px' // Increased width for better spacing
 
 export default function DashboardPageLayout({
   children,
