@@ -15,7 +15,6 @@ export interface LocalCartItem {
   quantity: number
 }
 
-// Define LocalCart type for the reduce accumulator
 type LocalCart = Record<string, LocalCartItem>
 
 interface CartState {
@@ -64,7 +63,9 @@ export const useCartStore = create<CartState>()(
           const isMultipleStore =
             state.shopId !== null && item.vendor !== state.shopId
           if (isMultipleStore) {
-            toast.error("Please complete your current order before shopping from another store")
+            toast.error(
+              'Please complete your current order before shopping from another store'
+            )
             return state
           }
           return {
@@ -75,21 +76,33 @@ export const useCartStore = create<CartState>()(
                 quantity: (state.localCart[item._id]?.quantity || 0) + 1,
               },
             },
-            shopId:item.vendor
+            shopId: item.vendor,
           }
         }),
       removeFromLocalCart: (itemId) =>
         set((state) => {
           const newLocalCart = { ...state.localCart }
           delete newLocalCart[itemId]
-          return { localCart: newLocalCart }
+
+          const isCartEmpty = Object.keys(newLocalCart).length === 0
+
+          return {
+            localCart: newLocalCart,
+            shopId: isCartEmpty ? null : state.shopId,
+          }
         }),
       updateLocalCartQuantity: (itemId, newQuantity) =>
         set((state) => {
           if (newQuantity < 1) {
             const newLocalCart = { ...state.localCart }
             delete newLocalCart[itemId]
-            return { localCart: newLocalCart }
+
+            const isCartEmpty = Object.keys(newLocalCart).length === 0
+
+            return {
+              localCart: newLocalCart,
+              shopId: isCartEmpty ? null : state.shopId,
+            }
           }
           return {
             localCart: {
@@ -101,7 +114,7 @@ export const useCartStore = create<CartState>()(
             },
           }
         }),
-      clearCart: () => set({ cart: null, shopId:null, localCart: {} }),
+      clearCart: () => set({ cart: null, shopId: null, localCart: {} }),
     }),
     {
       name: 'cart-storage',

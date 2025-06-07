@@ -50,7 +50,7 @@
       }
 }
 
-.bg_linear-gradient {
+.bg_linear-gradient,.laundry_bg_linear-gradient {
   background: linear-gradient(128deg, #00398F 0%, #001029 71.93%);
 }
 .faq-ans,
@@ -157,4 +157,10 @@
 
 .hero-swiper .swiper-slide-active {
   opacity: 1 !important;
+}
+
+@media screen and (max-width:767px) {
+  .laundry_bg_linear-gradient {
+    background: white
+  }
 }
