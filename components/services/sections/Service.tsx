@@ -24,6 +24,9 @@ type DataType = {
 }[]
 
 export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const [inView, setInView] = useState(false)
+  const [isFlipping, setIsFlipping] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
   const [activeData, setActiveData] = useState<DataType>(CUSTOMERDATA)
   const [activeImage, setActiveImage] = useState<StaticImageData[]>(CUSTOMERDATAIMAGES)
@@ -31,6 +34,10 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
   const [isDragging, setIsDragging] = useState<boolean>(false)
   const [startPosition, setStartPosition] = useState<number>(0)
   const [scrollTop, setScrollTop] = useState<number>(0)
+  const [typedText, setTypedText] = useState('')
+  const [isTyping, setIsTyping] = useState(false)
+  const typingInterval = useRef<NodeJS.Timeout | null>(null)
+  const cycleTimeout = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     setActiveData(() => (activeTab === customerTab ? CUSTOMERDATA : VENDORDATA))
@@ -101,8 +108,99 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
     setIsDragging(false)
   }
 
+  // Intersection Observer to detect if section is in view
+  useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.3 }
+    )
+    if (sectionRef.current) observer.observe(sectionRef.current)
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current)
+    }
+  }, [])
+
+  // Clear timeouts on cleanup
+  useEffect(() => {
+    return () => {
+      if (typingInterval.current) clearInterval(typingInterval.current)
+      if (cycleTimeout.current) clearTimeout(cycleTimeout.current)
+    }
+  }, [])
+
+  // Typing animation effect - improved for mobile
+  const typeText = (text: string, speed: number = 80) => {
+    // Clear any existing intervals/timeouts
+    if (typingInterval.current) clearInterval(typingInterval.current)
+    if (cycleTimeout.current) clearTimeout(cycleTimeout.current)
+    
+    if (!text || typeof text !== 'string') {
+      setTypedText('')
+      setIsTyping(false)
+      return
+    }
+
+    setIsTyping(true)
+    setTypedText('')
+    let index = 0
+
+    typingInterval.current = setInterval(() => {
+      if (index >= text.length) {
+        // Typing is complete
+        if (typingInterval.current) clearInterval(typingInterval.current)
+        setIsTyping(false)
+        
+        // Wait before moving to next item (only on mobile)
+        cycleTimeout.current = setTimeout(() => {
+          // Check if we're still in view and on mobile before cycling
+          if (inView && window.innerWidth < 1024) { // lg breakpoint
+            setIsFlipping(true)
+            setTimeout(() => {
+              setIsFlipping(false)
+              setCurrentIndex(prev => {
+                const nextIndex = (prev + 1) % activeData.length
+                return nextIndex
+              })
+            }, 600) // flip duration
+          }
+        }, 2500) // wait 2.5 seconds after typing completes
+        return
+      }
+
+      setTypedText(text.substring(0, index + 1))
+      index++
+    }, speed)
+  }
+
+  // Start typing animation when in view or currentIndex changes
+  useEffect(() => {
+    if (inView && activeData[currentIndex]) {
+      const desc = activeData[currentIndex]?.desc
+      if (typeof desc === 'string' && desc.trim().length > 0) {
+        // Small delay before starting typing for better UX
+        setTimeout(() => {
+          typeText(desc.trim())
+        }, 300)
+      } else {
+        setTypedText('')
+        setIsTyping(false)
+      }
+    } else {
+      // Clean up when not in view
+      if (typingInterval.current) clearInterval(typingInterval.current)
+      if (cycleTimeout.current) clearTimeout(cycleTimeout.current)
+      setTypedText('')
+      setIsTyping(false)
+    }
+
+    return () => {
+      if (typingInterval.current) clearInterval(typingInterval.current)
+      if (cycleTimeout.current) clearTimeout(cycleTimeout.current)
+    }
+  }, [inView, currentIndex, activeData])
+
   return (
-    <div className='lg:px-[2.5rem] xl:px-[5.5rem] px-4 md:pb-[104px] pb-[54px]'>
+    <div className='lg:px-[2.5rem] xl:px-[5.5rem] px-4 md:pb-[104px] pb-[54px]' ref={sectionRef}>
       <MaxScreenWrapper style='flex flex-col'>
         <RevealAnimation style='w-fit md:mb-0 mb-6'>
           <Text
@@ -111,7 +209,7 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
             style='font-[700] md:text-[40px] text-[30px] md:leading-[160%] leading-[120%]'
           >
             {activeTab === customerTab
-              ? 'Several Services To Meet Your Laundry Needs'
+              ? 'Several Services To Meet Your Cleaning Needs'
               : 'More Loads. More Money. Less Stress'}
           </Text>
         </RevealAnimation>
@@ -120,26 +218,52 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
           {/* Image section */}
           <RevealAnimation style='lg:w-[50%] w-full relative'>
             <div className='relative w-full lg:h-[576px] h-[310px] sm:h-[380px]'>
-              {activeImage.map((img, index) => (
-                <div
-                  key={index}
-                  className='absolute inset-0 transition-opacity duration-300'
-                  style={{
-                    opacity: currentIndex === index ? 1 : 0,
-                  }}
-                >
-                  <CustomImage
-                    src={img}
-                    style='w-full h-full'
-                    imgStyle='object-contain'
-                  />
+              {/* Mobile: Only render the active image and overlay */}
+              <div className={`lg:hidden block h-full w-full ${isFlipping ? 'flip-anim' : ''}`}>
+                <CustomImage
+                  src={activeImage[currentIndex]}
+                  style='w-full h-full'
+                  imgStyle='object-contain'
+                />
+                <div className='absolute inset-0 flex flex-col justify-center items-center text-center px-4 z-10'>
+                  <div className='bg-black/50 backdrop-blur-sm rounded-lg p-6 max-w-sm'>
+                    <div className='transition-all duration-300'>
+                      <Text style='text-center text-white text-[24px] font-[700] leading-[120%] drop-shadow-lg mb-4'>
+                        {activeData[currentIndex]?.title || ''}
+                      </Text>
+                      <Text style='text-center text-white text-[14px] font-[400] leading-[140%] drop-shadow-lg min-h-[60px] flex items-center justify-center'>
+                        <span>
+                          {typedText}
+                          {isTyping && <span className='animate-pulse ml-1'>|</span>}
+                        </span>
+                      </Text>
+                    </div>
+                  </div>
                 </div>
-              ))}
+              </div>
+              {/* Desktop: Keep all images for fade transition */}
+              <div className='hidden lg:block h-full w-full'>
+                {activeImage.map((img, index) => (
+                  <div
+                    key={index}
+                    className='absolute inset-0 transition-opacity duration-300'
+                    style={{
+                      opacity: currentIndex === index ? 1 : 0,
+                    }}
+                  >
+                    <CustomImage
+                      src={img}
+                      style='w-full h-full'
+                      imgStyle='object-contain'
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </RevealAnimation>
 
           {/* Content section */}
-          <div className='lg:w-[50%] w-full'>
+          <div className='lg:w-[50%] w-full hidden lg:block'>
             <div
               ref={scrollRef}
               className='overflow-y-auto scroll-smooth h-[200px] md:h-[400px] lg:h-[450px]'
@@ -179,6 +303,24 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
           </div>
         </div>
       </MaxScreenWrapper>
+
+      {/* Flip animation style */}
+      <style jsx global>{`
+        .flip-anim {
+          animation: flipY 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+        }
+        @keyframes flipY {
+          0% {
+            transform: rotateY(0deg);
+          }
+          50% {
+            transform: rotateY(90deg);
+          }
+          100% {
+            transform: rotateY(0deg);
+          }
+        }
+      `}</style>
     </div>
   )
 }

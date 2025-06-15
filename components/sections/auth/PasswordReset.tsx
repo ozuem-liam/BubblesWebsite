@@ -134,6 +134,7 @@ export const PasswordReset = () => {
       await authService.resetPassword({
         email,
         password,
+        confirmPassword,
         token,
       })
 
@@ -293,15 +294,6 @@ export const PasswordReset = () => {
               }`}
             >
               {countdown > 0 ? `Resend code in ${countdown}s` : 'Resend code'}
-            </button>
-          </div>
-          <div className='text-center mt-2 w-full'>
-            <button
-              type='button'
-              onClick={() => setCurrentStep('email')}
-              className='h-[50px] rounded-sm flex items-center justify-center bg_linear-gradient text-white text-sm font-medium text-lg w-full'
-            >
-              Change email
             </button>
           </div>
         </form>

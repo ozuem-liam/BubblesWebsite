@@ -25,49 +25,73 @@ export const Accordium: React.FC<IAccordium> = ({
   }, []);
 
   useEffect(() => {
- 
     if (serviceAccordium.current) {
       if (isOpen) {
-      
         serviceAccordium.current.classList.add("active");
       } else {
-      
         setTimeout(() => {
           if (serviceAccordium.current) {
             serviceAccordium.current.classList.remove("active");
           }
-        }, 50); 
+        }, 50);
       }
     }
   }, [isOpen]);
+  //   if (text.includes("\n")) {
+  //     return text.split("\n").map((paragraph, index) => (
+  //       <p
+  //         key={index}
+  //         className={cn(
+  //           "md:text-[20px] text-[14px] font-[400] text-tertiary1000 leading-[160%]",
+  //           index > 0 && "mt-4"
+  //         )}
+  //       >
+  //         {paragraph.trim()}
+  //       </p>
+  //     ));
+  //   }
+
+  //   return (
+  //     <div
+  //       className="md:text-[20px] leading-[160%] text-[14px] font-[400] text-tertiary1000"
+  //       dangerouslySetInnerHTML={{ __html: text }}
+  //     />
+  //   );
+  // };
 
   const formatAnswerText = (text: string) => {
-    if (text.includes("\n")) {
-      return text.split("\n").map((paragraph, index) => (
-        <p 
-          key={index} 
-          className={cn(
-            "md:text-[20px] text-[14px] font-[400] text-tertiary1000 leading-[160%]",
-            index > 0 && "mt-4"
-          )}
-        >
-          {paragraph.trim()}
-        </p>
-      ));
+    const hasHTMLTags = /<\/?[a-z][\s\S]*>/i.test(text); // Simple check for HTML tags
+  
+    if (hasHTMLTags) {
+      // Render as HTML if tags like <a>, <ul>, <strong> are found
+      return (
+        <div
+          className="md:text-[20px] text-[14px] font-[400] text-tertiary1000 leading-[160%]"
+          dangerouslySetInnerHTML={{ __html: text }}
+        />
+      );
     }
-    
-    return (
-      <Text style="md:text-[20px] leading-[160%] text-[14px] font-[400] text-tertiary1000">
-        {text}
-      </Text>
-    );
+  
+    // Otherwise, treat it as plain text with line breaks
+    return text.split("\n").map((paragraph, index) => (
+      <p
+        key={index}
+        className={cn(
+          "md:text-[20px] text-[14px] font-[400] text-tertiary1000 leading-[160%]",
+          index > 0 && "mt-4"
+        )}
+      >
+        {paragraph.trim()}
+      </p>
+    ));
   };
+  
 
   return (
     <RevealAnimation style="py-5 w-full">
       <div className="w-full">
-        <div 
-          onClick={handleToggle} 
+        <div
+          onClick={handleToggle}
           className="flex items-center justify-between gap-4 cursor-pointer"
         >
           <Text style="md:text-[28px] leading-[160%] text-[20px] font-[400] text-tertiary1000">
@@ -82,14 +106,9 @@ export const Accordium: React.FC<IAccordium> = ({
             )}
           />
         </div>
-        
-        <div 
-          ref={serviceAccordium}
-          className="service-accord"
-        >
-          <div ref={contentRef}>
-            {formatAnswerText(info)}
-          </div>
+
+        <div ref={serviceAccordium} className="service-accord">
+          <div ref={contentRef}>{formatAnswerText(info)}</div>
         </div>
       </div>
     </RevealAnimation>

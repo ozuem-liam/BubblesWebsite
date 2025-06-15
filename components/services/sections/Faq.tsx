@@ -13,22 +13,29 @@ interface IFAQ {
 const customerFaq = [
   {
     title: "Is Bubbles available in my area?",
-    answer: "Bubbles is currently in Lagos, Nigeria.",
+    answer: "Bubbles is currently active in more than 20 LCDAs across Lagos.",
   },
   {
     title: "Can I reschedule or cancel a pickup?",
     answer:
-      "Yes, you can cancel or reschedule your order before it is picked up.",
+      "Yep, you can cancel or reschedule your order anytime before pickup.",
   },
   {
     title: "Who do I contact for support?",
-    answer:
-      "For assistance, please reach out to our support team at williams@bubblesng.com.",
+    answer: `
+    Email us at 
+    <a class="text-primary500 underline hover:text-primary700" href="mailto:williams@bubblesng.com">
+      williams@bubblesng.com
+    </a> 
+    or call 
+    <a class="text-primary500 underline hover:text-primary700" href="tel:+2348105951215">
+      +234 810 595 1215
+    </a>.
+  `,
   },
   {
     title: "How much is delivery?",
-    answer:
-      "Delivery fees vary based on the distance of your location. For more details, feel free to contact us!",
+    answer: "Delivery cost ranges between ₦1500 - ₦5000",
   },
 ];
 

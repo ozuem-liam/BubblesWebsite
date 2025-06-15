@@ -55,6 +55,7 @@ export interface Address {
 interface ResetPasswordData {
   email: string;
   password: string;
+  confirmPassword: string;
   token: string;
 }
 
@@ -137,7 +138,7 @@ export const authService = {
   },
 
   async resetPassword(data: ResetPasswordData) {
-    return api.post<{ message: string }>('/customer/reset-password', data);
+    return api.patch<{ message: string }>('/customer/reset-password', data);
   },
 
   async getProfileData(token: string) {

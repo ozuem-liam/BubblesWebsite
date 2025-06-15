@@ -5,8 +5,9 @@ import heroImg4 from '../../public/service_img5.svg'
 import heroImg5 from '../../public/service_img6.svg'
 import heroImg6 from '../../public/service_img7.svg'
 import heroImg7 from '../../public/service_img8.svg'
+import heroImg8 from '../../public/service_img9.svg'
 
-export const CUSTOMERDATAIMAGES = [heroImg1, heroImg2, heroImg3, heroImg4]
+export const CUSTOMERDATAIMAGES = [heroImg1, heroImg2, heroImg3, heroImg4, heroImg8]
 export const VENDORDATAIMAGES = [heroImg5, heroImg6, heroImg7]
 
 export const CUSTOMERDATA = [
@@ -26,6 +27,10 @@ export const CUSTOMERDATA = [
     title: 'Essentials',
     desc: 'From shoes to rugs, shoes, bags to duvets, we handle it all with expert cleaning tailored to each item.',
   },
+  {
+    title: 'Fumigation',
+    desc: 'Protect your space with our professional fumigation services. We eliminate pests and ensure a clean, safe environment for your home or business.',
+  }
 ]
 
 export const VENDORDATA = [

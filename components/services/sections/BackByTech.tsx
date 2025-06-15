@@ -20,7 +20,8 @@ export const BackByTech: React.FC = () => {
   return (
     <div className="bg-tertiary300 lg:px-[2.5rem] xl:px-[5.5rem] px-4 py-[54px] sm:py-[104px]">
       <MaxScreenWrapper style="flex flex-col gap-[18px]">
-        <div className="flex flex-wrap gap-[12px] justify-center">
+        {/* Desktop: Show all images in first row */}
+        <div className="hidden md:flex flex-wrap gap-[12px] justify-center">
           <RevealAnimation style="w-fit">
             <CustomImage
               src={heroImg1}
@@ -50,18 +51,24 @@ export const BackByTech: React.FC = () => {
             />
           </RevealAnimation>
         </div>
-        <div className="flex lg:flex-row flex-col gap-[12px] justify-center md:items-auto items-center">
-          <RevealAnimation style="w-fit">
-            <CustomImage
-              src={heroImg5}
-              style="lg:w-[270px] lg:h-[270px] w-[300px] h-[300px]"
-              imgStyle="object-cover"
-            />
-          </RevealAnimation>
+
+        {/* Mobile: Show only the last image */}
+        <div className="md:hidden flex justify-center">
           <RevealAnimation style="w-fit">
             <CustomImage
               src={heroImg6}
-              style="lg:w-[250px] lg:h-[290px] w-[300px] h-[340px] lg:hidden block"
+              style="w-[300px] h-[340px]"
+              imgStyle="object-cover"
+            />
+          </RevealAnimation>
+        </div>
+
+        <div className="flex lg:flex-row flex-col gap-[12px] justify-center md:items-auto items-center">
+          {/* Desktop: Show heroImg5 */}
+          <RevealAnimation style="w-fit">
+            <CustomImage
+              src={heroImg5}
+              style="lg:w-[270px] lg:h-[270px] w-[300px] h-[300px] md:block hidden"
               imgStyle="object-cover"
             />
           </RevealAnimation>
@@ -93,6 +100,8 @@ export const BackByTech: React.FC = () => {
               <EcoFriendlySvg />
             </div>
           </div>
+
+          {/* Desktop: Show heroImg6 on the right */}
           <RevealAnimation style="w-fit">
             <CustomImage
               src={heroImg6}

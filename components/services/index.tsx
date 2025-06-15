@@ -10,6 +10,7 @@ import { BackByTech } from "./sections/BackByTech";
 import { FAQ } from "./sections/Faq";
 import { SecondHero } from "./sections/SecondHero";
 import { NeedHelp } from "./sections/NeedHelp";
+import { StoreProducts } from "../sections/store/StoreProducts";
 
 export const customerTab = "Customer";
 const vendorTab = "Vendor";
@@ -56,6 +57,7 @@ export const Services: React.FC = () => {
       <BackByTech />
       <FAQ activeTab={activeTab} />
       <SecondHero activeTab={activeTab} />
+      <StoreProducts />
       <NeedHelp />
     </div>
   );
