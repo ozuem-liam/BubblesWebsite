@@ -84,7 +84,7 @@ export const SignUpForm = () => {
         //   email: encodeURIComponent(values.email),
         // }).toString()
 
-        router.push(`/auth/verify-otp`)
+        router.push(`/auth/verify-otp?email=${encodeURIComponent(values?.email)}`)
       } else {
         toast.error(registerResponse?.message || 'Registration failed')
       }
