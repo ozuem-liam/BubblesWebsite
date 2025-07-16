@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
 import { Text } from '@/components/global/Text'
-import { FeaturedShop } from '@/components/sections/shop/ShopList'
 
 export const metadata: Metadata = {
   title: 'Shops | Bubbles',
@@ -24,7 +23,6 @@ export default async function ShopPage() {
           />
         </div>
       </header>
-      <FeaturedShop/>
     </section>
   )
 }
