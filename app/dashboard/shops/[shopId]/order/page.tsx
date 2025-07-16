@@ -22,6 +22,7 @@ export default function OrderFlowPage() {
     categories,
     setCategories,
     items,
+    categoryItemsMap,
     cart,
     loading,
     error,
@@ -118,6 +119,7 @@ export default function OrderFlowPage() {
             selectedCategory={selectedCategory || null}
             cloading={loading.categories}
             items={items}
+            categoryItemsMap={categoryItemsMap}
             cart={cart}
             addToCart={addToCart}
             removeFromCart={removeFromCart}

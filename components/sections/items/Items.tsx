@@ -24,6 +24,7 @@ export const CategoryItemsPageComponent = () => {
     query.get('service_id') || '',
     query.get('category_id') || ''
   )
+
   const router = useRouter()
 
   const breadcrumbItems = [
@@ -58,7 +59,7 @@ export const CategoryItemsPageComponent = () => {
     <div>
       <BreadCrumb breadcrumbItems={breadcrumbItems} />
       <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4'>
-        {items.map((item, itemIndex) => (
+        {(items || []).map((item, itemIndex) => (
           <CategoryItems
             key={itemIndex}
             items={[item]}

@@ -83,7 +83,7 @@ export const SignInForm = () => {
           <PasswordInput
             control={form.control}
             name='pwd'
-            placeholder='Create Password'
+            placeholder='Enter Password'
           />
           <Link
             href={'/auth/reset-password'}

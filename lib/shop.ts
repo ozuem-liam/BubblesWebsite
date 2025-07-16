@@ -1,93 +1,93 @@
-import { StaticImageData } from 'next/legacy/image'
-import { api } from './api'
-import { Item } from './order-flow'
+import { StaticImageData } from "next/legacy/image";
+import { api } from "./api";
+import { Item } from "./order-flow";
 
-const bubbleStoreId = '683685a5d84b9ffcbab7bde3'
+const bubbleStoreId = "683685a5d84b9ffcbab7bde3";
 export interface ShopService {
-  _id: string
-  name: string
-  image: StaticImageData
-  meta: string
-  __v: number
+  _id: string;
+  name: string;
+  image: StaticImageData;
+  meta: string;
+  __v: number;
 }
 
 export interface ShopCategory {
-  _id: string
-  name: string
-  image: StaticImageData
-  meta: string
-  createdAt: string
-  updatedAt: string
-  __v: number
+  _id: string;
+  name: string;
+  image: StaticImageData;
+  meta: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
 
 export interface ShopServiceWithCategories {
-  service: ShopService
-  categories: ShopCategory[]
-  _id: string
+  service: ShopService;
+  categories: ShopCategory[];
+  _id: string;
 }
 
 export interface OpeningHour {
-  day: string
-  value: boolean
-  opening_time: string
-  closing_time: string
-  _id: string
+  day: string;
+  value: boolean;
+  opening_time: string;
+  closing_time: string;
+  _id: string;
 }
 
 export interface Shop {
-  _id: string
-  first_name: string
-  last_name: string
-  other_name: string
-  phone: string
-  email: string
-  action: string
-  business_name: string
-  business_url: string
-  business_address: string
-  business_state: string
-  business_lga: string
-  business_city: string
-  addresses: any[] // Can be more specific if needed
-  business_banner: string
-  business_logo: string
-  bank_statement: string
-  amount_earned: number
-  stages: number
-  cac_certificate: string
-  rean_membership_fee_receipt?: string // Optional based on response
-  tax_clearance_certificate: string
-  coren_certificate: string
-  project_reference: string
-  slug: string
-  bank_account_name: string
-  bank_account_number: string
-  recipient_response: string | any // Can be parsed to specific type if needed
-  recipient_auth_code: string
-  status: 'approved' | 'pending' | 'rejected' // Adjust based on possible values
-  user_type: 'vendor' | string // Adjust based on possible values
-  login_count: number
-  is_procurement: boolean
-  is_verified: boolean
-  is_active: boolean
-  is_locked: boolean
-  is_deleted: boolean
-  is_profile_complete: boolean
-  two_factor_auth: boolean
-  role: string
-  subscription_type: string
-  has_access: boolean
-  services: ShopServiceWithCategories[]
-  opening_hours: OpeningHour[]
-  last_login: string
-  createdAt: string
-  updatedAt: string
-  __v: number
+  _id: string;
+  first_name: string;
+  last_name: string;
+  other_name: string;
+  phone: string;
+  email: string;
+  action: string;
+  business_name: string;
+  business_url: string;
+  business_address: string;
+  business_state: string;
+  business_lga: string;
+  business_city: string;
+  addresses: any[]; // Can be more specific if needed
+  business_banner: string;
+  business_logo: string;
+  bank_statement: string;
+  amount_earned: number;
+  stages: number;
+  cac_certificate: string;
+  rean_membership_fee_receipt?: string; // Optional based on response
+  tax_clearance_certificate: string;
+  coren_certificate: string;
+  project_reference: string;
+  slug: string;
+  bank_account_name: string;
+  bank_account_number: string;
+  recipient_response: string | any; // Can be parsed to specific type if needed
+  recipient_auth_code: string;
+  status: "approved" | "pending" | "rejected"; // Adjust based on possible values
+  user_type: "vendor" | string; // Adjust based on possible values
+  login_count: number;
+  is_procurement: boolean;
+  is_verified: boolean;
+  is_active: boolean;
+  is_locked: boolean;
+  is_deleted: boolean;
+  is_profile_complete: boolean;
+  two_factor_auth: boolean;
+  role: string;
+  subscription_type: string;
+  has_access: boolean;
+  services: ShopServiceWithCategories[];
+  opening_hours: OpeningHour[];
+  last_login: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
 
 export interface ShopListPagination {
-  total: number
+  total: number;
   // Add other pagination fields if they exist in other responses
   // per_page?: number;
   // current_page?: number;
@@ -95,40 +95,53 @@ export interface ShopListPagination {
 }
 
 export interface ShopListResponse {
-  code: number
-  message: string
+  code: number;
+  message: string;
   data: {
-    count: number
-    pagination: ShopListPagination
-    results: Shop[]
-  }
+    count: number;
+    pagination: ShopListPagination;
+    results: Shop[];
+  };
 }
 
 export interface ItemListResponse {
-  code: number
-  message: string
+  code: number;
+  message: string;
   data: {
-    count: number
-    pagination: ShopListPagination
-    results: Item[]
-  }
+    count: number;
+    pagination: ShopListPagination;
+    results: Item[];
+  };
 }
 
 export interface ShopRequest {
-  _id: string
-  userId: string
-  status: 'pending' | 'approved' | 'rejected'
-  createdAt: string
-  updatedAt: string
+  _id: string;
+  userId: string;
+  status: "pending" | "approved" | "rejected";
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ShopRequestResponse {
-  code: number
-  message: string
-  data: ShopRequest
+  code: number;
+  message: string;
+  data: ShopRequest;
+}
+
+export interface Service {
+  _id: string;
+  name: string;
+  image: string;
+  meta: string;
+  is_active: boolean;
+  __v: number;
 }
 
 export const shopService = {
+  async getActiveServices(token: string): Promise<any> {
+    return api.get<any>(`/service/active`, token);
+  },
+
   async getShops(
     token: string,
     page = 1,
@@ -137,7 +150,7 @@ export const shopService = {
     return api.get<ShopListResponse>(
       `/customer/shops?page=${page}&limit=${limit}`,
       token
-    )
+    );
   },
 
   async getShopById(
@@ -147,18 +160,21 @@ export const shopService = {
     return api.get<{ code: number; message: string; data: Shop }>(
       `/customer/shops/${id}`,
       token
-    )
+    );
   },
 
   async searchShops(query: string, token?: string): Promise<ShopListResponse> {
-    return api.get<ShopListResponse>(`/customer/shops/search?q=${query}`, token)
+    return api.get<ShopListResponse>(
+      `/customer/shops/search?q=${query}`,
+      token
+    );
   },
 
   async searchForBubblesShops(token?: string): Promise<ShopListResponse> {
     return api.get<ShopListResponse>(
       `/shop/search?search=store&searchBy=business_type`,
       token
-    )
+    );
   },
 
   async searchForBubblesShopItem(
@@ -168,7 +184,7 @@ export const shopService = {
     const response = await api.get<any>(
       `/shop/items/search?search=${q}&searchBy=name&service=${bubbleStoreId}`,
       token
-    )
-    return response
+    );
+    return response;
   },
-}
+};

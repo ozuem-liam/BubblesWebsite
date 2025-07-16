@@ -47,7 +47,7 @@ import { useOrderFlow } from '@/hooks/useOrderFlow'
 const generalItems = [
   {
     title: 'Shops',
-    url: 'shops',
+    url: '/shops/6837466d37f650f4defa3839/order?name=bubbles',
     icon: Store,
   },
   {

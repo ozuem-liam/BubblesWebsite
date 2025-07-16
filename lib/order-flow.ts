@@ -241,7 +241,8 @@ interface ItemListResponse {
   data: {
     count: number
     pagination: ShopListPagination
-    results: Item[]
+    results?: Item[]
+    items?: Item[]
   }
 }
 
@@ -255,16 +256,16 @@ export const orderFlowService = {
     return response.data.services
   },
 
-  // async getItemsByCategory(
-  //   vendorId: string,
-  //   serviceId: string,
-  //   categoryId: string
-  // ): Promise<ItemListResponse> {
-  //   const response = await api.get<any>(
-  //     `/item-request/search?vendor_id=${vendorId}&service_id=${serviceId}&category_id=${categoryId}?page=1&limit=10`
-  //   )
-  //   return response
-  // },
+  async getItemsByCategory(
+    vendorId: string,
+    serviceId: string,
+    categoryId: string
+  ): Promise<ItemListResponse> {
+    const response = await api.get<any>(
+      `/item-request/search?vendor_id=${vendorId}&service_id=${serviceId}&category_id=${categoryId}&page=1&limit=10`
+    )
+    return response
+  },
 
   async getPaginatedItemsByCategory(
     vendorId: string,
@@ -274,7 +275,7 @@ export const orderFlowService = {
     limit = 10
   ): Promise<ItemListResponse> {
     const response = await api.get<any>(
-      `/item-request/search?vendor=${vendorId}&service=${serviceId}&category=${categoryId}&page=${page}&limit=${limit}`
+      `/item-request/shop/products/${categoryId}?page=${page}&limit=${limit}`
     )
     return response
   },

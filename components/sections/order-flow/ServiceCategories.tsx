@@ -25,6 +25,7 @@ export const ServiceCategories = ({
   selectedCategory,
   cloading,
   items,
+  categoryItemsMap,
   cart,
   addToCart,
   removeFromCart,
@@ -37,6 +38,7 @@ export const ServiceCategories = ({
   selectedCategory: string | null
   cloading: boolean
   items: Item[]
+  categoryItemsMap: Record<string, Item[]>
   cart: CartData | null
   addToCart: (item: Item) => void
   removeFromCart: (itemId: string) => void
@@ -59,8 +61,9 @@ export const ServiceCategories = ({
     }
   }, [loading])
 
+  // Use the map instead of filtering the flat array
   const getItemsByCategory = (categoryId: string) => {
-    return items.filter((item) => item?.filteringCategoryId === categoryId)
+    return categoryItemsMap[categoryId] || []
   }
 
   // Clean up Swiper instances on unmount

@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Shop, shopService } from "../lib/shop";
+import { ItemListResponse, Service, Shop, shopService } from "../lib/shop";
 import { useAuth } from "../contexts/auth-context";
 import { Item } from "@/lib/order-flow";
 
 export const useShops = (page = 1, limit = 10) => {
   const { token } = useAuth();
-  const [shops, setShops] = useState<Shop[]>([]);
+  const [shops, setShops] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [meta, setMeta] = useState<any>(null);
@@ -16,9 +16,9 @@ export const useShops = (page = 1, limit = 10) => {
     const fetchShops = async () => {
       try {
         setLoading(true);
-        const response = await shopService.getShops(token!, page, limit);
-        setShops(response.data.results);
-        setMeta(response.data.pagination || null);
+        const response = await shopService.getActiveServices(token!);
+        console.log(response);
+        setShops(response.data.services);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to fetch shops");
       } finally {
@@ -78,8 +78,16 @@ export const useBubbleShopItems = (q: string) => {
         if (paginationPage === 1) setLoading(true);
         const response = await shopService.searchForBubblesShopItem(q);
         console.log(response);
-        setItems(response.data.results);
-        setPaginationTotal(response?.data?.pagination?.total);
+        // Support both 'results' and 'items' keys from API
+        const data = response.data;
+        let products: Item[] = [];
+        if (Array.isArray(data.results)) {
+          products = data.results;
+        } else if (Array.isArray((data as any).items)) {
+          products = (data as any).items;
+        }
+        setItems(products);
+        setPaginationTotal(data?.pagination?.total);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to fetch shops");
       } finally {
@@ -89,24 +97,6 @@ export const useBubbleShopItems = (q: string) => {
 
     fetchItems();
   }, []);
-  // useEffect(() => {
-  //   const fetchItems = async () => {
-  //     try {
-  //       if (paginationPage === 1) setLoading(true)
-  //       const response = await shopService.searchForBubblesShopItem(q, token!)
-  //       setItems(response.data.results)
-  //       setPaginationTotal(response?.data?.pagination?.total)
-  //     } catch (err) {
-  //       setError(err instanceof Error ? err.message : 'Failed to fetch shops')
-  //     } finally {
-  //       setLoading(false)
-  //     }
-  //   }
-
-  //   if (token) {
-  //     fetchItems()
-  //   }
-  // }, [token])
 
   return {
     items,

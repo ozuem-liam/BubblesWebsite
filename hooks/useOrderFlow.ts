@@ -49,6 +49,7 @@ export const useOrderFlow = (shopId?: string) => {
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string | null>(null)
   const [isExpressSelected, setIsExpressSelected] = useState(false)
   const [cartInitialized, setCartInitialized] = useState(false)
+  const [categoryItemsMap, setCategoryItemsMap] = useState<Record<string, Item[]>>({})
 
   const {
     cart,
@@ -117,23 +118,34 @@ export const useOrderFlow = (shopId?: string) => {
 
         // Load items for all categories
         const allItems: Item[] = []
+        const itemsMap: Record<string, Item[]> = {}
         for (const category of selectedService.categories) {
           const response = await orderFlowService.getPaginatedItemsByCategory(
             shopId,
             selectedService.service._id,
             category._id
           )
-          if (response?.data?.results) {
+          let products: Item[] = [];
+          if (Array.isArray(response?.data?.results)) {
+            products = response.data.results;
+          } else if (Array.isArray((response?.data as any)?.items)) {
+            products = (response.data as any).items;
+          }
+          if (products.length > 0) {
             // Add category ID to each item for easier filtering
-            const itemsWithCategory = response.data.results.map((item) => ({
+            const itemsWithCategory = products.map((item) => ({
               ...item,
               filteringCategoryId: category._id,
             }))
             allItems.push(...itemsWithCategory)
+            itemsMap[category._id] = itemsWithCategory
+          } else {
+            itemsMap[category._id] = []
           }
         }
 
         setItems(allItems)
+        setCategoryItemsMap(itemsMap)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load items')
       } finally {
@@ -539,6 +551,7 @@ export const useOrderFlow = (shopId?: string) => {
     categories,
     setCategories,
     items,
+    categoryItemsMap,
     cart: getDisplayCart(isExpressSelected),
     deliveryOptions,
     loading,
@@ -589,7 +602,7 @@ export const useFetchCategoryItems = (
         )
         console.log('this is rbowese', response)
 
-        setItems(response?.data?.results)
+        setItems(response?.data?.items || response?.data?.results || [])
         setPaginationTotal(response?.data?.pagination?.total)
         // setMeta(response.data?.pagination || null)
       } catch (err) {
