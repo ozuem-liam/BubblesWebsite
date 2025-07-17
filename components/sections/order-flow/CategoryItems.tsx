@@ -47,7 +47,7 @@ export const CategoryItems = ({
   const price = cartItem ? cartItem.price : item.fixed_amount
 
   return (
-    <div className='flex flex-col gap-5 items-center w-full transition-all duration-200 overflow-hidden'>
+    <div className='flex flex-col gap-4 items-center w-full transition-all duration-200 overflow-hidden'>
       {/* Item Image */}
       {item.image && (
         <div className='relative w-[172px] h-32 rounded-lg'>
@@ -63,10 +63,10 @@ export const CategoryItems = ({
       {/* Item Content */}
       <div className='space-y-3 w-full flex flex-col items-center'>
         {/* Item Name and Price */}
-        <div className='space-y-1'>
+        <div className='space-y-1 w-full'>
           <Text
             as='h4'
-            style='text-lg text-center text-gray-800 font-medium text-sm leading-tight line-clamp-2'
+            style='text-lg text-center text-gray-800 font-medium text-sm leading-tight line-clamp-3'
           >
             {item.name}
           </Text>

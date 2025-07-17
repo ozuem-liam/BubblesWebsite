@@ -158,7 +158,7 @@ export const ServiceCategories = ({
                       {[...Array(3)].map((_, idx) => (
                         <Skeleton
                           key={idx}
-                          className='w-54 h-32 bg-gray-200 rounded-lg'
+                          className='w-50 h-32 bg-gray-200 rounded-lg'
                         />
                       ))}
                     </div>
@@ -166,13 +166,16 @@ export const ServiceCategories = ({
                     <>
                       <Swiper
                         spaceBetween={16}
-                        slidesPerView='auto'
-                        loop={categoryItems.length > 3}
-                        autoplay={{
-                          delay: 2500,
-                          disableOnInteraction: false,
-                          pauseOnMouseEnter: true,
+                        slidesPerView={2}
+                        breakpoints={{
+                          640: { slidesPerView: 2 },
                         }}
+                        loop={categoryItems.length > 3}
+                        // autoplay={{
+                        //   delay: 2500,
+                        //   disableOnInteraction: false,
+                        //   pauseOnMouseEnter: true,
+                        // }}
                         modules={[Navigation, Autoplay]}
                         navigation={{
                           nextEl: `.swiper-button-next-${category._id}`,
@@ -188,10 +191,10 @@ export const ServiceCategories = ({
                         {categoryItems.map((item, itemIndex) => (
                           <SwiperSlide
                             key={`${category._id}-${item._id}-${itemIndex}`}
-                            style={{ width: 'auto' }}
+                            style={{ width: '60%' }}
                           >
                             <div
-                              className={`w-54 bg-none transition-all duration-500 ease-out ${
+                              className={`w-50 bg-none transition-all duration-500 ease-out ml-5 ${
                                 isContentVisible
                                   ? 'opacity-100 translate-x-0'
                                   : 'opacity-0 translate-x-4'

@@ -105,7 +105,10 @@ const PromoBannerSection = ({ router }: { router: any }) => {
           </div>
           <Swiper
             spaceBetween={16}
-            slidesPerView='auto'
+            slidesPerView={2}
+            breakpoints={{
+              640: { slidesPerView: 2 },
+            }}
             loop={items.length > 4}
             autoplay={{ delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true }}
             modules={[Navigation, Autoplay]}

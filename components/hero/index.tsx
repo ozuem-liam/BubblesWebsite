@@ -46,15 +46,15 @@ const heroSlides = [
   //     'Schedule pickups and deliveries at your convenience. We work around your schedule to make laundry day stress-free.',
   //   image: heroImg,
   // },
-  {
-    title: 'Premium Car Wash Services',
-    subtitle: 'Sparkling Clean Cars',
-    description:
-      'Get your car spotless with our professional car wash services. We use advanced cleaning techniques and premium products for the perfect shine.',
-    image: bubbleCarImg,
-    isCarWash: true,
-    subscribeUrl: 'https://paystack.shop/pay/kqz7lftfi9',
-  },
+  // {
+  //   title: 'Premium Car Wash Services',
+  //   subtitle: 'Sparkling Clean Cars',
+  //   description:
+  //     'Get your car spotless with our professional car wash services. We use advanced cleaning techniques and premium products for the perfect shine.',
+  //   image: bubbleCarImg,
+  //   isCarWash: true,
+  //   subscribeUrl: 'https://paystack.shop/pay/kqz7lftfi9',
+  // },
 ]
 
 export const Hero: React.FC = () => {
@@ -94,10 +94,10 @@ export const Hero: React.FC = () => {
             pagination={{
               clickable: true,
             }}
-            autoplay={{
-              delay: 2000,
-              disableOnInteraction: false,
-            }}
+            // autoplay={{
+            //   delay: 2000,
+            //   disableOnInteraction: false,
+            // }}
             effect='fade'
             fadeEffect={{
               crossFade: true,
@@ -154,7 +154,7 @@ export const Hero: React.FC = () => {
                       </div>
                     </RevealAnimation>
 
-                    <RevealAnimation style='md:w-fit w-full'>
+                    {/* <RevealAnimation style='md:w-fit w-full'>
                       <div
                         className={`transform transition-all duration-700 delay-450 ease-out ${
                           isTransitioning
@@ -179,7 +179,7 @@ export const Hero: React.FC = () => {
                           )}
                         </div>
                       </div>
-                    </RevealAnimation>
+                    </RevealAnimation> */}
                   </div>
 
                   {/* Image Section */}

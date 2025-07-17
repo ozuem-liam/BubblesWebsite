@@ -87,13 +87,16 @@ export default function CategoriesPage() {
                 <>
                   <Swiper
                     spaceBetween={16}
-                    slidesPerView="auto"
-                    loop={categoryItems[cat._id].length > 3}
-                    autoplay={{
-                      delay: 2500,
-                      disableOnInteraction: false,
-                      pauseOnMouseEnter: true,
+                    slidesPerView={2}
+                    breakpoints={{
+                      640: { slidesPerView: 2 },
                     }}
+                    loop={categoryItems[cat._id].length > 3}
+                    // autoplay={{
+                    //   delay: 2500,
+                    //   disableOnInteraction: false,
+                    //   pauseOnMouseEnter: true,
+                    // }}
                     modules={[Navigation, Autoplay]}
                     navigation={{
                       nextEl: `.swiper-button-next-${cat._id}`,
@@ -114,7 +117,7 @@ export default function CategoriesPage() {
                       </SwiperSlide>
                     ))}
                   </Swiper>
-                  {categoryItems[cat._id].length > 3 && (
+                  {categoryItems[cat._id].length > 2 && (
                     <>
                       <button
                         className={`swiper-button-prev-${cat._id} absolute left-0 top-1/2 z-10 -translate-y-1/2 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-gray-100 transition-colors`}
