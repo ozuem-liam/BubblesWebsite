@@ -6,7 +6,6 @@ import { useAuth } from '@/contexts/auth-context'
 import { useRouter } from 'next/navigation'
 import { capitalize } from '@/lib/utils'
 import bubblesDesktopStorebanner from '../../../public/bubbles_store_desktop_img.jpeg'
-import bubblesMobileStorebanner from '../../../public/bubbles_store_mobile_img.jpeg'
 import { CustomImage } from '@/components/global/Image'
 import { Button } from '@/components/ui/button'
 import { useBubbleShopItems, useShops } from '@/hooks/useShops'
@@ -20,12 +19,12 @@ import { Navigation, Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/autoplay'
-import { InputField } from '@/components/global/InputField'
 import { useForm } from 'react-hook-form'
 import { useAddress } from '@/hooks/useAddress'
 import { useEffect, useState } from 'react'
-import { Form } from '@/components/ui/form'
 import { ChevronDown } from 'lucide-react'
+import Script from 'next/script';
+import { useRef } from 'react';
 
 export const Dashboard = () => {
   const { user, loading } = useAuth()
@@ -37,6 +36,7 @@ export const Dashboard = () => {
       street_address: '',
       city: '',
       state: '',
+      lga: '',
       country: 'Nigeria',
     },
   })
@@ -50,7 +50,7 @@ export const Dashboard = () => {
   ];
   const NIGERIA_STATES = ['Lagos'];
   const handleAddressSubmit = async (values: any) => {
-    await addAddress({ ...values, lga: values.city })
+    await addAddress({ ...values })
     setShowAddressModal(false)
     form.reset()
   }
@@ -60,6 +60,78 @@ export const Dashboard = () => {
       getAddresses();
     }
   }, [user?._id, getAddresses]);
+
+  const autocompleteInputRef = useRef<HTMLInputElement>(null);
+  // const [autoStreet, setAutoStreet] = useState('');
+  // const [autoCity, setAutoCity] = useState('');
+  // const [autoState, setAutoState] = useState('');
+  const [autoError, setAutoError] = useState('');
+  const [googleReady, setGoogleReady] = useState(false);
+
+  // Handler for Google Places Autocomplete
+  useEffect(() => {
+    if (!googleReady || !showAddressModal || typeof window === 'undefined' || !autocompleteInputRef.current) return;
+    const google = (window as any).google;
+    if (!google || !google.maps) return;
+    console.log('Initializing autocomplete');
+    // Use the correct Autocomplete constructor
+    const autocomplete = new google.maps.places.Autocomplete(autocompleteInputRef.current, {
+      types: ['address'],
+      componentRestrictions: { country: 'ng' },
+    });
+    const listener = autocomplete.addListener('place_changed', async () => {
+      const place = autocomplete.getPlace();
+      if (!place.address_components) {
+        setAutoError('Could not extract address details.');
+        return;
+      }
+      let street = '';
+      let city = '';
+      let state = '';
+      let lga = '';
+      let street_number = '';
+      place.address_components.forEach((component: any) => {
+        if (component.types.includes('route')) {
+          street = component.long_name;
+        }
+        if (component.types.includes('street_number')) {
+          street_number = component.long_name;
+        }
+        if (component.types.includes('neighborhood')) {
+          city = component.long_name;
+        }
+        if (component.types.includes('administrative_area_level_3')) {
+          lga = component.long_name;
+        }
+        if (component.types.includes('administrative_area_level_1')) {
+          state = component.long_name;
+        }
+      });
+      // setAutoStreet(street);
+      // setAutoCity(city);
+      // setAutoState(state);
+      setAutoError('');
+      // Automatically submit extracted address
+      if (street_number && street && city && state) {
+        await handleAddressSubmit({
+          street_address: street_number + " " + street,
+          city: city,
+          state: state,
+          country: 'Nigeria',
+          lga: lga
+        });
+        setShowAddressModal(false);
+        // setAutoStreet('');
+        // setAutoCity('');
+        // setAutoState('');
+        if (autocompleteInputRef.current) autocompleteInputRef.current.value = '';
+      }
+    });
+    // Cleanup
+    return () => {
+      if (listener && listener.remove) listener.remove();
+    };
+  }, [googleReady, showAddressModal, autocompleteInputRef]);
 
   if (loading) {
     return <LoadingComponent fallbackText={'Loading your dashboard...'} />
@@ -86,6 +158,24 @@ export const Dashboard = () => {
         <div className='fixed inset-0 z-50 flex flex-col justify-end'>
           <div className='absolute inset-0 bg-black/40' onClick={() => setShowAddressModal(false)} />
           <div className='relative w-full h-[70vh] bg-white shadow-lg z-50 p-8 mx-auto rounded-t-2xl flex flex-col items-center justify-start overflow-y-auto'>
+            {/* Google Places Autocomplete Address Input (now inside modal) */}
+            <div className='w-full flex flex-col items-start mb-6'>
+              <label htmlFor='google-address-input' className='mb-1 text-sm font-medium text-gray-700'>Search Address</label>
+              <input
+                id='google-address-input'
+                ref={autocompleteInputRef}
+                type='text'
+                placeholder='Enter a new address'
+                className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200 mb-2'
+              />
+              {autoError && <span className='text-red-500 text-xs mb-1'>{autoError}</span>}
+              {/* <div className='w-full flex flex-col gap-1 text-sm text-gray-700'>
+                {autoStreet && <span><b>Street:</b> {autoStreet}</span>}
+                {autoCity && <span><b>City:</b> {autoCity}</span>}
+                {autoState && <span><b>State:</b> {autoState}</span>}
+              </div> */}
+            </div>
+            {/* Previous Addresses */}
             <div className='w-full max-w-md mb-6'>
               <h3 className='text-lg font-semibold mb-2 text-gray-900'>Previous Addresses</h3>
               {addressLoading ? (
@@ -109,7 +199,7 @@ export const Dashboard = () => {
                 <div className='text-gray-500'>No addresses found.</div>
               )}
             </div>
-            <Form {...form}>
+            {/* <Form {...form}>
               <form onSubmit={form.handleSubmit(handleAddressSubmit)} className='w-full max-w-md flex flex-col gap-4'>
                 <InputField
                   control={form.control}
@@ -143,10 +233,15 @@ export const Dashboard = () => {
                   Add Address
                 </Button>
               </form>
-            </Form>
+            </Form> */}
           </div>
         </div>
       )}
+      <Script
+        src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyCBwgl4rAVLN4mKtZmUPFFq8UzmqZebVS8&libraries=places&loading=async`}
+        strategy='afterInteractive'
+        onLoad={() => setGoogleReady(true)}
+      />
       <div className='mx-auto py-6 space-y-8'>
         <WelcomeSection user={user} />
         <ShopsSection />
