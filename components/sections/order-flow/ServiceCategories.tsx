@@ -191,7 +191,7 @@ export const ServiceCategories = ({
                         {categoryItems.map((item, itemIndex) => (
                           <SwiperSlide
                             key={`${category._id}-${item._id}-${itemIndex}`}
-                            style={{ width: '60%' }}
+                            style={{ width: '65%' }}
                           >
                             <div
                               className={`w-50 bg-none transition-all duration-500 ease-out ml-5 ${
