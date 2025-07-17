@@ -20,17 +20,134 @@ import { Navigation, Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/autoplay'
+import { InputField } from '@/components/global/InputField'
+import { useForm } from 'react-hook-form'
+import { useAddress } from '@/hooks/useAddress'
+import { useEffect, useState } from 'react'
+import { Form } from '@/components/ui/form'
+import { ChevronDown } from 'lucide-react'
 
 export const Dashboard = () => {
   const { user, loading } = useAuth()
   const router = useRouter()
+  const [showAddressModal, setShowAddressModal] = useState(false)
+  const { addAddress, addresses, setAddressActive, loading: addressLoading, error: addressError, getAddresses } = useAddress(user?._id)
+  const form = useForm({
+    defaultValues: {
+      street_address: '',
+      city: '',
+      state: '',
+      country: 'Nigeria',
+    },
+  })
+  const lagosCities = [
+    "Lagos Island", "Victoria Island", "Ikoyi", "Lekki", "Ajah", "Banana Island",
+    "Ikeja", "Yaba", "Surulere", "Mushin", "Oshodi", "Isolo", "Ejigbo", "Okota",
+    "Amuwo-Odofin", "Festac Town", "Satellite Town", "Orile", "Ebute-Metta", "Oyingbo",
+    "Iddo", "Jibowu", "Palmgrove", "Onipanu", "Fadeyi", "Ilupeju", "Somolu", "Bariga",
+    "Shomolu", "Gbagada", "Oworonshoki", "Kosofe", "Ketu", "Ojota", "Magodo", "Omole",
+    "Ogba", "Agege", "Dopemu", "Mangoro", "Iyana-Ipaja"
+  ];
+  const NIGERIA_STATES = ['Lagos'];
+  const handleAddressSubmit = async (values: any) => {
+    await addAddress({ ...values, lga: values.city })
+    setShowAddressModal(false)
+    form.reset()
+  }
+
+  useEffect(() => {
+    if (user?._id) {
+      getAddresses();
+    }
+  }, [user?._id, getAddresses]);
 
   if (loading) {
     return <LoadingComponent fallbackText={'Loading your dashboard...'} />
   }
+  console.log({ addresses })
 
   return (
     <div>
+      {/* Address Modal Trigger - Long Thin Div with Active Address */}
+      <div className='w-full flex justify-start mb-4'>
+        <div
+          className='w-[80%] px-4 py-1 rounded-full border border-blue-300 bg-blue-50 text-blue-900 flex items-center justify-between cursor-pointer hover:bg-blue-100 transition-colors text-sm font-medium shadow-sm'
+          onClick={() => setShowAddressModal(true)}
+        >
+          <span className='truncate'>
+            {addresses && addresses.length > 0 && addresses.find(a => a.is_active)
+              ? `${addresses.find(a => a.is_active)?.street_address}, ${addresses.find(a => a.is_active)?.city}, ${addresses.find(a => a.is_active)?.state}`
+              : 'Add Address'}
+          </span>
+          <ChevronDown className='ml-2 w-5 h-5 text-blue-600' />
+        </div>
+      </div>
+      {/* Address Modal Overlay */}
+      {showAddressModal && (
+        <div className='fixed inset-0 z-50 flex flex-col justify-end'>
+          <div className='absolute inset-0 bg-black/40' onClick={() => setShowAddressModal(false)} />
+          <div className='relative w-full h-[70vh] bg-white shadow-lg z-50 p-8 mx-auto rounded-t-2xl flex flex-col items-center justify-start overflow-y-auto'>
+            <div className='w-full max-w-md mb-6'>
+              <h3 className='text-lg font-semibold mb-2 text-gray-900'>Previous Addresses</h3>
+              {addressLoading ? (
+                <div className='text-gray-500'>Loading...</div>
+              ) : addressError ? (
+                <div className='text-red-500'>{addressError}</div>
+              ) : addresses && addresses.length > 0 ? (
+                <div className='space-y-2'>
+                  {addresses.map(addr => (
+                    <div
+                      key={addr._id}
+                      className={`p-3 rounded border flex items-center justify-between cursor-pointer ${addr.is_active ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-gray-50 hover:bg-blue-100'}`}
+                      onClick={() => setAddressActive(addr._id)}
+                    >
+                      <span className='text-gray-800 text-sm'>{addr.street_address}, {addr.city}, {addr.state}</span>
+                      {addr.is_active && <span className='ml-2 text-xs text-blue-600 font-bold'>Active</span>}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className='text-gray-500'>No addresses found.</div>
+              )}
+            </div>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(handleAddressSubmit)} className='w-full max-w-md flex flex-col gap-4'>
+                <InputField
+                  control={form.control}
+                  name='street_address'
+                  placeholder='Street Address'
+                  inputCategory='input'
+                  inputType='text'
+                />
+                <InputField
+                  control={form.control}
+                  name='city'
+                  placeholder='Select City'
+                  inputCategory='select'
+                  selectList={lagosCities.map(city => ({ value: city, title: city }))}
+                />
+                <InputField
+                  control={form.control}
+                  name='state'
+                  placeholder='Select State'
+                  inputCategory='select'
+                  selectList={NIGERIA_STATES.map(state => ({ value: state, title: state }))}
+                />
+                <InputField
+                  control={form.control}
+                  name='country'
+                  placeholder='Select Country'
+                  inputCategory='select'
+                  selectList={[{ value: 'Nigeria', title: 'Nigeria' }]}
+                />
+                <Button type='submit' className='bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 mt-2'>
+                  Add Address
+                </Button>
+              </form>
+            </Form>
+          </div>
+        </div>
+      )}
       <div className='mx-auto py-6 space-y-8'>
         <WelcomeSection user={user} />
         <ShopsSection />

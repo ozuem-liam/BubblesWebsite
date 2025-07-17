@@ -280,10 +280,12 @@ export default function DashboardPageLayout({
                   align='end'
                   className='w-48 border border-gray-200 shadow-lg z-[1000] bg-white rounded-lg'
                 >
-                  <DropdownMenuItem className='flex items-center gap-3 px-4 py-3 hover:bg-gray-50'>
-                    <User className='w-5 h-5 text-gray-500' />
-                    <span className='font-medium'>Profile</span>
-                  </DropdownMenuItem>
+                  <Link href='/dashboard/profile' passHref legacyBehavior>
+                    <DropdownMenuItem className='flex items-center gap-3 px-4 py-3 hover:bg-gray-50'>
+                      <User className='w-5 h-5 text-gray-500' />
+                      <span className='font-medium'>Profile</span>
+                    </DropdownMenuItem>
+                  </Link>
                   <DropdownMenuItem
                     onClick={handleOpenAlert}
                     className='flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 focus:text-red-600'
