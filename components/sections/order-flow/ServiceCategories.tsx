@@ -166,16 +166,16 @@ export const ServiceCategories = ({
                     <>
                       <Swiper
                         spaceBetween={16}
-                        slidesPerView={2}
+                        slidesPerView={1}
                         breakpoints={{
                           640: { slidesPerView: 2 },
                         }}
                         loop={categoryItems.length > 3}
-                        // autoplay={{
-                        //   delay: 2500,
-                        //   disableOnInteraction: false,
-                        //   pauseOnMouseEnter: true,
-                        // }}
+                        autoplay={{
+                          delay: 3000,
+                          disableOnInteraction: false,
+                          pauseOnMouseEnter: true,
+                        }}
                         modules={[Navigation, Autoplay]}
                         navigation={{
                           nextEl: `.swiper-button-next-${category._id}`,
@@ -191,10 +191,10 @@ export const ServiceCategories = ({
                         {categoryItems.map((item, itemIndex) => (
                           <SwiperSlide
                             key={`${category._id}-${item._id}-${itemIndex}`}
-                            style={{ width: '65%' }}
+                            style={{ width: '100%' }}
                           >
                             <div
-                              className={`w-50 bg-none transition-all duration-500 ease-out ml-5 ${
+                              className={`w-full bg-none transition-all duration-500 ease-out ${
                                 isContentVisible
                                   ? 'opacity-100 translate-x-0'
                                   : 'opacity-0 translate-x-4'
