@@ -8,11 +8,11 @@ export const ErrorComponent = ({ error }: { error: string }) => {
         <AlertCircle className='w-8 h-8 text-red-500' />
       </div>
       <Text as='p' style='text-red-600 font-medium mb-2'>
-        Oops! Something went wrong
+        { error ? error : "Oops! Something went wrong"}
       </Text>
-      <Text as='p' style='text-gray-600 text-sm'>
+      {/* <Text as='p' style='text-gray-600 text-sm'>
         {error}
-      </Text>
+      </Text> */}
     </div>
   )
 }

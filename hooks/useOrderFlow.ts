@@ -420,7 +420,6 @@ export const useOrderFlow = (shopId?: string) => {
           setCart(resp.data)
         }
       }
-      console.log('Cart ID:', cartId, 'Items to update:', itemsToUpdate)
       // Update cart items and pricing
       if (itemsToUpdate.length > 0 && cartId) {
         updatedCart = await orderFlowService.updateMultipleCartItems(
@@ -501,8 +500,8 @@ export const useOrderFlow = (shopId?: string) => {
         token
       )
 
-      console.log('Order Payload:', orderPayload, paymentResponse)
-      return
+      // console.log('Order Payload:', orderPayload, paymentResponse)
+      // return
 
       if (paymentResponse?.code === 200 && paymentResponse?.data) {
         toast.success(paymentResponse.message)
@@ -600,7 +599,6 @@ export const useFetchCategoryItems = (
           paginationPage,
           limit
         )
-        console.log('this is rbowese', response)
 
         setItems(response?.data?.items || response?.data?.results || [])
         setPaginationTotal(response?.data?.pagination?.total)

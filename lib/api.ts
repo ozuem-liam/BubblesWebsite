@@ -1,3 +1,5 @@
+import { ok } from "node:assert"
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 export const WEB_DOMAIN = process.env.WEB_DOMAIN || 'https://bubblesng.com/'
 
@@ -39,7 +41,9 @@ export const api = {
     })
 
     if (!response.ok) {
-      throw new Error(`API request failed with status ${response.status}`)
+      const error = await response.json();
+      throw new Error(error.message)
+      // throw new Error(`API request failed with status ${response.status}`)
     }
 
     return response.json()

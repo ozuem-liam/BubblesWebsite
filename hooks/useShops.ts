@@ -17,7 +17,6 @@ export const useShops = (page = 1, limit = 10) => {
       try {
         setLoading(true);
         const response = await shopService.getActiveServices(token!);
-        console.log(response);
         setShops(response.data.services);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to fetch shops");
@@ -77,7 +76,6 @@ export const useBubbleShopItems = (q: string) => {
       try {
         if (paginationPage === 1) setLoading(true);
         const response = await shopService.searchForBubblesShopItem(q);
-        console.log(response);
         // Support both 'results' and 'items' keys from API
         const data = response.data;
         let products: Item[] = [];

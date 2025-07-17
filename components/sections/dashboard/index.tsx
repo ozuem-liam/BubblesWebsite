@@ -64,7 +64,6 @@ export const Dashboard = () => {
   if (loading) {
     return <LoadingComponent fallbackText={'Loading your dashboard...'} />
   }
-  console.log({ addresses })
 
   return (
     <div>
