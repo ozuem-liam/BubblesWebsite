@@ -65,7 +65,7 @@ export const TopNav: React.FC = () => {
         isScrolled ? 'bg-primary800 shadow-md' : 'bg-transparent'
       }`}
     >
-      <MaxScreenWrapper style='lg:px-[2.5rem] xl:px-[5.5rem] px-4 lg:pb-0 pb-[1rem] flex lg:flex-row flex-col justify-between lg:items-center items-start lg:gap-[12px] gap-0'>
+      <MaxScreenWrapper style='lg:px-[2.5rem] px-4 lg:pb-0 pb-[1rem] flex lg:flex-row flex-col justify-between lg:items-center items-start lg:gap-[12px] gap-0'>
         <div>
           <Logo />
         </div>

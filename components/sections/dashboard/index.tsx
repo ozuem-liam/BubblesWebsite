@@ -327,10 +327,10 @@ const PromoBannerSection = ({ router }: { router: any }) => {
               nextEl: `.dashboard-swiper-button-next`,
               prevEl: `.dashboard-swiper-button-prev`,
             }}
-            className='product-swiper pb-6'
+            className='w-full pb-6'
           >
             {items.slice(0, 10).map((item, idx) => (
-              <SwiperSlide key={item._id} style={{ width: 240, maxWidth: '90vw' }}>
+              <SwiperSlide key={item._id} style={{ width: '100%' }}>
                 <CategoryItems
                   items={[item]}
                   cart={cart}
