@@ -45,7 +45,6 @@ export const CategoryItems = ({
   const cartItem = cart?.items.find((ci) => ci.item._id === item._id)
   const quantity = cartItem?.quantity || 0
   const price = cartItem ? cartItem.price : item.fixed_amount
-
   return (
     <div className='flex flex-col gap-4 items-center w-full transition-all duration-200 overflow-hidden'>
       {/* Item Image */}

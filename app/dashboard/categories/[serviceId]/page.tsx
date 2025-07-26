@@ -8,13 +8,13 @@ import { Text } from "@/components/global/Text";
 import { useCategory } from "@/hooks/useCategory";
 import { orderFlowService, Item } from "@/lib/order-flow";
 import { Category } from "@/lib/category";
-import { useCartStore } from "@/stores/CartStore";
 import { CategoryItems } from "@/components/sections/order-flow/CategoryItems";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
+import { useOrderFlow } from "@/hooks/useOrderFlow";
 
 export default function CategoriesPage() {
   const { serviceId } = useParams();
@@ -25,12 +25,7 @@ export default function CategoriesPage() {
   const swiperRefs = useRef<{ [key: string]: any }>({});
 
   // Cart store logic
-  const {
-    cart,
-    addToLocalCart,
-    removeFromLocalCart,
-    updateLocalCartQuantity,
-  } = useCartStore();
+  const { cart, addToCart, removeFromCart, updateQuantity } = useOrderFlow()
 
   useEffect(() => {
     const fetchAllItems = async () => {
@@ -110,9 +105,9 @@ export default function CategoriesPage() {
                         <CategoryItems
                           items={[item]}
                           cart={cart}
-                          onAddToCart={addToLocalCart}
-                          onRemoveFromCart={removeFromLocalCart}
-                          onUpdateQuantity={updateLocalCartQuantity}
+                          onAddToCart={addToCart}
+                          onRemoveFromCart={removeFromCart}
+                          onUpdateQuantity={updateQuantity}
                         />
                       </SwiperSlide>
                     ))}
