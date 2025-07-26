@@ -10,11 +10,11 @@ interface SignupRequestPayload {
   last_name: string;
   email: string;
   phone: string;
-  address: string;
-  country: string;
-  state: string;
-  local_government: string;
-  city: string;
+  // address: string;
+  // country: string;
+  // state: string;
+  // local_government: string;
+  // city: string;
   password: string;
   user_type: string;
 }

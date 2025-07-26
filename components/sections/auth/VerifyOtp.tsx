@@ -99,6 +99,8 @@ const VerifyOtpFormContent = () => {
       footerText="Didn't receive the code?"
       footerLink="#"
       footerLinkTitle="Resend OTP"
+      hasAction={true}
+      action={handleResendOtp}
     >
       {!otpSent ? (
         <div className="w-full flex flex-col gap-4">
