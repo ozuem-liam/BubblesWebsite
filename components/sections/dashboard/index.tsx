@@ -277,7 +277,7 @@ export const Dashboard = () => {
 
         {/* Load Google Maps Script */}
         <Script
-          src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyCBwgl4rAVLN4mKtZmUPFFq8UzmqZebVS8&libraries=places&loading=async`}
+          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_PLACE_API_KEY}&libraries=places&loading=async`}
           strategy='lazyOnload'
           onLoad={() => setGoogleReady(true)}
         />
