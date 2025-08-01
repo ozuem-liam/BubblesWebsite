@@ -82,7 +82,7 @@ interface Order {
   sub_total: number
   delivery_fee: number
   processing_fee: number
-  shipping_address: string
+  shipping_address?: string
   address: string
   scheduled_date?: string
   scheduled_time?: string

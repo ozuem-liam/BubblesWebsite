@@ -36,7 +36,7 @@ export interface CreateOrderPayload {
   delivery_option: DeliveryOption;
   scheduled_date: string; // ISO date string
   scheduled_time: string; // HH:mm:ss format
-  shipping_address: string;
+  // shipping_address: string;
   payment_method: PaymentMethod;
   sub_total: number;
   delivery_fee?: number;
@@ -84,7 +84,7 @@ export interface Order {
   delivery_option: DeliveryOption;
   scheduled_date: string; // ISO date string
   scheduled_time: string; // HH:mm:ss format
-  shipping_address: string;
+  shipping_address?: string;
   delivery_fee: number; // in kobo
   payment_method: PaymentMethod;
   sub_total: number; // in kobo

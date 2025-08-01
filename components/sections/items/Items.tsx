@@ -1,17 +1,21 @@
-'use client'
+"use client";
 
-import { Skeleton } from '../../../components/ui/skeleton'
-import { useSearchParams } from 'next/navigation'
-import { useFetchCategoryItems, useOrderFlow } from '@/hooks/useOrderFlow'
-import { CategoryItems } from '../order-flow/CategoryItems'
-import { BreadCrumb } from '@/components/global/BreadCrumb'
-import { useRouter } from 'nextjs-toploader/app'
-import { ErrorComponent } from '@/components/global/Error'
-import { Pagination } from '@/components/global/Pagination'
+import { Skeleton } from "../../../components/ui/skeleton";
+import { useParams, useSearchParams } from "next/navigation";
+import { useFetchCategoryItems, useOrderFlow } from "@/hooks/useOrderFlow";
+import { CategoryItems } from "../order-flow/CategoryItems";
+import { BreadCrumb } from "@/components/global/BreadCrumb";
+import { useRouter } from "nextjs-toploader/app";
+import { ErrorComponent } from "@/components/global/Error";
+import { Pagination } from "@/components/global/Pagination";
+import { useCategory } from "@/hooks/useCategory";
 
 export const CategoryItemsPageComponent = () => {
-  const { cart, addToCart, removeFromCart, updateQuantity } = useOrderFlow()
-  const query = useSearchParams()
+  const { serviceId } = useParams();
+  const { vendorId } = useCategory(serviceId as string);
+  const { cart, addToCart, removeFromCart, updateQuantity } =
+    useOrderFlow(vendorId);
+  const query = useSearchParams();
   const {
     items,
     loading,
@@ -20,45 +24,45 @@ export const CategoryItemsPageComponent = () => {
     setPaginationPage,
     paginationPage,
   } = useFetchCategoryItems(
-    query.get('vendor_id') || '',
-    query.get('service_id') || '',
-    query.get('category_id') || ''
-  )
+    query.get("vendor_id") || "",
+    query.get("service_id") || "",
+    query.get("category_id") || ""
+  );
 
-  const router = useRouter()
+  const router = useRouter();
 
   const breadcrumbItems = [
     {
       isHome: true,
-      label: 'Home',
-      onClick: () => router.push('/dashboard'),
+      label: "Home",
+      onClick: () => router.push("/dashboard"),
     },
     {
       label: `Shop Items`,
     },
-  ]
+  ];
 
   if (loading) {
     return (
-      <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {[...Array(4)].map((_, index) => (
           <Skeleton
             key={index}
-            className='w-full h-32 bg-gray-200 rounded-lg'
+            className="w-full h-32 bg-gray-200 rounded-lg"
           />
         ))}
       </div>
-    )
+    );
   }
 
   if (error) {
-    return <ErrorComponent error={error} />
+    return <ErrorComponent error={error} />;
   }
 
   return (
     <div>
       <BreadCrumb breadcrumbItems={breadcrumbItems} />
-      <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4'>
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {(items || []).map((item, itemIndex) => (
           <CategoryItems
             key={itemIndex}
@@ -91,5 +95,5 @@ export const CategoryItemsPageComponent = () => {
         }
       `}</style>
     </div>
-  )
-}
+  );
+};

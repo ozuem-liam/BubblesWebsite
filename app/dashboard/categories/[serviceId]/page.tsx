@@ -25,7 +25,7 @@ export default function CategoriesPage() {
   const swiperRefs = useRef<{ [key: string]: any }>({});
 
   // Cart store logic
-  const { cart, addToCart, removeFromCart, updateQuantity } = useOrderFlow()
+  const { cart, addToCart, removeFromCart, updateQuantity } = useOrderFlow(vendorId);
 
   useEffect(() => {
     const fetchAllItems = async () => {

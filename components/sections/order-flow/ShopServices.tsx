@@ -23,9 +23,8 @@ export const ShopServices = ({
 const handleServiceSelect = (service: ShopService) => {
   onSelectService(service);
   setCategories(service.categories);
-  
   // Save service ID to localStorage
-  localStorage.setItem('selectedServiceId', service?.service?._id);
+  localStorage.setItem("selectedServiceId", service?.service?._id);
 };
 
   return (

@@ -487,7 +487,7 @@ export const useOrderFlow = (shopId?: string) => {
         delivery_option: 'delivery',
         scheduled_date: scheduledDate,
         scheduled_time: `${timeSlotId || ''}:00`,
-        shipping_address: shippingAddressId,
+        // shipping_address: shippingAddressId,
         payment_method: payment_method, // or whatever method selected
         sub_total: subtotal,
         delivery_fee: deliveryFee,
