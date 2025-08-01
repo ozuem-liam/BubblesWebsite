@@ -283,7 +283,7 @@ export const Dashboard = () => {
         />
 
         {/* Rest of the Dashboard Content */}
-        <div className='mx-auto py-6 px-4 space-y-8'>
+        <div className='mx-auto py-6 space-y-8'>
           <WelcomeSection user={user} />
           <ShopsSection />
           <PromoBannerSection router={router} />
@@ -301,7 +301,7 @@ const WelcomeSection = ({ user }: { user: any }) => (
   <section>
     <Text
       as='h1'
-      style='text-gray-900 text-2xl font-bold mb-2'
+      style='text-gray-900 text-2xl font-bold'
       children={`Welcome back, ${capitalize(user?.first_name) || 'Guest'}! 👋`}
     />
     <Text

@@ -65,7 +65,8 @@ export const CategoryItems = ({
         <div className='space-y-1 w-full'>
           <Text
             as='h4'
-            style='text-lg text-center text-gray-800 font-medium text-sm leading-tight line-clamp-3'
+            // style='text-lg text-center text-gray-800 font-medium text-sm leading-tight line-clamp-3'
+            style='text-lg text-center text-gray-800 font-medium text-sm leading-tight'
           >
             {item.name}
           </Text>

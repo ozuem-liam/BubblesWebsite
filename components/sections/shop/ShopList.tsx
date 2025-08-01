@@ -57,11 +57,11 @@ const ServiceCard = ({ service }: { service: Service }) => {
   }
   return (
     <div
-      className='group rounded-[10px] overflow-hidden border border-gray-200 hover:border-blue-200 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer'
+      className='group rounded-[10px] overflow-hidden hover:border-blue-200 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer'
       onClick={handleClick}
     >
       {/* Service Image */}
-      <div className='bg-white m-1 border border-gray-200 rounded-md p-3 relative h-48 from-gray-100 to-gray-200 overflow-hidden'>
+      <div className='bg-white rounded-md relative h-48 from-gray-100 to-gray-200 overflow-hidden'>
         {service.image ? (
           <CustomImage
             src={service.image}
