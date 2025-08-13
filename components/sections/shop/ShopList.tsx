@@ -87,12 +87,12 @@ const ServiceCard = ({ service }: { service: Service }) => {
       {/* Service Information */}
       <div className="py-2 px-2">
         <div className="mb-2">
-          <Text
+          {/* <Text
             as="h3"
             style="text-gray-900 text-lg font-bold mb-2 line-clamp-1 group-hover:text-blue-600 transition-colors"
           >
             {service.name}
-          </Text>
+          </Text> */}
           <Text as="p" style="text-gray-600 text-sm line-clamp-2">
             {service.meta}
           </Text>
