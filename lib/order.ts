@@ -29,7 +29,7 @@ export interface CreateOrderPayload {
   customer_last_name: string;
   customer_phone_number: string;
   amount: number;
-  address: string;
+  // address: string;
   total_quantity: number;
   cart: string;
   service: string;

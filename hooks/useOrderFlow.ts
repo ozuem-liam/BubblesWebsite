@@ -475,12 +475,6 @@ export const useOrderFlow = (shopId?: string) => {
         customer_last_name: user?.last_name || '',
         customer_phone_number: user?.phone || '',
         amount: totalAmount || 0,
-        address:
-          (typeof shippingAddress === 'object'
-            ? `${shippingAddress?.street_address || ''} ${
-                shippingAddress?.city || ''
-              } ${shippingAddress?.state || ''}`
-            : shippingAddress) || '',
         total_quantity: totalItems,
         cart: finalCartId || '',
         service: serviceId,
