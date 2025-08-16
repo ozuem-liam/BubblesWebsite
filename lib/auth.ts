@@ -130,7 +130,8 @@ export const authService = {
   },
 
   async sendOtp(email: string) {
-    return await api.post<LoginResponse>('/customer/send-verification-code', { email, user_type: 'customer' });
+    // return await api.post<LoginResponse>('/customer/send-otp', { email, user_type: 'customer' });
+    return await api.post<LoginResponse>('/customer/send-otp', { email });
   },
 
   async verifyOtp(data: OtpData) {
