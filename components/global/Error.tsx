@@ -11,7 +11,7 @@ export const ErrorComponent = ({ error }: { error: string }) => {
         {error
           ? error == "Cannot read properties of null (reading 'service')"
             ? "Service coming soon"
-            : error
+            : "Coming soon!!!"
           : "Oops! Something went wrong"}
       </Text>
       {/* <Text as='p' style='text-gray-600 text-sm'>
