@@ -10,7 +10,7 @@ export default async function BubbleStorePage() {
 
   return (
     <section className="h-screen py-6">
-      <header className='flex flex-wrap justify-between items-center mb-8 gap-4'>
+      {/* <header className='flex flex-wrap justify-between items-center mb-8 gap-4'>
         <div>
           <Text
             as='h2'
@@ -18,7 +18,7 @@ export default async function BubbleStorePage() {
             children='Category Items'
           />
         </div>
-      </header>
+      </header> */}
       <CategoryItemsPageComponent/>
     </section>
   )

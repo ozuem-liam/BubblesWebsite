@@ -60,14 +60,14 @@ export const useCartStore = create<CartState>()(
       },
       addToLocalCart: (item) =>
         set((state) => {
-          const isMultipleStore =
-            state.shopId !== null && item.vendor !== state.shopId
-          if (isMultipleStore) {
-            toast.error(
-              'Please complete your current order before shopping from another store'
-            )
-            return state
-          }
+          // const isMultipleService =
+          //   state.shopId !== null && item.vendor !== state.shopId
+          // if (isMultipleService) {
+          //   toast.error(
+          //     'Please complete your current order before shopping from another service'
+          //   )
+          //   return state
+          // }
           return {
             localCart: {
               ...state.localCart,

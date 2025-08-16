@@ -59,6 +59,7 @@ export default function CategoriesPage() {
   }, [categories, service, vendorId]);
 
   if (loading || itemsLoading) return <LoadingComponent fallbackText="Loading categories and items..." />;
+  console.log({error})
   if (error) return <ErrorComponent error={error} />;
   if (itemsError) return <ErrorComponent error={itemsError} />;
 
@@ -67,7 +68,7 @@ export default function CategoriesPage() {
       {service && (
         <div className="mb-6 flex items-center gap-4">
           <div>
-            <Text as="h2" style="text-2xl font-bold text-gray-900">{service.name}</Text>
+            <Text as="h2" style="text-2xl font-bold text-gray-900">{service?.name}</Text>
           </div>
         </div>
       )}
