@@ -51,7 +51,7 @@ export const NeedHelp: React.FC = () => {
         <MaxScreenWrapper style='w-full gap-[20px] flex flex-wrap md:justify-between justify-center items-center lg:px-[2.5rem] xl:px-[5.5rem] px-4'>
           <RevealAnimation style='w-fit'>
             <Link
-              href='https://api.whatsapp.com/send?phone=2348105951215'
+              href='https://api.whatsapp.com/send?phone=2347061002397'
               className='text-none'
               target='_blank'
             >
@@ -59,7 +59,7 @@ export const NeedHelp: React.FC = () => {
             </Link>
           </RevealAnimation>
           <RevealAnimation style='w-fit'>
-            <Link href='tel:08105951215' className='text-none' target='_blank'>
+            <Link href='tel:07061002397' className='text-none' target='_blank'>
               <HelpCard icon={<CallSvg />} title={'Phone support'} />
             </Link>
           </RevealAnimation>

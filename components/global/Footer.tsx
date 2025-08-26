@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
             </Text>
             <Text style="text-[16px] font-[500] leading-[160%] flex gap-[6px] items-center text-tertiary700">
               <LocationSvg />
-              yusuf Oyero, Ketu, Lagos
+              10 Hughes Ave, Alagomeji-Yaba, Lagos 101011, Lagos
             </Text>
           </div>
           <div className="flex flex-col md:gap-[20px] gap-[15px]">
