@@ -72,33 +72,7 @@ export const TopNav: React.FC = () => {
         <nav>
           <NavLinks />
         </nav>
-        <div className='flex justify-between items-center lg:w-auto w-full h-[85%] gap-4'>
-          <MobileNav />
-          {/* Hide on mobile, show on desktop */}
-          {!isAuthenticated ? (
-            <div className='hidden lg:flex items-center gap-4'>
-              <Link href='/auth/sign-in'>
-                <Button className='p-4 bg-[#bfdbfe] rounded-md text-[rgba(0, 57, 143, 1)] hover:bg-[#a3c4fd] transition-colors'>
-                  Login
-                </Button>
-              </Link>
-              <Link href='/auth/sign-up'>
-                <Button className='p-4 bg-[#bfdbfe] rounded-md text-[rgba(0, 57, 143, 1)] hover:bg-[#a3c4fd] transition-colors'>
-                  Sign Up
-                </Button>
-              </Link>
-            </div>
-          ) : (
-            <div className='hidden lg:flex items-center gap-4'>
-              <Link href='/dashboard'>
-                <Button className='p-4 bg-[#bfdbfe] rounded-md text-[rgba(0, 57, 143, 1)] hover:bg-[#a3c4fd] transition-colors'>
-                  Dashboard
-                </Button>
-              </Link>
-            </div>
-          )}
-          <CartButton cartItemCount={cartItemCount} />
-        </div>
+
       </MaxScreenWrapper>
     </header>
   )

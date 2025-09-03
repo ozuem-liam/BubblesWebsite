@@ -46,7 +46,7 @@ export const MobileNav: React.FC = () => {
         ))}
       </ul>
 
-      <div className='flex flex-col gap-4 mb-30 w-full'>
+      {/* <div className='flex flex-col gap-4 mb-30 w-full'>
         {!isAuthenticated ? (
           <div className='flex flex-col gap-4 w-full'>
             <SheetClose asChild>
@@ -97,7 +97,7 @@ export const MobileNav: React.FC = () => {
             </SheetClose>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   )
 
