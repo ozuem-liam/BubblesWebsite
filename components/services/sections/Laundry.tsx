@@ -67,7 +67,7 @@ export const LaundrySection: React.FC<ILaundrySection> = ({ activeTab }) => {
             </Text>
           </RevealAnimation>
           <Button
-            onClick={() => router.push("/auth/sign-in")}
+            onClick={() => router.push("/")}
             className="text-black bg-primary100 text-tertiary1100 rounded-[12px] h-[50px] w-[162px] flex flex-col items-center lg:text-[16px] text-[14px] font-[500]"
           >
             Get Started

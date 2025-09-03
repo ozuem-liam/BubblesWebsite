@@ -39,7 +39,7 @@ export const SecondHero: React.FC<ISecondHero> = ({ activeTab }) => {
           </RevealAnimation>
           <RevealAnimation style="md:w-fit w-full">
             <div className="flex md:gap-[15px] gap-[6px] md:justify-start justify-between">
-              <Link
+              {/* <Link
                 href={
                   activeTab === customerTab
                     ? `https://play.google.com/store/apps/details?id=com.bubbles.customer.app&hl=en`
@@ -47,10 +47,33 @@ export const SecondHero: React.FC<ISecondHero> = ({ activeTab }) => {
                 }
                 target="_blank"
                 className="text-none"
+              > */}
+              <Link
+                id="store"
+                href={`https://play.google.com/store/apps/details?id=com.bubbles.customer.app&hl=en`}
+                target="_blank"
+                className="text-none p-0 m-0"
               >
                 <BlackPlayStoreSvg />
               </Link>
-              <BlackAppleStoreSvg />
+              {/* <Link
+                href={
+                  activeTab === customerTab
+                    ? `https://play.google.com/store/apps/details?id=com.bubbles.customer.app&hl=en`
+                    : "https://play.google.com/store/apps/details?id=com.bubbles.bubbles_vendor&hl=en"
+                }
+                target="_blank"
+                className="text-none"
+              > */}
+              <Link
+                id="store"
+                href={`https://apps.apple.com/ng/app/bubblesng/id6751163998?platform=iphone`}
+                target="_blank"
+                className="text-none p-0 m-0"
+              >
+                <BlackAppleStoreSvg />
+              </Link>
+              {/* </Link> */}
             </div>
           </RevealAnimation>
         </div>

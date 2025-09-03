@@ -1,26 +1,27 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { CustomImage } from '../global/Image'
-import { Text } from '../global/Text'
-import { TopNav } from '../global/TopNav'
+import { useState } from "react";
+import { CustomImage } from "../global/Image";
+import { Text } from "../global/Text";
+import { TopNav } from "../global/TopNav";
 // import { AppleStoreSvg, PlayStoreSvg } from "../svgs";
-import { MaxScreenWrapper } from '../global/MaxScreen'
-import { RevealAnimation } from '../global/Reveal'
-import Link from 'next/link'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, Pagination, EffectFade } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/effect-fade'
-import heroImg from '../../public/hero_img.svg'
-import bubbleCarImg from '../../public/bubble-car.png'
-import { Button } from '@/components/ui/button'
+import { MaxScreenWrapper } from "../global/MaxScreen";
+import { RevealAnimation } from "../global/Reveal";
+import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, EffectFade } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/effect-fade";
+import heroImg from "../../public/hero_img.svg";
+import bubbleCarImg from "../../public/bubble-car.png";
+import { Button } from "@/components/ui/button";
+import { AppleStoreSvg, PlayStoreSvg } from "../svgs";
 
 const heroSlides = [
   {
-    title: 'Cleaning Made Simple For You',
-    subtitle: '8hrs+ Saved Weekly',
+    title: "Cleaning Made Simple For You",
+    subtitle: "8hrs+ Saved Weekly",
     description:
       "Say goodbye to cleaning stress! Whether it's laundry, home, office cleaning, or fumigation, we deliver fresh, spotless results every time. Perfect for busy professionals and businesses alike—let us handle the mess so you can focus on what matters.",
     image: heroImg,
@@ -55,37 +56,41 @@ const heroSlides = [
   //   isCarWash: true,
   //   subscribeUrl: 'https://paystack.shop/pay/kqz7lftfi9',
   // },
-]
+];
 
 export const Hero: React.FC = () => {
-  const [activeSlide, setActiveSlide] = useState(0)
-  const [isTransitioning, setIsTransitioning] = useState(false)
-  const [isAutoplayPaused, setIsAutoplayPaused] = useState(false)
-  const [swiperInstance, setSwiperInstance] = useState<any>(null)
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
+  const [swiperInstance, setSwiperInstance] = useState<any>(null);
 
   const handleCarouselClick = () => {
     if (swiperInstance) {
       if (isAutoplayPaused) {
-        swiperInstance.autoplay.start()
-        setIsAutoplayPaused(false)
+        swiperInstance.autoplay.start();
+        setIsAutoplayPaused(false);
       } else {
-        swiperInstance.autoplay.stop()
-        setIsAutoplayPaused(true)
+        swiperInstance.autoplay.stop();
+        setIsAutoplayPaused(true);
       }
     }
-  }
+  };
 
   return (
-    <div className='lg:px-[2.5rem] xl:px-[5.5rem] px-4 bg_linear-gradient lg:pt-[3rem] pt-[10rem] relative overflow-hidden'>
+    <div className="lg:px-[2.5rem] xl:px-[5.5rem] px-4 bg_linear-gradient lg:pt-[3rem] pt-[10rem] relative overflow-hidden">
       {/* Dynamic background overlay */}
-      <div className='absolute inset-0 bg-gradient-to-br transition-all duration-1000 ease-in-out' />
+      <div className="absolute inset-0 bg-gradient-to-br transition-all duration-1000 ease-in-out" />
 
       <TopNav />
-      <MaxScreenWrapper style='pt-0 pb-[1rem] relative z-10'>
-        <div 
+      <MaxScreenWrapper style="pt-0 pb-[1rem] relative z-10">
+        <div
           onClick={handleCarouselClick}
           className="cursor-pointer"
-          title={isAutoplayPaused ? "Click to resume autoplay" : "Click to pause autoplay"}
+          title={
+            isAutoplayPaused
+              ? "Click to resume autoplay"
+              : "Click to pause autoplay"
+          }
         >
           <Swiper
             modules={[Autoplay, Pagination, EffectFade]}
@@ -98,62 +103,82 @@ export const Hero: React.FC = () => {
             //   delay: 2000,
             //   disableOnInteraction: false,
             // }}
-            effect='fade'
+            effect="fade"
             fadeEffect={{
               crossFade: true,
             }}
             loop={true}
             speed={600}
-            className='hero-swiper'
+            className="hero-swiper"
             onSwiper={setSwiperInstance}
             onSlideChange={(swiper) => {
-              setIsTransitioning(true)
-              setActiveSlide(swiper.realIndex)
-              setTimeout(() => setIsTransitioning(false), 100)
+              setIsTransitioning(true);
+              setActiveSlide(swiper.realIndex);
+              setTimeout(() => setIsTransitioning(false), 100);
             }}
           >
             {heroSlides.map((slide, index) => (
               <SwiperSlide key={index}>
-                <div className='flex lg:flex-row flex-col items-center md:gap-[40px] gap-[20px] justify-between'>
+                <div className="flex lg:flex-row flex-col items-center md:gap-[40px] gap-[20px] justify-between">
                   {/* Content Section */}
-                  <div className='flex flex-col gap-[24px] lg:w-[40%] xl:w-[50%] w-full lg:items-start items-center'>
-                    <RevealAnimation style='w-fit'>
+                  <div className="flex flex-col gap-[24px] lg:w-[40%] xl:w-[50%] w-full lg:items-start items-center">
+                    <RevealAnimation style="w-fit">
                       <div
                         className={`transform transition-all duration-700 ease-out ${
                           isTransitioning
-                            ? 'translate-y-4 opacity-0'
-                            : 'translate-y-0 opacity-100'
+                            ? "translate-y-4 opacity-0"
+                            : "translate-y-0 opacity-100"
                         }`}
                       >
-                        <Text style='lg:text-start text-center border-l-2 border-primary300 w-fit px-[16px] py-[8px] bg-primary800/90 backdrop-blur-sm rounded-r-[8px] text-tertiary700 text-[14px] font-[400] shadow-lg'>
+                        <Text style="lg:text-start text-center border-l-2 border-primary300 w-fit px-[16px] py-[8px] bg-primary800/90 backdrop-blur-sm rounded-r-[8px] text-tertiary700 text-[14px] font-[400] shadow-lg">
                           {slide.subtitle}
                         </Text>
                       </div>
                     </RevealAnimation>
 
-                    <RevealAnimation style='w-fit'>
+                    <RevealAnimation style="w-fit">
                       <Text
-                        id='home'
-                        style='lg:text-start text-center md:text-[72px] text-[42px] font-[800] leading-[120%] text-tertiary100'
+                        id="home"
+                        style="lg:text-start text-center md:text-[72px] text-[42px] font-[800] leading-[120%] text-tertiary100"
                       >
                         {slide.title}
                       </Text>
                     </RevealAnimation>
 
-                    <RevealAnimation style='w-fit'>
+                    <RevealAnimation style="w-fit">
                       <div
                         className={`transform transition-all duration-700 delay-300 ease-out ${
                           isTransitioning
-                            ? 'translate-y-4 opacity-0'
-                            : 'translate-y-0 opacity-100'
+                            ? "translate-y-4 opacity-0"
+                            : "translate-y-0 opacity-100"
                         }`}
                       >
-                        <Text style='lg:text-start text-center text-tertiary700 text-[15px] md:text-[20px] font-[400] leading-[140%] drop-shadow-sm'>
+                        <Text style="lg:text-start text-center text-tertiary700 text-[15px] md:text-[20px] font-[400] leading-[140%] drop-shadow-sm">
                           {slide.description}
                         </Text>
                       </div>
                     </RevealAnimation>
 
+                    <RevealAnimation style="md:w-fit w-full">
+                      <div className="flex md:gap-[15px] gap-[6px] md:justify-start justify-between">
+                        <Link
+                          id="store"
+                          href={`https://play.google.com/store/apps/details?id=com.bubbles.customer.app&hl=en`}
+                          target="_blank"
+                          className="text-none p-0 m-0"
+                        >
+                          <PlayStoreSvg />
+                        </Link>
+                        <Link
+                          id="store"
+                          href={`https://apps.apple.com/ng/app/bubblesng/id6751163998?platform=iphone`}
+                          target="_blank"
+                          className="text-none p-0 m-0"
+                        >
+                          <AppleStoreSvg />
+                        </Link>
+                      </div>
+                    </RevealAnimation>
                     {/* <RevealAnimation style='md:w-fit w-full'>
                       <div
                         className={`transform transition-all duration-700 delay-450 ease-out ${
@@ -183,13 +208,13 @@ export const Hero: React.FC = () => {
                   </div>
 
                   {/* Image Section */}
-                  <RevealAnimation style='lg:w-[60%] xl:w-[50%] w-full'>
+                  <RevealAnimation style="lg:w-[60%] xl:w-[50%] w-full">
                     <CustomImage
                       src={slide.image}
-                      style='w-full lg:h-[776px] h-[400px]'
-                      imgStyle='object-contain'
+                      style="w-full lg:h-[776px] h-[400px]"
+                      imgStyle="object-contain"
                       priority={index === 0} // Only prioritize first image
-                      loading={index === 0 ? 'eager' : 'lazy'} // Eager load first, lazy load others
+                      loading={index === 0 ? "eager" : "lazy"} // Eager load first, lazy load others
                       alt={slide.title}
                     />
                   </RevealAnimation>
@@ -254,5 +279,5 @@ export const Hero: React.FC = () => {
         }
       `}</style>
     </div>
-  )
-}
+  );
+};

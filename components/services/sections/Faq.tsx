@@ -116,7 +116,7 @@ export const FAQ: React.FC<IFAQ> = ({ activeTab }) => {
       <MaxScreenWrapper style="relative flex md:flex-row flex-col md:gap-[80px] gap-[40px]">
         <CustomImage
           src={bubble}
-          style="md:w-[370px] w-[300px] h-[330px] absolute top-[10px] left-[10px]"
+          style="md:w-[370px] w-[288px] h-[330px] absolute top-[10px] left-[10px]"
           imgStyle="object-cover"
         />
         <div
