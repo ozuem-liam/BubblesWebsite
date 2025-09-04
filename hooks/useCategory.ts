@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from '../contexts/auth-context';
+// import { useAuth } from '../contexts/auth-context';
 import { Category, categoryService, Service } from '../lib/category';
 
 export const useCategory = (serviceId?: string) => {
-  const { token } = useAuth();
+  const token = '';
   const [categories, setCategories] = useState<Category[]>();
   const [service, setService] = useState<Service>();
   const [vendorId, setVendorId] = useState<string>('');

@@ -16,10 +16,10 @@ export const CategoryItems = ({
   loading,
 }: {
   items: Item[]
-  cart: CartData | null
-  onAddToCart: (item: Item) => void
-  onRemoveFromCart: (itemId: string) => void
-  onUpdateQuantity: (itemId: string, quantity: number) => void
+  cart?: CartData | null
+  onAddToCart?: (item: Item) => void
+  onRemoveFromCart?: (itemId: string) => void
+  onUpdateQuantity?: (itemId: string, quantity: number) => void
   loading?: boolean
 }) => {
   if (loading) {
@@ -84,7 +84,7 @@ export const CategoryItems = ({
                 size='sm'
                 onClick={(e) => {
                   e.stopPropagation()
-                  onUpdateQuantity(item._id, quantity - 1)
+                  // onUpdateQuantity(item._id, quantity - 1)
                 }}
                 className='h-8 w-8 p-0 border-red-300 text-red-600 hover:bg-red-50 flex-shrink-0'
               >
@@ -98,7 +98,7 @@ export const CategoryItems = ({
                 size='sm'
                 onClick={(e) => {
                   e.stopPropagation()
-                  onUpdateQuantity(item._id, quantity + 1)
+                  // onUpdateQuantity(item._id, quantity + 1)
                 }}
                 className='h-8 w-8 p-0 border-green-300 text-green-600 hover:bg-green-50 flex-shrink-0'
               >
@@ -110,7 +110,7 @@ export const CategoryItems = ({
               <Button
                 onClick={(e) => {
                   e.stopPropagation()
-                  onAddToCart(item)
+                  // onAddToCart(item)
                 }}
                 className='w-full h-8 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium'
               >

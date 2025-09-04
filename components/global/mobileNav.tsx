@@ -15,7 +15,7 @@ import { cn } from "../../lib/utils";
 import { useRouter } from "nextjs-toploader/app";
 import { NavRoutes } from "../../lib/constants/NavRoutes";
 import { Button } from "../ui/button";
-import { useAuth } from "@/contexts/auth-context";
+// import { useAuth } from "@/contexts/auth-context";
 import { RevealAnimation } from "./Reveal";
 import { AppleStoreSvg, PlayStoreSvg } from "../svgs";
 
@@ -23,7 +23,7 @@ export const MobileNav: React.FC = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
   const currentPath = usePathname();
   const router = useRouter();
-  const { isAuthenticated } = useAuth();
+  // const { isAuthenticated } = useAuth();
 
   const NavLinks: React.FC = () => (
     <div className="flex flex-col h-full justify-between">

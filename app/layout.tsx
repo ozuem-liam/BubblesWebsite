@@ -2,10 +2,11 @@ import type { Metadata } from 'next'
 import { Hanken_Grotesk } from 'next/font/google'
 import './globals.css'
 import NextTopLoader from 'nextjs-toploader'
-import { AuthProvider } from '../contexts/auth-context'
+// import { AuthProvider } from '../contexts/auth-context'
 import { Toaster } from '@/components/ui/sonner'
 import CartHydration from '@/stores/CartHydration'
 import { Suspense } from 'react'
+import ChatWidget from '@/components/ChatWidget'
 
 const grotesk = Hanken_Grotesk({
   subsets: ['latin'],
@@ -25,19 +26,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <AuthProvider>
         <body
           className={`m-auto min-h-[100vh] flex flex-col ${grotesk.className}`}
         >
           <NextTopLoader color='#001029' showSpinner={false} />
           <main>
             <CartHydration />
-
             <Suspense fallback={<div></div>}>{children}</Suspense>
           </main>
+          <ChatWidget />
           <Toaster richColors />
         </body>
-      </AuthProvider>
     </html>
   )
 }

@@ -4,54 +4,54 @@ import { useBubbleShopItems } from "../../../hooks/useShops";
 import { ErrorComponent } from "@/components/global/Error";
 import { LoadingComponent } from "@/components/global/Loading";
 import { CategoryItems } from "../order-flow/CategoryItems";
-import { useOrderFlow } from "@/hooks/useOrderFlow";
+// import { useOrderFlow } from "@/hooks/useOrderFlow";
 import { Text } from "@/components/global/Text";
 import { MaxScreenWrapper } from "@/components/global/MaxScreen";
 import { RevealAnimation } from "@/components/global/Reveal";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "nextjs-toploader/app";
 import { bubblesStoreRoute } from "@/lib/constants/BubbleStore";
-import { useAuth } from "@/contexts/auth-context";
+// import { useAuth } from "@/contexts/auth-context";
 import { useParams } from "next/navigation";
 import { useCategory } from "@/hooks/useCategory";
 
 export const StoreProducts = () => {
   const { serviceId } = useParams();
   const { vendorId } = useCategory(serviceId as string);
-  const { cart, addToCart, removeFromCart, updateQuantity } =
-    useOrderFlow(vendorId);
+  // const { cart, addToCart, removeFromCart, updateQuantity } =
+  //   useOrderFlow(vendorId);
   const { items, loading, error } = useBubbleShopItems("");
-  const { isAuthenticated } = useAuth();
+  // const { isAuthenticated } = useAuth();
   const router = useRouter();
 
   // Generic function to handle authentication-required actions
-  const withAuthCheck = <T extends any[]>(
-    callback: (...args: T) => void,
-    redirectOnFail: boolean = true
-  ) => {
-    return (...args: T) => {
-      if (!isAuthenticated) {
-        if (redirectOnFail) {
-          router.push(bubblesStoreRoute);
-        }
-        return;
-      }
-      callback(...args);
-    };
-  };
+  // const withAuthCheck = <T extends any[]>(
+  //   callback: (...args: T) => void,
+  //   redirectOnFail: boolean = true
+  // ) => {
+  //   return (...args: T) => {
+  //     if (!isAuthenticated) {
+  //       if (redirectOnFail) {
+  //         router.push(bubblesStoreRoute);
+  //       }
+  //       return;
+  //     }
+  //     callback(...args);
+  //   };
+  // };
 
   const handleButtonClick = () => router.push(bubblesStoreRoute);
 
   // Create authenticated versions of the handlers
-  const handleAddToCart = withAuthCheck((item: any) => addToCart(item));
-  const handleRemoveFromCart = withAuthCheck(
-    (itemId: string) => removeFromCart(itemId),
-    false
-  );
-  const handleUpdateQuantity = withAuthCheck(
-    (itemId: string, quantity: number) => updateQuantity(itemId, quantity),
-    false
-  );
+  // const handleAddToCart = withAuthCheck((item: any) => addToCart(item));
+  // const handleRemoveFromCart = withAuthCheck(
+  //   (itemId: string) => removeFromCart(itemId),
+  //   false
+  // );
+  // const handleUpdateQuantity = withAuthCheck(
+  //   (itemId: string, quantity: number) => updateQuantity(itemId, quantity),
+  //   false
+  // );
 
   if (loading) {
     return <LoadingComponent fallbackText={"Loading amazing products..."} />;
@@ -104,10 +104,10 @@ export const StoreProducts = () => {
               <CategoryItems
                 key={itemIndex}
                 items={[item]}
-                cart={cart}
-                onAddToCart={handleAddToCart}
-                onRemoveFromCart={handleRemoveFromCart}
-                onUpdateQuantity={handleUpdateQuantity}
+                // cart={cart}
+                // onAddToCart={handleAddToCart}
+                // onRemoveFromCart={handleRemoveFromCart}
+                // onUpdateQuantity={handleUpdateQuantity}
                 loading={loading}
               />
             ))}
