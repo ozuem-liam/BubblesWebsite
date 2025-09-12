@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Hanken_Grotesk } from 'next/font/google'
+import { DM_Sans, Hanken_Grotesk } from 'next/font/google'
 import './globals.css'
 import NextTopLoader from 'nextjs-toploader'
 // import { AuthProvider } from '../contexts/auth-context'
@@ -8,10 +8,11 @@ import CartHydration from '@/stores/CartHydration'
 import { Suspense } from 'react'
 import ChatWidget from '@/components/ChatWidget'
 
-const grotesk = Hanken_Grotesk({
-  subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-})
+const DmSans = DM_Sans({
+  subsets: ["latin-ext"],
+  variable: "--dm-sans",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 export const metadata: Metadata = {
   title: 'Bubbles',
@@ -25,18 +26,18 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en'>
-        <body
-          className={`m-auto min-h-[100vh] flex flex-col ${grotesk.className}`}
-        >
-          <NextTopLoader color='#001029' showSpinner={false} />
-          <main>
-            <CartHydration />
-            <Suspense fallback={<div></div>}>{children}</Suspense>
-          </main>
-          <ChatWidget />
-          <Toaster richColors />
-        </body>
+    <html lang="en">
+      <body
+        className={`m-auto min-h-[100vh] flex flex-col ${DmSans.className}`}
+      >
+        <NextTopLoader color="#001029" showSpinner={false} />
+        <main>
+          <CartHydration />
+          <Suspense fallback={<div></div>}>{children}</Suspense>
+        </main>
+        <ChatWidget />
+        <Toaster richColors />
+      </body>
     </html>
-  )
+  );
 }
