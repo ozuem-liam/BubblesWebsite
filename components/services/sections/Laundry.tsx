@@ -20,9 +20,9 @@ interface ILaundrySection {
 export const LaundrySection: React.FC<ILaundrySection> = ({ activeTab }) => {
   const router = useRouter();
   return (
-    <div className="lg:px-[2.5rem] xl:px-[5.5rem] px-4  py-[24px] sm:py-[54px]">
+    <div className="lg:px-[2.5rem] xl:px-[5.5rem]  py-[24px] sm:py-[54px]">
       <MaxScreenWrapper style="flex flex-col gap-[40px]">
-        <RevealAnimation style="w-fit">
+        <RevealAnimation style="w-fit px-4 lg:px-0">
           <Text
             as="h1"
             style="font-[700] text-[40px] leading-[160%] md:text-start text-center"
@@ -32,30 +32,24 @@ export const LaundrySection: React.FC<ILaundrySection> = ({ activeTab }) => {
               : "Getting Started is Easy"}
           </Text>
         </RevealAnimation>
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 grid-cols-1 laundry_bg_linear-gradient rounded-[12px] md:px-[40px] px-0 lg:py-0 md:py-[20px] py-0 lg:gap-[24px] gap-[10px] justify-between">
-          <RevealAnimation style="w-full">
-            <LaunderyCard
-              img={activeTab === customerTab ? step1 : step4}
-              // title={"Place laundry order"}
-              // desc={"Pick a nearby shop, add items and pay."}
-            />
-          </RevealAnimation>
-          <RevealAnimation style="w-full">
-            <LaunderyCard
-              img={activeTab === customerTab ? step2 : step5}
-              // title={"Schedule Pickup"}
-              // desc={"Click delivery, and we come running."}
-            />
-          </RevealAnimation>
-          <RevealAnimation style="w-full">
-            <LaunderyCard
-              img={activeTab === customerTab ? step3 : step6}
-              // title={"We Wash & Deliver"}
-              // desc={"Fresh, folded, and ready to wear."}
-            />
-          </RevealAnimation>
+        <div className="flex flex-wrap flex-row justify-center laundry_bg_linear-gradient rounded-[12px] md:px-[40px] py-4 px-4 md:py-[20px] lg:gap-[24px] gap-[10px]">
+          <LaunderyCard
+            img={activeTab === customerTab ? step1 : step4}
+            // title={"Place laundry order"}
+            // desc={"Pick a nearby shop, add items and pay."}
+          />
+          <LaunderyCard
+            img={activeTab === customerTab ? step2 : step5}
+            // title={"Schedule Pickup"}
+            // desc={"Click delivery, and we come running."}
+          />
+          <LaunderyCard
+            img={activeTab === customerTab ? step3 : step6}
+            // title={"We Wash & Deliver"}
+            // desc={"Fresh, folded, and ready to wear."}
+          />
         </div>
-        <div className="flex flex-col items-center justify-center gap-[16px]">
+        <div className="px-4 lg:px-0 flex flex-col items-center justify-center gap-[16px]">
           <RevealAnimation style="w-fit">
             <Text
               as="h1"
