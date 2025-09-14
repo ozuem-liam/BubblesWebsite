@@ -1,203 +1,207 @@
-'use client'
+"use client";
 
-import { useEffect, useRef, useState } from 'react'
-import { CustomImage } from '../../../components/global/Image'
-import { Text } from '../../../components/global/Text'
-import { MaxScreenWrapper } from '../../../components/global/MaxScreen'
-import { RevealAnimation } from '../../../components/global/Reveal'
-import { customerTab } from '../index'
+import { useEffect, useRef, useState } from "react";
+import { CustomImage } from "../global/Image";
+import { Text } from "../global/Text";
+import { MaxScreenWrapper } from "../global/MaxScreen";
+import { RevealAnimation } from "../global/Reveal";
+import { customerTab } from "./index";
 import {
   CUSTOMERDATA,
   CUSTOMERDATAIMAGES,
   VENDORDATA,
   VENDORDATAIMAGES,
-} from '../../../lib/constants/Service'
-import { StaticImageData } from 'next/legacy/image'
+} from "../../lib/constants/Service";
+import { StaticImageData } from "next/legacy/image";
 
 interface IServicesSection {
-  activeTab: string
+  activeTab: string;
 }
 
 type DataType = {
-  title: string
-  desc: string
-}[]
+  title: string;
+  desc: string;
+}[];
 
 export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const [inView, setInView] = useState(false)
-  const [isFlipping, setIsFlipping] = useState(false)
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const [activeData, setActiveData] = useState<DataType>(CUSTOMERDATA)
-  const [activeImage, setActiveImage] = useState<StaticImageData[]>(CUSTOMERDATAIMAGES)
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isDragging, setIsDragging] = useState<boolean>(false)
-  const [startPosition, setStartPosition] = useState<number>(0)
-  const [scrollTop, setScrollTop] = useState<number>(0)
-  const [typedText, setTypedText] = useState('')
-  const [isTyping, setIsTyping] = useState(false)
-  const typingInterval = useRef<NodeJS.Timeout | null>(null)
-  const cycleTimeout = useRef<NodeJS.Timeout | null>(null)
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  const [isFlipping, setIsFlipping] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeData, setActiveData] = useState<DataType>(CUSTOMERDATA);
+  const [activeImage, setActiveImage] =
+    useState<StaticImageData[]>(CUSTOMERDATAIMAGES);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [startPosition, setStartPosition] = useState<number>(0);
+  const [scrollTop, setScrollTop] = useState<number>(0);
+  const [typedText, setTypedText] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const typingInterval = useRef<NodeJS.Timeout | null>(null);
+  const cycleTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    setActiveData(() => (activeTab === customerTab ? CUSTOMERDATA : VENDORDATA))
+    setActiveData(() =>
+      activeTab === customerTab ? CUSTOMERDATA : VENDORDATA
+    );
     setActiveImage(() =>
       activeTab === customerTab ? CUSTOMERDATAIMAGES : VENDORDATAIMAGES
-    )
-    setCurrentIndex(0) // Reset to first item when tab changes
-  }, [activeTab])
+    );
+    setCurrentIndex(0); // Reset to first item when tab changes
+  }, [activeTab]);
 
   useEffect(() => {
     const handleScroll = () => {
       if (scrollRef.current) {
-        const { scrollTop, scrollHeight, clientHeight } = scrollRef.current
-        const itemHeight = clientHeight * 0.8 // Each item takes 80% of container height
-        const maxScroll = scrollHeight - clientHeight
-        
+        const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+        const itemHeight = clientHeight * 0.8; // Each item takes 80% of container height
+        const maxScroll = scrollHeight - clientHeight;
+
         if (maxScroll <= 0) {
-          setCurrentIndex(0)
-          return
+          setCurrentIndex(0);
+          return;
         }
 
         // Simple index calculation based on scroll position
         const index = Math.min(
           Math.floor(scrollTop / itemHeight),
           activeData.length - 1
-        )
-        
-        setCurrentIndex(index)
-        setScrollTop(scrollTop)
-      }
-    }
+        );
 
-    const scrollElement = scrollRef.current
+        setCurrentIndex(index);
+        setScrollTop(scrollTop);
+      }
+    };
+
+    const scrollElement = scrollRef.current;
     if (scrollElement) {
-      scrollElement.addEventListener('scroll', handleScroll)
-      return () => scrollElement.removeEventListener('scroll', handleScroll)
+      scrollElement.addEventListener("scroll", handleScroll);
+      return () => scrollElement.removeEventListener("scroll", handleScroll);
     }
-  }, [activeData.length])
+  }, [activeData.length]);
 
   // Handle mouse/touch events for drag scrolling
   const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true)
-    setStartPosition(e.clientY)
-    e.preventDefault()
-  }
+    setIsDragging(true);
+    setStartPosition(e.clientY);
+    e.preventDefault();
+  };
 
   const handleTouchStart = (e: React.TouchEvent) => {
-    setIsDragging(true)
-    setStartPosition(e.touches[0].clientY)
-  }
+    setIsDragging(true);
+    setStartPosition(e.touches[0].clientY);
+  };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || !scrollRef.current) return
-    const deltaY = e.clientY - startPosition
-    scrollRef.current.scrollTop = scrollTop - deltaY
-    setStartPosition(e.clientY)
-    e.preventDefault()
-  }
+    if (!isDragging || !scrollRef.current) return;
+    const deltaY = e.clientY - startPosition;
+    scrollRef.current.scrollTop = scrollTop - deltaY;
+    setStartPosition(e.clientY);
+    e.preventDefault();
+  };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging || !scrollRef.current) return
-    const deltaY = e.touches[0].clientY - startPosition
-    scrollRef.current.scrollTop = scrollTop - deltaY
-    setStartPosition(e.touches[0].clientY)
-  }
+    if (!isDragging || !scrollRef.current) return;
+    const deltaY = e.touches[0].clientY - startPosition;
+    scrollRef.current.scrollTop = scrollTop - deltaY;
+    setStartPosition(e.touches[0].clientY);
+  };
 
   const handleDragEnd = () => {
-    setIsDragging(false)
-  }
+    setIsDragging(false);
+  };
 
   // Intersection Observer to detect if section is in view
   useEffect(() => {
     const observer = new window.IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
       { threshold: 0.3 }
-    )
-    if (sectionRef.current) observer.observe(sectionRef.current)
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current)
-    }
-  }, [])
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+    };
+  }, []);
 
   // Clear timeouts on cleanup
   useEffect(() => {
     return () => {
-      if (typingInterval.current) clearInterval(typingInterval.current)
-      if (cycleTimeout.current) clearTimeout(cycleTimeout.current)
-    }
-  }, [])
+      if (typingInterval.current) clearInterval(typingInterval.current);
+      if (cycleTimeout.current) clearTimeout(cycleTimeout.current);
+    };
+  }, []);
 
   // Typing animation effect - improved for mobile
   const typeText = (text: string, speed: number = 80) => {
     // Clear any existing intervals/timeouts
-    if (typingInterval.current) clearInterval(typingInterval.current)
-    if (cycleTimeout.current) clearTimeout(cycleTimeout.current)
-    
-    if (!text || typeof text !== 'string') {
-      setTypedText('')
-      setIsTyping(false)
-      return
+    if (typingInterval.current) clearInterval(typingInterval.current);
+    if (cycleTimeout.current) clearTimeout(cycleTimeout.current);
+
+    if (!text || typeof text !== "string") {
+      setTypedText("");
+      setIsTyping(false);
+      return;
     }
 
-    setIsTyping(true)
-    setTypedText('')
-    let index = 0
+    setIsTyping(true);
+    setTypedText("");
+    let index = 0;
 
     typingInterval.current = setInterval(() => {
       if (index >= text.length) {
         // Typing is complete
-        if (typingInterval.current) clearInterval(typingInterval.current)
-        setIsTyping(false)
-        
+        if (typingInterval.current) clearInterval(typingInterval.current);
+        setIsTyping(false);
+
         // Wait before moving to next item (only on mobile)
         cycleTimeout.current = setTimeout(() => {
           // Check if we're still in view and on mobile before cycling
-          if (inView && window.innerWidth < 1024) { // lg breakpoint
-            setIsFlipping(true)
+          if (inView && window.innerWidth < 1024) {
+            // lg breakpoint
+            setIsFlipping(true);
             setTimeout(() => {
-              setIsFlipping(false)
-              setCurrentIndex(prev => {
-                const nextIndex = (prev + 1) % activeData.length
-                return nextIndex
-              })
-            }, 600) // flip duration
+              setIsFlipping(false);
+              setCurrentIndex((prev) => {
+                const nextIndex = (prev + 1) % activeData.length;
+                return nextIndex;
+              });
+            }, 600); // flip duration
           }
-        }, 2500) // wait 2.5 seconds after typing completes
-        return
+        }, 2500); // wait 2.5 seconds after typing completes
+        return;
       }
 
-      setTypedText(text.substring(0, index + 1))
-      index++
-    }, speed)
-  }
+      setTypedText(text.substring(0, index + 1));
+      index++;
+    }, speed);
+  };
 
   // Start typing animation when in view or currentIndex changes
   useEffect(() => {
     if (inView && activeData[currentIndex]) {
-      const desc = activeData[currentIndex]?.desc
-      if (typeof desc === 'string' && desc.trim().length > 0) {
+      const desc = activeData[currentIndex]?.desc;
+      if (typeof desc === "string" && desc.trim().length > 0) {
         // Small delay before starting typing for better UX
         setTimeout(() => {
-          typeText(desc.trim())
-        }, 300)
+          typeText(desc.trim());
+        }, 300);
       } else {
-        setTypedText('')
-        setIsTyping(false)
+        setTypedText("");
+        setIsTyping(false);
       }
     } else {
       // Clean up when not in view
-      if (typingInterval.current) clearInterval(typingInterval.current)
-      if (cycleTimeout.current) clearTimeout(cycleTimeout.current)
-      setTypedText('')
-      setIsTyping(false)
+      if (typingInterval.current) clearInterval(typingInterval.current);
+      if (cycleTimeout.current) clearTimeout(cycleTimeout.current);
+      setTypedText("");
+      setIsTyping(false);
     }
 
     return () => {
-      if (typingInterval.current) clearInterval(typingInterval.current)
-      if (cycleTimeout.current) clearTimeout(cycleTimeout.current)
-    }
-  }, [inView, currentIndex, activeData])
+      if (typingInterval.current) clearInterval(typingInterval.current);
+      if (cycleTimeout.current) clearTimeout(cycleTimeout.current);
+    };
+  }, [inView, currentIndex, activeData]);
 
   return (
     <div
@@ -332,4 +336,4 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
       `}</style>
     </div>
   );
-}
+};

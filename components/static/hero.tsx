@@ -160,7 +160,7 @@ export const Hero: React.FC = () => {
                     </RevealAnimation>
 
                     <RevealAnimation style="md:w-fit w-full">
-                      <div className="flex md:gap-[15px] gap-[6px] md:justify-start justify-between">
+                      <div className="flex md:gap-[15px] gap-[6px] md:justify-start justify-center">
                         <Link
                           id="store"
                           href={`https://play.google.com/store/apps/details?id=com.bubbles.customer.app&hl=en`}

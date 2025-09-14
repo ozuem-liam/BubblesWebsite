@@ -1,16 +1,16 @@
 "use client";
-import { Text } from "../../../components/global/Text";
-import { MaxScreenWrapper } from "../../../components/global/MaxScreen";
+import { Text } from "../global/Text";
+import { MaxScreenWrapper } from "../global/MaxScreen";
 import { LaunderyCard } from "./LaundryCard";
-import step1 from "../../../public/step 1 (1).svg";
-import step2 from "../../../public/step 2 (1).svg";
-import step3 from "../../../public/step 3 (1).svg";
-import step4 from "../../../public/step 4 (1).svg";
-import step5 from "../../../public/step 5 (1).svg";
-import step6 from "../../../public/step 6 (1).svg";
-import { Button } from "../../../components/ui/button";
-import { RevealAnimation } from "../../../components/global/Reveal";
-import { customerTab } from "../index";
+import step1 from "../../public/step 1 (1).svg";
+import step2 from "../../public/step 2 (1).svg";
+import step3 from "../../public/step 3 (1).svg";
+import step4 from "../../public/step 4 (1).svg";
+import step5 from "../../public/step 5 (1).svg";
+import step6 from "../../public/step 6 (1).svg";
+import { Button } from "../ui/button";
+import { RevealAnimation } from "../global/Reveal";
+import { customerTab } from "./index";
 import { useRouter } from "next/navigation";
 
 interface ILaundrySection {

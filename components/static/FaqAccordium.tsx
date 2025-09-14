@@ -1,8 +1,8 @@
 "use client";
 
-import { RevealAnimation } from "../../../components/global/Reveal";
-import { Text } from "../../../components/global/Text";
-import { cn } from "../../../lib/utils";
+import { RevealAnimation } from "../global/Reveal";
+import { Text } from "../global/Text";
+import { cn } from "../../lib/utils";
 import { ArrowDown2 } from "iconsax-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -61,7 +61,7 @@ export const Accordium: React.FC<IAccordium> = ({
 
   const formatAnswerText = (text: string) => {
     const hasHTMLTags = /<\/?[a-z][\s\S]*>/i.test(text); // Simple check for HTML tags
-  
+
     if (hasHTMLTags) {
       // Render as HTML if tags like <a>, <ul>, <strong> are found
       return (
@@ -71,7 +71,7 @@ export const Accordium: React.FC<IAccordium> = ({
         />
       );
     }
-  
+
     // Otherwise, treat it as plain text with line breaks
     return text.split("\n").map((paragraph, index) => (
       <p
@@ -85,7 +85,6 @@ export const Accordium: React.FC<IAccordium> = ({
       </p>
     ));
   };
-  
 
   return (
     <RevealAnimation style="py-5 w-full">

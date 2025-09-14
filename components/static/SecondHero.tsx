@@ -1,14 +1,14 @@
 "use client";
 
-import { CustomImage } from "../../global/Image";
-import { Text } from "../../global/Text";
-import { BlackAppleStoreSvg, BlackPlayStoreSvg } from "../../svgs";
-import heroImg from "../../../public/iPhone 11 Pro2.svg";
-import heroImg2 from "../../../public/iPhone 11 Pro.svg";
-import { MaxScreenWrapper } from "../../global/MaxScreen";
-import bubble2 from "../../../public/bubble2.png";
-import { RevealAnimation } from "../../../components/global/Reveal";
-import { customerTab } from "../index";
+import { CustomImage } from "../global/Image";
+import { Text } from "../global/Text";
+import { BlackAppleStoreSvg, BlackPlayStoreSvg } from "../svgs";
+import heroImg from "../../public/iPhone 11 Pro2.svg";
+import heroImg2 from "../../public/iPhone 11 Pro.svg";
+import { MaxScreenWrapper } from "../global/MaxScreen";
+import bubble2 from "../../public/bubble2.png";
+import { RevealAnimation } from "../global/Reveal";
+import { customerTab } from "./index";
 import Link from "next/link";
 
 interface ISecondHero {
@@ -38,7 +38,7 @@ export const SecondHero: React.FC<ISecondHero> = ({ activeTab }) => {
             </Text>
           </RevealAnimation>
           <RevealAnimation style="md:w-fit w-full">
-            <div className="flex md:gap-[15px] gap-[6px] md:justify-start justify-between">
+            <div className="flex md:gap-[15px] gap-[6px] md:justify-start justify-center">
               {/* <Link
                 href={
                   activeTab === customerTab
