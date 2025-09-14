@@ -1,4 +1,4 @@
-import { CustomImage } from "../../../components/global/Image";
+import { CustomImage } from "../global/Image";
 import { StaticImageData } from "next/legacy/image";
 
 interface ILaunderyCard {

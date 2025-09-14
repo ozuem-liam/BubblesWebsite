@@ -1,20 +1,16 @@
 "use client";
 
-import { CustomImage } from "../../../components/global/Image";
-import heroImg1 from "../../../public/place_img1.svg";
-import { MaxScreenWrapper } from "../../../components/global/MaxScreen";
-import heroImg2 from "../../../public/place_img2.svg";
-import heroImg3 from "../../../public/place_img3.svg";
-import heroImg4 from "../../../public/place_img4.svg";
-import heroImg5 from "../../../public/place_img5.svg";
-import heroImg6 from "../../../public/place_img6.svg";
-import { Text } from "../../../components/global/Text";
-import {
-  EcoFriendlySvg,
-  SecurePaymentSvg,
-  VerifiedVendorSvg,
-} from "../../../components/svgs";
-import { RevealAnimation } from "../../../components/global/Reveal";
+import { CustomImage } from "../global/Image";
+import heroImg1 from "../../public/place_img1.svg";
+import { MaxScreenWrapper } from "../global/MaxScreen";
+import heroImg2 from "../../public/place_img2.svg";
+import heroImg3 from "../../public/place_img3.svg";
+import heroImg4 from "../../public/place_img4.svg";
+import heroImg5 from "../../public/place_img5.svg";
+import heroImg6 from "../../public/place_img6.svg";
+import { Text } from "../global/Text";
+import { EcoFriendlySvg, SecurePaymentSvg, VerifiedVendorSvg } from "../svgs";
+import { RevealAnimation } from "../global/Reveal";
 
 export const BackByTech: React.FC = () => {
   return (
@@ -87,8 +83,8 @@ export const BackByTech: React.FC = () => {
                 as="h4"
                 style="font-[400] text-[22px] leading-[140%] text-tertiary1000 text-center"
               >
-                We started with one goal: To make cleaning feel less like a chore
-                and more like a breeze.
+                We started with one goal: To make cleaning feel less like a
+                chore and more like a breeze.
               </Text>
             </RevealAnimation>
 
