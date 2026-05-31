@@ -34,13 +34,13 @@ export const MobileNav: React.FC = () => {
               onClick={() => setOpen(false)}
               className={cn(
                 "text-[16px] font-[500] text-[#CCD0D4] py-2 transition-colors duration-300",
-                (index === 0 && currentPath === links.route) ||
-                  (index !== 0 && currentPath.includes(links.route))
+                (index === 0 && currentPath === (links.route ?? '')) ||
+                  (index !== 0 && links.route && currentPath.includes(links.route))
                   ? "text-white font-[700] border-l-4 border-[#bfdbfe] pl-4"
                   : "hover:text-white"
               )}
             >
-              <Link href={`/#${links.route}`} className="text-none">
+              <Link href={"href" in links && links.href ? links.href : `/#${links.route}`} className="text-none">
                 {links.title}
               </Link>
             </li>
