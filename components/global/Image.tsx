@@ -12,6 +12,7 @@ interface ICustomImagePropType {
   loading?: 'lazy' | 'eager' // Add loading prop
   clickFunc?: () => void
   style: string
+  unoptimized?: boolean
 }
 
 export const CustomImage: React.FC<ICustomImagePropType> = ({
@@ -22,6 +23,7 @@ export const CustomImage: React.FC<ICustomImagePropType> = ({
   priority = false,
   loading,
   clickFunc,
+  unoptimized = false,
 }) => {
   return (
     <div className={cn('relative', style)} onClick={clickFunc}>
@@ -32,6 +34,7 @@ export const CustomImage: React.FC<ICustomImagePropType> = ({
         fill={true}
         priority={priority}
         loading={loading}
+        unoptimized={unoptimized}
       />
     </div>
   )

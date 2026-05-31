@@ -23,6 +23,7 @@ export const BackByTech: React.FC = () => {
               src={heroImg1}
               style="md:w-[330px] w-[300px] h-[240px] md:h-[260px]"
               imgStyle="object-cover"
+              unoptimized
             />
           </RevealAnimation>
           <RevealAnimation style="w-fit">
@@ -30,6 +31,7 @@ export const BackByTech: React.FC = () => {
               src={heroImg2}
               style="w-[200px] h-[230px]"
               imgStyle="object-cover"
+              unoptimized
             />
           </RevealAnimation>
           <RevealAnimation style="w-fit">
@@ -37,6 +39,7 @@ export const BackByTech: React.FC = () => {
               src={heroImg3}
               style="md:w-[290px] md:h-[245px] w-[300px] h-[250px]"
               imgStyle="object-cover"
+              unoptimized
             />
           </RevealAnimation>
           <RevealAnimation style="w-fit">
@@ -44,6 +47,7 @@ export const BackByTech: React.FC = () => {
               src={heroImg4}
               style="md:w-[300px] md:h-[310px] w-[300px] h-[310px]"
               imgStyle="object-cover"
+              unoptimized
             />
           </RevealAnimation>
         </div>
@@ -55,6 +59,7 @@ export const BackByTech: React.FC = () => {
               src={heroImg6}
               style="w-[300px] h-[340px]"
               imgStyle="object-cover"
+              unoptimized
             />
           </RevealAnimation>
         </div>
@@ -66,6 +71,7 @@ export const BackByTech: React.FC = () => {
               src={heroImg5}
               style="lg:w-[270px] lg:h-[270px] w-[300px] h-[300px] md:block hidden"
               imgStyle="object-cover"
+              unoptimized
             />
           </RevealAnimation>
 
@@ -103,6 +109,7 @@ export const BackByTech: React.FC = () => {
               src={heroImg6}
               style="w-[290px] h-[330px] lg:block hidden"
               imgStyle="object-cover"
+              unoptimized
             />
           </RevealAnimation>
         </div>
