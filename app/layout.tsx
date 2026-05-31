@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { DM_Sans, Hanken_Grotesk } from 'next/font/google'
+import { DM_Sans } from 'next/font/google'
 import './globals.css'
 import NextTopLoader from 'nextjs-toploader'
 // import { AuthProvider } from '../contexts/auth-context'
@@ -68,7 +68,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
         <body
-          className={`m-auto min-h-[100vh] flex flex-col ${grotesk.className}`}
+          className={`m-auto min-h-[100vh] flex flex-col ${DmSans.className}`}
         >
           <NextTopLoader color='#001029' showSpinner={false} />
           <main>
