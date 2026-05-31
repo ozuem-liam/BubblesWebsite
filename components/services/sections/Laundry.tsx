@@ -1,6 +1,6 @@
 "use client";
-import { Text } from "../../../components/global/Text";
-import { MaxScreenWrapper } from "../../../components/global/MaxScreen";
+import { Text } from "../../global/Text";
+import { MaxScreenWrapper } from "../../global/MaxScreen";
 import { LaunderyCard } from "./LaundryCard";
 import step1 from "../../../public/step 1 (1).svg";
 import step2 from "../../../public/step 2 (1).svg";
@@ -8,17 +8,19 @@ import step3 from "../../../public/step 3 (1).svg";
 import step4 from "../../../public/step 4 (1).svg";
 import step5 from "../../../public/step 5 (1).svg";
 import step6 from "../../../public/step 6 (1).svg";
-import { Button } from "../../../components/ui/button";
-import { RevealAnimation } from "../../../components/global/Reveal";
+import { Button } from "../../ui/button";
+import { RevealAnimation } from "../../global/Reveal";
 import { customerTab } from "../index";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface ILaundrySection {
   activeTab: string;
 }
 
+const CUSTOMER_STORE_URL = "https://play.google.com/store/apps/details?id=com.bubbles.customer.app&hl=en";
+const VENDOR_STORE_URL = "https://play.google.com/store/apps/details?id=com.bubbles.bubbles_vendor&hl=en";
+
 export const LaundrySection: React.FC<ILaundrySection> = ({ activeTab }) => {
-  const router = useRouter();
   return (
     <div className="lg:px-[2.5rem] xl:px-[5.5rem] px-4  py-[24px] sm:py-[54px]">
       <MaxScreenWrapper style="flex flex-col gap-[40px]">
@@ -66,12 +68,14 @@ export const LaundrySection: React.FC<ILaundrySection> = ({ activeTab }) => {
                 : "Start getting requests from nearby customers"}
             </Text>
           </RevealAnimation>
-          <Button
-            onClick={() => router.push("/")}
-            className="text-black bg-primary100 text-tertiary1100 rounded-[12px] h-[50px] w-[162px] flex flex-col items-center lg:text-[16px] text-[14px] font-[500]"
+          <Link
+            href={activeTab === customerTab ? CUSTOMER_STORE_URL : VENDOR_STORE_URL}
+            target="_blank"
           >
-            Get Started
-          </Button>
+            <Button className="text-black bg-primary100 text-tertiary1100 rounded-[12px] h-[50px] w-[162px] flex flex-col items-center lg:text-[16px] text-[14px] font-[500] transition-all duration-200 hover:bg-primary800 hover:text-white hover:shadow-md active:scale-95">
+              Get Started
+            </Button>
+          </Link>
         </div>
       </MaxScreenWrapper>
     </div>

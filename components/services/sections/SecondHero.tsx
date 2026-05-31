@@ -7,7 +7,7 @@ import heroImg from "../../../public/iPhone 11 Pro2.svg";
 import heroImg2 from "../../../public/iPhone 11 Pro.svg";
 import { MaxScreenWrapper } from "../../global/MaxScreen";
 import bubble2 from "../../../public/bubble2.png";
-import { RevealAnimation } from "../../../components/global/Reveal";
+import { RevealAnimation } from "../../global/Reveal";
 import { customerTab } from "../index";
 import Link from "next/link";
 
@@ -39,41 +39,30 @@ export const SecondHero: React.FC<ISecondHero> = ({ activeTab }) => {
           </RevealAnimation>
           <RevealAnimation style="md:w-fit w-full">
             <div className="flex md:gap-[15px] gap-[6px] md:justify-start justify-between">
-              {/* <Link
-                href={
-                  activeTab === customerTab
-                    ? `https://play.google.com/store/apps/details?id=com.bubbles.customer.app&hl=en`
-                    : "https://play.google.com/store/apps/details?id=com.bubbles.bubbles_vendor&hl=en"
-                }
-                target="_blank"
-                className="text-none"
-              > */}
               <Link
                 id="store"
-                href={`https://play.google.com/store/apps/details?id=com.bubbles.customer.app&hl=en`}
+                href={
+                  activeTab === customerTab
+                    ? "https://play.google.com/store/apps/details?id=com.bubbles.customer.app&hl=en"
+                    : "https://play.google.com/store/apps/details?id=com.bubbles.bubbles_vendor&hl=en"
+                }
                 target="_blank"
                 className="text-none p-0 m-0"
               >
                 <BlackPlayStoreSvg />
               </Link>
-              {/* <Link
-                href={
-                  activeTab === customerTab
-                    ? `https://play.google.com/store/apps/details?id=com.bubbles.customer.app&hl=en`
-                    : "https://play.google.com/store/apps/details?id=com.bubbles.bubbles_vendor&hl=en"
-                }
-                target="_blank"
-                className="text-none"
-              > */}
               <Link
                 id="store"
-                href={`https://apps.apple.com/ng/app/bubblesng/id6751163998?platform=iphone`}
+                href={
+                  activeTab === customerTab
+                    ? "https://apps.apple.com/ng/app/bubblesng/id6751163998?platform=iphone"
+                    : "https://apps.apple.com/ng/app/bubbles-vendor/id6746811071"
+                }
                 target="_blank"
                 className="text-none p-0 m-0"
               >
                 <BlackAppleStoreSvg />
               </Link>
-              {/* </Link> */}
             </div>
           </RevealAnimation>
         </div>

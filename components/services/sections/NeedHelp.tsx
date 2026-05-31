@@ -1,9 +1,9 @@
-import { MaxScreenWrapper } from '../../../components/global/MaxScreen'
-import { Text } from '../../../components/global/Text'
+import { MaxScreenWrapper } from '../../global/MaxScreen'
+import { Text } from '../../global/Text'
 import bubble from '../../../public/bubbles.png'
-import { CustomImage } from '../../../components/global/Image'
-import { CallSvg, SendSvg, SocialSvg, WhatsappSvg } from '../../../components/svgs'
-import { RevealAnimation } from '../../../components/global/Reveal'
+import { CustomImage } from '../../global/Image'
+import { CallSvg, SendSvg, SocialSvg, WhatsappSvg } from '../../svgs'
+import { RevealAnimation } from '../../global/Reveal'
 import Link from 'next/link'
 
 interface IHelpCard {
@@ -12,7 +12,7 @@ interface IHelpCard {
 }
 
 const HelpCard: React.FC<IHelpCard> = ({ icon, title }) => (
-  <div className='cursor-pointer bg-primaryBubbly justify-center rounded w-[200px] h-[160px] flex gap-[10px] flex-col items-center'>
+  <div className='cursor-pointer bg-primaryBubbly justify-center rounded w-[200px] h-[160px] flex gap-[10px] flex-col items-center transition-all duration-200 hover:-translate-y-1 hover:shadow-md'>
     {icon}
     <Text style='text-[20px] font-[500]'>{title}</Text>
   </div>

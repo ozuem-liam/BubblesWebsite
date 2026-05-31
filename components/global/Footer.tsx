@@ -1,4 +1,4 @@
-import { MaxScreenWrapper } from "../../components/global/MaxScreen";
+import { MaxScreenWrapper } from "./MaxScreen";
 import { Logo } from "./Logo";
 import { Text } from "./Text";
 import { CopyrightSvg, EnvelopeSvg, LocationSvg } from "../svgs";
@@ -39,14 +39,12 @@ export const Footer: React.FC = () => {
                 Services
               </Text>
             </Link>
-            <Text style="text-[16px] font-[500] leading-[160%] text-tertiary700">
-              Terms
-            </Text>
-            <Link
-              href="https://www.isolutionmedia.com/policy"
-              target='_blank'
-              className="text-none"
-            >
+            <Link href="/terms" className="text-none">
+              <Text style="text-[16px] font-[500] leading-[160%] text-tertiary700">
+                Terms
+              </Text>
+            </Link>
+            <Link href="/privacy" className="text-none">
               <Text style="text-[16px] font-[500] leading-[160%] text-tertiary700">
                 Privacy policy
               </Text>
@@ -61,9 +59,11 @@ export const Footer: React.FC = () => {
                 FAQ
               </Text>
             </Link>
-            <Text style="text-[16px] font-[500] leading-[160%] text-tertiary700">
-              Become a vendor
-            </Text>
+            <Link href="/vendor" className="text-none">
+              <Text style="text-[16px] font-[500] leading-[160%] text-tertiary700">
+                Become a vendor
+              </Text>
+            </Link>
           </div>
           <div className="flex flex-col sm:gap-[20px] gap-[15px]">
             <Text style="text-[16px] font-[700] leading-[150%] text-tertiary100">

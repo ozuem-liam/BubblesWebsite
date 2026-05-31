@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "../../components/ui/button";
+import { Button } from "../ui/button";
 import Link from "next/link";
 import { NavRoutes } from "../../lib/constants/NavRoutes";
 import { Logo } from "./Logo";
@@ -13,9 +13,12 @@ const NavLinks: React.FC = () => (
     {NavRoutes.map((links, index) => (
       <li
         key={index}
-        className="text-[16px] font-[400] text-tertiary600 py-1 px-1 hover:text-primary600 transition-colors duration-500"
+        className="text-[16px] font-[400] text-tertiary600 py-1 px-1 hover:text-white transition-colors duration-200"
       >
-        <Link href={`/#${links.route}`} className="text-none text-tertiary600">
+        <Link
+          href={"href" in links && links.href ? links.href : `/#${links.route}`}
+          className="text-none text-tertiary600"
+        >
           {links.title}
         </Link>
       </li>
@@ -37,8 +40,10 @@ export const TopNav: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 ${
-        isScrolled ? "bg-primary800 shadow-md" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-200 ${
+        isScrolled
+          ? "bg-primary800/95 backdrop-blur-sm shadow-lg"
+          : "bg-transparent"
       }`}
     >
       <MaxScreenWrapper style="px-[1rem] lg:pb-0 pb-[1rem] flex lg:flex-row flex-col justify-between lg:items-center items-start lg:gap-[12px] gap-0">

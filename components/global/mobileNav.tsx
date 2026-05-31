@@ -6,7 +6,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "../../components/ui/sheet";
+} from "../ui/sheet";
 import { useState } from "react";
 import { HambergerMenu } from "iconsax-react";
 import Link from "next/link";

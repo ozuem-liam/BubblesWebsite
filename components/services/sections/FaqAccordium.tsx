@@ -1,7 +1,7 @@
 "use client";
 
-import { RevealAnimation } from "../../../components/global/Reveal";
-import { Text } from "../../../components/global/Text";
+import { RevealAnimation } from "../../global/Reveal";
+import { Text } from "../../global/Text";
 import { cn } from "../../../lib/utils";
 import { ArrowDown2 } from "iconsax-react";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -92,7 +92,10 @@ export const Accordium: React.FC<IAccordium> = ({
       <div className="w-full">
         <div
           onClick={handleToggle}
-          className="flex items-center justify-between gap-4 cursor-pointer"
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === "Enter" && handleToggle()}
+          className="flex items-center justify-between gap-4 cursor-pointer select-none rounded-sm transition-opacity duration-150 hover:opacity-80"
         >
           <Text style="md:text-[28px] leading-[160%] text-[20px] font-[400] text-tertiary1000">
             {title}
@@ -101,7 +104,7 @@ export const Accordium: React.FC<IAccordium> = ({
             size="15"
             color="grey"
             className={cn(
-              "rotate-0 transform transition-transform duration-700",
+              "rotate-0 transform transition-transform duration-200 shrink-0",
               isOpen && "rotate-180"
             )}
           />

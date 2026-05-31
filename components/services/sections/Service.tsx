@@ -1,10 +1,10 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { CustomImage } from '../../../components/global/Image'
-import { Text } from '../../../components/global/Text'
-import { MaxScreenWrapper } from '../../../components/global/MaxScreen'
-import { RevealAnimation } from '../../../components/global/Reveal'
+import { CustomImage } from '../../global/Image'
+import { Text } from '../../global/Text'
+import { MaxScreenWrapper } from '../../global/MaxScreen'
+import { RevealAnimation } from '../../global/Reveal'
 import { customerTab } from '../index'
 import {
   CUSTOMERDATA,
