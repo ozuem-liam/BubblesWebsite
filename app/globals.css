@@ -180,8 +180,24 @@ html {
   opacity: 1 !important;
 }
 
-@media screen and (max-width:767px) {
-  .laundry_bg_linear-gradient {
-    background: white
-  }
+.custom-scroll::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+/* Track */
+.custom-scroll::-webkit-scrollbar-track {
+  background: var(--secondary);
+  border-radius: 1rem;
+}
+
+/* Handle */
+.custom-scroll::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background: #fdc316;
+}
+
+/* Handle on hover */
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: #fdc316;
 }

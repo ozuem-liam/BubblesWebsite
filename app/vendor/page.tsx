@@ -4,7 +4,7 @@ import Link from "next/link";
 import { TrendingUp, LayoutDashboard, Wallet, CheckCircle2 } from "lucide-react";
 import { TopNav } from "@/components/global/TopNav";
 import { Footer } from "@/components/global/Footer";
-import { Stats } from "@/components/services/sections/Stats";
+import { Stats } from "@/components/static/Stats";
 import { FAQ } from "@/components/services/sections/Faq";
 import { RevealAnimation } from "@/components/global/Reveal";
 import { Text } from "@/components/global/Text";

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Hanken_Grotesk } from 'next/font/google'
+import { DM_Sans, Hanken_Grotesk } from 'next/font/google'
 import './globals.css'
 import NextTopLoader from 'nextjs-toploader'
 // import { AuthProvider } from '../contexts/auth-context'
@@ -8,10 +8,11 @@ import { Toaster } from '@/components/ui/sonner'
 import { Suspense } from 'react'
 import ChatWidget from '@/components/ChatWidget'
 
-const grotesk = Hanken_Grotesk({
-  subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-})
+const DmSans = DM_Sans({
+  subsets: ["latin-ext"],
+  variable: "--dm-sans",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 const SITE_URL = 'https://bubblesng.com'
 const OG_IMAGE = `${SITE_URL}/bubbles-logo.png`
@@ -78,5 +79,5 @@ export default function RootLayout({
           <Toaster richColors />
         </body>
     </html>
-  )
+  );
 }

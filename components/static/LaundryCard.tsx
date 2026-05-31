@@ -1,4 +1,4 @@
-import { CustomImage } from "../../global/Image";
+import { CustomImage } from "../global/Image";
 import { StaticImageData } from "next/legacy/image";
 
 interface ILaunderyCard {
@@ -11,7 +11,7 @@ export const LaunderyCard: React.FC<ILaunderyCard> = ({
 }) => (
   <CustomImage
     src={img}
-    style="w-full h-[450px] lg:h-[610px]"
+    style="md:w-[31%] w-full h-[450px] lg:h-[610px]"
     imgStyle="object-contain"
   />
 );

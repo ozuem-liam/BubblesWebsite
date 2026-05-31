@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
-import { MaxScreenWrapper } from "../../global/MaxScreen";
-import { Text } from "../../global/Text";
+import { MaxScreenWrapper } from "../global/MaxScreen";
+import { Text } from "../global/Text";
 
 const stats = [
   { end: 2000, suffix: "+", label: "Orders Completed" },

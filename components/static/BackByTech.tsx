@@ -1,20 +1,16 @@
 "use client";
 
-import { CustomImage } from "../../global/Image";
-import heroImg1 from "../../../public/place_img1.svg";
-import { MaxScreenWrapper } from "../../global/MaxScreen";
-import heroImg2 from "../../../public/place_img2.svg";
-import heroImg3 from "../../../public/place_img3.svg";
-import heroImg4 from "../../../public/place_img4.svg";
-import heroImg5 from "../../../public/place_img5.svg";
-import heroImg6 from "../../../public/place_img6.svg";
-import { Text } from "../../global/Text";
-import {
-  EcoFriendlySvg,
-  SecurePaymentSvg,
-  VerifiedVendorSvg,
-} from "../../svgs";
-import { RevealAnimation } from "../../global/Reveal";
+import { CustomImage } from "../global/Image";
+import heroImg1 from "../../public/place_img1.svg";
+import { MaxScreenWrapper } from "../global/MaxScreen";
+import heroImg2 from "../../public/place_img2.svg";
+import heroImg3 from "../../public/place_img3.svg";
+import heroImg4 from "../../public/place_img4.svg";
+import heroImg5 from "../../public/place_img5.svg";
+import heroImg6 from "../../public/place_img6.svg";
+import { Text } from "../global/Text";
+import { EcoFriendlySvg, SecurePaymentSvg, VerifiedVendorSvg } from "../svgs";
+import { RevealAnimation } from "../global/Reveal";
 
 export const BackByTech: React.FC = () => {
   return (
@@ -87,20 +83,16 @@ export const BackByTech: React.FC = () => {
                 as="h4"
                 style="font-[400] text-[22px] leading-[140%] text-tertiary1000 text-center"
               >
-                We started with one goal: To make cleaning feel less like a chore
-                and more like a breeze.
+                We started with one goal: To make cleaning feel less like a
+                chore and more like a breeze.
               </Text>
             </RevealAnimation>
 
             <div className="flex gap-[10px] flex-wrap items-center justify-center">
-              <div className="transition-transform duration-200 hover:-translate-y-1">
-                <SecurePaymentSvg />
-              </div>
-              <div className="transition-transform duration-200 hover:-translate-y-1">
-                <VerifiedVendorSvg />
-              </div>
+              <SecurePaymentSvg />
+              <VerifiedVendorSvg />
             </div>
-            <div className="md:w-auto w-fit m-auto transition-transform duration-200 hover:-translate-y-1">
+            <div className="md:w-auto w-fit m-auto">
               <EcoFriendlySvg />
             </div>
           </div>

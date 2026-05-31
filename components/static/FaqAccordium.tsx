@@ -1,8 +1,8 @@
 "use client";
 
-import { RevealAnimation } from "../../global/Reveal";
-import { Text } from "../../global/Text";
-import { cn } from "../../../lib/utils";
+import { RevealAnimation } from "../global/Reveal";
+import { Text } from "../global/Text";
+import { cn } from "../../lib/utils";
 import { ArrowDown2 } from "iconsax-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -61,7 +61,7 @@ export const Accordium: React.FC<IAccordium> = ({
 
   const formatAnswerText = (text: string) => {
     const hasHTMLTags = /<\/?[a-z][\s\S]*>/i.test(text); // Simple check for HTML tags
-  
+
     if (hasHTMLTags) {
       // Render as HTML if tags like <a>, <ul>, <strong> are found
       return (
@@ -71,7 +71,7 @@ export const Accordium: React.FC<IAccordium> = ({
         />
       );
     }
-  
+
     // Otherwise, treat it as plain text with line breaks
     return text.split("\n").map((paragraph, index) => (
       <p
@@ -85,17 +85,13 @@ export const Accordium: React.FC<IAccordium> = ({
       </p>
     ));
   };
-  
 
   return (
     <RevealAnimation style="py-5 w-full">
       <div className="w-full">
         <div
           onClick={handleToggle}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => e.key === "Enter" && handleToggle()}
-          className="flex items-center justify-between gap-4 cursor-pointer select-none rounded-sm transition-opacity duration-150 hover:opacity-80"
+          className="flex items-center justify-between gap-4 cursor-pointer"
         >
           <Text style="md:text-[28px] leading-[160%] text-[20px] font-[400] text-tertiary1000">
             {title}
@@ -104,7 +100,7 @@ export const Accordium: React.FC<IAccordium> = ({
             size="15"
             color="grey"
             className={cn(
-              "rotate-0 transform transition-transform duration-200 shrink-0",
+              "rotate-0 transform transition-transform duration-700",
               isOpen && "rotate-180"
             )}
           />

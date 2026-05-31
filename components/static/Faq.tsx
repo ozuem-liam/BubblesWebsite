@@ -1,10 +1,10 @@
-import { MaxScreenWrapper } from "../../global/MaxScreen";
-import { Text } from "../../global/Text";
+import { MaxScreenWrapper } from "../global/MaxScreen";
+import { Text } from "../global/Text";
 import { Accordium } from "./FaqAccordium";
-import bubble from "../../../public/bubbles.png";
-import { CustomImage } from "../../global/Image";
+import bubble from "../../public/bubbles.png";
+import { CustomImage } from "../global/Image";
 import { useEffect, useState } from "react";
-import { customerTab } from "..";
+import { customerTab } from ".";
 
 interface IFAQ {
   activeTab: string;
