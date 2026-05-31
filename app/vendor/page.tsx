@@ -5,7 +5,7 @@ import { TrendingUp, LayoutDashboard, Wallet, CheckCircle2 } from "lucide-react"
 import { TopNav } from "@/components/global/TopNav";
 import { Footer } from "@/components/global/Footer";
 import { Stats } from "@/components/static/Stats";
-import { FAQ } from "@/components/services/sections/Faq";
+import { FAQ } from "@/components/static/Faq";
 import { RevealAnimation } from "@/components/global/Reveal";
 import { Text } from "@/components/global/Text";
 import { MaxScreenWrapper } from "@/components/global/MaxScreen";
