@@ -17,10 +17,9 @@ import step5 from "@/public/step 5 (1).svg";
 import step6 from "@/public/step 6 (1).svg";
 
 const VENDOR_PLAY_URL =
-  "https://play.google.com/store/apps/details?id=com.bubbles.bubbles_vendor&hl=en";
-// Update with the real App Store link once Apple approves the vendor app
+  "https://play.google.com/store/apps/details?id=com.bubbles.bubbles_vendor&pcampaignid=web_share";
 const VENDOR_APP_STORE_URL =
-  "https://apps.apple.com/ng/app/bubbles-vendor/id6746811071";
+  "https://apps.apple.com/ng/app/bubbles-vendor-app/id6774730854";
 
 // ─── Value Props ───────────────────────────────────────────────────────────────
 

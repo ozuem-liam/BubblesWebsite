@@ -44,7 +44,7 @@ export const SecondHero: React.FC<ISecondHero> = ({ activeTab }) => {
                 href={
                   activeTab === customerTab
                     ? "https://play.google.com/store/apps/details?id=com.bubbles.customer.app&hl=en"
-                    : "https://play.google.com/store/apps/details?id=com.bubbles.bubbles_vendor&hl=en"
+                    : "https://play.google.com/store/apps/details?id=com.bubbles.bubbles_vendor&pcampaignid=web_share"
                 }
                 target="_blank"
                 className="text-none p-0 m-0"
@@ -56,7 +56,7 @@ export const SecondHero: React.FC<ISecondHero> = ({ activeTab }) => {
                 href={
                   activeTab === customerTab
                     ? "https://apps.apple.com/ng/app/bubblesng/id6751163998?platform=iphone"
-                    : "https://apps.apple.com/ng/app/bubbles-vendor/id6746811071"
+                    : "https://apps.apple.com/ng/app/bubbles-vendor-app/id6774730854"
                 }
                 target="_blank"
                 className="text-none p-0 m-0"
