@@ -64,7 +64,7 @@ export default function TermsPage() {
                 <li>Be available at the scheduled pickup and delivery times</li>
                 <li>Safeguard your OTP codes — these are required to confirm pickup and collection</li>
                 <li>Pay for services as agreed at the time of order</li>
-                <li>Treat vendors and riders with respect</li>
+                <li>Treat vendors and their dispatch teams with respect</li>
                 <li>Report any issues with service quality promptly through the app</li>
               </ul>
             </section>

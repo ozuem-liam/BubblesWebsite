@@ -107,7 +107,7 @@ export default function VendorPage() {
                 <Text style="lg:text-start text-center text-tertiary700 text-[16px] md:text-[18px] font-[400] leading-[160%]">
                   Stop chasing customers. Let Bubbles bring them to you. Join
                   hundreds of vendors across Lagos earning more with streamlined
-                  order management, secure payments, and delivery support.
+                  order management, secure payments, and your own delivery pricing.
                 </Text>
               </RevealAnimation>
 

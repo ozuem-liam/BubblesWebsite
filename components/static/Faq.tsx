@@ -35,7 +35,8 @@ const customerFaq = [
   },
   {
     title: "How much is delivery?",
-    answer: "Delivery cost ranges between ₦1500 - ₦5000",
+    answer:
+      "Delivery fees are set by each vendor and depend on your location. Some vendors deliver to your door; others are pickup only — you'll see the exact fee (or the pickup option) before you pay.",
   },
 ];
 
@@ -43,7 +44,7 @@ const vendorFaq = [
   {
     title: "How does Bubbles help my business?",
     answer:
-      "Bubbles helps your business by connecting you with a steady stream of customers who need laundry services, increasing your revenue without the hassle of finding clients yourself. Our platform handles customer acquisition, order management, and secure payments, allowing you to focus on providing quality service. Additionally, Bubbles offers logistics support, helping you manage pickups and deliveries efficiently. With our seamless system, you can grow your business while reducing operational stress.",
+      "Bubbles helps your business by connecting you with a steady stream of customers who need laundry services, increasing your revenue without the hassle of finding clients yourself. Our platform handles customer acquisition, order management, and secure payments, allowing you to focus on providing quality service. You stay in full control of fulfilment — set your own delivery fees by area, or offer pickup only — and manage it all from one app. With our seamless system, you can grow your business while reducing operational stress.",
   },
   {
     title: "What do I need to get started?",

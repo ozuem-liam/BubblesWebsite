@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: '%s | Bubbles',
   },
   description:
-    'Bubbles connects Lagos residents to reliable cleaning and laundry services. Schedule pickups, track orders, and enjoy hassle-free cleaning — delivered to your door.',
+    'Bubbles connects Lagos residents to reliable cleaning and laundry services. Schedule pickups, track orders, and enjoy hassle-free cleaning — delivered to your door or ready for pickup.',
   keywords: [
     'laundry Lagos', 'dry cleaning Lagos', 'laundry pickup Lagos',
     'cleaning services Lagos', 'laundry app Nigeria', 'Bubbles laundry',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     siteName: 'Bubbles',
     title: 'Bubbles — Cleaning & Laundry Services in Lagos',
     description:
-      'Bubbles connects Lagos residents to reliable cleaning and laundry services. Schedule pickups, track orders, and enjoy hassle-free cleaning — delivered to your door.',
+      'Bubbles connects Lagos residents to reliable cleaning and laundry services. Schedule pickups, track orders, and enjoy hassle-free cleaning — delivered to your door or ready for pickup.',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Bubbles Laundry & Cleaning' }],
   },
   twitter: {

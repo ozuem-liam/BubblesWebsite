@@ -13,7 +13,7 @@ export const VENDORDATAIMAGES = [heroImg5, heroImg6, heroImg7]
 export const CUSTOMERDATA = [
   {
     title: 'Wash',
-    desc: 'Deep-cleaned, fresh, and neatly folded laundry delivered to your doorstep. We handle everything from everyday wear to delicate fabrics with expert care.',
+    desc: 'Deep-cleaned, fresh, and neatly folded laundry delivered to your doorstep or ready for pickup. We handle everything from everyday wear to delicate fabrics with expert care.',
   },
   {
     title: 'Dry clean',
@@ -40,7 +40,7 @@ export const VENDORDATA = [
   },
   {
     title: 'Streamlined Order Management',
-    desc: 'Focus on laundry, not logistics. Manage orders with ease and efficiency.',
+    desc: 'One simple app to manage orders, set your delivery pricing, and run pickups your way.',
   },
   {
     title: 'Reliable Payouts',

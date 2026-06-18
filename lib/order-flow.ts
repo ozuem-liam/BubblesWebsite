@@ -49,13 +49,6 @@ export interface CartItemResponse {
   price: number
 }
 
-export interface DeliveryOption {
-  type: 'standard' | 'express'
-  label: string
-  fee: number // in kobo
-  deliveryTime: string
-}
-
 export interface OrderPayload {
   customer: string
   customer_first_name: string
@@ -352,24 +345,6 @@ export const orderFlowService = {
       token
     )
     return { orderId: response.data._id }
-  },
-
-  // Delivery Options
-  getDeliveryOptions(): DeliveryOption[] {
-    return [
-      {
-        type: 'standard',
-        label: 'Standard Delivery',
-        fee: 2000, // ₦2000 in kobo
-        deliveryTime: '3-5 business days',
-      },
-      {
-        type: 'express',
-        label: 'Express Delivery',
-        fee: 5000, // ₦5000 in kobo
-        deliveryTime: '24 hours',
-      },
-    ]
   },
 
   // Add this method to the orderFlowService object
