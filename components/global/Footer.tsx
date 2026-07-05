@@ -97,7 +97,7 @@ export const Footer: React.FC = () => {
         </div>
         <Text style="items-center md:mt-[104px] mt-[43px] mb-[73px] md:mb-[243px] text-[16px] text-center font-[500] leading-[160%] flex gap-[4px] text-tertiary800">
           <CopyrightSvg />
-          2025 Bubbles. All rights reserved
+          2026 Bubbles. All rights reserved
         </Text>
       </MaxScreenWrapper>
     </div>
