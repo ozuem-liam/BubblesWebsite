@@ -1,7 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { TrendingUp, LayoutDashboard, Wallet, CheckCircle2 } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import {
+  TrendingUp,
+  LayoutDashboard,
+  Wallet,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { TopNav } from "@/components/global/TopNav";
 import { Footer } from "@/components/global/Footer";
 import { Stats } from "@/components/static/Stats";
@@ -11,7 +20,6 @@ import { Text } from "@/components/global/Text";
 import { MaxScreenWrapper } from "@/components/global/MaxScreen";
 import { CustomImage } from "@/components/global/Image";
 import { AppleStoreSvg, PlayStoreSvg } from "@/components/svgs";
-import heroImg from "@/public/iPhone 11 Pro.svg";
 import step4 from "@/public/step 4 (1).svg";
 import step5 from "@/public/step 5 (1).svg";
 import step6 from "@/public/step 6 (1).svg";
@@ -21,13 +29,61 @@ const VENDOR_PLAY_URL =
 const VENDOR_APP_STORE_URL =
   "https://apps.apple.com/ng/app/bubbles-vendor-app/id6774730854";
 
+const artisanSlides = [
+  {
+    type: "Laundry professionals",
+    title: "Grow your laundry business with more orders.",
+    description:
+      "Connect with customers who need washing, dry cleaning, garment care, and dependable delivery.",
+    image: "/artisans/laundry.png",
+    imagePosition: "object-center",
+    accent: "#a9c7ff",
+  },
+  {
+    type: "Ironing professionals",
+    title: "Turn your ironing skill into steady income.",
+    description:
+      "Showcase your service, set your prices, manage requests, and serve more customers through Bubbles.",
+    image: "/artisans/ironing.png",
+    imagePosition: "object-center",
+    accent: "#f6d88d",
+  },
+  {
+    type: "Cleaning professionals",
+    title: "Find more homes and businesses to clean.",
+    description:
+      "Receive cleaning requests, organize your jobs, communicate with customers, and track your earnings.",
+    image: "/artisans/cleaning.png",
+    imagePosition: "object-top",
+    accent: "#a9e7ce",
+  },
+  {
+    type: "Electrical professionals",
+    title: "Put your electrical expertise in front of more customers.",
+    description:
+      "Get discovered for installations, repairs, maintenance, and other skilled electrical work in your area.",
+    image: "/artisans/electrician.jpg",
+    imagePosition: "object-center",
+    accent: "#f6c85f",
+  },
+  {
+    type: "Painting professionals",
+    title: "Build a steady pipeline for your painting business.",
+    description:
+      "Reach people looking for trusted professionals for home, office, renovation, and finishing work.",
+    image: "/artisans/painter.jpg",
+    imagePosition: "object-center",
+    accent: "#d6b4ff",
+  },
+];
+
 // ─── Value Props ───────────────────────────────────────────────────────────────
 
 const valueProps = [
   {
     Icon: TrendingUp,
     title: "More Customers",
-    desc: "Connect with customers actively searching for cleaning services in your area — no ads, no cold calls required.",
+    desc: "Connect with customers actively searching for trusted services in your area — no ads or cold calls required.",
   },
   {
     Icon: LayoutDashboard,
@@ -69,72 +125,185 @@ const steps = [
 // ─── What You Can Offer ────────────────────────────────────────────────────────
 
 const services = [
-  { label: "Laundry Wash", desc: "Everyday clothes to delicate fabrics" },
-  { label: "Dry Cleaning", desc: "Premium garment care" },
-  { label: "Ironing & Pressing", desc: "Sharp, wrinkle-free finishes" },
-  { label: "Essentials", desc: "Shoes, bags, rugs, duvets" },
+  { label: "Laundry & Garment Care", desc: "Washing, dry cleaning, ironing, and specialist care" },
+  { label: "Home & Office Cleaning", desc: "Regular, deep, move-in, and commercial cleaning" },
+  { label: "Electrical Services", desc: "Installations, maintenance, and electrical repairs" },
+  { label: "Plumbing", desc: "Leaks, fittings, installations, and everyday repairs" },
+  { label: "Painting", desc: "Interior, exterior, renovation, and finishing work" },
+  { label: "Handyman & Repairs", desc: "Practical help for homes, offices, and businesses" },
   { label: "Fumigation", desc: "Home and office pest control" },
 ];
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default function VendorPage() {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [announcement, setAnnouncement] = useState("");
+  const reduceMotion = useReducedMotion();
+
+  const selectSlide = (index: number) => {
+    setActiveSlide(index);
+    setAnnouncement(
+      `Slide ${index + 1} of ${artisanSlides.length}: ${artisanSlides[index].type}`
+    );
+  };
+
+  const showPreviousSlide = () => {
+    const previous =
+      (activeSlide - 1 + artisanSlides.length) % artisanSlides.length;
+    selectSlide(previous);
+  };
+
+  const showNextSlide = () => {
+    selectSlide((activeSlide + 1) % artisanSlides.length);
+  };
+
+  const slide = artisanSlides[activeSlide];
+
   return (
     <>
       {/* ── Hero ── */}
-      <div className="lg:px-[2.5rem] xl:px-[5.5rem] px-4 bg_linear-gradient lg:pt-[3rem] pt-[10rem] relative overflow-hidden">
+      <section
+        className="relative overflow-hidden bg-[#001330] px-4 pt-[9.5rem] text-white sm:pt-[10rem] lg:px-[2.5rem] lg:pt-[7rem] xl:px-[5.5rem]"
+        aria-roledescription="carousel"
+        aria-label="Artisans who can grow with Bubbles"
+      >
+        <div className="absolute inset-0 bg-[linear-gradient(135deg,#001330_0%,#00265f_58%,#001029_100%)]" />
+        <div
+          className="absolute -right-32 top-28 h-[420px] w-[420px] rounded-full opacity-[0.12] blur-3xl transition-colors duration-500"
+          style={{ backgroundColor: slide.accent }}
+        />
         <TopNav />
-        <MaxScreenWrapper style="pt-0 pb-[3rem] relative z-10">
-          <div className="flex lg:flex-row flex-col items-center md:gap-[40px] gap-[30px] justify-between">
-            {/* Copy */}
-            <div className="flex flex-col gap-[24px] lg:w-[50%] w-full lg:items-start items-center">
-              <RevealAnimation style="w-fit">
-                <Text style="lg:text-start text-center border-l-2 border-primary300 w-fit px-[16px] py-[8px] bg-primary800/90 backdrop-blur-sm rounded-r-[8px] text-tertiary700 text-[14px] font-[400]">
-                  Join 150+ Active Vendors
-                </Text>
-              </RevealAnimation>
+        <MaxScreenWrapper style="relative z-10">
+          <div className="grid min-h-[calc(100vh-7rem)] items-center gap-10 pb-12 lg:grid-cols-[0.54fr_0.46fr] lg:gap-16 lg:pb-16">
+            <div className="flex w-full flex-col items-center text-center lg:items-start lg:text-left">
+              <Text style="mb-5 w-fit rounded-full border border-white/[0.2] bg-white/[0.08] px-4 py-2 text-[15px] font-[700] leading-[1.5] text-white">
+                The app for artisans and service professionals
+              </Text>
 
-              <RevealAnimation style="w-fit">
-                <Text
-                  as="h1"
-                  style="lg:text-start text-center md:text-[64px] text-[40px] font-[800] leading-[120%] text-tertiary100"
-                >
-                  Grow Your Cleaning Business With Bubbles
-                </Text>
-              </RevealAnimation>
+              <div className="relative grid min-h-[280px] w-full place-items-center lg:min-h-[310px] lg:place-items-start">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={slide.type}
+                    className="col-start-1 row-start-1 flex flex-col items-center lg:items-start"
+                    initial={reduceMotion ? false : { opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.45, ease: "easeOut" }}
+                  >
+                    <Text style="mb-3 text-[16px] font-[700] leading-[1.5] text-[#c8dcff]">
+                      {slide.type}
+                    </Text>
+                    <Text
+                      as="h1"
+                      style="max-w-[760px] text-[40px] font-[800] leading-[1.12] text-white sm:text-[50px] lg:text-[58px]"
+                    >
+                      {slide.title}
+                    </Text>
+                    <Text style="mt-5 max-w-[650px] text-[18px] font-[400] leading-[1.7] text-white/[0.9]">
+                      {slide.description}
+                    </Text>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
 
-              <RevealAnimation style="w-fit">
-                <Text style="lg:text-start text-center text-tertiary700 text-[16px] md:text-[18px] font-[400] leading-[160%]">
-                  Stop chasing customers. Let Bubbles bring them to you. Join
-                  hundreds of vendors across Lagos earning more with streamlined
-                  order management, secure payments, and your own delivery pricing.
+              <div className="mt-5 flex flex-col items-center gap-3 lg:items-start">
+                <Text style="text-[16px] font-[700] leading-[1.5] text-white/[0.9]">
+                  Get the Bubbles Vendor App
                 </Text>
-              </RevealAnimation>
-
-              <RevealAnimation style="w-fit">
-                <div className="flex md:gap-[15px] gap-[6px] md:justify-start justify-between">
-                  <Link href={VENDOR_PLAY_URL} target="_blank" className="text-none p-0 m-0">
+                <div className="flex flex-wrap justify-center gap-3 lg:justify-start">
+                  <Link
+                    href={VENDOR_PLAY_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Download the Bubbles Vendor App on Google Play"
+                    className="transition-transform duration-300 hover:-translate-y-1"
+                  >
                     <PlayStoreSvg />
                   </Link>
-                  <Link href={VENDOR_APP_STORE_URL} target="_blank" className="text-none p-0 m-0">
+                  <Link
+                    href={VENDOR_APP_STORE_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Download the Bubbles Vendor App on the App Store"
+                    className="transition-transform duration-300 hover:-translate-y-1"
+                  >
                     <AppleStoreSvg />
                   </Link>
                 </div>
-              </RevealAnimation>
+              </div>
+
+              <div
+                className="mt-7 flex flex-wrap items-center justify-center gap-2 lg:justify-start"
+                aria-label="Choose an artisan story"
+              >
+                <button
+                  type="button"
+                  onClick={showPreviousSlide}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.32] bg-white/[0.08] text-white transition-colors hover:bg-white/[0.16]"
+                  aria-label="Show previous artisan"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+                <div className="flex items-center gap-0.5">
+                  {artisanSlides.map((item, index) => (
+                    <button
+                      type="button"
+                      key={item.type}
+                      onClick={() => selectSlide(index)}
+                      className="flex h-11 w-11 items-center justify-center rounded-full"
+                      aria-label={`Show slide ${index + 1} of ${artisanSlides.length}: ${item.type}`}
+                      aria-current={activeSlide === index ? "true" : undefined}
+                    >
+                      <span
+                        className={`h-2.5 rounded-full transition-all duration-300 ${
+                          activeSlide === index
+                            ? "w-7 bg-white"
+                            : "w-2.5 border border-white/70 bg-transparent"
+                        }`}
+                      />
+                    </button>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={showNextSlide}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.32] bg-white/[0.08] text-white transition-colors hover:bg-white/[0.16]"
+                  aria-label="Show next artisan"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </button>
+              </div>
+              <p className="sr-only" aria-live="polite" aria-atomic="true">
+                {announcement}
+              </p>
             </div>
 
-            {/* Phone mockup */}
-            <RevealAnimation style="lg:w-[50%] w-full">
-              <CustomImage
-                src={heroImg}
-                style="w-full lg:h-[700px] h-[420px]"
-                imgStyle="object-contain"
-                alt="Bubbles Vendor App"
-              />
-            </RevealAnimation>
+            <div className="relative mx-auto w-full max-w-[560px]">
+              <div className="relative h-[440px] overflow-hidden rounded-[26px] sm:h-[570px] lg:h-[650px]">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={slide.image}
+                    className="absolute inset-0"
+                    initial={reduceMotion ? false : { opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                  >
+                    <CustomImage
+                      src={slide.image}
+                      style="h-full w-full"
+                      imgStyle={`object-cover ${slide.imagePosition}`}
+                      alt={`${slide.type} using Bubbles to grow their business`}
+                      priority={activeSlide === 0}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
           </div>
         </MaxScreenWrapper>
-      </div>
+      </section>
 
       {/* ── Value Props ── */}
       <div className="lg:px-[2.5rem] xl:px-[5.5rem] px-4 py-[54px] sm:py-[104px] bg-tertiary300">
@@ -144,7 +313,7 @@ export default function VendorPage() {
               as="h2"
               style="font-[700] md:text-[40px] text-[30px] leading-[120%] text-center"
             >
-              Why Vendors Choose Bubbles
+              Why Artisans Choose Bubbles
             </Text>
           </RevealAnimation>
 

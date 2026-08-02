@@ -1,13 +1,29 @@
-import heroImg1 from '../../public/service_img2.svg'
-import heroImg2 from '../../public/service_img3.svg'
-import heroImg3 from '../../public/service_img4.svg'
-import heroImg4 from '../../public/service_img5.svg'
+import heroImg1 from '../../public/service_img.png'
+import heroImg2 from '../../public/place_img5.png'
+import heroImg3 from '../../public/place_img4.png'
+import heroImg4 from '../../public/place_img3.png'
 import heroImg5 from '../../public/service_img6.svg'
 import heroImg6 from '../../public/service_img7.svg'
 import heroImg7 from '../../public/service_img8.svg'
-import heroImg8 from '../../public/service_img9.svg'
+import cleaningImg from '../../public/artisans/cleaning.png'
+import electricalImg from '../../public/artisans/electrician.jpg'
+import plumbingImg from '../../public/services/plumbing.jpg'
+import paintingImg from '../../public/artisans/painter.jpg'
+import repairsImg from '../../public/services/repairs.jpg'
+import fumigationImg from '../../public/place_img1.png'
 
-export const CUSTOMERDATAIMAGES = [heroImg1, heroImg2, heroImg3, heroImg4, heroImg8]
+export const CUSTOMERDATAIMAGES = [
+  heroImg1,
+  heroImg2,
+  heroImg3,
+  heroImg4,
+  cleaningImg,
+  electricalImg,
+  plumbingImg,
+  paintingImg,
+  repairsImg,
+  fumigationImg,
+]
 export const VENDORDATAIMAGES = [heroImg5, heroImg6, heroImg7]
 
 export const CUSTOMERDATA = [
@@ -25,12 +41,32 @@ export const CUSTOMERDATA = [
   },
   {
     title: 'Essentials',
-    desc: 'From shoes to rugs, shoes, bags to duvets, we handle it all with expert cleaning tailored to each item.',
+    desc: 'From shoes and bags to rugs and duvets, we handle everyday essentials with expert care tailored to each item.',
+  },
+  {
+    title: 'Home & office cleaning',
+    desc: 'Book trusted professionals for regular cleaning, deep cleaning, move-in cleaning, and workplace care.',
+  },
+  {
+    title: 'Electrical services',
+    desc: 'Get help with sockets, lighting, installations, electrical faults, and routine maintenance from skilled professionals.',
+  },
+  {
+    title: 'Plumbing',
+    desc: 'Find reliable help for leaking taps, blocked pipes, fittings, installations, and other everyday plumbing repairs.',
+  },
+  {
+    title: 'Painting',
+    desc: 'Refresh your home, office, or business with careful interior painting, exterior painting, touch-ups, and finishing work.',
+  },
+  {
+    title: 'Handyman & repairs',
+    desc: 'Get practical help with mounting, fittings, furniture, minor repairs, maintenance, and the odd jobs around your space.',
   },
   {
     title: 'Fumigation',
     desc: 'Protect your space with our professional fumigation services. We eliminate pests and ensure a clean, safe environment for your home or business.',
-  }
+  },
 ]
 
 export const VENDORDATA = [

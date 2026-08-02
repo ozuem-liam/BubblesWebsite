@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Grow Your Cleaning Business",
+  title: "Grow Your Artisan Business",
   description:
-    "Join 150+ vendors on Bubbles and grow your cleaning business. Get more customers, manage orders easily, and receive reliable payouts — all from one app.",
+    "Grow your artisan or service business with Bubbles. Find more customers, manage jobs, set your prices, and receive reliable payouts from one app.",
   openGraph: {
-    title: "Grow Your Cleaning Business with Bubbles",
+    title: "Grow Your Artisan Business with Bubbles",
     description:
-      "Join 150+ vendors on Bubbles. Get more customers, manage orders easily, and receive reliable payouts — all from one app. Download now.",
+      "Bubbles helps artisans and service professionals find customers, manage jobs, and receive reliable payouts from one app.",
     url: "https://bubblesng.com/vendor",
     images: [{ url: "https://bubblesng.com/bubbles-logo.png", width: 1200, height: 630, alt: "Bubbles Vendor App" }],
   },
   twitter: {
-    title: "Grow Your Cleaning Business with Bubbles",
+    title: "Grow Your Artisan Business with Bubbles",
     description:
-      "Join 150+ vendors on Bubbles. Manage orders, get customers, and receive payouts — all from one app.",
+      "Find customers, manage jobs, and receive payouts with the Bubbles Vendor App.",
   },
 };
 
