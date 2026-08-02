@@ -216,7 +216,7 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
             style="font-[700] md:text-[40px] text-[30px] md:leading-[160%] leading-[120%]"
           >
             {activeTab === customerTab
-              ? "Several Services To Meet Your Cleaning Needs"
+              ? "Several Services To Meet Your Everyday Needs"
               : "More Loads. More Money. Less Stress"}
           </Text>
         </RevealAnimation>
@@ -235,6 +235,7 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
                   src={activeImage[currentIndex]}
                   style="w-full h-full"
                   imgStyle="object-contain"
+                  alt={activeData[currentIndex]?.title || "Bubbles service"}
                 />
                 <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4 z-10">
                   <div className="bg-black/50 backdrop-blur-sm rounded-lg p-6 max-w-sm">
@@ -268,6 +269,7 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
                       src={img}
                       style="w-full h-full"
                       imgStyle="object-contain"
+                      alt={activeData[index]?.title || "Bubbles service"}
                     />
                   </div>
                 ))}
