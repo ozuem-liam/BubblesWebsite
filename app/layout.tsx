@@ -73,6 +73,13 @@ export default function RootLayout({
         <body
           className={`m-auto min-h-[100vh] flex flex-col ${DmSans.className}`}
         >
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@graph': [
+              { '@type': 'Organization', name: 'Bubbles', url: SITE_URL, logo: `${SITE_URL}/bubbles-logo.png`, contactPoint: { '@type': 'ContactPoint', contactType: 'customer support', email: 'williams@bubblesng.com', telephone: '+2348105951215', areaServed: 'NG' } },
+              { '@type': 'WebSite', name: 'Bubbles', url: SITE_URL, potentialAction: { '@type': 'SearchAction', target: `${SITE_URL}/blog?search={search_term_string}`, 'query-input': 'required name=search_term_string' } },
+            ],
+          }) }} />
           <NextTopLoader color='#001029' showSpinner={false} />
           <main>
             {/* <CartHydration /> */}
