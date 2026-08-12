@@ -49,6 +49,26 @@ export const Footer: React.FC = () => {
                 Privacy policy
               </Text>
             </Link>
+            <Link href="/how-it-works" className="text-none">
+              <Text style="text-[16px] font-[500] leading-[160%] text-tertiary700">
+                How Bubbles works
+              </Text>
+            </Link>
+            <Link href="/trust-safety" className="text-none">
+              <Text style="text-[16px] font-[500] leading-[160%] text-tertiary700">
+                Trust &amp; safety
+              </Text>
+            </Link>
+            <Link href="/laundry-service-lagos" className="text-none">
+              <Text style="text-[16px] font-[500] leading-[160%] text-tertiary700">
+                Services in Lagos
+              </Text>
+            </Link>
+            <Link href="/laundry-service-abuja" className="text-none">
+              <Text style="text-[16px] font-[500] leading-[160%] text-tertiary700">
+                Services in Abuja
+              </Text>
+            </Link>
           </div>
           <div className="flex flex-col md:gap-[20px] gap-[15px]">
             <Text style="text-[16px] font-[700] leading-[150%] text-tertiary100">

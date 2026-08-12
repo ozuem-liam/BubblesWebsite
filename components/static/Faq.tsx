@@ -16,9 +16,9 @@ const customerFaq = [
     answer: "Bubbles is currently active in more than 20 LCDAs across Lagos.",
   },
   {
-    title: "Can I reschedule or cancel a pickup?",
+    title: "What does Bubbles do?",
     answer:
-      "Yep, you can cancel or reschedule your order anytime before pickup.",
+      "Bubbles is a marketplace. We connect customers with independent service professionals, help manage service requests, and provide support when a booking needs attention. The selected vendor provides the service.",
   },
   {
     title: "Who do I contact for support?",
@@ -34,9 +34,9 @@ const customerFaq = [
   `,
   },
   {
-    title: "How much is delivery?",
+    title: "What if there is a problem with my booking?",
     answer:
-      "Delivery fees are set by each vendor and depend on your location. Some vendors deliver to your door; others are pickup only — you'll see the exact fee (or the pickup option) before you pay.",
+      "Contact Bubbles support as soon as possible. We will review the information available and help you and the vendor follow the relevant platform policies toward a fair resolution.",
   },
 ];
 
@@ -44,11 +44,11 @@ const vendorFaq = [
   {
     title: "How does Bubbles help my business?",
     answer:
-      "Bubbles helps your business by connecting you with a steady stream of customers who need laundry services, increasing your revenue without the hassle of finding clients yourself. Our platform handles customer acquisition, order management, and secure payments, allowing you to focus on providing quality service. You stay in full control of fulfilment — set your own delivery fees by area, or offer pickup only — and manage it all from one app. With our seamless system, you can grow your business while reducing operational stress.",
+      "Bubbles helps independent service businesses reach customers, manage requests, and keep their marketplace profile organised. You remain in control of the services you offer, your pricing, availability, and fulfilment.",
   },
   {
     title: "What do I need to get started?",
-    answer: `Register Your Business – Sign up on the Bubbles platform and provide basic details about your laundry service.
+    answer: `Register Your Business – Sign up on the Bubbles platform and provide basic details about your service business.
 
       Set Up Your Profile – Add your pricing, service offerings, and business location so customers can find you easily.
       
@@ -62,9 +62,9 @@ const vendorFaq = [
     title: "How do I receive payments?",
     answer: `Bubbles ensures a seamless and secure payment process for your business. Here’s how you receive payments:
 
-      Customers Pay Online – When a customer places an order, they make a secure payment through the Bubbles app.
+      Customers Pay Online – When a customer places an order, payment is processed through the Bubbles app where available.
       
-      Funds Are Processed Securely – Payments are held safely until the service is completed to ensure customer satisfaction.
+      Funds Are Processed According to the Platform Flow – The applicable payment and payout status is shown in your vendor account.
       
       Payouts to Your Account – After completing an order, your earnings are automatically transferred to your registered bank account or wallet on Bubbles.
       
@@ -75,7 +75,7 @@ const vendorFaq = [
   {
     title: "Can I set my own prices?",
     answer:
-      "Yes! With Bubbles, you have full control over your pricing. You can set your own rates for different laundry services based on your business model, fabric type, and service options (e.g., express delivery, ironing, dry cleaning). Our platform also provides insights into competitive pricing in your area to help you stay profitable while attracting more customers.",
+      "Yes. You control the prices for the services you choose to offer, based on your business model, service requirements, and availability. Make sure your profile clearly explains what each price includes.",
   },
   {
     title: "How do I withdraw my business profits?",
@@ -125,7 +125,7 @@ export const FAQ: React.FC<IFAQ> = ({ activeTab }) => {
           className="flex flex-col md:w-[30%] w-full md:gap-[30px] gap-[0px]"
         >
           <Text
-            as="h1"
+            as="h2"
             style="font-[700] text-[34px] leading-[160%] md:text-start text-center"
           >
             FAQs

@@ -81,7 +81,7 @@ export const BackByTech: React.FC = () => {
                 as="h3"
                 style="font-[700] text-[34px] leading-[160%] text-center"
               >
-                Cleaning Service Backed by Tech That Delivers
+                A Marketplace Built for Confident Bookings
               </Text>
             </RevealAnimation>
             <RevealAnimation style="w-fit">
@@ -89,8 +89,8 @@ export const BackByTech: React.FC = () => {
                 as="h4"
                 style="font-[400] text-[22px] leading-[140%] text-tertiary1000 text-center"
               >
-                We started with one goal: To make cleaning feel less like a
-                chore and more like a breeze.
+                Bubbles helps customers discover independent professionals,
+                manage service requests, and get support when a booking needs attention.
               </Text>
             </RevealAnimation>
 

@@ -1,7 +1,13 @@
-import { ok } from "node:assert"
-
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 export const WEB_DOMAIN = process.env.WEB_DOMAIN || 'https://bubblesng.com/'
+
+const apiUrl = (endpoint: string) => {
+  if (!BASE_URL) {
+    throw new Error('NEXT_PUBLIC_BASE_URL is not configured')
+  }
+
+  return `${BASE_URL.replace(/\/$/, '')}/${endpoint.replace(/^\//, '')}`
+}
 
 export const api = {
   async post<T>(endpoint: string, body: any, token?: string): Promise<T> {
@@ -14,7 +20,7 @@ export const api = {
         headers['Authorization'] = `Bearer ${token}`
       }
 
-      const response = await fetch(`${BASE_URL}${endpoint}`, {
+      const response = await fetch(apiUrl(endpoint), {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(body),
@@ -35,7 +41,7 @@ export const api = {
       headers['Authorization'] = `Bearer ${token}`
     }
 
-    const response = await fetch(`${BASE_URL}${endpoint}`, {
+    const response = await fetch(apiUrl(endpoint), {
       method: 'GET',
       headers,
     })
@@ -58,7 +64,7 @@ export const api = {
       headers['Authorization'] = `Bearer ${token}`
     }
 
-    const response = await fetch(`${BASE_URL}${endpoint}`, {
+    const response = await fetch(apiUrl(endpoint), {
       method: 'PATCH',
       headers: headers,
       body: JSON.stringify(body),
@@ -80,7 +86,7 @@ export const api = {
       headers['Authorization'] = `Bearer ${token}`
     }
 
-    const response = await fetch(`${BASE_URL}${endpoint}`, {
+    const response = await fetch(apiUrl(endpoint), {
       method: 'PUT',
       headers: headers,
       body: JSON.stringify(body),
@@ -102,7 +108,7 @@ export const api = {
       headers['Authorization'] = `Bearer ${token}`
     }
 
-    const response = await fetch(`${BASE_URL}${endpoint}`, {
+    const response = await fetch(apiUrl(endpoint), {
       method: 'DELETE',
       headers,
     })

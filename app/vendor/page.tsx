@@ -27,7 +27,7 @@ const valueProps = [
   {
     Icon: TrendingUp,
     title: "More Customers",
-    desc: "Connect with customers actively searching for cleaning services in your area — no ads, no cold calls required.",
+    desc: "Connect with customers actively searching for services in your area — no cold calls required.",
   },
   {
     Icon: LayoutDashboard,
@@ -99,15 +99,14 @@ export default function VendorPage() {
                   as="h1"
                   style="lg:text-start text-center md:text-[64px] text-[40px] font-[800] leading-[120%] text-tertiary100"
                 >
-                  Grow Your Cleaning Business With Bubbles
+                  Grow Your Service Business With Bubbles
                 </Text>
               </RevealAnimation>
 
               <RevealAnimation style="w-fit">
                 <Text style="lg:text-start text-center text-tertiary700 text-[16px] md:text-[18px] font-[400] leading-[160%]">
-                  Stop chasing customers. Let Bubbles bring them to you. Join
-                  hundreds of vendors across Lagos earning more with streamlined
-                  order management, secure payments, and your own delivery pricing.
+                  Bubbles helps independent service professionals reach customers,
+                  manage requests, and run their business with clearer tools and support.
                 </Text>
               </RevealAnimation>
 
@@ -144,7 +143,7 @@ export default function VendorPage() {
               as="h2"
               style="font-[700] md:text-[40px] text-[30px] leading-[120%] text-center"
             >
-              Why Vendors Choose Bubbles
+              Why Service Professionals Choose Bubbles
             </Text>
           </RevealAnimation>
 
@@ -183,13 +182,13 @@ export default function VendorPage() {
                 as="h2"
                 style="font-[700] md:text-[40px] text-[30px] leading-[120%] lg:text-start text-center"
               >
-                Services You Can Offer on Bubbles
+                Start with the Services You Know Best
               </Text>
             </RevealAnimation>
             <RevealAnimation style="w-fit shrink-0">
               <Text style="text-[16px] font-[400] text-tertiary1000 leading-[160%] lg:text-start text-center max-w-[360px]">
-                List any combination of services. You control your pricing and
-                availability at all times.
+                List the categories currently supported on Bubbles. You control your pricing,
+                availability, and the services you choose to offer.
               </Text>
             </RevealAnimation>
           </div>

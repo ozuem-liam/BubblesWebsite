@@ -7,15 +7,17 @@ import { MaxScreenWrapper } from "../global/MaxScreen";
 import { RevealAnimation } from "../global/Reveal";
 import { customerTab } from "./index";
 import {
-  CUSTOMERDATA,
   CUSTOMERDATAIMAGES,
   VENDORDATA,
   VENDORDATAIMAGES,
 } from "../../lib/constants/Service";
 import { StaticImageData } from "next/legacy/image";
+import type { ActiveService } from "@/hooks/useActiveServices";
 
 interface IServicesSection {
   activeTab: string;
+  services: ActiveService[];
+  loading: boolean;
 }
 
 type DataType = {
@@ -23,14 +25,14 @@ type DataType = {
   desc: string;
 }[];
 
-export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
+export const ServicesSection: React.FC<IServicesSection> = ({ activeTab, services, loading }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
   const [isFlipping, setIsFlipping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [activeData, setActiveData] = useState<DataType>(CUSTOMERDATA);
+  const [activeData, setActiveData] = useState<DataType>([]);
   const [activeImage, setActiveImage] =
-    useState<StaticImageData[]>(CUSTOMERDATAIMAGES);
+    useState<(StaticImageData | string)[]>(CUSTOMERDATAIMAGES);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [startPosition, setStartPosition] = useState<number>(0);
@@ -39,16 +41,17 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
   const [isTyping, setIsTyping] = useState(false);
   const typingInterval = useRef<NodeJS.Timeout | null>(null);
   const cycleTimeout = useRef<NodeJS.Timeout | null>(null);
+  const typingStartTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    setActiveData(() =>
-      activeTab === customerTab ? CUSTOMERDATA : VENDORDATA
-    );
+    setActiveData(() => activeTab === customerTab ? services.map(({ title, description }) => ({ title, desc: description })) : VENDORDATA);
     setActiveImage(() =>
-      activeTab === customerTab ? CUSTOMERDATAIMAGES : VENDORDATAIMAGES
+      activeTab === customerTab
+        ? services.map((service, index) => service.image || CUSTOMERDATAIMAGES[index % CUSTOMERDATAIMAGES.length])
+        : VENDORDATAIMAGES
     );
     setCurrentIndex(0); // Reset to first item when tab changes
-  }, [activeTab]);
+  }, [activeTab, services]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -128,6 +131,7 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
     return () => {
       if (typingInterval.current) clearInterval(typingInterval.current);
       if (cycleTimeout.current) clearTimeout(cycleTimeout.current);
+      if (typingStartTimeout.current) clearTimeout(typingStartTimeout.current);
     };
   }, []);
 
@@ -182,7 +186,7 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
       const desc = activeData[currentIndex]?.desc;
       if (typeof desc === "string" && desc.trim().length > 0) {
         // Small delay before starting typing for better UX
-        setTimeout(() => {
+        typingStartTimeout.current = setTimeout(() => {
           typeText(desc.trim());
         }, 300);
       } else {
@@ -193,13 +197,12 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
       // Clean up when not in view
       if (typingInterval.current) clearInterval(typingInterval.current);
       if (cycleTimeout.current) clearTimeout(cycleTimeout.current);
-      setTypedText("");
-      setIsTyping(false);
     }
 
     return () => {
       if (typingInterval.current) clearInterval(typingInterval.current);
       if (cycleTimeout.current) clearTimeout(cycleTimeout.current);
+      if (typingStartTimeout.current) clearTimeout(typingStartTimeout.current);
     };
   }, [inView, currentIndex, activeData]);
 
@@ -216,15 +219,19 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
             style="font-[700] md:text-[40px] text-[30px] md:leading-[160%] leading-[120%]"
           >
             {activeTab === customerTab
-              ? "Several Services To Meet Your Cleaning Needs"
+              ? "Explore Services Available on Bubbles"
               : "More Loads. More Money. Less Stress"}
           </Text>
         </RevealAnimation>
 
+        {!loading && activeData.length === 0 ? (
+          <Text style="mt-6 text-[18px] text-tertiary1000">Services are being updated. Please check back shortly.</Text>
+        ) : (
+
         <div className="flex md:flex-row flex-col items-center lg:gap-[80px] gap-[25px] sm:gap-[50px] justify-between">
           {/* Image section */}
           <RevealAnimation style="lg:w-[50%] w-full relative">
-            <div className="relative w-full lg:h-[576px] h-[310px] sm:h-[380px]">
+            <div className="relative w-full overflow-hidden rounded-[28px] border border-primary800/10 bg-[linear-gradient(135deg,#eef4ff_0%,#dbeafe_52%,#f8fbff_100%)] shadow-[0_20px_60px_rgba(0,19,48,0.16)] lg:h-[576px] h-[310px] sm:h-[380px]">
               {/* Mobile: Only render the active image and overlay */}
               <div
                 className={`lg:hidden block h-full w-full ${
@@ -234,7 +241,8 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
                 <CustomImage
                   src={activeImage[currentIndex]}
                   style="w-full h-full"
-                  imgStyle="object-contain"
+                  imgStyle="object-cover"
+                  unoptimized={typeof activeImage[currentIndex] === "string"}
                 />
                 <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4 z-10">
                   <div className="bg-black/50 backdrop-blur-sm rounded-lg p-6 max-w-sm">
@@ -267,7 +275,8 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
                     <CustomImage
                       src={img}
                       style="w-full h-full"
-                      imgStyle="object-contain"
+                      imgStyle="object-cover"
+                      unoptimized={typeof img === "string"}
                     />
                   </div>
                 ))}
@@ -315,6 +324,7 @@ export const ServicesSection: React.FC<IServicesSection> = ({ activeTab }) => {
             </div>
           </div>
         </div>
+        )}
       </MaxScreenWrapper>
 
       {/* Flip animation style */}

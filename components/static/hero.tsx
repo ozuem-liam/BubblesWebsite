@@ -20,10 +20,10 @@ import { AppleStoreSvg, PlayStoreSvg } from "../svgs";
 
 const heroSlides = [
   {
-    title: "Cleaning Made Simple For You",
-    subtitle: "8hrs+ Saved Weekly",
+    title: "Find trusted help for the jobs around your day.",
+    subtitle: "A marketplace built for confidence",
     description:
-      "Say goodbye to cleaning stress! Whether it's laundry, home, office cleaning, or fumigation, we deliver fresh, spotless results every time. Perfect for busy professionals and businesses alike—let us handle the mess so you can focus on what matters.",
+      "Bubbles connects you with independent, reviewed service professionals. Compare options, manage your request, and get support when you need it.",
     image: heroImg,
   },
   // {

@@ -27,14 +27,14 @@ export const SecondHero: React.FC<ISecondHero> = ({ activeTab }) => {
         <div className="py-0 md:py-[2rem] lg:py-0 flex flex-col gap-[24px] lg:w-[30%] w-full lg:items-start items-center">
           <RevealAnimation style="w-fit">
             <Text style="lg:text-start text-center border-l-2 border-primary300 w-fit px-[16px] py-[8px] bg-primary100 rounded-r-[8px] text-black text-[14px] font-[400]">
-              Free Laundry Basket
+              The Bubbles Customer App
             </Text>
           </RevealAnimation>
           <RevealAnimation style="md:w-[90%] w-full">
             <Text style="w-full lg:text-start text-center text-[46px] md:text-[56px] font-[500] leading-[140%] text-black">
               {activeTab === customerTab
-                ? `Don't Get Left in the Basket. Join Us Today!`
-                : "Start growing your business with every spin."}
+                ? `Find professionals. Manage bookings. Get support when it matters.`
+                : "Grow your service business with better tools."}
             </Text>
           </RevealAnimation>
           <RevealAnimation style="md:w-fit w-full">

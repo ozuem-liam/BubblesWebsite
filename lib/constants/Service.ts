@@ -13,23 +13,23 @@ export const VENDORDATAIMAGES = [heroImg5, heroImg6, heroImg7]
 export const CUSTOMERDATA = [
   {
     title: 'Wash',
-    desc: 'Deep-cleaned, fresh, and neatly folded laundry delivered to your doorstep or ready for pickup. We handle everything from everyday wear to delicate fabrics with expert care.',
+    desc: 'Find independent laundry professionals for everyday wear, delicate fabrics, and pickup or delivery options where available.',
   },
   {
     title: 'Dry clean',
-    desc: 'Gentle on fabric, tough on stains. Expert care for your delicate and premium wears, returned crisp and polished.',
+    desc: 'Explore dry-cleaning professionals for delicate and premium garments, with service details set by each vendor.',
   },
   {
     title: 'Iron',
-    desc: 'Precision-pressed and wrinkle-free, your clothes come out looking sharp, fresh, and ready to wear. We believe every outfit deserves a flawless finish.',
+    desc: 'Connect with professionals offering ironing and pressing services for garments that need a polished finish.',
   },
   {
     title: 'Essentials',
-    desc: 'From shoes to rugs, shoes, bags to duvets, we handle it all with expert cleaning tailored to each item.',
+    desc: 'Discover specialist vendors for shoes, bags, rugs, duvets, and other cleaning needs.',
   },
   {
     title: 'Fumigation',
-    desc: 'Protect your space with our professional fumigation services. We eliminate pests and ensure a clean, safe environment for your home or business.',
+    desc: 'Find fumigation professionals for homes and businesses, subject to vendor availability in your area.',
   }
 ]
 
