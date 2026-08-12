@@ -29,7 +29,7 @@ function contentApiUrl(path: string) {
 export async function getPublishedArticles(): Promise<ApiResponse<Article[]> | null> {
   const url = contentApiUrl('/articles?limit=12')
   if (!url) return null
-  const response = await fetch(url, { next: { revalidate: 300 } })
+  const response = await fetch(url, { cache: 'no-store' })
   if (!response.ok) return null
   return response.json()
 }
@@ -37,7 +37,7 @@ export async function getPublishedArticles(): Promise<ApiResponse<Article[]> | n
 export async function getPublishedArticle(slug: string): Promise<Article | null> {
   const url = contentApiUrl(`/articles/${encodeURIComponent(slug)}`)
   if (!url) return null
-  const response = await fetch(url, { next: { revalidate: 300 } })
+  const response = await fetch(url, { cache: 'no-store' })
   if (!response.ok) return null
   const result: ApiResponse<Article> = await response.json()
   return result.data
