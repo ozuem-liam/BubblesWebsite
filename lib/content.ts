@@ -46,3 +46,9 @@ export async function getPublishedArticle(slug: string): Promise<Article | null>
 export function articleUrl(article: Article) {
   return article.canonical_url || `/blog/${article.slug}`
 }
+
+export function articleCoverImageUrl(image?: string) {
+  if (!image) return undefined
+  const googleDriveFileId = image.match(/drive\.google\.com\/file\/d\/([^/]+)/)?.[1]
+  return googleDriveFileId ? `https://drive.google.com/uc?export=view&id=${googleDriveFileId}` : image
+}

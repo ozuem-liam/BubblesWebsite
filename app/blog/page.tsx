@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Footer } from '@/components/global/Footer'
 import { TopNav } from '@/components/global/TopNav'
-import { getPublishedArticles } from '@/lib/content'
+import { articleCoverImageUrl, getPublishedArticles } from '@/lib/content'
 
 export const metadata: Metadata = {
   title: 'Bubbles Guides',
@@ -26,6 +27,7 @@ export default async function BlogPage() {
     <main className="m-auto max-w-[1440px] px-4 py-16 lg:px-[2.5rem] xl:px-[5.5rem]">
       {articles.length ? <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {articles.map((article) => <article key={article._id} className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          {articleCoverImageUrl(article.cover_image) && <div className="relative -mx-6 -mt-6 mb-6 aspect-[16/9] overflow-hidden rounded-t-2xl bg-slate-100"><Image src={articleCoverImageUrl(article.cover_image)!} alt={article.cover_image_alt || article.title} fill className="object-cover" sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" /></div>}
           {article.primary_category && <p className="text-sm font-semibold capitalize text-blue-700">{article.primary_category}</p>}
           <h2 className="mt-3 text-2xl font-bold leading-tight text-slate-950"><Link href={`/blog/${article.slug}`} className="hover:underline">{article.title}</Link></h2>
           <p className="mt-4 flex-1 leading-relaxed text-slate-600">{article.excerpt}</p>
