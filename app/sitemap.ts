@@ -1,9 +1,10 @@
 import type { MetadataRoute } from 'next'
+import { getPublishedArticles } from '@/lib/content'
 
 const SITE_URL = 'https://www.bubblesng.com'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const corePages: MetadataRoute.Sitemap = [
     '',
     '/laundry-service-abuja',
     '/laundry-service-lagos',
@@ -18,4 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: path === '' ? 'weekly' : 'monthly',
     priority: path === '' ? 1 : 0.8,
   }))
+  const articles = await getPublishedArticles()
+  const articlePages = (articles?.data ?? []).map((article) => ({
+    url: `${SITE_URL}/blog/${article.slug}`,
+    lastModified: article.last_updated_at || article.published_at || new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+  return [...corePages, ...articlePages]
 }
