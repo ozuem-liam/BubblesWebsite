@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { getPublishedArticles } from '@/lib/content'
+import { getAllPublishedArticles } from '@/lib/content'
 
 const SITE_URL = 'https://www.bubblesng.com'
 
@@ -19,8 +19,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: path === '' ? 'weekly' : 'monthly',
     priority: path === '' ? 1 : 0.8,
   }))
-  const articles = await getPublishedArticles()
-  const articlePages = (articles?.data ?? []).map((article) => ({
+  const articles = await getAllPublishedArticles()
+  const articlePages = articles.map((article) => ({
     url: `${SITE_URL}/blog/${article.slug}`,
     lastModified: article.last_updated_at || article.published_at || new Date(),
     changeFrequency: 'monthly' as const,
