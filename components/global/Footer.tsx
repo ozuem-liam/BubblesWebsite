@@ -59,6 +59,11 @@ export const Footer: React.FC = () => {
                 Trust &amp; safety
               </Text>
             </Link>
+            <Link href="/blog" className="text-none">
+              <Text style="text-[16px] font-[500] leading-[160%] text-tertiary700">
+                Guides
+              </Text>
+            </Link>
             <Link href="/laundry-service-lagos" className="text-none">
               <Text style="text-[16px] font-[500] leading-[160%] text-tertiary700">
                 Services in Lagos
