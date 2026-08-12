@@ -14,20 +14,20 @@ const DmSans = DM_Sans({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
-const SITE_URL = 'https://bubblesng.com'
-const OG_IMAGE = `${SITE_URL}/bubbles-logo.png`
+const SITE_URL = 'https://www.bubblesng.com'
+const OG_IMAGE = `${SITE_URL}/bubbles-og-image.png`
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Bubbles — Cleaning & Laundry Services in Lagos',
+    default: 'Bubbles — Trusted Service Professionals in Nigeria',
     template: '%s | Bubbles',
   },
   description:
-    'Bubbles connects Lagos residents to reliable cleaning and laundry services. Schedule pickups, track orders, and enjoy hassle-free cleaning — delivered to your door or ready for pickup.',
+    'Bubbles is a Nigerian marketplace that connects customers with independent, reviewed service professionals. Discover services, manage bookings, and get support when needed.',
   keywords: [
-    'laundry Lagos', 'dry cleaning Lagos', 'laundry pickup Lagos',
-    'cleaning services Lagos', 'laundry app Nigeria', 'Bubbles laundry',
+    'artisan marketplace Nigeria', 'service professionals Nigeria', 'find local artisans Nigeria',
+    'book service professionals Nigeria', 'vendor marketplace Nigeria', 'Bubbles Nigeria',
   ],
   authors: [{ name: 'Bubbles', url: SITE_URL }],
   creator: 'Bubbles',
@@ -36,16 +36,16 @@ export const metadata: Metadata = {
     locale: 'en_NG',
     url: SITE_URL,
     siteName: 'Bubbles',
-    title: 'Bubbles — Cleaning & Laundry Services in Lagos',
+    title: 'Bubbles — Trusted Service Professionals in Nigeria',
     description:
-      'Bubbles connects Lagos residents to reliable cleaning and laundry services. Schedule pickups, track orders, and enjoy hassle-free cleaning — delivered to your door or ready for pickup.',
+      'Find and book independent service professionals through Bubbles. Availability varies by category and location across Nigeria.',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Bubbles Laundry & Cleaning' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Bubbles — Cleaning & Laundry Services in Lagos',
+    title: 'Bubbles — Trusted Service Professionals in Nigeria',
     description:
-      'Schedule laundry pickups and cleaning services across Lagos. Download the Bubbles app today.',
+      'Find independent service professionals through Bubbles. Check availability in your Nigerian city.',
     images: [OG_IMAGE],
     creator: '@getbubblesng',
   },
@@ -53,6 +53,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+  },
+  alternates: {
+    canonical: '/',
   },
   icons: {
     icon: '/favicon.ico',

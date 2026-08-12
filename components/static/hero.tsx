@@ -1,100 +1,283 @@
 "use client";
 
-import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { useState } from "react";
 import { CustomImage } from "../global/Image";
-import { MaxScreenWrapper } from "../global/MaxScreen";
 import { Text } from "../global/Text";
 import { TopNav } from "../global/TopNav";
-import { AppleStoreSvg, PlayStoreSvg } from "../svgs";
+// import { AppleStoreSvg, PlayStoreSvg } from "../svgs";
+import { MaxScreenWrapper } from "../global/MaxScreen";
+import { RevealAnimation } from "../global/Reveal";
+import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, EffectFade } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/effect-fade";
 import heroImg from "../../public/hero_img.svg";
+import bubbleCarImg from "../../public/bubble-car.png";
+import { Button } from "@/components/ui/button";
+import { AppleStoreSvg, PlayStoreSvg } from "../svgs";
 
-const CUSTOMER_PLAY_URL =
-  "https://play.google.com/store/apps/details?id=com.bubbles.customer.app&hl=en";
-const CUSTOMER_APP_STORE_URL =
-  "https://apps.apple.com/ng/app/bubblesng/id6751163998?platform=iphone";
+const heroSlides = [
+  {
+    title: "Find trusted help for the jobs around your day.",
+    subtitle: "A marketplace built for confidence",
+    description:
+      "Bubbles connects you with independent, reviewed service professionals. Compare options, manage your request, and get support when you need it.",
+    image: heroImg,
+  },
+  // {
+  //   title: 'Laundry Made Simple For You',
+  //   subtitle: '8hrs+ Saved Weekly',
+  //   description:
+  //     "No more laundry stress; just fresh, professionally cleaned clothes. Whether you're a busy professional or a laundry business looking to grow, we're here to help.",
+  //   image: heroImg,
+  // },
+  // {
+  //   title: 'Professional Cleaning Services',
+  //   subtitle: 'Quality Guaranteed',
+  //   description:
+  //     'Experience premium laundry service with our expert cleaners. We ensure your clothes get the care they deserve.',
+  //   image: heroImg,
+  // },
+  // {
+  //   title: 'Fast & Reliable Service',
+  //   subtitle: '24/7 Service',
+  //   description:
+  //     'Schedule pickups and deliveries at your convenience. We work around your schedule to make laundry day stress-free.',
+  //   image: heroImg,
+  // },
+  // {
+  //   title: 'Premium Car Wash Services',
+  //   subtitle: 'Sparkling Clean Cars',
+  //   description:
+  //     'Get your car spotless with our professional car wash services. We use advanced cleaning techniques and premium products for the perfect shine.',
+  //   image: bubbleCarImg,
+  //   isCarWash: true,
+  //   subscribeUrl: 'https://paystack.shop/pay/kqz7lftfi9',
+  // },
+];
 
 export const Hero: React.FC = () => {
-  const reduceMotion = useReducedMotion();
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
+  const [swiperInstance, setSwiperInstance] = useState<any>(null);
+
+  const handleCarouselClick = () => {
+    if (swiperInstance) {
+      if (isAutoplayPaused) {
+        swiperInstance.autoplay.start();
+        setIsAutoplayPaused(false);
+      } else {
+        swiperInstance.autoplay.stop();
+        setIsAutoplayPaused(true);
+      }
+    }
+  };
 
   return (
-    <section
-      id="home"
-      className="relative overflow-hidden bg-[#001330] px-4 pt-[9.5rem] text-white sm:pt-[10rem] lg:px-[2.5rem] lg:pt-[7rem] xl:px-[5.5rem]"
-    >
-      <div className="absolute inset-0 bg-[linear-gradient(135deg,#001330_0%,#00265f_58%,#001029_100%)]" />
-      <div className="absolute -right-32 top-28 h-[420px] w-[420px] rounded-full bg-[#a9c7ff] opacity-[0.12] blur-3xl" />
+    <div className="lg:px-[2.5rem] xl:px-[5.5rem] px-4 bg_linear-gradient lg:pt-[3rem] pt-[10rem] relative overflow-hidden">
+      {/* Dynamic background overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br transition-all duration-1000 ease-in-out" />
+
       <TopNav />
-
-      <MaxScreenWrapper style="relative z-10">
-        <div className="grid min-h-[calc(100vh-7rem)] items-center gap-10 pb-12 lg:grid-cols-[0.54fr_0.46fr] lg:gap-16 lg:pb-16">
-          <motion.div
-            className="flex w-full flex-col items-center text-center lg:items-start lg:text-left"
-            initial={reduceMotion ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.45, ease: "easeOut" }}
+      <MaxScreenWrapper style="pt-0 pb-[1rem] relative z-10">
+        <div
+          onClick={handleCarouselClick}
+          className="cursor-pointer"
+          title={
+            isAutoplayPaused
+              ? "Click to resume autoplay"
+              : "Click to pause autoplay"
+          }
+        >
+          <Swiper
+            modules={[Autoplay, Pagination, EffectFade]}
+            spaceBetween={0}
+            slidesPerView={1}
+            pagination={{
+              clickable: true,
+            }}
+            // autoplay={{
+            //   delay: 2000,
+            //   disableOnInteraction: false,
+            // }}
+            effect="fade"
+            fadeEffect={{
+              crossFade: true,
+            }}
+            loop={true}
+            speed={600}
+            className="hero-swiper"
+            onSwiper={setSwiperInstance}
+            onSlideChange={(swiper) => {
+              setIsTransitioning(true);
+              setActiveSlide(swiper.realIndex);
+              setTimeout(() => setIsTransitioning(false), 100);
+            }}
           >
-            <Text style="mb-5 w-fit rounded-full border border-white/[0.2] bg-white/[0.08] px-4 py-2 text-[15px] font-[700] leading-[1.5] text-white">
-              Trusted everyday services
-            </Text>
+            {heroSlides.map((slide, index) => (
+              <SwiperSlide key={index}>
+                <div className="flex lg:flex-row flex-col items-center md:gap-[40px] gap-[20px] justify-between">
+                  {/* Content Section */}
+                  <div className="flex flex-col gap-[24px] lg:w-[40%] xl:w-[50%] w-full lg:items-start items-center">
+                    <RevealAnimation style="w-fit">
+                      <div
+                        className={`transform transition-all duration-700 ease-out ${
+                          isTransitioning
+                            ? "translate-y-4 opacity-0"
+                            : "translate-y-0 opacity-100"
+                        }`}
+                      >
+                        <Text style="lg:text-start text-center border-l-2 border-primary300 w-fit px-[16px] py-[8px] bg-primary800/90 backdrop-blur-sm rounded-r-[8px] text-tertiary700 text-[14px] font-[400] shadow-lg">
+                          {slide.subtitle}
+                        </Text>
+                      </div>
+                    </RevealAnimation>
 
-            <Text
-              as="h1"
-              style="max-w-[760px] text-[40px] font-[800] leading-[1.12] text-white sm:text-[50px] lg:text-[58px]"
-            >
-              Get trusted help for the jobs around your day.
-            </Text>
+                    <RevealAnimation style="w-fit">
+                      <Text
+                        id="home"
+                        style="lg:text-start text-center md:text-[72px] text-[42px] font-[800] leading-[120%] text-tertiary100"
+                      >
+                        {slide.title}
+                      </Text>
+                    </RevealAnimation>
 
-            <Text style="mt-5 max-w-[650px] text-[18px] font-[400] leading-[1.7] text-white/[0.9]">
-              Book laundry, cleaning, electrical work, plumbing, fumigation,
-              and everyday repairs from trusted service professionals on
-              Bubbles.
-            </Text>
+                    <RevealAnimation style="w-fit">
+                      <div
+                        className={`transform transition-all duration-700 delay-300 ease-out ${
+                          isTransitioning
+                            ? "translate-y-4 opacity-0"
+                            : "translate-y-0 opacity-100"
+                        }`}
+                      >
+                        <Text style="lg:text-start text-center text-tertiary700 text-[15px] md:text-[20px] font-[400] leading-[140%] drop-shadow-sm">
+                          {slide.description}
+                        </Text>
+                      </div>
+                    </RevealAnimation>
 
-            <div className="mt-7 flex flex-col items-center gap-3 lg:items-start">
-              <Text style="text-[16px] font-[700] leading-[1.5] text-white/[0.9]">
-                Get the Bubbles Customer App
-              </Text>
-              <div className="flex flex-wrap justify-center gap-3 lg:justify-start">
-                <Link
-                  href={CUSTOMER_PLAY_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Download the Bubbles Customer App on Google Play"
-                  className="transition-transform duration-300 hover:-translate-y-1"
-                >
-                  <PlayStoreSvg />
-                </Link>
-                <Link
-                  href={CUSTOMER_APP_STORE_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Download the Bubbles Customer App on the App Store"
-                  className="transition-transform duration-300 hover:-translate-y-1"
-                >
-                  <AppleStoreSvg />
-                </Link>
-              </div>
-            </div>
-          </motion.div>
+                    <RevealAnimation style="md:w-fit w-full">
+                      <div className="flex md:gap-[15px] gap-[6px] md:justify-start justify-center">
+                        <Link
+                          id="store"
+                          href={`https://play.google.com/store/apps/details?id=com.bubbles.customer.app&hl=en`}
+                          target="_blank"
+                          className="text-none p-0 m-0"
+                        >
+                          <PlayStoreSvg />
+                        </Link>
+                        <Link
+                          id="store"
+                          href={`https://apps.apple.com/ng/app/bubblesng/id6751163998?platform=iphone`}
+                          target="_blank"
+                          className="text-none p-0 m-0"
+                        >
+                          <AppleStoreSvg />
+                        </Link>
+                      </div>
+                    </RevealAnimation>
+                    {/* <RevealAnimation style='md:w-fit w-full'>
+                      <div
+                        className={`transform transition-all duration-700 delay-450 ease-out ${
+                          isTransitioning
+                            ? 'translate-y-4 opacity-0'
+                            : 'translate-y-0 opacity-100'
+                        }`}
+                      >
+                        <div className='flex justify-center lg:justify-start w-full gap-4'>
+                          {!slide.isCarWash && (
+                            <Link href='/auth/sign-up'>
+                              <Button className='p-4 bg-[#bfdbfe] rounded-md text-[rgba(0, 57, 143, 1)] hover:bg-[#a3c4fd] transition-colors text-lg'>
+                                Get Started
+                              </Button>
+                            </Link>
+                          )}
+                          {slide.isCarWash && (
+                            <Link href={slide.subscribeUrl} target='_blank'>
+                              <Button className='p-4 bg-[#10b981] rounded-md text-white hover:bg-[#059669] transition-colors text-lg'>
+                                Subscribe Now
+                              </Button>
+                            </Link>
+                          )}
+                        </div>
+                      </div>
+                    </RevealAnimation> */}
+                  </div>
 
-          <motion.div
-            className="relative mx-auto w-full max-w-[560px]"
-            initial={reduceMotion ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          >
-            <CustomImage
-              src={heroImg}
-              style="h-[400px] w-full lg:h-[776px]"
-              imgStyle="object-contain"
-              alt="Bubbles customer app"
-              priority
-              loading="eager"
-            />
-          </motion.div>
+                  {/* Image Section */}
+                  <RevealAnimation style="lg:w-[60%] xl:w-[50%] w-full">
+                    <CustomImage
+                      src={slide.image}
+                      style="w-full lg:h-[776px] h-[400px]"
+                      imgStyle="object-contain"
+                      priority={index === 0} // Only prioritize first image
+                      loading={index === 0 ? "eager" : "lazy"} // Eager load first, lazy load others
+                      alt={slide.title}
+                    />
+                  </RevealAnimation>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </MaxScreenWrapper>
-    </section>
+
+      {/* Custom Styles */}
+      <style jsx global>{`
+        .hero-swiper {
+          overflow: visible;
+        }
+
+        .hero-swiper .swiper-wrapper {
+          transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .hero-pagination-bullet {
+          width: 12px;
+          height: 12px;
+          background: rgba(255, 255, 255, 0.3);
+          border: 2px solid rgba(255, 255, 255, 0.5);
+          opacity: 1;
+          transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .hero-pagination-bullet-active {
+          background: rgba(255, 255, 255, 0.9);
+          border-color: rgba(255, 255, 255, 1);
+          transform: scale(1.2);
+          box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-swiper .swiper-pagination {
+          bottom: -20px;
+          position: relative !important;
+          margin-top: 20px;
+        }
+
+        @media (max-width: 1024px) {
+          .hero-swiper .swiper-pagination {
+            bottom: -10px;
+            margin-top: 10px;
+          }
+        }
+
+        .hero-swiper .swiper-slide {
+          opacity: 0;
+          transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .hero-swiper .swiper-slide-active {
+          opacity: 1;
+        }
+
+        .hero-swiper .swiper-slide-next,
+        .hero-swiper .swiper-slide-prev {
+          opacity: 0;
+        }
+      `}</style>
+    </div>
   );
 };

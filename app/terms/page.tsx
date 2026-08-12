@@ -7,7 +7,7 @@ import { MaxScreenWrapper } from "@/components/global/MaxScreen";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description:
-    "Read the Bubbles Terms of Service governing your use of our cleaning and laundry services marketplace.",
+    "Read the Bubbles Terms of Service governing your use of our service-professionals marketplace.",
 };
 
 const LAST_UPDATED = "January 1, 2025";

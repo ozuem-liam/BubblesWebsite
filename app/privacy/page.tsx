@@ -7,7 +7,7 @@ import { MaxScreenWrapper } from "@/components/global/MaxScreen";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Learn how Bubbles collects, uses, and protects your personal information when you use our cleaning and laundry services platform.",
+    "Learn how Bubbles collects, uses, and protects your personal information when you use our service-professionals marketplace.",
 };
 
 const LAST_UPDATED = "January 1, 2025";
@@ -33,7 +33,7 @@ export default function PrivacyPage() {
             <section>
               <p className="text-lg leading-relaxed">
                 {COMPANY_NAME} ("we", "our", or "us") operates the Bubbles platform — a
-                marketplace connecting customers with cleaning and laundry vendors in Lagos,
+                marketplace connecting customers with independent service professionals,
                 Nigeria. This Privacy Policy explains how we collect, use, disclose, and
                 safeguard your information when you use our website or mobile applications.
                 Please read it carefully.
